@@ -1,19 +1,10 @@
-import react, { useEffect, useState } from "react"
+import Fetch from "./Fetch"
 
 export default function App(){
-    const [fetchRes,setFetchRes]=useState()
-    useEffect(()=>{
-        fetch(`${process.env.REACT_APP_MARVELAPI}${process.env.REACT_APP_ADRESS}?apikey=${process.env.REACT_APP_MARVEL_PUBLIC_KEY}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            setFetchRes(data)
-        });
-    },[])
-
-    return(
-        <>
-            <pre>{JSON.stringify(fetchRes,null,2)}</pre>
+   return(
+       <>
+       SOMETHING
+        <Fetch/>
         </>
-    )
+   )
 }
