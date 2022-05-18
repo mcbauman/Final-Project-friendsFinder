@@ -1,11 +1,19 @@
-import env from "react-dotenv"
-import react from "react"
+import react, { useEffect, useState } from "react"
 
 export default function App(){
-    // fetch(process.env.MARVELAPI,{apikey:process.env.MARVEL_PUBLIC_KEY})
+    const [fetchRes,setFetchRes]=useState()
+    useEffect(()=>{
+        fetch(`${process.env.REACT_APP_MARVELAPI}${process.env.REACT_APP_ADRESS}?apikey=${process.env.REACT_APP_MARVEL_PUBLIC_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            setFetchRes(data)
+        });
+    },[])
+
     return(
         <>
-            Hello From App
+            <pre>{JSON.stringify(fetchRes,null,2)}</pre>
         </>
     )
 }
