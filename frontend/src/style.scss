@@ -1,0 +1,19 @@
+body{
+    header{
+        nav{
+
+        }
+    }
+    main{
+        article{
+            display: flex;
+            flex-wrap: wrap;
+            .card{
+                box-shadow:0 0 5px grey inset;
+                img{
+                    width: 300px;
+                }
+            }
+        }
+    }
+}
