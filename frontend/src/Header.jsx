@@ -6,7 +6,10 @@ export default function Header(){
            HEADER
            "nav"
            <nav>
+                <NavLink to="Start">Start</NavLink>
                 <NavLink to="cards">Cards</NavLink>
+                <NavLink to="Login">Login</NavLink>
+                <NavLink to="Singin">Singin</NavLink>
            </nav>
        </header>
    )

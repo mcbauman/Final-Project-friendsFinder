@@ -3,7 +3,7 @@ import { FaArrowAltCircleLeft,FaArrowAltCircleRight } from 'react-icons/fa';
 
 export default function Fetch(){
     const [fetchRes,setFetchRes]=useState()
-    let howManyToFetch=50
+    let howManyToFetch=20
     let [howManyToSkip,setHowManyToSkip]=useState(0)
 useEffect(()=>{
     fetch(`${process.env.REACT_APP_MARVELAPI}${process.env.REACT_APP_ADRESS}?apikey=${process.env.REACT_APP_MARVEL_PUBLIC_KEY}&limit=${howManyToFetch}&offset=${howManyToSkip}`)
@@ -15,8 +15,8 @@ useEffect(()=>{
 },[howManyToSkip])
 
 function fiftyBackFunktion(){
-    if(howManyToSkip>=50){
-        setHowManyToSkip(howManyToSkip-50)
+    if(howManyToSkip>=howManyToFetch){
+        setHowManyToSkip(howManyToSkip-howManyToFetch)
     }else{
         setHowManyToSkip(0)
     }
@@ -35,7 +35,7 @@ return(
     <article>
         <div>
             <button onClick={fiftyBackFunktion}><FaArrowAltCircleLeft/></button>
-            <button onClick={()=>setHowManyToSkip(howManyToSkip+50)}><FaArrowAltCircleRight/></button>
+            <button onClick={()=>setHowManyToSkip(howManyToSkip+howManyToFetch)}><FaArrowAltCircleRight/></button>
         </div>
         <div id="cardsWrapper">
         {fetchRes?fetchRes.map((item)=>buildCard(item)):<p>...LOADING...</p>}
@@ -43,7 +43,7 @@ return(
         {/* <pre>{JSON.stringify(fetchRes,null,2)}</pre> */}
         <div>
             <button onClick={fiftyBackFunktion}><FaArrowAltCircleLeft/></button>
-            <button onClick={()=>setHowManyToSkip(howManyToSkip+50)}><FaArrowAltCircleRight/></button>
+            <button onClick={()=>setHowManyToSkip(howManyToSkip+howManyToFetch)}><FaArrowAltCircleRight/></button>
         </div>
     </article>
 )
