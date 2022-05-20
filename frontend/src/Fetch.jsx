@@ -32,12 +32,14 @@ function buildCard(props){
 }
 
 return(
-    <article id="cardsWrapper">
+    <article>
         <div>
             <button onClick={fiftyBackFunktion}><FaArrowAltCircleLeft/></button>
             <button onClick={()=>setHowManyToSkip(howManyToSkip+50)}><FaArrowAltCircleRight/></button>
         </div>
+        <div id="cardsWrapper">
         {fetchRes?fetchRes.map((item)=>buildCard(item)):<p>...LOADING...</p>}
+        </div>
         {/* <pre>{JSON.stringify(fetchRes,null,2)}</pre> */}
         <div>
             <button onClick={fiftyBackFunktion}><FaArrowAltCircleLeft/></button>
