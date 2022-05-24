@@ -1,3 +1,16 @@
 GET http://localhost:9000
 
 ###
+Post http://localhost:9000/user
+Content-Type: application/json
+
+{
+    "email":"name3@provider.de",
+    "password":"aA@123456",
+    "userName":"Mongo",
+    "avatar":"MongoPic"
+}
+###
+GET http://localhost:9000/user
+
+###

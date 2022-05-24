@@ -5,8 +5,8 @@ import mongoose from 'mongoose'
 // avatar Type
 
 const userSchema=new mongoose.Schema({
-    email:{type:String, required:true},
-    password:{required:true},
+    email:{type:String, required:true, unique:true},
+    password:{type:String,required:true},
     userName:{type:String},
     avatar:String
 })
