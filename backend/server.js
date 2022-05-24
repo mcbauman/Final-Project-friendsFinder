@@ -35,7 +35,7 @@ app.get("/",(req,res)=>{
 })
 
 // LOGIN User
-app.post("/loginUser",async (req,res,next)=>{
+app.post("/user/login",async (req,res,next)=>{
     try {
         // find user
         const user=await User.findOne({email:req.body.email})
@@ -52,7 +52,12 @@ app.post("/loginUser",async (req,res,next)=>{
 })
 
 //CreateUser
-app.post("/createUser",requestValidator(userValidator),async(req,res,next)=>{
+app.post("/user/create",userValidator,async(req,res,next)=>{
+    const errors=validationResult(req)
+    // console.log(errors);
+    if(!errors.isEmpty()){
+        return next(errors)
+    }
     try {
         req.body.password=await hash(req.body.password)
         const user = await User.create(req.body)
