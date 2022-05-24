@@ -1,11 +1,11 @@
 GET http://localhost:9000
 
 ###
-Post http://localhost:9000/createUser
+Post http://localhost:9000/user/create
 Content-Type: application/json
 
 {
-    "email":"name6@provider.de",
+    "email":"name7@provider.de",
     "password":"bB@123456",
     "userName":"Mongo",
     "avatar":"MongoPic"
@@ -14,11 +14,11 @@ Content-Type: application/json
 GET http://localhost:9000/usersList
 
 ###
-POST http://localhost:9000/loginUser
+POST http://localhost:9000/user/login
 Content-Type: application/json
 
 {
-    "email":"name4@provider.de",
+    "email":"name5@provider.de",
     "password":"aA@123456"
 }
 ###
