@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-export default function Singin(){
+export default function Singin(props){
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
     const [userName, setUserName]=useState("")
@@ -10,7 +10,13 @@ export default function Singin(){
         e.preventDefault()
         console.log({email,password,name: userName});
         axios.post("http://localhost:9000/user/create",{email,password,userName})
-        .then(resp=>console.log(resp))
+        .then(resp=>{
+            console.log(resp)
+            console.log("email",email);
+            console.log(typeof email);
+            props.setUser(email)
+            props.setToken(resp.data.token)
+        })
         .catch(err=>{
             console.log(err)
             alert(err.response.data.error)

@@ -61,7 +61,9 @@ app.post("/user/create",userValidator,async(req,res,next)=>{
     try {
         req.body.password=await hash(req.body.password)
         const user = await User.create(req.body)
-        res.send(user)
+        const user2=await User.findOne({email:req.body.email})
+        const token=jwt.sign({uid:user2._id},process.env.SECRET)
+        res.send({token})
     } catch (err) {
         next({status:400, message:err.message})
     }
