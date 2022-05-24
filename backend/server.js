@@ -5,7 +5,8 @@ import cors from "cors"
 import User from "./models/UserModel.js"
 import userValidator from "./validator/userValidator.js"
 import {validationResult} from "express-validator"
-
+import {hash, compare } from "./crypto.js"
+import jwt from "jsonwebtoken"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -31,13 +32,31 @@ app.get("/",(req,res)=>{
     res.send("Answer to /")
 })
 
-app.post("/user",userValidator,async(req,res,next)=>{
+app.post("/loginUser",async (req,res,next)=>{
+    try {
+        // find user
+        const user=await User.findOne({email:req.body.email})
+        // compare password
+        const loginSuccess = await compare(req.body.password, user.password) 
+        if(!loginSuccess){throw Error("Password missmatch")}
+        // create token
+        const token=jwt.sign({uid:user._id},process.env.SECRET)
+        // send user the token
+        res.send({user,token})
+    } catch (error) {
+        next({status:400,message:error})
+    }
+})
+
+//CreateUser
+app.post("/createUser",userValidator,async(req,res,next)=>{
     const errors=validationResult(req)
     // console.log(errors);
     if(!errors.isEmpty()){
         return next(errors)
     }
     try {
+        req.body.password=await hash(req.body.password)
         const user = await User.create(req.body)
         res.send(user)
     } catch (err) {
@@ -45,7 +64,8 @@ app.post("/user",userValidator,async(req,res,next)=>{
     }
 })
 
-app.get("/user",async(req,res,next)=>{
+//Get a List of Users
+app.get("/usersList",async(req,res,next)=>{
     try {
         let users= await User.find()
         res.send(users)
@@ -53,20 +73,6 @@ app.get("/user",async(req,res,next)=>{
         next({status:400, message:err.message})
     }
 })
-
-app.get("/user:/id",async(req,res)=>{
-    // try {
-    //     const user = await User.findById(req.params.id)
-    //     if (!user) {
-    //         return next(createError(404, "User not found"))
-    //     }
-    //     res.send(user)
-    // } catch (e) {
-    //     next(createError(400, e.message))
-    // }
-    res.send("Login passed or failed")
-})
-
 
 //Global Error Handler
 app.use("/",(error, req, res, next)=>{

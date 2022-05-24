@@ -4,8 +4,8 @@ function hash(password){
     return bcrypt.hash(password,3)
 }
 
-function compareHashes(password, hash){
-    return bcrupt.compare(password, hash)
+function compare(password, hash){
+    return bcrypt.compare(password, hash)
 }
 
-export {hash,compareHashes}
+export {hash,compare}
