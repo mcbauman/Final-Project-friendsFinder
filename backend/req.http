@@ -5,7 +5,7 @@ Post http://localhost:9000/createUser
 Content-Type: application/json
 
 {
-    "email":"name4@provider.de",
+    "email":"name5@provider.de",
     "password":"aA@123456",
     "userName":"Mongo",
     "avatar":"MongoPic"
@@ -20,4 +20,23 @@ Content-Type: application/json
 {
     "email":"name4@provider.de",
     "password":"aA@123456"
+}
+###
+PUT http://localhost:9000/updateProfile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhjYjRhYjA3YTE0MTMxYjE5NTBjN2UiLCJpYXQiOjE2NTMzOTMzOTh9.RPyWOHOly0i5VEcISIHcVfFjXF7VhKRYK9_SFDdlbeQ
+
+###
+GET http://localhost:9000/updateProfile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhjYjRhYjA3YTE0MTMxYjE5NTBjN2UiLCJpYXQiOjE2NTMzOTMzOTh9.RPyWOHOly0i5VEcISIHcVfFjXF7VhKRYK9_SFDdlbeQ
+
+###
+PUT http://localhost:9000/updateProfile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhjYjRhYjA3YTE0MTMxYjE5NTBjN2UiLCJpYXQiOjE2NTMzOTMzOTh9.RPyWOHOly0i5VEcISIHcVfFjXF7VhKRYK9_SFDdlbeQ
+
+{
+    "email":"eumilienchen.de",
+    "password":"123"
 }
