@@ -5,7 +5,7 @@ Post http://localhost:9000/user/create
 Content-Type: application/json
 
 {
-    "email":"name8@provider.de",
+    "email":"name9@provider.de",
     "password":"bB@123456",
     "userName":"Mongo",
     "avatar":"MongoPic"
