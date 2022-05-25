@@ -12,7 +12,7 @@ export default function Log(props){
            </nav>
            <Routes>
                 <Route path="Login" element={<Login setUser={props.setUser} setToken={props.setToken}/>}/>
-                <Route path="Singin" element={<Singin/>} setUser={props.setUser} setToken={props.setToken}/>
+                <Route path="Singin" element={<Singin setUser={props.setUser} setToken={props.setToken} />} />
             </Routes>
         </>
     )

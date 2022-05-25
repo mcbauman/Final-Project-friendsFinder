@@ -19,7 +19,7 @@ export default function Singin(props){
         })
         .catch(err=>{
             console.log(err)
-            alert(err.response.data.error)
+            alert(err?.response?.data?.error||"Something went wrong")
         })
     }
 
