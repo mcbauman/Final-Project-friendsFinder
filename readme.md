@@ -1,23 +1,60 @@
-REACT_AOO_ADRESS holds the folder, f.e. characters
+# Find Friends by interests
 
+## page is about
+- Setting Profile including interests
+- finding new friends based on that activities
+- finding groups around that topics
+- maybe getting news to the topic on landingPage (Depending on existance of API)
 
-Todos
-BE
-✅Validation
-✅Encryption
-✅Authentification
+## whats important
+- get as most profiles as possible
+    - signup simple (maybe facebook signup)
+    - getting good place on websearch (as fas as we can )
+    - social media connection
+    - getting advantage of inviting people
+- one click contact
+- good experience
+    - design
+    - search-engine-optimised
+    - performance of the page
 
+## basic functions
+- Users-Databank
+- search for Users
+- groups
+- sending messages
+- post-board
+- pictures in posts and user
 
-Multer:Opload Image
-    Ruslan
-    
-MessageBoard?
+## nice functions
+- login with facebook
+- syncronise to facebook group
+- invitation link and email
+- language switch/translation
+- newsfeed to the selected topics
+- nice adress
 
-Routes:
-user/login... user/create
+# Steps and Milestones
+## name and terms
+- finding a name and web-adress
+- describing page, search terms
 
-UserList sort alphabetically
-    get ten start from x
+## frontend general layout
+- general layout with placeholders
+- styling
+- logo
+- responsiveness of page
 
-Frontend Integration
-    Matthias
+## BackEnd
+- User Schema
+- Message Schema
+- BlogPosts Schema
+- Search and Filter
+
+## questions
+- user-rating-users? AnswerRation/Time to answer
+- -picture upload check by users
+
+Learned from Project
+- Protocoll of group-decisions
+- Deviding work
