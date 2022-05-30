@@ -3,7 +3,7 @@ import { FaArrowAltCircleLeft,FaArrowAltCircleRight } from 'react-icons/fa';
 
 export default function Fetch(){
     const [fetchRes,setFetchRes]=useState()
-    let howManyToFetch=20
+    let howManyToFetch=12
     let [howManyToSkip,setHowManyToSkip]=useState(0)
 useEffect(()=>{
     fetch(`${process.env.REACT_APP_MARVELAPI}${process.env.REACT_APP_ADRESS}?apikey=${process.env.REACT_APP_MARVEL_PUBLIC_KEY}&limit=${howManyToFetch}&offset=${howManyToSkip}`)
