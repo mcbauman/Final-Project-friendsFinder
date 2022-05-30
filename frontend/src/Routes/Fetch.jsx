@@ -14,7 +14,7 @@ useEffect(()=>{
     });
 },[howManyToSkip])
 
-function fiftyBackFunktion(){
+function fiftyBackFunction(){
     if(howManyToSkip>=howManyToFetch){
         setHowManyToSkip(howManyToSkip-howManyToFetch)
     }else{
@@ -34,7 +34,7 @@ function buildCard(props){
 return(
     <article>
         <div>
-            <button onClick={fiftyBackFunktion}><FaArrowAltCircleLeft/></button>
+            <button onClick={fiftyBackFunction}><FaArrowAltCircleLeft/></button>
             <button onClick={()=>setHowManyToSkip(howManyToSkip+howManyToFetch)}><FaArrowAltCircleRight/></button>
         </div>
         <div id="cardsWrapper">
@@ -42,7 +42,7 @@ return(
         </div>
         {/* <pre>{JSON.stringify(fetchRes,null,2)}</pre> */}
         <div>
-            <button onClick={fiftyBackFunktion}><FaArrowAltCircleLeft/></button>
+            <button onClick={fiftyBackFunction}><FaArrowAltCircleLeft/></button>
             <button onClick={()=>setHowManyToSkip(howManyToSkip+howManyToFetch)}><FaArrowAltCircleRight/></button>
         </div>
     </article>
