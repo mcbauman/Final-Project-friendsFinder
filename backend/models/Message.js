@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import User from "./UserModel.js"
 
+const { Schema, model } = mongoose
+
 const messageSchema = new mongoose.Schema({
-    // author:  { type: Schema.type.Object, ref: "user", required: true},
+    author:  { type: Schema.Types.ObjectId, ref: "user", required: true},
     content: { type: String, trim: true, required: true},
 }, {
     timestamps: true,
@@ -12,6 +14,18 @@ const messageSchema = new mongoose.Schema({
             delete ret.__v
         },
     },
+})
+
+messageSchema.pre("remove", async function(){
+    const id = this._id.toString()
+    console.log("Message is being removed " + id)
+
+    const author = await User.findById(this.author)
+    if ( author ) {
+        author.messages = author.messages.filter(x => x.toString() !== id)
+        await author.save()
+    }
+    // next() 
 })
 
 const Message = mongoose.model("message", messageSchema)
