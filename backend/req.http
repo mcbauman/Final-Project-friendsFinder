@@ -5,7 +5,7 @@ Post http://localhost:9000/user/create
 Content-Type: application/json
 
 {
-    "email":"name9@provider.de",
+    "email":"name10@provider.de",
     "password":"bB@123456",
     "userName":"Mongo",
     "avatar":"MongoPic"
@@ -18,13 +18,13 @@ POST http://localhost:9000/user/login
 Content-Type: application/json
 
 {
-    "email":"rthyssen73@gmail.com",
-    "password":"aA@123456"
+    "email":"name10@provider.de",
+    "password":"bB@123456"
 }
 ###
 PUT http://localhost:9000/updateProfile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhjYjRhYjA3YTE0MTMxYjE5NTBjN2UiLCJpYXQiOjE2NTMzOTMzOTh9.RPyWOHOly0i5VEcISIHcVfFjXF7VhKRYK9_SFDdlbeQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk1MWJmOTU1OGNiYTc0ZmYzY2IwNGYiLCJpYXQiOjE2NTM5MzkxOTN9.j3RAJkFpxHkXE0C7hy4w7zoqgVPl2soICEug54jcYaE
 
 ###
 GET http://localhost:9000/updateProfile
@@ -39,4 +39,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhjYjRhY
 {
     "email":"eumilienchen.de",
     "password":"123"
+}
+
+### MESSAGE PART
+
+POST http://localhost:9000/message/create
+Content-Type: application/json
+
+{
+    "content": "Hi there! It is control request 4"
 }
