@@ -1,5 +1,7 @@
-import Fetch from "./Routes/Fetch"
 import Start from "./Routes/Start"
+import Search from "./Routes/Search"
+import Messages from "./Routes/Messages"
+import Profile from "./Routes/Profile"
 import {Routes,Route} from "react-router-dom"
 import { useState } from "react"
 
@@ -36,8 +38,10 @@ export default function Main(){
     return(
         <main>
             <Routes>
-                <Route path="cards" element={<Fetch/>}/>
                 <Route path="Start" element={<Start/>}/>
+                <Route path="Search" element={<Search/>}/>
+                <Route path="Messages" element={<Messages/>}/>
+                <Route path="Profile" element={<Profile/>}/>
             </Routes>
             
         {/* <div>
