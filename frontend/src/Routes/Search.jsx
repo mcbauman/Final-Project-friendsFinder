@@ -7,8 +7,8 @@ export default function Search(){
             <input type="text" placeholder="activity"/>
             <input type="text" placeholder="activity"/>
             <input type="text" placeholder="activity"/>
-            <input type="text" placeholder="age"/>
-            <input type="text" placeholder="age"/>
+            <input type="text" placeholder="age from"/>
+            <input type="text" placeholder="age to"/>
             <input type="text" placeholder="gender"/>
             <button type="submit">search</button>
         </article>
