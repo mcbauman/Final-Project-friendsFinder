@@ -1,3 +1,5 @@
+import Activities from "../ActivitiesArray";
+
 export default function Profile(){
     return(
         <article>
