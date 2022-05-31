@@ -1,12 +1,12 @@
 import React from 'react';
 import Activities from "../ActivitiesArray";
 import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+// import makeAnimated from 'react-select/animated';
 
 
 export default function Search(){
     const options=Activities
-    const animatedComponents = makeAnimated();
+    // const animatedComponents = makeAnimated();
     
     return(
         <article>
@@ -14,7 +14,7 @@ export default function Search(){
             <Select
                 closeMenuOnSelect={false}
                 // components={animatedComponents}
-                defaultValue={[options[0], options[1]]}
+                // defaultValue={[options[0], options[1]]}
                 isMulti
                 options={options}
             />

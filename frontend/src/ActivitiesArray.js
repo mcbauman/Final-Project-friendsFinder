@@ -3,11 +3,8 @@ const Activities=[
     value:"Abnehmen",label:"Abnehmen"
 },
 {
-    value:"Laufen",label:"Laufen"
-},
-{
-    value:"Wandern",label:"Wandern"
-},
+    value:"Campen", label:"Campen"
+}, 
 {
     value:"Fahrradfahren Rennrad",label:"Fahrradfahren Rennrad"
 },
@@ -15,7 +12,10 @@ const Activities=[
     value:"Kochen", label:"Kochen"
 },
 {
-    value:"Campen", label:"Campen"
+    value:"Laufen",label:"Laufen"
+},
+{
+    value:"Wandern",label:"Wandern"
 }
 ]
 
