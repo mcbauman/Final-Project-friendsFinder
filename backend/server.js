@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cors from "cors"
 import User from "./models/UserModel.js"
+import Message from "./models/Message.js"
 import userValidator from "./validator/userValidator.js"
 import {validationResult} from "express-validator"
 import {hash, compare } from "./crypto.js"
@@ -52,13 +53,12 @@ app.post("/user/login",async (req,res,next)=>{
 })
 
 //CreateUser
-app.post("/user/create",userValidator,async(req,res,next)=>{
+app.post("/user/create",userValidator, async(req, res, next)=>{
     const errors=validationResult(req)
     // console.log(errors);
     if(!errors.isEmpty()){
         return next(errors)
-    }
-    try {
+    } try {
         req.body.password=await hash(req.body.password)
         const user = await User.create(req.body)
         const user2=await User.findOne({email:req.body.email})
@@ -101,6 +101,22 @@ app.put("/updateProfile",checkAuth,requestValidator(userValidator),async(req,res
     }
 })
 
+// Create Message:
+app.post("/message/create", async(req, res, next) => {
+    const errors = validationResult(req)
+    // console.log(errors)
+    if(!errors.isEmpty()){
+        return next(errors)
+    } try {
+        const message = await Message.create(req.body)
+        res.send({message})
+    } catch (err){
+        next({status: 400, message: err.message })
+    }
+})
+
+
+
 //Global Error Handler
 app.use("/",(error, req, res, next)=>{
     console.log("GlobalError",error);
@@ -110,5 +126,5 @@ app.use("/",(error, req, res, next)=>{
 })
 
 app.listen(process.env.PORT,()=>{
-    console.log("Server listening to"+process.env.PORT);
+    console.log("Server listening to " + process.env.PORT);
 })

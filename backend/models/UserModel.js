@@ -5,11 +5,11 @@ import mongoose from 'mongoose'
 // avatar Type
 
 const userSchema=new mongoose.Schema({
-    email:{type:String, required:true, unique:true},
+    email:   {type:String, required:true, unique:true},
     password:{type:String,required:true},
     userName:{type:String},
-    avatar:String,
-    score:{type:Number, default:0}
+    avatar:        String,
+    score:   {type:Number, default:0}
 }, {
     timestamps: true,
     toJSON:{
