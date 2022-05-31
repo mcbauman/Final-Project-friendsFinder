@@ -5,11 +5,12 @@ import cors from "cors"
 import User from "./models/UserModel.js"
 import Message from "./models/Message.js"
 import userValidator from "./validator/userValidator.js"
-import {validationResult} from "express-validator"
-import {hash, compare } from "./crypto.js"
+import { validationResult } from "express-validator"
+import { hash, compare } from "./crypto.js"
 import jwt from "jsonwebtoken"
 import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
+
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -35,7 +36,7 @@ app.get("/",(req,res)=>{
     res.send("Answer to /")
 })
 
-// LOGIN User
+// LOGIN User:
 app.post("/user/login",async (req,res,next)=>{
     try {
         // find user
@@ -52,18 +53,18 @@ app.post("/user/login",async (req,res,next)=>{
     }
 })
 
-//CreateUser
+// CreateUser:
 app.post("/user/create",userValidator, async(req, res, next)=>{
     const errors=validationResult(req)
-    // console.log(errors);
+    console.log(errors);
     if(!errors.isEmpty()){
         return next(errors)
     } try {
         req.body.password=await hash(req.body.password)
         const user = await User.create(req.body)
         const user2=await User.findOne({email:req.body.email})
-        const token=jwt.sign({uid:user2._id},process.env.SECRET)
-        res.send({token})
+        // const token=jwt.sign({uid:user2._id},process.env.SECRET)
+        res.send({message: "User was created!"})
     } catch (err) {
         next({status:400, message:err.message})
     }
@@ -79,9 +80,9 @@ app.get("/usersList",async(req,res,next)=>{
     }
 })
 
-//Edit Profile
-// find profile
+// Find Profile
 app.get("/updateProfile",checkAuth,async(req,res,next)=>{
+    // console.log(req);
     try {
         const user=await User.findById(req.user._id)
         res.send(user)
@@ -90,7 +91,7 @@ app.get("/updateProfile",checkAuth,async(req,res,next)=>{
     }
 })
 
-
+// Update Profile
 app.put("/updateProfile",checkAuth,requestValidator(userValidator),async(req,res,next)=>{
     console.log(validationResult(req));
     try {
@@ -103,13 +104,14 @@ app.put("/updateProfile",checkAuth,requestValidator(userValidator),async(req,res
 
 // Create Message:
 app.post("/message/create", async(req, res, next) => {
-    const errors = validationResult(req)
-    // console.log(errors)
-    if(!errors.isEmpty()){
-        return next(errors)
-    } try {
-        const message = await Message.create(req.body)
-        res.send({message})
+    try {
+        const user = await User.findById(req.body.author)
+        console.log(user);
+        if(user){
+            const message = await Message.create(req.body)
+            res.send({message})
+        }
+        
     } catch (err){
         next({status: 400, message: err.message })
     }

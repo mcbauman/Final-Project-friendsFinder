@@ -1,22 +1,25 @@
 import mongoose from 'mongoose'
+import Message from './Message.js'
+
+const { Schema, model } = mongoose
 
 // email-Type
 // password -coded
 // avatar Type
 
-const userSchema=new mongoose.Schema({
-  
-    name:{type:String,required:true},
-    familyName:{type:String,required:true},
-    email:{type:String, required:true, unique:true},
-    password:{type:String,required:true},
-    userName:{type:String},
-    avatar:String,
-    dateOfBirth:{type:Date,required:true},
-    gender:{type:String, required:true, enum:["male","female","diverse"]},
-    interests:Array,
+const userSchema=new Schema({
+    messages:    { type: [Schema.Types.ObjectId], ref: "message"},
+    name:        { type:String,required:true},
+    familyName:  { type:String,required:true},
+    email:       { type:String, required:true, unique:true},
+    password:    { type:String,required:true},
+    userName:    { type:String},
+    avatar:          String,
+    dateOfBirth: { type:Date,required:true},
+    gender:      { type:String, required:true, enum:["male","female","diverse"]},
+    interests:    Array,
     emailVerified:{type:Boolean,default:false},
-    score:{type:Number, default:0}
+    score:        { type:Number, default:0}
 
 }, {
     timestamps: true,
@@ -26,6 +29,11 @@ const userSchema=new mongoose.Schema({
             delete ret.__v
         },
     },
+})
+
+userSchema.pre('remove', async function() {
+    console.log("User is being removed " + this._id)
+    await Message.deleteMany({ author: this._id })
 })
 
 const User=mongoose.model("user", userSchema)
