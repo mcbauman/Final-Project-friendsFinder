@@ -1,7 +1,8 @@
 export default function Profile(){
     return(
         <article>
-            Profile
+            PROFILE
+            <img src="" alt=""/>
         </article>
     )
 }
