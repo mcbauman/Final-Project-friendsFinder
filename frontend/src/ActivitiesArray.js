@@ -1,10 +1,24 @@
 const Activities=[
-    "Abnehmen",
-    "Laufen",
-    "Wandern",
-    "Fahrradfahren Rennrad",
-    "Kochen",
-    "Campen",
+{
+    value:"Abnehmen",label:"Abnehmen"
+},
+{
+    value:"Campen", label:"Campen"
+}, 
+{
+    value:"Fahrradfahren Rennrad",label:"Fahrradfahren Rennrad"
+},
+{
+    value:"Kochen", label:"Kochen"
+},
+{
+    value:"Laufen",label:"Laufen"
+},
+{
+    value:"Wandern",label:"Wandern"
+}
 ]
+
+
 
 export default Activities
