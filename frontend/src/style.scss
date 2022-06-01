@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 body{
-    font-family: 'Bebas Neue', cursive;
+    height: 100vh;
+    margin:0;
+    //font-family: 'Bebas Neue', cursive;
+    font-family: "Helvetica Neue";
+    // font-family: 'Ubuntu', sans-serif;
+    // font-family: 'Bebas Neue', cursive;
     // font-family: 'Freckle Face', cursive;
     // font-family: 'Lobster', cursive;
     // font-family: 'Luckiest Guy', cursive;
@@ -8,36 +14,58 @@ body{
     // font-family: 'Pompiere', cursive;
     // font-family: 'Roboto', sans-serif;
 
-    font-size: 1rem;
+    font-size: 2rem;
     text-align: center;
-
-    font-style: italic;
+    font-weight: 100;
     background-color: hsl(211, 49%, 14%);
-
     header{
         background-color:rgb(188,70,58);
         nav{
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-around;
+            align-items: center;
+            justify-content:space-between;
             a{
-                margin: 15px;
+                color: rgb(255,255,205);
+                padding:15px;
                 text-decoration: none;
+                &:hover{
+                    color:rgb(50,50,50);
+                    border-radius: 20px;
+                    //box-shadow: 0px 0px 20px rgb(255,255,205) ;
+                }
             }
         }
     }
     main{
-
-        background-color: rgb(255, 1, 1);
-
+        //background-color: rgb(212,165,155);
+        height: 90%;
+        
         article{
-            background-color: rgb(212,165,155);
-            #cardsWrapper{
-                // display: flex;
-                // flex-wrap: wrap;
-                .card{
-                    box-shadow:0 0 5px grey inset;
-                    img{
-                        width: 100px;
+            width: 95%;
+            max-width: 1200px;
+            height: 100%;
+            margin:0px auto;
+            background-color: rgb(255,255,245);
+            form{
+                
+                input{
+                    font-size: 2rem;
+                    font-family: "Helvetica Neue";
+                    font-weight: 100;
+                    width: 13%
+                }
+                div{
+                    display: inline-flex;
+                    flex-direction: row;
+                }
+                select{
+                    font-size: 2rem;
+                    font-family: "Helvetica Neue";
+                    font-weight: 100;
+                    option{
+                        
                     }
                 }
             }
