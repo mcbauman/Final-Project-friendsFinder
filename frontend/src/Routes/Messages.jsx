@@ -37,14 +37,10 @@ console.log(allMsg);
             <section id="messages">
                 {allMsg.map(item => (
                 <div key={item._id}> 
+                    <div> {item.author.userName}</div>
                     <div> {item.name}</div>
                     <div> {item.subject}</div>
                     <div> {item.content}</div>
-                    {/* <div> {item._id}</div>
-                    <div> {item._id}</div>
-                    <div> {item._id}</div>
-                    <div> {item._id}</div>
-                    <div> {item._id}</div> */}
                 </div>
                 ))} 
             </section>
