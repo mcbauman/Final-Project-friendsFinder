@@ -1,27 +1,44 @@
 import React from 'react';
 import Activities from "../ActivitiesArray";
 import Select from 'react-select';
-// import makeAnimated from 'react-select/animated';
+import {useState} from "react";
+import axios from "axios";
 
 
-export default function Search(){
+
+export default function Search(props){
+    const [listOfUsers, setListOfUser]=useState([])
+    const [interests,setInterests]=useState([])
+    const [minAge,setMinAge]=useState(0)
+    const [maxAge,setMaxAge]=useState(150)
+    const [srchdGender,setSrchdGender]=useState("any")
     const options=Activities
-    // const animatedComponents = makeAnimated();
+    
+    function submitFunction(e){
+        e.preventDefault()
+        const headers = { Authorization: `Bearer ${props.token}` }
+        const body={interests,minAge,maxAge,srchdGender}
+        axios.post("http://localhost:9000/user/find", body,{headers})
+            .then(res => setListOfUser(res.data))
+            .catch(error => alert(error.response?.data?.error || "Unknown error"))
+    }
     
     return(
         <article>
             SEARCH
-            <Select
-                closeMenuOnSelect={false}
-                // components={animatedComponents}
-                // defaultValue={[options[0], options[1]]}
-                isMulti
-                options={options}
-            />
-            <input type="text" placeholder="age from"/>
-            <input type="text" placeholder="age to"/>
-            <input type="text" placeholder="gender"/>
-            <button type="submit">search</button>
+            <form onSubmit={submitFunction}>
+                <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
+                <input type="text" placeholder="age from"/>
+                <input type="text" placeholder="age to"/>
+                <input type="text" placeholder="gender"/>
+                <select onChange={(e)=>setSrchdGender(e.target.value)}>
+                    <option>any</option>
+                    <option>male</option>
+                    <option>female</option>
+                    <option>diverse</option>
+                </select>
+                <button type="submit">search</button>
+            </form>
         </article>
     )
 }
