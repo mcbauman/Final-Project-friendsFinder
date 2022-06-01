@@ -28,7 +28,7 @@ export default function App(){
          {user?
          <>
             <Header/>
-            <Main/>
+            <Main user = {user} token = {token} />
          </>
          :<Log setUser={setUser} setToken={setToken}/>
          }
