@@ -5,7 +5,12 @@ export default function Start(){
             <table>
                 <tr>
                     <th>sender</th>
+                    
+                </tr>
+
+                <tr>
                     <td>some text</td>
+                    
                 </tr>
             </table>
         </article>

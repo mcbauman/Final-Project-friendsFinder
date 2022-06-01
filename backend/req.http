@@ -1,7 +1,9 @@
+@url = http://localhost:9000
+
 GET http://localhost:9000
 
 ### POST new User:
-Post http://localhost:9000/user/create
+Post {{url}}/user/create
 Content-Type: application/json
 
 {
@@ -16,10 +18,10 @@ Content-Type: application/json
     "interests": "scince"
 }
 ### GET ALL Users:
-GET http://localhost:9000/usersList
+GET {{url}}/usersList
 
 ### GET certain User:
-POST http://localhost:9000/user/login
+POST {{url}}/user/login
 Content-Type: application/json
 
 {
@@ -32,12 +34,12 @@ Content-Type: application/json
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk1MWJhM2IyMTkxMjZkZmQ1YWNkZmQiLCJpYXQiOjE2NTQwMDI4NzB9.gOD6Zg9F9xyiYxEwHapG1Uxp2X6lcJTAi6KpYk5qLHM
 
 ### Find Profile:
-GET http://localhost:9000/updateProfile
+GET {{url}}/updateProfile
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
 
 ### Update Profile:
-PUT http://localhost:9000/updateProfile
+PUT {{url}}/updateProfile
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
 
@@ -48,10 +50,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5Z
 
 ### MESSAGE PART
 ### POST Message:
-POST http://localhost:9000/message/create
+POST {{url}}/message/create
 Content-Type: application/json
 
 {
     "author": "62951ba3b219126dfd5acdfd",
     "content": "Hi there! It is control request 4"
 }
+
+### Messages List:
+GET {{url}}/messageList
+
+### DELETE Message:
+DELETE {{url}}/message/6295268faded7440e2b0f8a8

@@ -2,20 +2,25 @@ body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 2rem;
     text-align: center;
-    background-color: rgb(25,48,43);
+    background-color: rgb(92,32,24);
     header{
+        background-color:rgb(188,70,58);
         nav{
-
             display: flex;
             justify-content: space-around;
+            a{
+                margin: 15px;
+                text-decoration: none;
+            }
         }
     }
     main{
-        background-color: lightgrey;
+        // background-color: lightgrey;
         article{
+            background-color: rgb(212,165,155);
             #cardsWrapper{
-                display: flex;
-                flex-wrap: wrap;
+                // display: flex;
+                // flex-wrap: wrap;
                 .card{
                     box-shadow:0 0 5px grey inset;
                     img{
