@@ -1,5 +1,5 @@
 import Start from "./Routes/Start"
-import Search from "./Routes/Search"
+import Search from "./Routes/Search.jsx"
 import Messages from "./Routes/Messages"
 import Profile from "./Routes/Profile"
 import {Routes,Route} from "react-router-dom"

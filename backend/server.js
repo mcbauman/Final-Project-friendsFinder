@@ -3,14 +3,15 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cors from "cors"
 import User from "./models/UserModel.js"
-import Message from "./models/Message.js"
+import Message from "./models/MessageModel.js"
 import userValidator from "./validator/userValidator.js"
 import { validationResult } from "express-validator"
 import { hash, compare } from "./crypto.js"
 import jwt from "jsonwebtoken"
 import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
-
+import { messageRules } from "./validator/messageValidator.js"
+import createError from "http-errors"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -96,6 +97,7 @@ app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
     }
 })
 
+
 // Update Profile
 app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(req,res,next)=>{
     console.log(validationResult(req));
@@ -108,21 +110,44 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(re
 })
 
 // Create Message:
-app.post("/message/create", async(req, res, next) => {
+app.post("/message/create", messageRules, async(req, res, next) => {
     try {
         const user = await User.findById(req.body.author)
         console.log(user);
         if(user){
             const message = await Message.create(req.body)
             res.send({message})
-        }
-        
+        }  
     } catch (err){
         next({status: 400, message: err.message })
     }
 })
 
-//Global Error Handler
+// Messages List:
+app.get("/messageList",checkAuth,  async(req, res, next) => {
+    try {
+        let messages = await Message.find()
+        res.send(messages)
+    } catch (error) {
+        next(createError(400, error.message))
+    }
+})
+
+// Delete Message:
+app.delete("/message/:id", checkAuth, async (req, res, next) => {
+    try {
+        const message = await Message.findById(req.params.id)
+        if(!message){
+            return next(createError(404, "Message is not found"))
+        }
+        await message.remove()
+        res.send({ ok: true, deleted: message })
+    } catch (error) {
+        next(createError(400, error.message))
+    }
+})
+
+// Global Error Handler:
 app.use("/",(error, req, res, next)=>{
     console.log("GlobalError",error);
     res.status(error.status || 500).send({
