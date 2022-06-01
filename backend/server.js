@@ -82,7 +82,8 @@ app.get("/users/ListAll",async(req,res,next)=>{
 })
 
 // Find users matching criteria
-app.get("/user/find",async (req,res,next)=>{
+app.post("/user/find",async (req,res,next)=>{
+    console.log(req.body)
     res.send("Endpoint user/find Answer")
 })
 

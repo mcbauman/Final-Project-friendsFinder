@@ -18,6 +18,7 @@ const userSchema=new Schema({
     dateOfBirth: { type:Date,required:true},
     gender:      { type:String, required:true, enum:["male","female","diverse"]},
     interests:    Array,
+    //Stored last search?
     emailVerified:{type:Boolean,default:false},
     score:        { type:Number, default:0}
 
