@@ -27,6 +27,7 @@ export default function Search(props){
     
     return(
         <article>
+
             SEARCH
             <form onSubmit={submitFunction}>
                 <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
@@ -52,6 +53,7 @@ export default function Search(props){
                         </div>
                 ))}
             </section>
+
         </article>
     )
 }

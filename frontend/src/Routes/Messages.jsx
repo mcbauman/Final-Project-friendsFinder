@@ -30,6 +30,7 @@ console.log(allMsg);
                 </div>
                 ))} 
             </section>
+
         </article>
     )
 }
