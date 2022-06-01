@@ -138,26 +138,13 @@ app.get("/messageList",checkAuth,  async(req, res, next) => {
 // Messages List:
 app.get("/message/find",checkAuth,  async(req, res, next) => {
     try {
-        
+        const query = Message.find({recipient: req.user._id})
+        query.populate("author", "userName")
+        const messages = await query.exec()
+        console.log(messages);
+        res.send(messages)
 
-
-
-        // console.log("It si line 141: ", req.user._id);
-        // const query = await Message.find({recipient: req.user._id})
-        // console.log("Line 143: ",query);
-        // const msgFinder = query.filter(msg => msg.recipient.toString() == req.user._id.toString() )
-        // query.forEach(item => console.log(item.recipient))
-        // console.log("Line 146",req.user._id);
-        // // console.log(query[0].author.toString());
-        // const authorName = await User.findById(query.author)
-        // console.log("MSG FINDER line 149: ", msgFinder);
-
-        // console.log("SERVER.JS line 141: ",req.user);
-        // const query = User.find(req.user)
-        // query.populate("users", userName)
-        // const msg = await query.exec()
-       
-        // res.send(messages)
+      
     } catch (error) {
         next(createError(400, error.message))
     }

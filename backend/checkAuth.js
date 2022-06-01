@@ -9,7 +9,7 @@ async function checkAuth(req,res,next){
 
         const payload=jwt.verify(token,process.env.SECRET)
         const user= await User.findById(payload.uid)
-        console.log(user);
+        // console.log(user);
         if(!user){
             return next({status:401, message:"user not found"})
         }
