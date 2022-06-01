@@ -82,9 +82,15 @@ app.get("/users/ListAll",async(req,res,next)=>{
 })
 
 // Find users matching criteria
-app.post("/user/find",async (req,res,next)=>{
+app.post("/user/find",checkAuth,async (req,res,next)=>{
     console.log(req.body)
-    res.send("Endpoint user/find Answer")
+    try{
+        let users=await User.find({interests:req.body.interests})
+        console.log(users)
+        res.send(users)
+    }catch (e) {
+        next({status:400, message:e.message})
+    }
 })
 
 // Find Profile
