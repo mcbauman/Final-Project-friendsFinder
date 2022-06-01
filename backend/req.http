@@ -10,7 +10,7 @@ Content-Type: application/json
     "name": "Ruslan",
     "familyName": "Tissen",
     "dateOfBirth": "1973-11-23",
-    "email":"name11@provider.de",
+    "email":"name12@provider.de",
     "password":"bB@123456",
     "userName":"Mongo",
     "avatar":"MongoPic",
@@ -25,7 +25,7 @@ POST {{url}}/user/login
 Content-Type: application/json
 
 {
-    "email":"name11@provider.de",
+    "email":"name12@provider.de",
     "password":"bB@123456"
 }
 ###
@@ -34,9 +34,9 @@ Content-Type: application/json
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk1MWJhM2IyMTkxMjZkZmQ1YWNkZmQiLCJpYXQiOjE2NTQwMDI4NzB9.gOD6Zg9F9xyiYxEwHapG1Uxp2X6lcJTAi6KpYk5qLHM
 
 ### Find Profile:
-GET {{url}}/updateProfile
+GET {{url}}/user/listAll
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk3NGEyOTE2YTQ0MjBjYjE1OWNiOTEiLCJpYXQiOjE2NTQwODIxODR9.CnQbS1msULwicIzEv4rsMIQ8xluzRo1gcvFcUROb10U
 
 ### Update Profile:
 PUT {{url}}/updateProfile
@@ -55,11 +55,22 @@ Content-Type: application/json
 
 {
     "author": "62951ba3b219126dfd5acdfd",
-    "content": "Hi there! It is control request 4"
+    "content": "Message in message",
+    "recipient": "6296129db6691dfa39ac6b2a",
+    "subject": "Message back"
 }
 
 ### Messages List:
 GET {{url}}/messageList
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
+
+### User Message list:
+GET {{url}}/message/find
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
 
 ### DELETE Message:
-DELETE {{url}}/message/6295268faded7440e2b0f8a8
+DELETE {{url}}/message/629526a45abae0bce2be8c2c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
