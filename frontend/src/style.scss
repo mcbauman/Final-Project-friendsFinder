@@ -1,8 +1,17 @@
 body{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 2rem;
+    font-family: 'Bebas Neue', cursive;
+    // font-family: 'Freckle Face', cursive;
+    // font-family: 'Lobster', cursive;
+    // font-family: 'Luckiest Guy', cursive;
+    // font-family: 'Mrs Sheppards', cursive;
+    // font-family: 'Oswald', sans-serif;
+    // font-family: 'Pompiere', cursive;
+    // font-family: 'Roboto', sans-serif;
+
+    font-size: 1rem;
     text-align: center;
-    background-color: rgb(30,194,247);
+    font-style: italic;
+    background-color: hsl(211, 49%, 14%);
     header{
         nav{
 
@@ -11,7 +20,7 @@ body{
         }
     }
     main{
-        background-color: lightgrey;
+        background-color: rgb(255, 1, 1);
         article{
             #cardsWrapper{
                 display: flex;
@@ -19,12 +28,12 @@ body{
                 .card{
                     box-shadow:0 0 5px grey inset;
                     img{
-                        width: 300px;
+                        width: 100px;
                     }
                 }
             }
         form{
-            display: flex;
+            display: flex-wrap;
             flex-direction: column;
             align-items: center;
 

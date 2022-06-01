@@ -4,7 +4,8 @@ export default function Start(){
             Start
             <table>
                 <tr>
-                    <th>sender</th>
+                    
+                    <th>send</th>
                     <td>some text</td>
                 </tr>
             </table>

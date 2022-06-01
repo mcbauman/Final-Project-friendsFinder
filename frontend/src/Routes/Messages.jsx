@@ -7,6 +7,7 @@ export default function Messages(){
                 <input type="text" placeholder="text"/>
                 <button type="submit">send Message</button>
             </section>
+            <br />
             <section id="readMessage">
                 <input type="text" placeholder="from"/>
                 <input type="text" placeholder="text"/>
