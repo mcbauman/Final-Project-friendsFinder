@@ -4,8 +4,6 @@ import Select from 'react-select';
 import {useState} from "react";
 import axios from "axios";
 
-
-
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
     const [interests,setInterests]=useState([])
@@ -19,7 +17,11 @@ export default function Search(props){
         const headers = { Authorization: `Bearer ${props.token}` }
         const body={interests,minAge,maxAge,srchdGender}
         axios.post("http://localhost:9000/user/find", body,{headers})
-            .then(res => setListOfUser(res.data))
+            .then(res => {
+                setListOfUser(res.data)
+                console.log(listOfUsers)
+                console.log(res.data)
+            })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
     
@@ -39,6 +41,17 @@ export default function Search(props){
                 </select>
                 <button type="submit">search</button>
             </form>
+            <section>
+                {listOfUsers.map(item=>(
+                        <div>
+                            <div>{item.name}</div>
+                            <div>{item.familyName}</div>
+                            <div>{item.gender}</div>
+                            <div>{item.dateOfBirth}</div>
+                            <div>{item.userName}</div>
+                        </div>
+                ))}
+            </section>
         </article>
     )
 }
