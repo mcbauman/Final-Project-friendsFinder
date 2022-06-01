@@ -71,7 +71,7 @@ app.post("/user/create",userValidator, async(req, res, next)=>{
 })
 
 //Get a List of Users
-app.get("/usersList",async(req,res,next)=>{
+app.get("/users/ListAll",async(req,res,next)=>{
     try {
         let users= await User.find()
         res.send(users)
@@ -81,7 +81,7 @@ app.get("/usersList",async(req,res,next)=>{
 })
 
 // Find Profile
-app.get("/updateProfile",checkAuth,async(req,res,next)=>{
+app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
     // console.log(req);
     try {
         const user=await User.findById(req.user._id)
@@ -92,7 +92,7 @@ app.get("/updateProfile",checkAuth,async(req,res,next)=>{
 })
 
 // Update Profile
-app.put("/updateProfile",checkAuth,requestValidator(userValidator),async(req,res,next)=>{
+app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(req,res,next)=>{
     console.log(validationResult(req));
     try {
         const user=await User.findByIdAndUpdate(req.user._id,req.body,{new:true})
@@ -116,8 +116,6 @@ app.post("/message/create", async(req, res, next) => {
         next({status: 400, message: err.message })
     }
 })
-
-
 
 //Global Error Handler
 app.use("/",(error, req, res, next)=>{
