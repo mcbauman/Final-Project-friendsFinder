@@ -1,51 +1,77 @@
+@url = http://localhost:9000
+
 GET http://localhost:9000
 
-###
-Post http://localhost:9000/user/create
+### POST new User:
+Post {{url}}/user/create
 Content-Type: application/json
 
 {
-    "email":"name10@provider.de",
-    "password":"bB@123456",
-    "userName":"Mongo",
-    "avatar":"MongoPic"
+    "name": "Torge",
+    "familyName": "Baumann",
+    "dateOfBirth": "2012-01-23",
+    "email":"torge@jepleting.de",
+    "password":"aB@123456",
+    "userName":"TAJB",
+    "avatar":"MongoPic",
+    "gender": "male",
+    "interests": [{"value":"Campen","labe":"Campen"}]
 }
-### GET ALL Users
-GET http://localhost:9000/usersList
+### GET ALL Users:
+GET {{url}}/users/listAll
 
-###
-POST http://localhost:9000/user/login
+### GET certain User:
+POST {{url}}/user/login
 Content-Type: application/json
 
 {
-    "email":"name10@provider.de",
-    "password":"bB@123456"
+    "email":"torge@jepleting.de",
+    "password":"aB@123456"
 }
 ###
-PUT http://localhost:9000/updateProfile
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk1MWJmOTU1OGNiYTc0ZmYzY2IwNGYiLCJpYXQiOjE2NTM5MzkxOTN9.j3RAJkFpxHkXE0C7hy4w7zoqgVPl2soICEug54jcYaE
+# PUT http://localhost:9000/updateProfile
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk1MWJhM2IyMTkxMjZkZmQ1YWNkZmQiLCJpYXQiOjE2NTQwMDI4NzB9.gOD6Zg9F9xyiYxEwHapG1Uxp2X6lcJTAi6KpYk5qLHM
 
-###
-GET http://localhost:9000/updateProfile
+### Find Profile:
+GET {{url}}/user/listAll
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhjYjRhYjA3YTE0MTMxYjE5NTBjN2UiLCJpYXQiOjE2NTMzOTMzOTh9.RPyWOHOly0i5VEcISIHcVfFjXF7VhKRYK9_SFDdlbeQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk3NGEyOTE2YTQ0MjBjYjE1OWNiOTEiLCJpYXQiOjE2NTQwODIxODR9.CnQbS1msULwicIzEv4rsMIQ8xluzRo1gcvFcUROb10U
 
-###
-PUT http://localhost:9000/updateProfile
+### Update Profile:
+PUT {{url}}/updateProfile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhjYjRhYjA3YTE0MTMxYjE5NTBjN2UiLCJpYXQiOjE2NTMzOTMzOTh9.RPyWOHOly0i5VEcISIHcVfFjXF7VhKRYK9_SFDdlbeQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
 
 {
-    "email":"eumilienchen.de",
-    "password":"123"
+    "email":"eumili@enchen.de",
+    "password":"123alskjmvlkaRT:@"
 }
 
 ### MESSAGE PART
-
-POST http://localhost:9000/message/create
+### POST Message:
+POST {{url}}/message/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk3YTk5NDQzMzY4MTAzOGE1NWFkYTMiLCJpYXQiOjE2NTQxMDY1Njd9.SVMym5bWXiYop3gV5HTng03mwafcIq43vzRgHDnS4Xc
 
 {
-    "content": "Hi there! It is control request 4"
+    "author": "6297a994433681038a55ada3",
+    "content": "Message in message",
+    "recipient": "62961c6e7ab347678994e6c8",
+    "subject": "Message"
 }
+
+### Messages List:
+GET {{url}}/messageList
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk3YTk5NDQzMzY4MTAzOGE1NWFkYTMiLCJpYXQiOjE2NTQxMDY1Njd9.SVMym5bWXiYop3gV5HTng03mwafcIq43vzRgHDnS4Xc
+
+### User Message list:
+GET {{url}}/message/find
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk3YTk5NDQzMzY4MTAzOGE1NWFkYTMiLCJpYXQiOjE2NTQxMDY1Njd9.SVMym5bWXiYop3gV5HTng03mwafcIq43vzRgHDnS4Xc
+
+### DELETE Message:
+DELETE {{url}}/message/629526a45abae0bce2be8c2c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo

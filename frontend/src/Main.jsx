@@ -1,12 +1,12 @@
 import Start from "./Routes/Start"
-import Search from "./Routes/Search"
+import Search from "./Routes/Search.jsx"
 import Messages from "./Routes/Messages"
 import Profile from "./Routes/Profile"
 import {Routes,Route} from "react-router-dom"
 import { useState } from "react"
 
 
-export default function Main(){
+export default function Main(props){
     // const [ file, setFile ] = useState(null)
 
     // function handleFileSelected(e){
@@ -38,10 +38,10 @@ export default function Main(){
     return(
         <main>
             <Routes>
-                <Route path="Start" element={<Start/>}/>
-                <Route path="Search" element={<Search/>}/>
-                <Route path="Messages" element={<Messages/>}/>
-                <Route path="Profile" element={<Profile/>}/>
+                <Route path="Start" element={<Start user= {props.user} token= {props.token} /> }/>
+                <Route path="Search" element={<Search user= {props.user} token= {props.token}/>}/>
+                <Route path="Messages" element={<Messages user= {props.user} token= {props.token}/>}/>
+                <Route path="Profile" element={<Profile user= {props.user} token= {props.token}/> }/>
             </Routes>
             
         {/* <div>

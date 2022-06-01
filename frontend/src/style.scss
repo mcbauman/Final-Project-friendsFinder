@@ -10,21 +10,30 @@ body{
 
     font-size: 1rem;
     text-align: center;
+
     font-style: italic;
     background-color: hsl(211, 49%, 14%);
-    header{
-        nav{
 
+    header{
+        background-color:rgb(188,70,58);
+        nav{
             display: flex;
             justify-content: space-around;
+            a{
+                margin: 15px;
+                text-decoration: none;
+            }
         }
     }
     main{
+
         background-color: rgb(255, 1, 1);
+
         article{
+            background-color: rgb(212,165,155);
             #cardsWrapper{
-                display: flex;
-                flex-wrap: wrap;
+                // display: flex;
+                // flex-wrap: wrap;
                 .card{
                     box-shadow:0 0 5px grey inset;
                     img{

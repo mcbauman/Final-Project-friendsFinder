@@ -4,9 +4,9 @@ export default function Start(){
             Start
             <table>
                 <tr>
-                    
-                    <th>send</th>
+
                     <td>some text</td>
+                    
                 </tr>
             </table>
         </article>
