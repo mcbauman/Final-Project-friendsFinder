@@ -80,6 +80,11 @@ app.get("/users/ListAll",async(req,res,next)=>{
     }
 })
 
+// Find users matching criteria
+app.get("/user/find",async (req,res,next)=>{
+    res.send("Endpoint user/find Answer")
+})
+
 // Find Profile
 app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
     // console.log(req);
