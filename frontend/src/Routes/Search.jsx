@@ -35,7 +35,10 @@ export default function Search(props){
             const headers = { Authorization: `Bearer ${props.token}` }
             const data={subject,content,author:props.user,recipient:id}
             axios.post("http://localhost:9000/message/create",data, {headers})
-                .then(res => console.log(res.data))
+                .then(res => {
+                    setSubject("")
+                    setContent("")
+                })
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
     }
@@ -64,8 +67,8 @@ export default function Search(props){
                             <div>{item.age}</div>
                             <div>{item.userName}</div>
                             <form className={vis?"show":"hide"}>
-                                <input type="text" placeholder="subject" onChange={(e)=>setSubject(e.target.value)}/>
-                                <input type="text" placeholder="your text" onChange={(e)=>setContent(e.target.value)}/>
+                                <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
+                                <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                             </form>
                             <button onClick={()=>writeMessage(item._id)}>send Message</button>
                         </div>
