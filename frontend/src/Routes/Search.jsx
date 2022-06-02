@@ -30,8 +30,8 @@ export default function Search(props){
             SEARCH
             <form onSubmit={submitFunction}>
                 <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
-                <input type="text" placeholder="age from"/>
-                <input type="text" placeholder="age to"/>
+                <input type="text" onChange={(e)=>setMinAge(e.target.value||0)} placeholder="minimum Age"/>
+                <input type="text" onChange={(e)=>setMaxAge(e.target.value||150)} placeholder="maximum age"/>
                 <select onChange={(e)=>setSrchdGender(e.target.value)}>
                     <option>any</option>
                     <option>male</option>

@@ -33,6 +33,16 @@ app.use(cors())
 app.use(express.json())
 connect()
 
+/*function async updateAge(){
+    const Users=await User.find()
+    
+}
+updateAge()
+setInterval(()=>{
+    updateAge()
+},1000*60*60*24)
+ */
+
 app.get("/",(req,res)=>{
     res.send("Answer to /")
 })
@@ -89,11 +99,14 @@ app.post("/user/find",checkAuth,async (req,res,next)=>{
     // console.log(new Date("1990-02-05T00:00:00.000Z").getTime())
     // console.log("YEAR",new Date("1990-02-05T00:00:00.000Z").getDate())
     // console.log("AGE from l88",age)
-    const filter={}
+    const filter={age:{$gte:req.body.minAge, $lte:req.body.maxAge}}
     if(req.body.interests&&req.body.interests.length>0){
         filter.interests={
             $in:req.body.interests
         }
+    }
+    if(req.body.srchdGender!=="any"){
+        filter.gender= req.body.srchdGender
     }
     try{
         let users=await User.find(filter)

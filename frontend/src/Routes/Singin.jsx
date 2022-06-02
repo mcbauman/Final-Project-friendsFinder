@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useState} from "react"
 import axios from "axios"
 import Select from "react-select";
 import Activities from "../ActivitiesArray";
-import Log from "../Log";
+
 
 export default function Singin(props){
     const [email, setEmail]=useState("")
@@ -16,26 +16,36 @@ export default function Singin(props){
     const [interests,setInterests]=useState([])
     const options=Activities
 
+    function ageFunction(e){
+        setDateOfBirth(e.target.value)
+        setAge(Math.floor((Date.now()-new Date(e.target.value).getTime())/(31536000000)))
+    }
     function submitFunction(e){
         e.preventDefault()
-        console.log(new Date(dateOfBirth).getTime())
-        console.log(Date.now())
-        setAge((Date.now()-new Date(dateOfBirth).getTime())/31536000000)
-        console.log(age)
-        console.log("SIGNING BODY l22",{email,password,userName, name, familyName,dateOfBirth,age,gender,interests});
+        console.log("BDate",new Date(dateOfBirth).getTime())
+        console.log("DToday",Date.now())
+        console.log("AGE",age)
+        console.log("SIGNING BODY l22",{age,email,password,userName,name,familyName,dateOfBirth,gender,interests});
         const sendInterests=interests.map(item=>item.value)
-        axios.post("http://localhost:9000/user/create",{email,password,userName, name, familyName,dateOfBirth,age,gender,interests:sendInterests})
-        .then(resp=>{
-            console.log(interests)
-            props.setUser(email)
-            props.setToken(resp.data.token)
-        })
-        .catch(err=>{
-            console.log(err)
-            alert(err?.response?.data?.error||"Something went wrong")
-        })
+
     }
     
+    function unused(){
+        axios.post("http://localhost:9000/user/create",{email,password,userName,name,familyName,dateOfBirth,age,gender,interests:sendInterests})
+            .then(resp=>{
+                console.log(interests)
+                props.setUser(email)
+                props.setToken(resp.data.token)
+            })
+            .catch(err=>{
+                console.log(err)
+                alert(err?.response?.data?.error||"Something went wrong")
+            })
+    }
+    
+    console.log(Date.now())
+    console.log(age)
+    console.log("BDate",new Date(dateOfBirth).getTime())
     return(
         <article>
             Signin
@@ -45,11 +55,11 @@ export default function Singin(props){
                 <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="@"/>
                 <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="password"/>
                 <input type="text" value={userName} onChange={e=>setUserName(e.target.value)} placeholder="user-name" />
-                <input type="date" value={dateOfBirth} onChange={e=>setDateOfBirth(e.target.value)} placeholder="date of birth"/>
+                <input type="date" value={dateOfBirth} onChange={ageFunction} placeholder="date of birth"/>
                 <fieldset onChange={e=>setGender(e.target.id)}>
-                    <input type="radio" name="gender" id="male"/><labe for="male">male</labe>
-                    <input type="radio" name="gender" id="female"/><labe for="female">female</labe>
-                    <input type="radio" name="gender" id="diverse"/><labe for="diverse">diverse</labe>
+                    <input type="radio" name="gender" id="male"/><label htmlFor="male">male</label>
+                    <input type="radio" name="gender" id="female"/><label htmlFor="female">female</label>
+                    <input type="radio" name="gender" id="diverse"/><label htmlFor="diverse">diverse</label>
                 </fieldset>
                 <input type="file" placeholder="choose avatar" />
                 <Select closeMenuOnSelect={false} isMulti options={options} onChange={setInterests} />
