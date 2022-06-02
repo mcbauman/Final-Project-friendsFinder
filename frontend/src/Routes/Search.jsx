@@ -33,7 +33,6 @@ export default function Search(props){
                 <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
                 <input type="text" placeholder="age from"/>
                 <input type="text" placeholder="age to"/>
-                <input type="text" placeholder="gender"/>
                 <select onChange={(e)=>setSrchdGender(e.target.value)}>
                     <option>any</option>
                     <option>male</option>

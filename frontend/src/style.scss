@@ -54,11 +54,12 @@ body{
                     font-size: 2rem;
                     font-family: "Helvetica Neue";
                     font-weight: 100;
-                    width: 13%
+                    width: 200px;
                 }
                 div{
                     display: inline-flex;
                     flex-direction: column;
+                    width: 250px;
                 }
                 select{
                     font-size: 2rem;
