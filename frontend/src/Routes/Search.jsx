@@ -46,7 +46,7 @@ export default function Search(props){
                             <div>{item.name}</div>
                             <div>{item.familyName}</div>
                             <div>{item.gender}</div>
-                            <div>{item.dateOfBirth}</div>
+                            <div>{item.age}</div>
                             <div>{item.userName}</div>
                             <button>send Message</button>
                         </div>

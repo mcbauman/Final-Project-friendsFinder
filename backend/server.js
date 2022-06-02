@@ -83,7 +83,12 @@ app.get("/users/ListAll",async(req,res,next)=>{
 
 // Find users matching criteria
 app.post("/user/find",checkAuth,async (req,res,next)=>{
-    console.log(req.body)
+    //console.log(req.body)
+    // let age=(Date.now()-(new Date(reg.body.birthday)).getTime())/(365*24*60*60*1000)
+    // console.log(Date.now())
+    // console.log(new Date("1990-02-05T00:00:00.000Z").getTime())
+    // console.log("YEAR",new Date("1990-02-05T00:00:00.000Z").getDate())
+    // console.log("AGE from l88",age)
     const filter={}
     if(req.body.interests&&req.body.interests.length>0){
         filter.interests={
@@ -93,7 +98,7 @@ app.post("/user/find",checkAuth,async (req,res,next)=>{
     try{
         let users=await User.find(filter)
         console.log("Filter 95",filter)
-        console.log("BE SERVER.JS USER 89",users)
+        // console.log("BE SERVER.JS USER 89",users)
         res.send(users)
     }catch (e) {
         next({status:400, message:e.message})

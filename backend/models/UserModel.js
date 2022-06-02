@@ -16,6 +16,7 @@ const userSchema=new Schema({
     userName:    { type:String},
     avatar:          String,
     dateOfBirth: { type:Date,required:true},
+    age:            Number,
     gender:      { type:String, required:true, enum:["male","female","diverse"]},
     interests:    Array,
     //Stored last search?
