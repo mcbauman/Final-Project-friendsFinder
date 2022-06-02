@@ -27,6 +27,7 @@ console.log(allMsg);
                     <div> {item.name}</div>
                     <div> {item.subject}</div>
                     <div> {item.content}</div>
+                    <button>Answer</button>
                 </div>
                 ))} 
             </section>

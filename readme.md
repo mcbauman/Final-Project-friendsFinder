@@ -58,3 +58,10 @@
 Learned from Project
 - Protocoll of group-decisions
 - Deviding work
+
+
+db.collection.aggregate([
+{ $addFields:
+{ age: { $dateDiff: { startDate: "$dob", endDate: "$$NOW", unit: "year" } } }
+}
+])

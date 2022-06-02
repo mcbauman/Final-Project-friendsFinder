@@ -20,6 +20,7 @@ body{
     background-color: hsl(211, 49%, 14%);
     header{
         background-color:rgb(188,70,58);
+        box-shadow: 0 0 7px black inset;
         nav{
             max-width: 1200px;
             margin: 0 auto;
@@ -38,6 +39,9 @@ body{
             }
             svg{
                 color: rgb(255,255,205);
+                &:hover {
+                    color: rgb(50, 50, 50);
+                }
             }
         }
     }
@@ -65,12 +69,10 @@ body{
                     font-size: 2rem;
                     font-family: "Helvetica Neue";
                     font-weight: 100;
-                    width: 200px;
                 }
-                div{
+                >div{
                     display: inline-flex;
                     flex-direction: column;
-                    width: 250px;
                 }
                 select{
                     font-size: 2rem;
@@ -81,12 +83,6 @@ body{
                     }
                 }
             }
-        form{
-            display: flex-wrap;
-            flex-direction: column;
-            align-items: center;
-
-        }
         }
     }
 }

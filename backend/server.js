@@ -33,6 +33,16 @@ app.use(cors())
 app.use(express.json())
 connect()
 
+/*function async updateAge(){
+    const Users=await User.find()
+    
+}
+updateAge()
+setInterval(()=>{
+    updateAge()
+},1000*60*60*24)
+ */
+
 app.get("/",(req,res)=>{
     res.send("Answer to /")
 })
@@ -83,10 +93,25 @@ app.get("/users/ListAll",async(req,res,next)=>{
 
 // Find users matching criteria
 app.post("/user/find",checkAuth,async (req,res,next)=>{
-    console.log(req.body)
+    //console.log(req.body)
+    // let age=(Date.now()-(new Date(reg.body.birthday)).getTime())/(365*24*60*60*1000)
+    // console.log(Date.now())
+    // console.log(new Date("1990-02-05T00:00:00.000Z").getTime())
+    // console.log("YEAR",new Date("1990-02-05T00:00:00.000Z").getDate())
+    // console.log("AGE from l88",age)
+    const filter={age:{$gte:req.body.minAge, $lte:req.body.maxAge}}
+    if(req.body.interests&&req.body.interests.length>0){
+        filter.interests={
+            $in:req.body.interests
+        }
+    }
+    if(req.body.srchdGender!=="any"){
+        filter.gender= req.body.srchdGender
+    }
     try{
-        let users=await User.find({interests:req.body.interests})
-        console.log(users)
+        let users=await User.find(filter)
+        console.log("Filter 95",filter)
+        // console.log("BE SERVER.JS USER 89",users)
         res.send(users)
     }catch (e) {
         next({status:400, message:e.message})

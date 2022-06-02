@@ -16,11 +16,11 @@ export default function Search(props){
         e.preventDefault()
         const headers = { Authorization: `Bearer ${props.token}` }
         const body={interests,minAge,maxAge,srchdGender}
+        body.interests=body.interests.map(item=>item.value)
         axios.post("http://localhost:9000/user/find", body,{headers})
             .then(res => {
                 setListOfUser(res.data)
-                console.log(listOfUsers)
-                console.log(res.data)
+                console.log("SEARCH RES.DATA l24",res.data)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
@@ -30,8 +30,8 @@ export default function Search(props){
             SEARCH
             <form onSubmit={submitFunction}>
                 <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
-                <input type="text" placeholder="age from"/>
-                <input type="text" placeholder="age to"/>
+                <input type="text" onChange={(e)=>setMinAge(e.target.value||0)} placeholder="minimum Age"/>
+                <input type="text" onChange={(e)=>setMaxAge(e.target.value||150)} placeholder="maximum age"/>
                 <select onChange={(e)=>setSrchdGender(e.target.value)}>
                     <option>any</option>
                     <option>male</option>
@@ -46,7 +46,7 @@ export default function Search(props){
                             <div>{item.name}</div>
                             <div>{item.familyName}</div>
                             <div>{item.gender}</div>
-                            <div>{item.dateOfBirth}</div>
+                            <div>{item.age}</div>
                             <div>{item.userName}</div>
                             <button>send Message</button>
                         </div>

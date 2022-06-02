@@ -9,7 +9,7 @@ export default function Log(props){
             <header>
                 <nav>
                     <NavLink to="*">Login</NavLink>
-                    <NavLink to="Singin">Singin</NavLink>
+                    <NavLink to="Singin">Signin</NavLink>
                 </nav>
             </header>
            <main>
