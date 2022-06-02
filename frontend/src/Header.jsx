@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom"
-import {MdLogout} from "react-icons/all";
+import {MdLogout} from "react-icons/md";
 
 export default function Header(){
    return(

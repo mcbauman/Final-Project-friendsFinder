@@ -12,6 +12,9 @@ import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
 import createError from "http-errors"
+import multer from "multer"
+import File from "./models/ProfileModel.js"
+import path from "path"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -54,8 +57,40 @@ app.post("/user/login",async (req,res,next)=>{
     }
 })
 
+// create multer "middleware factory" (here we can configure multer)
+const multerOptions = { dest: 'uploads/' }
+const upload = multer(multerOptions)
+
+const handleUpload = upload.fields([{ name: "selectedFile", maxCount: 1 }])
+// Create Profile Picture:
+app.post("/user/createPicture", handleUpload, async(req, res, next) => {
+    try {
+        const profile = await File.create(req.files.selectedFile[0])
+        res.send(profile)
+    } catch (error) {
+        next({status:400, message:error.message})
+    }
+    console.log("picture file: ", req.files);
+})
+
+// Show a Picture:
+app.get("/file/:id", async(req, res, next)=> {
+    try {
+        const pic = await File.findById(req.params.id)
+        if(!pic){
+            return next(createError(404, "Picture is not found"))
+        }
+        const absolutPath = path.resolve(pic.path)
+        console.log("Absolute Path: ",absolutPath);
+        res.sendFile(absolutPath)
+    } catch (error) {
+        next(createError(400, error.message))
+    }
+})
+
 // CreateUser:
 app.post("/user/create",userValidator, async(req, res, next)=>{
+    console.log(req.files);
     const errors=validationResult(req)
     console.log(errors);
     if(!errors.isEmpty()){
