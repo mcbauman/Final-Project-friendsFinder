@@ -20,6 +20,7 @@ body{
     background-color: hsl(211, 49%, 14%);
     header{
         background-color:rgb(188,70,58);
+        box-shadow: 0 0 7px black inset;
         nav{
             max-width: 1200px;
             margin: 0 auto;
@@ -70,10 +71,9 @@ body{
                     font-weight: 100;
                     width: 200px;
                 }
-                div{
+                >div{
                     display: inline-flex;
                     flex-direction: column;
-                    width: 250px;
                 }
                 select{
                     font-size: 2rem;

@@ -1,5 +1,6 @@
 import {NavLink} from "react-router-dom"
-import {MdLogout} from "react-icons/all";
+// import {MdLogout} from "react-icons/all";
+// // <MdLogout onClick={logout}/>
 
 export default function Header(props){
     function logout(){
@@ -13,7 +14,7 @@ export default function Header(props){
                <NavLink to="Search">Search</NavLink>
                <NavLink to="Messages">Messages</NavLink>
                <NavLink to="Profile">Profile</NavLink>
-               <MdLogout onClick={logout}/>
+               
            </nav>
        </header>
    )

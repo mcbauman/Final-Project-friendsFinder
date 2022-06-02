@@ -84,9 +84,16 @@ app.get("/users/ListAll",async(req,res,next)=>{
 // Find users matching criteria
 app.post("/user/find",checkAuth,async (req,res,next)=>{
     console.log(req.body)
+    const filter={}
+    if(req.body.interests&&req.body.interests.length>0){
+        filter.interests={
+            $in:req.body.interests
+        }
+    }
     try{
-        let users=await User.find({interests:req.body.interests})
-        console.log(users)
+        let users=await User.find(filter)
+        console.log("Filter 95",filter)
+        console.log("BE SERVER.JS USER 89",users)
         res.send(users)
     }catch (e) {
         next({status:400, message:e.message})

@@ -18,7 +18,8 @@ export default function Singin(props){
     function submitFunction(e){
         e.preventDefault()
         console.log({email,password,userName, name, familyName,dateOfBirth,gender,interests});
-        axios.post("http://localhost:9000/user/create",{email,password,userName, name, familyName,dateOfBirth,gender,interests})
+        const sendInterests=interests.map(item=>item.value)
+        axios.post("http://localhost:9000/user/create",{email,password,userName, name, familyName,dateOfBirth,gender,interests:sendInterests})
         .then(resp=>{
             console.log(interests)
             props.setUser(email)

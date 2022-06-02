@@ -16,11 +16,11 @@ export default function Search(props){
         e.preventDefault()
         const headers = { Authorization: `Bearer ${props.token}` }
         const body={interests,minAge,maxAge,srchdGender}
+        body.interests=body.interests.map(item=>item.value)
         axios.post("http://localhost:9000/user/find", body,{headers})
             .then(res => {
                 setListOfUser(res.data)
-                console.log(listOfUsers)
-                console.log(res.data)
+                console.log("SEARCH RES.DATA l24",res.data)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
