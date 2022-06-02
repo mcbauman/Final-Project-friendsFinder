@@ -36,6 +36,9 @@ body{
                     //box-shadow: 0px 0px 20px rgb(255,255,205) ;
                 }
             }
+            svg{
+                color: rgb(255,255,205);
+            }
         }
     }
     main{
@@ -48,6 +51,14 @@ body{
             height: 100%;
             margin:0px auto;
             background-color: rgb(255,255,245);
+            section{
+                .ProfileCard{
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom:solid 30px rgb(188,70,58); 
+                    border-top:solid 30px rgb(188,70,58);
+                }
+            }
             form{
                 
                 input{

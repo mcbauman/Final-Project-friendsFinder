@@ -22,7 +22,7 @@ console.log(allMsg);
             MESSAGES
             <section id="messages">
                 {allMsg.map(item => (
-                <div key={item._id}> 
+                <div className="ProfileCard" key={item._id}> 
                     <div> {item.author.userName}</div>
                     <div> {item.name}</div>
                     <div> {item.subject}</div>

@@ -27,7 +27,6 @@ export default function Search(props){
     
     return(
         <article>
-
             SEARCH
             <form onSubmit={submitFunction}>
                 <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
@@ -43,12 +42,13 @@ export default function Search(props){
             </form>
             <section>
                 {listOfUsers.map(item=>(
-                        <div>
+                        <div className="ProfileCard">
                             <div>{item.name}</div>
                             <div>{item.familyName}</div>
                             <div>{item.gender}</div>
                             <div>{item.dateOfBirth}</div>
                             <div>{item.userName}</div>
+                            <button>send Message</button>
                         </div>
                 ))}
             </section>
