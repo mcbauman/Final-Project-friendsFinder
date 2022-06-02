@@ -13,7 +13,6 @@ body{
     // font-family: 'Oswald', sans-serif;
     // font-family: 'Pompiere', cursive;
     // font-family: 'Roboto', sans-serif;
-
     font-size: 2rem;
     text-align: center;
     font-weight: 100;
@@ -46,9 +45,7 @@ body{
         }
     }
     main{
-        //background-color: rgb(212,165,155);
         height: 90%;
-        
         article{
             width: 95%;
             max-width: 1200px;
@@ -56,15 +53,28 @@ body{
             margin:0px auto;
             background-color: rgb(255,255,245);
             section{
-                .ProfileCard{
+                >.ProfileCard{
                     display: flex;
+                    flex-wrap: wrap;
                     justify-content: space-between;
                     border-bottom:solid 30px rgb(188,70,58); 
                     border-top:solid 30px rgb(188,70,58);
+                    .show{
+                        display: block;
+                    }
+                    .hide{
+                        display: none;
+                    }
                 }
             }
             form{
-                
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                button{
+                    background-color: white;
+                    height: 52px;
+                }
                 input{
                     font-size: 2rem;
                     font-family: "Helvetica Neue";
@@ -79,7 +89,6 @@ body{
                     font-family: "Helvetica Neue";
                     font-weight: 100;
                     option{
-                        
                     }
                 }
             }

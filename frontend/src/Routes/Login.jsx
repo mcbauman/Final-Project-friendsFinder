@@ -13,7 +13,7 @@ export default function Login(props){
             console.log(resp)
             console.log("email",email);
             console.log(typeof email);
-            props.setUser(email)
+            props.setUser(resp.data._id)
             props.setToken(resp.data.token)
         })
         .catch(err=>{

@@ -15,6 +15,7 @@ import createError from "http-errors"
 import multer from "multer"
 import File from "./models/ProfileModel.js"
 import path from "path"
+import {log} from "util";
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -61,7 +62,7 @@ app.post("/user/login",async (req,res,next)=>{
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
-        res.send({token})
+        res.send({token,_id:user._id})
     } catch (error) {
         next({status:400,message:error})
     }
@@ -110,7 +111,7 @@ app.post("/user/create",userValidator, async(req, res, next)=>{
         const user = await User.create(req.body)
         const user2=await User.findOne({email:req.body.email})
         const token=jwt.sign({uid:user2._id},process.env.SECRET)
-        res.send({token})
+        res.send({token,_id:user._id})
     } catch (err) {
         next({status:400, message:err.message})
     }
@@ -145,7 +146,7 @@ app.post("/user/find",checkAuth,async (req,res,next)=>{
     }
     try{
         let users=await User.find(filter)
-        console.log("Filter 95",filter)
+        // console.log("Filter 95",filter)
         // console.log("BE SERVER.JS USER 89",users)
         res.send(users)
     }catch (e) {
@@ -177,10 +178,11 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(re
 })
 
 // Create Message:
-app.post("/message/create", messageRules, async(req, res, next) => {
+app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
     try {
-        const user = await User.findById(req.body.author)
-        console.log(user);
+        console.log(req.user.id)
+        const user = await User.findById(req.user.id)
+        console.log("USER MESSAGE CREATE",user);
         if(user){
             const message = await Message.create(req.body)
             res.send({message})

@@ -27,14 +27,10 @@ export default function Singin(props){
         console.log("AGE",age)
         console.log("SIGNING BODY l22",{age,email,password,userName,name,familyName,dateOfBirth,gender,interests});
         const sendInterests=interests.map(item=>item.value)
-
-    }
-    
-    function unused(){
         axios.post("http://localhost:9000/user/create",{email,password,userName,name,familyName,dateOfBirth,age,gender,interests:sendInterests})
             .then(resp=>{
                 console.log(interests)
-                props.setUser(email)
+                props.setUser(resp.data._id)
                 props.setToken(resp.data.token)
             })
             .catch(err=>{
@@ -43,9 +39,6 @@ export default function Singin(props){
             })
     }
     
-    console.log(Date.now())
-    console.log(age)
-    console.log("BDate",new Date(dateOfBirth).getTime())
     return(
         <article>
             Signin
