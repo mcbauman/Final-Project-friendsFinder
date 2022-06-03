@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import React from "react";
+import exmpl from "../exmpl.jpeg"
 
 
 export default function Messages(props){
@@ -41,7 +42,8 @@ export default function Messages(props){
             MESSAGES
             <section id="messages">
                 {allMsg.map(item=>(
-                    <div key={item._id} className="ProfileCard">
+                    <div key={item._id} className="messages">
+                        <img src={exmpl}/>
                         <div>{item.author.userName}</div>
                         <div>{item.subject}</div>
                         <div>{item.content}</div>

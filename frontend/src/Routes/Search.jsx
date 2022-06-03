@@ -4,6 +4,7 @@ import Select from 'react-select';
 import {useState} from "react";
 import axios from "axios";
 import Log from "../Log";
+import exmpl from "../exmpl.jpeg"
 
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
@@ -61,17 +62,21 @@ export default function Search(props){
             <section id="messages">
                 {listOfUsers.map(item=>(
                         <div key={item._id} className="ProfileCard">
-                            <div>{item.userName}</div>
-                            <div>{item.profileText}</div>
-                            <div>{item.name}</div>
-                            <div>{item.familyName}</div>
-                            <div>{item.gender}</div>
-                            <div>{item.age}</div>
+                            <img src={exmpl}/>
+                            <div>
+                                <div className="profileHeader">
+                                    <div>{item.userName}</div>
+                                    <div>{item.gender}</div>
+                                    <div>{item.age}</div>
+                                    <button onClick={()=>writeMessage(item._id)}>send Message</button>
+                                </div>
+                                <div className="profileText">{item.profileText}</div>
+                            </div>
                             <form className={vis===item._id?"show":"hide"}>
                                 <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                                 <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                             </form>
-                            <button onClick={()=>writeMessage(item._id)}>send Message</button>
+                            
                         </div>
                 ))}
             </section>
