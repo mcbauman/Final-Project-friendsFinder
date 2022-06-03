@@ -180,7 +180,7 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(re
 // Create Message:
 app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
     try {
-        console.log(req.user.id)
+        console.log("message/create l183", req.user.id)
         const user = await User.findById(req.user.id)
         console.log("USER MESSAGE CREATE",user);
         if(user){
@@ -192,7 +192,7 @@ app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
     }
 })
 
-// List all Messages:
+//TESTING List all Messages:
 app.get("/messageList",checkAuth,  async(req, res, next) => {
     try {
         console.log("Message list all: ", req.user.id);
@@ -207,13 +207,12 @@ app.get("/messageList",checkAuth,  async(req, res, next) => {
 // Messages List:
 app.get("/message/find",checkAuth,  async(req, res, next) => {
     try {
-        const query = Message.find({recipient: req.user._id})
+        const query = Message.find({recipient: req.user.id})
         query.populate("author", "userName")
         const messages = await query.exec()
         console.log(messages);
         res.send(messages)
-
-      
+        
     } catch (error) {
         next(createError(400, error.message))
     }

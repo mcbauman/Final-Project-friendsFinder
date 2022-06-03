@@ -30,8 +30,8 @@ export default function Search(props){
     }
     
     function writeMessage(id){
-        setVis(vis?false:true)
-        if(vis){
+        setVis(vis?0:id)
+        if(vis&&subject.length>1){
             const headers = { Authorization: `Bearer ${props.token}` }
             const data={subject,content,author:props.user,recipient:id}
             axios.post("http://localhost:9000/message/create",data, {headers})
@@ -58,7 +58,7 @@ export default function Search(props){
                 </select>
                 <button type="submit">search</button>
             </form>
-            <section>
+            <section id="messages">
                 {listOfUsers.map(item=>(
                         <div key={item._id} className="ProfileCard">
                             <div>{item.name}</div>
@@ -66,7 +66,7 @@ export default function Search(props){
                             <div>{item.gender}</div>
                             <div>{item.age}</div>
                             <div>{item.userName}</div>
-                            <form className={vis?"show":"hide"}>
+                            <form className={vis===item._id?"show":"hide"}>
                                 <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                                 <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                             </form>
@@ -74,7 +74,6 @@ export default function Search(props){
                         </div>
                 ))}
             </section>
-
         </article>
     )
 }
