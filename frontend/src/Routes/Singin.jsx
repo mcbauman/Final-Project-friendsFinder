@@ -14,6 +14,7 @@ export default function Singin(props){
     const [age,setAge]=useState(0)
     const [gender, setGender] = useState("male")
     const [interests,setInterests]=useState([])
+    const [profileText,setProfileText]=useState("")
     const options=Activities
 
     function ageFunction(e){
@@ -22,12 +23,9 @@ export default function Singin(props){
     }
     function submitFunction(e){
         e.preventDefault()
-        console.log("BDate",new Date(dateOfBirth).getTime())
-        console.log("DToday",Date.now())
-        console.log("AGE",age)
-        console.log("SIGNING BODY l22",{age,email,password,userName,name,familyName,dateOfBirth,gender,interests});
         const sendInterests=interests.map(item=>item.value)
-        axios.post("http://localhost:9000/user/create",{email,password,userName,name,familyName,dateOfBirth,age,gender,interests:sendInterests})
+        const data={age,email,password,userName,name,familyName,dateOfBirth,gender,interests:sendInterests,profileText}
+        axios.post("http://localhost:9000/user/create",data)
             .then(resp=>{
                 console.log(interests)
                 props.setUser(resp.data._id)
@@ -50,10 +48,11 @@ export default function Singin(props){
                 <input type="text" value={userName} onChange={e=>setUserName(e.target.value)} placeholder="user-name" />
                 <input type="date" value={dateOfBirth} onChange={ageFunction} placeholder="date of birth"/>
                 <fieldset onChange={e=>setGender(e.target.id)}>
-                    <input type="radio" name="gender" id="male"/><label htmlFor="male">male</label>
-                    <input type="radio" name="gender" id="female"/><label htmlFor="female">female</label>
-                    <input type="radio" name="gender" id="diverse"/><label htmlFor="diverse">diverse</label>
+                    <input type="radio" name="gender" id="♂️"/><label htmlFor="♂️">♂️</label>
+                    <input type="radio" name="gender" id="♀️"/><label htmlFor="♀️">♀️</label>
+                    <input type="radio" name="gender" id="⚧"/><label htmlFor="⚧">⚧</label>
                 </fieldset>
+                <textarea value={profileText} onChange={e=>setProfileText(e.target.value)} placeholder="tell us a bit about yourself"/>
                 <input type="file" placeholder="choose avatar" />
                 <Select closeMenuOnSelect={false} isMulti options={options} onChange={setInterests} />
                 <button type="submit">save user</button>
