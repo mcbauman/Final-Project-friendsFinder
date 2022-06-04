@@ -2,19 +2,8 @@
 body{
     height: 100vh;
     margin:0;
-    //font-family: 'Bebas Neue', cursive;
     font-family: "Helvetica Neue";
-    // font-family: 'Ubuntu', sans-serif;
-    // font-family: 'Bebas Neue', cursive;
-    // font-family: 'Freckle Face', cursive;
-    // font-family: 'Lobster', cursive;
-    // font-family: 'Luckiest Guy', cursive;
-    // font-family: 'Mrs Sheppards', cursive;
-    // font-family: 'Oswald', sans-serif;
-    // font-family: 'Pompiere', cursive;
-    // font-family: 'Roboto', sans-serif;
     font-size: 2rem;
-    text-align: center;
     font-weight: 100;
     background-color: hsl(211, 49%, 14%);
     header{
@@ -22,8 +11,10 @@ body{
         box-shadow: 0 0 7px black inset;
         nav{
             max-width: 1200px;
+            width: 95%;
             margin: 0 auto;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content:space-between;
             a{
@@ -120,5 +111,15 @@ body{
                 }
             }
         }
+    }
+}
+@media only screen and (max-width:650px) {
+    .bigScreen{
+        display: none;
+    }
+}
+@media only screen and (min-width:650px) {
+    .smallScreen{
+        display: none;
     }
 }
