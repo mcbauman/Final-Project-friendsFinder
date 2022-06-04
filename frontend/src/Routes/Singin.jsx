@@ -25,7 +25,7 @@ export default function Singin(props){
         e.preventDefault()
         const sendInterests=interests.map(item=>item.value)
         const data={age,email,password,userName,name,familyName,dateOfBirth,gender,interests:sendInterests,profileText}
-        axios.post("http://localhost:9000/user/create",data)
+        axios.post(`${process.env.REACT_APP_BE_SERVER}/user/create`,data)
             .then(resp=>{
                 console.log(interests)
                 props.setUser(resp.data._id)

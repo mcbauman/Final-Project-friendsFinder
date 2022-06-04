@@ -1,6 +1,8 @@
-@url = http://localhost:9000
 
-GET http://localhost:9000
+@url = {process.env.REACT_APP_BE_SERVER}
+
+
+GET {{url}}
 
 ### POST new User:
 Post {{url}}/user/create

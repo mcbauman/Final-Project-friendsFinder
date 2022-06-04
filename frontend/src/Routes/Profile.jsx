@@ -23,7 +23,7 @@ export default function Profile(props){
                 body: formData
             }
         
-            fetch("http://localhost:9000/user/createPicture", config)
+            fetch(`${process.env.REACT_APP_BE_SERVER}/user/createPicture`, config)
                 .then(res => res.json())
                 .then(res =>  res.send({}))
                 .catch()

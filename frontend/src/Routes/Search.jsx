@@ -22,7 +22,7 @@ export default function Search(props){
         const headers = { Authorization: `Bearer ${props.token}` }
         const body={interests,minAge,maxAge,srchdGender}
         body.interests=body.interests.map(item=>item.value)
-        axios.post("http://localhost:9000/user/find", body,{headers})
+        axios.post(`${process.env.REACT_APP_BE_SERVER}/user/find`, body,{headers})
             .then(res => {
                 setListOfUser(res.data)
                 console.log("SEARCH RES.DATA l24",res.data)
@@ -35,7 +35,7 @@ export default function Search(props){
         if(vis&&subject.length>1){
             const headers = { Authorization: `Bearer ${props.token}` }
             const data={subject,content,author:props.user,recipient:id}
-            axios.post("http://localhost:9000/message/create",data, {headers})
+            axios.post(`${process.env.REACT_APP_BE_SERVER}/message/create`,data, {headers})
                 .then(res => {
                     setSubject("")
                     setContent("")
