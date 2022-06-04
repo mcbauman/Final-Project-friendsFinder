@@ -8,7 +8,7 @@ export default function Login(props){
     function submitFunction(e){
         e.preventDefault()
         console.log({email,password})
-        axios.post("http://localhost:9000/user/login",{email,password})
+        axios.post(`${process.env.REACT_APP_BE_SERVER}/user/login`,{email,password})
         .then(resp=>{
             console.log(resp)
             console.log("email",email);

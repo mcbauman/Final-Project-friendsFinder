@@ -17,9 +17,11 @@ const userSchema=new Schema({
     avatar:          String,
     dateOfBirth: { type:Date,required:true},
     age:            Number,
-    gender:      { type:String, required:true, enum:["male","female","diverse"]},
+    gender:      { type:String, required:true, enum:["⚧","♂️","♀️"]},
     interests:    Array,
     //Stored last search?
+    profileText:    String,
+    friends:    {type:Array},
     emailVerified:{type:Boolean,default:false},
     score:        { type:Number, default:0}
 

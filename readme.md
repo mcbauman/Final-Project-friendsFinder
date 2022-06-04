@@ -60,8 +60,4 @@ Learned from Project
 - Deviding work
 
 
-db.collection.aggregate([
-{ $addFields:
-{ age: { $dateDiff: { startDate: "$dob", endDate: "$$NOW", unit: "year" } } }
-}
-])
+Also, from what I’ve learned, SPAs have problems with client-side routing. If you use React Router, you should create _redirects file with /* /index.html 200 line in public folder. That will prevent 404.

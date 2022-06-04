@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import React from "react";
+import exmpl from "../exmpl.jpeg"
 
 
 export default function Messages(props){
@@ -12,7 +13,7 @@ export default function Messages(props){
     function requestMessages(){
         const headers = { Authorization: `Bearer ${props.token}` }
     
-        axios.get("http://localhost:9000/message/find", {headers})
+        axios.get(`${process.env.REACT_APP_BE_SERVER}/message/find`, {headers})
             .then(res => setAllMsg(res.data))
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
@@ -26,7 +27,7 @@ export default function Messages(props){
             const headers = { Authorization: `Bearer ${props.token}` }
             const data={subject,content,author:props.user,recipient:author}
 ///ID Of Message or User?
-            axios.post("http://localhost:9000/message/create",data, {headers})
+            axios.post(`${process.env.BE_SERVER}/message/create`,data, {headers})
                 .then(res => {
                     setSubject("")
                     setContent("")
@@ -41,7 +42,8 @@ export default function Messages(props){
             MESSAGES
             <section id="messages">
                 {allMsg.map(item=>(
-                    <div key={item._id} className="ProfileCard">
+                    <div key={item._id} className="messages">
+                        <img src={exmpl}/>
                         <div>{item.author.userName}</div>
                         <div>{item.subject}</div>
                         <div>{item.content}</div>
