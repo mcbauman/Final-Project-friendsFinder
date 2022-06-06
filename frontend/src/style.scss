@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 body{
-//    height: 100vh;
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -40,7 +39,7 @@ body{
         article{
             width: 95%;
             max-width: 1200px;
-            margin:0px auto;
+            margin:0 auto;
             padding: 10px;
             background-color: rgb(255,255,245);
             form{
@@ -54,7 +53,7 @@ body{
                 }
                 input{
                     font-size: 2rem;
-                    font-family: "Helvetica Neue";
+                    font-family: "Helvetica Neue", sans-serif;
                     font-weight: 100;
                 }
                 >div{
@@ -63,7 +62,7 @@ body{
                 }
                 select{
                     font-size: 2rem;
-                    font-family: "Helvetica Neue";
+                    font-family: "Helvetica Neue", sans-serif;
                     font-weight: 100;
                     option{
                     }
