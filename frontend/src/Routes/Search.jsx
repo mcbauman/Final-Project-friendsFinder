@@ -62,9 +62,9 @@ export default function Search(props){
             <section id="messages">
                 {listOfUsers.map(item=>(
                         <div key={item._id} className="ProfileCard">
-                            <img src={exmpl}/>
                             <div>
                                 <div className="profileHeader">
+                                    <img src={exmpl}/>
                                     <div>{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>

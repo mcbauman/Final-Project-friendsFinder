@@ -26,6 +26,8 @@ export default function Messages(props){
         if(vis&&subject.length>1){
             const headers = { Authorization: `Bearer ${props.token}` }
             const data={subject,content,author:props.user,recipient:author}
+            console.log("author",author)
+            console.log("user",props.user)
 ///ID Of Message or User?
             axios.post(`${process.env.BE_SERVER}/message/create`,data, {headers})
                 .then(res => {
@@ -43,15 +45,17 @@ export default function Messages(props){
             <section id="messages">
                 {allMsg.map(item=>(
                     <div key={item._id} className="messages">
-                        <img src={exmpl}/>
-                        <div>{item.author.userName}</div>
-                        <div>{item.subject}</div>
-                        <div>{item.content}</div>
+                        <div className="messageHeader">
+                            <img src={exmpl} alt="ProfilePicture"/>
+                            <div>{item.author.userName}</div>
+                            <div>{item.subject}</div>
+                            <button onClick={()=>writeMessage(item._id,item.author._id)}>Answer</button>
+                        </div>
                         <form className={vis===item._id?"show":"hide"}>
                             <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                             <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                         </form>
-                        <button onClick={()=>writeMessage(item._id,item.author._id)}>send Message</button>
+                        <div>{item.content}</div>
                     </div>
                 ))}
             </section>

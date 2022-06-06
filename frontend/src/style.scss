@@ -2,7 +2,7 @@
 body{
     height: 100vh;
     margin:0;
-    font-family: "Helvetica Neue";
+    font-family: "Helvetica Neue",sans-serif;
     font-size: 2rem;
     font-weight: 100;
     background-color: hsl(211, 49%, 14%);
@@ -44,53 +44,13 @@ body{
             margin:0px auto;
             padding: 10px;
             background-color: rgb(255,255,245);
-            section{
-                >.ProfileCard{
-                    display: flex;
-                    justify-content: space-between;
-                    border-bottom:solid 10px rgb(188,70,58); 
-                    // border-top:solid 30px rgb(188,70,58);
-                    div{
-                        .profileHeader{
-                            display: flex;
-                            justify-content: flex-end;
-                        }
-                    }
-                    .show{
-                        display: block;
-                    }
-                    .hide{
-                        display: none;
-                    }
-                    img{
-                        width: 200px;
-                        border-radius: 20px;
-                    }
-                }
-                >.messages{
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-between;
-                    border-bottom:solid 10px rgb(188,70,58);
-                    // border-top:solid 30px rgb(188,70,58);
-                    .show{
-                        display: block;
-                    }
-                    .hide{
-                        display: none;
-                    }
-                    img{
-                        width: 100px;
-                        border-radius: 50px;
-                    }
-                }
-            }
             form{
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
                 button{
                     background-color: white;
+                    color:black;
                     height: 52px;
                 }
                 input{
@@ -107,6 +67,61 @@ body{
                     font-family: "Helvetica Neue";
                     font-weight: 100;
                     option{
+                    }
+                }
+            }
+            section{
+                >.ProfileCard{
+                    padding: 20px 0;
+                    margin-bottom: 10px;
+                    background-color: antiquewhite;
+                    border-radius: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    border-bottom:solid 10px rgb(188,70,58); 
+                    // border-top:solid 30px rgb(188,70,58);
+                    div{
+                        width: 100%;
+                        .profileHeader{
+                            display: flex;
+                            // flex-wrap: wrap;
+                            justify-content: space-between;
+                        }
+                    }
+                    .show{
+                        display: block;
+                    }
+                    .hide{
+                        display: none;
+                    }
+                    img{
+                        width: 200px;
+                        border-radius: 20px;
+                    }
+                }
+                >.messages{
+                    padding: 20px 0;
+                    margin-bottom: 10px;
+                    background-color: antiquewhite;
+                    border-radius: 20px;
+//                    display: flex;
+//                    flex-wrap: wrap;
+//                    justify-content: space-between;
+                    border-bottom:solid 10px rgb(188,70,58);
+                    .messageHeader{
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    .show{
+                        display: block;
+                    }
+                    .hide{
+                        display: none;
+                    }
+                    img{
+                        width: 100px;
+                        border-radius: 50px;
                     }
                 }
             }
