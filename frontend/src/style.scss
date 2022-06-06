@@ -16,20 +16,22 @@ body{
         nav{
             max-width: 1200px;
             width: 95%;
+            height: 50px;
             margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content:space-between;
             a{
+                display: flex;
+                align-items: center;
                 color: rgb(255,255,205);
                 text-decoration: none;
                 &:hover{
                     color:rgb(50,50,50);
-                    border-radius: 20px;
                 }
             }
             svg{
-                padding:15px;
+                // padding:15px;
                 color: rgb(255,255,205);
                 &:hover {
                     color: rgb(50, 50, 50);
@@ -56,8 +58,9 @@ body{
                 }
                 input{
                     font-size: 2rem;
+                    width:120px;
                     font-family: "Helvetica Neue", sans-serif;
-                    font-weight: 100;
+                    font-weight: 200;
                 }
                 >div{
                     display: inline-flex;
@@ -66,7 +69,7 @@ body{
                 select{
                     font-size: 2rem;
                     font-family: "Helvetica Neue", sans-serif;
-                    font-weight: 100;
+                    font-weight: 200;
                     option{
                     }
                 }
