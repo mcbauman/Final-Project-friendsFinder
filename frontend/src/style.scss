@@ -5,9 +5,12 @@ body{
     box-sizing: border-box;
     font-family: "Helvetica Neue", sans-serif;
     font-size: 1.8rem;
-    font-weight: 100;
+    font-weight: 200;
     background-color: hsl(211, 49%, 14%);
     header{
+        position: sticky;
+        top:0;
+        z-index: 100;
         background-color:rgb(188,70,58);
         box-shadow: 0 0 7px black inset;
         nav{
@@ -69,15 +72,38 @@ body{
                 }
             }
             section{
-                >.ProfileCard{
-                    padding: 20px 0;
+                >div {
+                    padding: 20px 10px;
                     margin-bottom: 10px;
                     background-color: antiquewhite;
                     border-radius: 20px;
+                    border-bottom: solid 10px rgb(188, 70, 58);
+                    .profileText{
+                        background-color: rgb(255,255,245);
+                        padding:10px 0;
+                        border-radius: 10px;
+                    }
+                    div{
+                        button{
+                            background-color: white;
+                            border-radius: 10px;
+                            height: 52px;
+                        }
+                    }
+                    .show {
+                        display: block;
+                    }
+                    .hide {
+                        display: none;
+                    }
+                    img {
+                        border-radius: 25px;
+                    }
+                }
+                >.ProfileCard{
                     display: flex;
                     justify-content: space-between;
                     flex-wrap: wrap;
-                    border-bottom:solid 10px rgb(188,70,58); 
                     div{
                         width: 100%;
                         .profileHeader{
@@ -85,36 +111,10 @@ body{
                             justify-content: space-between;
                         }
                     }
-                    .show{
-                        display: block;
-                    }
-                    .hide{
-                        display: none;
-                    }
-                    img{
-                        
-                        border-radius: 20px;
-                    }
                 }
                 >.messages{
-                    padding: 20px 0;
-                    margin-bottom: 10px;
-                    background-color: antiquewhite;
-                    border-radius: 20px;
-                    border-bottom:solid 10px rgb(188,70,58);
-//                    .messageHeader{
-//                        display: flex;
-//                        justify-content: space-between;
-//                    }
-                    .show{
-                        display: block;
-                    }
-                    .hide{
-                        display: none;
-                    }
                     img{
                         width: 100px;
-                        border-radius: 50px;
                     }
                 }
             }

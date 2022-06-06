@@ -55,7 +55,7 @@ export default function Messages(props){
                             <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                             <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                         </form>
-                        <div>{item.content}</div>
+                        <div className="profileText">{item.content}</div>
                     </div>
                 ))}
             </section>
