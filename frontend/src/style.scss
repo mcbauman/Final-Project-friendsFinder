@@ -92,7 +92,7 @@ body{
                         display: none;
                     }
                     img{
-                        width: 200px;
+                        
                         border-radius: 20px;
                     }
                 }
@@ -102,10 +102,10 @@ body{
                     background-color: antiquewhite;
                     border-radius: 20px;
                     border-bottom:solid 10px rgb(188,70,58);
-                    .messageHeader{
-                        display: flex;
-                        justify-content: space-between;
-                    }
+//                    .messageHeader{
+//                        display: flex;
+//                        justify-content: space-between;
+//                    }
                     .show{
                         display: block;
                     }
@@ -121,13 +121,31 @@ body{
         }
     }
 }
+//On Small Screens
 @media only screen and (max-width:650px) {
     .bigScreen{
         display: none;
     }
+    .messageHeader{
+        display: block;
+    }
+    .profileHeader{
+        flex-wrap: wrap;
+    }
+    img{
+        width: 100%;
+    }
 }
+//On Big Screens
 @media only screen and (min-width:650px) {
     .smallScreen{
         display: none;
+    }
+    .messageHeader{
+        display: flex;
+        justify-content: space-between;
+    }
+    img{
+        width: 200px;
     }
 }
