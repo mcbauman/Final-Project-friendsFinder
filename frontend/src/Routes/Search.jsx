@@ -3,7 +3,7 @@ import Activities from "../ActivitiesArray";
 import Select from 'react-select';
 import {useState} from "react";
 import axios from "axios";
-import Log from "../Log";
+import {FaUserFriends} from "react-icons/fa"
 import exmpl from "../exmpl.jpeg"
 
 export default function Search(props){
@@ -68,6 +68,7 @@ export default function Search(props){
                                     <div>{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
+                                    <button><FaUserFriends/></button>
                                     <button onClick={()=>writeMessage(item._id)}>send Message</button>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>

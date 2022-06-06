@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import React from "react";
 import exmpl from "../exmpl.jpeg"
+import {FaUserFriends} from "react-icons/fa"
 
 
 export default function Messages(props){
@@ -49,7 +50,10 @@ export default function Messages(props){
                             <img src={exmpl} alt="ProfilePicture"/>
                             <div>{item.author.userName}</div>
                             <div>{item.subject}</div>
-                            <button onClick={()=>writeMessage(item._id,item.author._id)}>Answer</button>
+                            <div className="btns">
+                                <button><FaUserFriends/></button>
+                                <button onClick={()=>writeMessage(item._id,item.author._id)}>Answer</button>
+                            </div>
                         </div>
                         <form className={vis===item._id?"show":"hide"}>
                             <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
