@@ -182,7 +182,7 @@ app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
     try {
         console.log("message/create l183", req.user.id)
         const user = await User.findById(req.user.id)
-        console.log("USER MESSAGE CREATE",user);
+        console.log("MESSAGE CREATE",req.body);
         if(user){
             const message = await Message.create(req.body)
             res.send({message})
@@ -210,7 +210,6 @@ app.get("/message/find",checkAuth,  async(req, res, next) => {
         const query = Message.find({recipient: req.user.id})
         query.populate("author", "userName")
         const messages = await query.exec()
-        console.log(messages);
         res.send(messages)
         
     } catch (error) {
