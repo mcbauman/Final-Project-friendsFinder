@@ -29,7 +29,7 @@ export default function Messages(props){
             console.log("author",author)
             console.log("user",props.user)
 ///ID Of Message or User?
-            axios.post(`${process.env.BE_SERVER}/message/create`,data, {headers})
+            axios.post(`${process.env.REACT_APP_BE_SERVER}/message/create`,data, {headers})
                 .then(res => {
                     setSubject("")
                     setContent("")
