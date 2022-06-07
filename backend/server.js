@@ -190,6 +190,17 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(re
     }
 })
 
+// add an Friend
+app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
+    try {
+//        const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:{friends:req.body}})
+        const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:req.body})
+        res.send(user)
+    } catch (error) {
+        next({status:400, message:error.message})
+    }
+})
+
 // Create Message:
 app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
     try {

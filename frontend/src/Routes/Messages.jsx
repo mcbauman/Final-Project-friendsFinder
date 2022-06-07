@@ -40,6 +40,16 @@ export default function Messages(props){
         }
     }
 
+    function addFriend(id){
+        const headers = { Authorization: `Bearer ${props.token}` }
+        const data={friends:id}
+        axios.put(`${process.env.REACT_APP_BE_SERVER}/user/addFriend`,data, {headers})
+            .then(res => {
+                console.log(`friend ${id} added`)
+            })
+            .catch(error => alert(error.response?.data?.error || "Unknown error"))
+    }
+    
     return(
         <article>
             MESSAGES
@@ -51,7 +61,7 @@ export default function Messages(props){
                             <div>{item.author.userName}</div>
                             <div>{item.subject}</div>
                             <div className="btns">
-                                <button><FaUserFriends/></button>
+                                <button onClick={()=>addFriend(item.author._id)}><FaUserFriends/></button>
                                 <button onClick={()=>writeMessage(item._id,item.author._id)}>Answer</button>
                             </div>
                         </div>

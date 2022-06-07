@@ -44,6 +44,16 @@ export default function Search(props){
         }
     }
     
+    function addFriend(id){
+        const headers = { Authorization: `Bearer ${props.token}` }
+        const data={friends:id}
+        axios.put(`${process.env.REACT_APP_BE_SERVER}/user/addFriend`,data, {headers})
+            .then(res => {
+                console.log(`friend ${id} added`)
+            })
+            .catch(error => alert(error.response?.data?.error || "Unknown error"))
+    }
+    
     return(
         <article>
             SEARCH
@@ -68,7 +78,7 @@ export default function Search(props){
                                     <div>{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
-                                    <button><FaUserFriends/></button>
+                                    <button onClick={()=>addFriend(item._id)}><FaUserFriends/></button>
                                     <button onClick={()=>writeMessage(item._id)}>send Message</button>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>
