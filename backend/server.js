@@ -47,26 +47,33 @@ setInterval(()=>{
 },1000*60*60*24)
  */
 
+//TESTING BASIC REQUEST TO SEE THAT SERVER IS RESPONDING AT ALL
 app.get("/",(req,res)=>{
     res.send("Answer to /")
 })
 
-// LOGIN User:
-app.post("/user/login",async (req,res,next)=>{
+//TESTING Get a List of Users
+app.get("/users/ListAll",async(req,res,next)=>{
     try {
-        // find user
-        const user=await User.findOne({email:req.body.email})
-        // compare password
-        const loginSuccess = await compare(req.body.password, user.password) 
-        if(!loginSuccess){throw {error:"Password missmatch"}}
-        // create token
-        const token=jwt.sign({uid:user._id},process.env.SECRET)
-        // send user the token
-        res.send({token,_id:user._id})
-    } catch (error) {
-        next({status:400,message:error})
+        let users= await User.find()
+        res.send(users)
+    } catch (err) {
+        next({status:400, message:err.message})
     }
 })
+
+//TESTING List all Messages:
+app.get("/messageList",checkAuth,  async(req, res, next) => {
+    try {
+        console.log("Message list all: ", req.user.id);
+
+        let messages = await Message.find()
+        res.send(messages)
+    } catch (error) {
+        next(createError(400, error.message))
+    }
+})
+
 
 // create multer "middleware factory" (here we can configure multer)
 const multerOptions = { dest: 'uploads/' }
@@ -99,6 +106,23 @@ app.get("/file/:id", async(req, res, next)=> {
     }
 })
 
+// LOGIN User:
+app.post("/user/login",async (req,res,next)=>{
+    try {
+        // find user
+        const user=await User.findOne({email:req.body.email})
+        // compare password
+        const loginSuccess = await compare(req.body.password, user.password)
+        if(!loginSuccess){throw {error:"Password missmatch"}}
+        // create token
+        const token=jwt.sign({uid:user._id},process.env.SECRET)
+        // send user the token
+        res.send({token,_id:user._id})
+    } catch (error) {
+        next({status:400,message:error})
+    }
+})
+
 // CreateUser:
 app.post("/user/create",userValidator, async(req, res, next)=>{
     console.log(req.files);
@@ -112,16 +136,6 @@ app.post("/user/create",userValidator, async(req, res, next)=>{
         const user2=await User.findOne({email:req.body.email})
         const token=jwt.sign({uid:user2._id},process.env.SECRET)
         res.send({token,_id:user._id})
-    } catch (err) {
-        next({status:400, message:err.message})
-    }
-})
-
-//Get a List of Users
-app.get("/users/ListAll",async(req,res,next)=>{
-    try {
-        let users= await User.find()
-        res.send(users)
     } catch (err) {
         next({status:400, message:err.message})
     }
@@ -165,7 +179,6 @@ app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
     }
 })
 
-
 // Update Profile
 app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(req,res,next)=>{
     console.log(validationResult(req));
@@ -189,18 +202,6 @@ app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
         }  
     } catch (err){
         next({status: 400, message: err.message })
-    }
-})
-
-//TESTING List all Messages:
-app.get("/messageList",checkAuth,  async(req, res, next) => {
-    try {
-        console.log("Message list all: ", req.user.id);
-        
-        let messages = await Message.find()
-        res.send(messages)
-    } catch (error) {
-        next(createError(400, error.message))
     }
 })
 
