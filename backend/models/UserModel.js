@@ -1,14 +1,12 @@
 import mongoose from 'mongoose'
 import Message from './MessageModel.js'
 
-const { Schema, model } = mongoose
+//const friendsSchema=new mongoose.Schema({
+//    fried:{type:[mongoose.Schema.Types.ObjectId],ref:"user"}
+//},{_id:false})
 
-// email-Type
-// password -coded
-// avatar Type
-
-const userSchema=new Schema({
-    messages:    { type: [Schema.Types.ObjectId], ref: "message"},
+const userSchema=new mongoose.Schema({
+    messages:    { type: [mongoose.Schema.Types.ObjectId], ref: "message"},
     name:        { type:String,required:true},
     familyName:  { type:String,required:true},
     email:       { type:String, required:true, unique:true},
@@ -21,10 +19,10 @@ const userSchema=new Schema({
     interests:    Array,
     //Stored last search?
     profileText:    String,
-    friends:    {type:Array},
+//    friends:    {type:[friendsSchema]},
+    friends:        Array,
     emailVerified:{type:Boolean,default:false},
     score:        { type:Number, default:0}
-
 }, {
     timestamps: true,
     toJSON:{
