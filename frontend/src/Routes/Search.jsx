@@ -71,7 +71,7 @@ export default function Search(props){
                                     <div>{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
-                                    <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token)}><FaUserFriends/></button>
+                                    <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
                                     <button onClick={()=>writeMessage(item._id)}>send Message</button>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>

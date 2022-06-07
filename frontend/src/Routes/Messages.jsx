@@ -50,7 +50,7 @@ export default function Messages(props){
                             <div>{item.author.userName}</div>
                             <div>{item.subject}</div>
                             <div className="btns">
-                                <button className={isFriend(item.author._id,friends)} onClick={()=>addFriend(item.author._id,props.token)}><FaUserFriends/></button>
+                                <button className={isFriend(item.author._id,friends)} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
                                 <button onClick={()=>writeMessage(item._id,item.author._id)}>Answer</button>
                             </div>
                         </div>

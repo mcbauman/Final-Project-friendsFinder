@@ -19,7 +19,7 @@ function checkFriends(token,setFriends){
         })
 }
 
-function addFriend(id,token){
+function addFriend(id,token,setFriends){
     const headers = { Authorization: `Bearer ${token}` }
     const data={friends:id}
     axios.put(`${process.env.REACT_APP_BE_SERVER}/user/addFriend`,data, {headers})
@@ -27,7 +27,7 @@ function addFriend(id,token){
             console.log(`friend ${id} added`)
         })
         .catch(error => alert(error.response?.data?.error || "Unknown error"))
-    checkFriends()
+    checkFriends(token,setFriends)
 }
 
 export{isFriend,checkFriends,addFriend}
