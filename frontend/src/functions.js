@@ -25,9 +25,10 @@ function addFriend(id,token,setFriends){
     axios.put(`${process.env.REACT_APP_BE_SERVER}/user/addFriend`,data, {headers})
         .then(res => {
             console.log(`friend ${id} added`)
+            checkFriends(token,setFriends)
         })
         .catch(error => alert(error.response?.data?.error || "Unknown error"))
-    checkFriends(token,setFriends)
+    
 }
 
 export{isFriend,checkFriends,addFriend}
