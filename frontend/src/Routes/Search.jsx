@@ -5,6 +5,7 @@ import {useState} from "react";
 import axios from "axios";
 import {FaUserFriends} from "react-icons/fa"
 import exmpl from "../exmpl.jpeg"
+import {isFriend,checkFriends,addFriend} from "../functions";
 
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
@@ -16,6 +17,7 @@ export default function Search(props){
     const [vis,setVis]=useState(false)
     const [subject,setSubject]=useState("")
     const [content,setContent]=useState("")
+    const [friends,setFriends]=useState([])
     
     function submitFunction(e){
         e.preventDefault()
@@ -28,6 +30,7 @@ export default function Search(props){
                 console.log("SEARCH RES.DATA l24",res.data)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
+        checkFriends(props.token,setFriends)
     }
     
     function writeMessage(id){
@@ -42,16 +45,6 @@ export default function Search(props){
                 })
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
-    }
-    
-    function addFriend(id){
-        const headers = { Authorization: `Bearer ${props.token}` }
-        const data={friends:id}
-        axios.put(`${process.env.REACT_APP_BE_SERVER}/user/addFriend`,data, {headers})
-            .then(res => {
-                console.log(`friend ${id} added`)
-            })
-            .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
     
     return(
@@ -78,7 +71,7 @@ export default function Search(props){
                                     <div>{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
-                                    <button onClick={()=>addFriend(item._id)}><FaUserFriends/></button>
+                                    <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token)}><FaUserFriends/></button>
                                     <button onClick={()=>writeMessage(item._id)}>send Message</button>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>

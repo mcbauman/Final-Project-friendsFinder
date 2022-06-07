@@ -190,6 +190,16 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(re
     }
 })
 
+// check friends
+app.get("/user/checkFriends",checkAuth, async (req,res,next)=>{
+    try {
+        const user=await User.findById(req.user._id)
+        res.send(user.friends)
+    } catch (error) {
+        next({status:400, message:error.message})
+    }
+})
+
 // add an Friend
 app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
     try {
@@ -217,7 +227,7 @@ app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
 })
 
 // Messages List:
-app.get("/message/find",checkAuth,  async(req, res, next) => {
+app.get("/message/find",checkAuth,async(req, res, next) => {
     try {
         const query = Message.find({recipient: req.user.id})
         query.populate("author", "userName")
