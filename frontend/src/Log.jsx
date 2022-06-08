@@ -8,8 +8,8 @@ export default function Log(props){
         <>
             <header>
                 <nav>
-                    <NavLink to="*">Login</NavLink>
-                    <NavLink to="Singin">Signin</NavLink>
+                    <NavLink to="*">Log in</NavLink>
+                    <NavLink to="Singin">Sign up</NavLink>
                 </nav>
             </header>
            <main>

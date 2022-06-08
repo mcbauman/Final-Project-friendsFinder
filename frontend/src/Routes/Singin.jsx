@@ -27,20 +27,17 @@ export default function Singin(props){
         const data={age,email,password,userName,name,familyName,dateOfBirth,gender,interests:sendInterests,profileText}
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/create`,data)
             .then(resp=>{
-                console.log(interests)
                 props.setUser(resp.data._id)
                 props.setToken(resp.data.token)
             })
             .catch(err=>{
-                console.log(err)
                 alert(err?.response?.data?.error||"Something went wrong")
             })
     }
     
     return(
         <article>
-            Signin
-            <form onSubmit={submitFunction}>
+            <form className="signin" onSubmit={submitFunction}>
                 <input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Name"/>
                 <input type="text" value={familyName} onChange={e=>setFamilyName(e.target.value)} placeholder="Family Name"/>
                 <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="@"/>
@@ -52,7 +49,7 @@ export default function Singin(props){
                     <input type="radio" name="gender" id="♀️"/><label htmlFor="♀️">♀️</label>
                     <input type="radio" name="gender" id="⚧"/><label htmlFor="⚧">⚧</label>
                 </fieldset>
-                <textarea value={profileText} onChange={e=>setProfileText(e.target.value)} placeholder="tell us a bit about yourself"/>
+                <textarea rows="5" value={profileText} onChange={e=>setProfileText(e.target.value)} placeholder="tell us a bit about yourself"/>
                 <input type="file" placeholder="choose avatar" />
                 <Select closeMenuOnSelect={false} isMulti options={options} onChange={setInterests} />
                 <button type="submit">save user</button>

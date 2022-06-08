@@ -73,6 +73,21 @@ body{
                     option{
                     }
                 }
+                textarea{
+                    font-size: 2rem;
+                    font-family: "Helvetica Neue", sans-serif;
+                    font-weight: 200;
+                }
+            }
+            .signin{
+                >input{
+                    width: 300px;
+                }
+                fieldset{
+                    input{
+                        width: 20px;
+                    }
+                }
             }
             section{
                 >div {
@@ -84,6 +99,7 @@ body{
                     .profileText{
                         background-color: rgb(255,255,245);
                         padding:10px 0;
+                        margin-top: 10px;
                         border-radius: 10px;
                     }
                     div{
@@ -91,6 +107,10 @@ body{
                             background-color: white;
                             border-radius: 10px;
                             height: 52px;
+                        }
+                        .activeFriend{
+                            background-color: rgb(188, 70, 58);
+                            color:white;
                         }
                     }
                     .show {

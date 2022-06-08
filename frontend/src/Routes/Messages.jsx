@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import React from "react";
 import exmpl from "../exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
+import {isFriend,checkFriends,addFriend} from "../functions";
 
 
 export default function Messages(props){
@@ -10,16 +11,17 @@ export default function Messages(props){
     const [vis,setVis]=useState(false)
     const [subject,setSubject]=useState("")
     const [content,setContent]=useState("")
+    const [friends,setFriends]=useState([])
     
     function requestMessages(){
         const headers = { Authorization: `Bearer ${props.token}` }
-    
         axios.get(`${process.env.REACT_APP_BE_SERVER}/message/find`, {headers})
             .then(res => setAllMsg(res.data))
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
     useEffect(() => {
         requestMessages()
+        checkFriends(props.token,setFriends)
     }, [])
 
     function writeMessage(id,author){
@@ -27,9 +29,6 @@ export default function Messages(props){
         if(vis&&subject.length>1){
             const headers = { Authorization: `Bearer ${props.token}` }
             const data={subject,content,author:props.user,recipient:author}
-            console.log("author",author)
-            console.log("user",props.user)
-///ID Of Message or User?
             axios.post(`${process.env.REACT_APP_BE_SERVER}/message/create`,data, {headers})
                 .then(res => {
                     setSubject("")
@@ -39,7 +38,7 @@ export default function Messages(props){
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
     }
-
+    
     return(
         <article>
             MESSAGES
@@ -51,7 +50,7 @@ export default function Messages(props){
                             <div>{item.author.userName}</div>
                             <div>{item.subject}</div>
                             <div className="btns">
-                                <button><FaUserFriends/></button>
+                                <button className={isFriend(item.author._id,friends)} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
                                 <button onClick={()=>writeMessage(item._id,item.author._id)}>Answer</button>
                             </div>
                         </div>
