@@ -40,7 +40,7 @@ export default function Singin(props){
     return(
         <article>
             Signin
-            <form onSubmit={submitFunction}>
+            <form className="signin" onSubmit={submitFunction}>
                 <input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Name"/>
                 <input type="text" value={familyName} onChange={e=>setFamilyName(e.target.value)} placeholder="Family Name"/>
                 <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="@"/>
@@ -52,7 +52,7 @@ export default function Singin(props){
                     <input type="radio" name="gender" id="♀️"/><label htmlFor="♀️">♀️</label>
                     <input type="radio" name="gender" id="⚧"/><label htmlFor="⚧">⚧</label>
                 </fieldset>
-                <textarea value={profileText} onChange={e=>setProfileText(e.target.value)} placeholder="tell us a bit about yourself"/>
+                <textarea rows="5" value={profileText} onChange={e=>setProfileText(e.target.value)} placeholder="tell us a bit about yourself"/>
                 <input type="file" placeholder="choose avatar" />
                 <Select closeMenuOnSelect={false} isMulti options={options} onChange={setInterests} />
                 <button type="submit">save user</button>

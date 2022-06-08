@@ -11,11 +11,9 @@ import jwt from "jsonwebtoken"
 import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
-import createError from "http-errors"
 import multer from "multer"
 import File from "./models/ProfileModel.js"
 import path from "path"
-import {log} from "util";
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -70,7 +68,7 @@ app.get("/messageList",checkAuth,  async(req, res, next) => {
         let messages = await Message.find()
         res.send(messages)
     } catch (error) {
-        next(createError(400, error.message))
+        next({status:400, message:err.message})
     }
 })
 
@@ -96,13 +94,13 @@ app.get("/file/:id", async(req, res, next)=> {
     try {
         const pic = await File.findById(req.params.id)
         if(!pic){
-            return next(createError(404, "Picture is not found"))
+            next({status:400, message:"picture not found"})
         }
         const absolutPath = path.resolve(pic.path)
         console.log("Absolute Path: ",absolutPath);
         res.sendFile(absolutPath)
     } catch (error) {
-        next(createError(400, error.message))
+        next({status:400, message:err.message})
     }
 })
 
@@ -111,9 +109,10 @@ app.post("/user/login",async (req,res,next)=>{
     try {
         // find user
         const user=await User.findOne({email:req.body.email})
+        if(!user){return next({status:405,message:"user doesnt exist"})}
         // compare password
         const loginSuccess = await compare(req.body.password, user.password)
-        if(!loginSuccess){throw {error:"Password missmatch"}}
+        if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
@@ -126,8 +125,9 @@ app.post("/user/login",async (req,res,next)=>{
 // CreateUser:
 app.post("/user/create",userValidator, async(req, res, next)=>{
     const errors=validationResult(req)
+    console.log(errors)
     if(!errors.isEmpty()){
-        return next(errors)
+        return next({status:405,message:errors.errors.map(err=>err.msg)})
     } try {
         req.body.password=await hash(req.body.password)
         const user = await User.create(req.body)
@@ -232,7 +232,7 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
         const messages = await query.exec()
         res.send(messages)
     } catch (error) {
-        next(createError(400, error.message))
+        next({status:400, message:err.message})
     }
 })
 
@@ -241,12 +241,12 @@ app.delete("/message/:id", checkAuth, async (req, res, next) => {
     try {
         const message = await Message.findById(req.params.id)
         if(!message){
-            return next(createError(404, "Message is not found"))
+            next({status:400, message:"Message not found"})
         }
         await message.remove()
         res.send({ ok: true, deleted: message })
     } catch (error) {
-        next(createError(400, error.message))
+        next({status:400, message:err.message})
     }
 })
 
