@@ -73,6 +73,16 @@ body{
                     option{
                     }
                 }
+                textarea{
+                    font-size: 2rem;
+                    font-family: "Helvetica Neue", sans-serif;
+                    font-weight: 200;
+                }
+            }
+            .signin{
+                >input{
+                    width: 300px;
+                }
             }
             section{
                 >div {
