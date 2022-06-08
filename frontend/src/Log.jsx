@@ -8,14 +8,14 @@ export default function Log(props){
         <>
             <header>
                 <nav>
-                    <NavLink to="*">Login</NavLink>
-                    <NavLink to="Singin">Signin</NavLink>
+                    <NavLink to="*">Log in</NavLink>
+                    <NavLink to="Singin">Sign up</NavLink>
                 </nav>
             </header>
            <main>
                <Routes>
-                   <Route path="*" element={<Login setUser={props.setUser} setToken={props.setToken}/>}/>
-                   <Route path="Singin" element={<Singin setUser={props.setUser} setToken={props.setToken} />} />
+                   <Route path="*" element={<Login userProfPic={props.userProfPic} setUserProfPic={props.setUserProfPic}  setUser={props.setUser} setToken={props.setToken}/>}/>
+                   <Route path="Singin" element={<Singin userProfPic={props.userProfPic}  setUser={props.setUser} setToken={props.setToken} />} />
                </Routes>
            </main>
         </>

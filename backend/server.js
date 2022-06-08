@@ -11,11 +11,7 @@ import jwt from "jsonwebtoken"
 import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
-import createError from "http-errors"
-import multer from "multer"
-import File from "./models/ProfileModel.js"
-import path from "path"
-import {log} from "util";
+import pictureRouter from "./routes/pictureRouter.js"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -70,54 +66,28 @@ app.get("/messageList",checkAuth,  async(req, res, next) => {
         let messages = await Message.find()
         res.send(messages)
     } catch (error) {
-        next(createError(400, error.message))
+        next({status:400,message:error})
     }
 })
 
+app.use("/picture", pictureRouter)
 
-// create multer "middleware factory" (here we can configure multer)
-const multerOptions = { dest: 'uploads/' }
-const upload = multer(multerOptions)
 
-const handleUpload = upload.fields([{ name: "selectedFile", maxCount: 1 }])
-// Create Profile Picture:
-app.post("/user/createPicture", handleUpload, async(req, res, next) => {
-    try {
-        const profile = await File.create(req.files.selectedFile[0])
-        res.send(profile)
-    } catch (error) {
-        next({status:400, message:error.message})
-    }
-    console.log("picture file: ", req.files);
-})
-
-// Show a Picture:
-app.get("/file/:id", async(req, res, next)=> {
-    try {
-        const pic = await File.findById(req.params.id)
-        if(!pic){
-            return next(createError(404, "Picture is not found"))
-        }
-        const absolutePath = path.resolve(pic.path)
-        console.log("Absolute Path: ",absolutePath);
-        res.sendFile(absolutePath)
-    } catch (error) {
-        next(createError(400, error.message))
-    }
-})
 
 // LOGIN User:
 app.post("/user/login",async (req,res,next)=>{
     try {
         // find user
+
         const user=await User.findOne({email:req.body.email})
+        if(!user){return next({status:405,message:"user doesnt exist"})}
         // compare password
         const loginSuccess = await compare(req.body.password, user.password)
-        if(!loginSuccess){throw {error:"Password mismatch"}}
+        if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
-        res.send({token,_id:user._id})
+        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString()})
     } catch (error) {
         next({status:400,message:error})
     }
@@ -125,11 +95,10 @@ app.post("/user/login",async (req,res,next)=>{
 
 // CreateUser:
 app.post("/user/create",userValidator, async(req, res, next)=>{
-    console.log(req.files);
     const errors=validationResult(req)
-    console.log(errors);
+    console.log(errors)
     if(!errors.isEmpty()){
-        return next(errors)
+        return next({status:405,message:errors.errors.map(err=>err.msg)})
     } try {
         req.body.password=await hash(req.body.password)
         const user = await User.create(req.body)
@@ -203,7 +172,9 @@ app.get("/user/checkFriends",checkAuth, async (req,res,next)=>{
 // add an Friend
 app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
     try {
-//        const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:{friends:req.body}})
+//        const query= User.findByIdAndUpdate(req.user._id, {$addToSet:{id:req.body}})
+//        query.populate("name","userName")
+//        const user=await query.exec()      
         const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:req.body})
         res.send(user)
     } catch (error) {
@@ -214,9 +185,7 @@ app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
 // Create Message:
 app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
     try {
-        console.log("message/create l183", req.user.id)
         const user = await User.findById(req.user.id)
-        console.log("MESSAGE CREATE",req.body);
         if(user){
             const message = await Message.create(req.body)
             res.send({message})
@@ -233,9 +202,8 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
         query.populate("author", "userName")
         const messages = await query.exec()
         res.send(messages)
-        
     } catch (error) {
-        next(createError(400, error.message))
+        next({status:400, message:err.message})
     }
 })
 
@@ -244,12 +212,12 @@ app.delete("/message/:id", checkAuth, async (req, res, next) => {
     try {
         const message = await Message.findById(req.params.id)
         if(!message){
-            return next(createError(404, "Message is not found"))
+            next({status:400, message:"Message not found"})
         }
         await message.remove()
         res.send({ ok: true, deleted: message })
     } catch (error) {
-        next(createError(400, error.message))
+        next({status:400, message:err.message})
     }
 })
 
