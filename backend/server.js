@@ -11,7 +11,7 @@ import jwt from "jsonwebtoken"
 import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
-import multer from "multer"
+import pictureRouter from "./routes/pictureRouter.js"
 import File from "./models/ProfileModel.js"
 import path from "path"
 
@@ -68,46 +68,18 @@ app.get("/messageList",checkAuth,  async(req, res, next) => {
         let messages = await Message.find()
         res.send(messages)
     } catch (error) {
-        next({status:400, message:err.message})
+        next({status:400,message:error})
     }
 })
 
+app.use("/picture", pictureRouter)
 
-// create multer "middleware factory" (here we can configure multer)
-const multerOptions = { dest: 'uploads/' }
-const upload = multer(multerOptions)
-
-const handleUpload = upload.fields([{ name: "selectedFile", maxCount: 1 }])
-// Create Profile Picture:
-app.post("/user/createPicture", handleUpload, async(req, res, next) => {
-    try {
-        const profile = await File.create(req.files.selectedFile[0])
-        res.send(profile)
-    } catch (error) {
-        next({status:400, message:error.message})
-    }
-    console.log("picture file: ", req.files);
-})
-
-// Show a Picture:
-app.get("/file/:id", async(req, res, next)=> {
-    try {
-        const pic = await File.findById(req.params.id)
-        if(!pic){
-            next({status:400, message:"picture not found"})
-        }
-        const absolutPath = path.resolve(pic.path)
-        console.log("Absolute Path: ",absolutPath);
-        res.sendFile(absolutPath)
-    } catch (error) {
-        next({status:400, message:err.message})
-    }
-})
 
 // LOGIN User:
 app.post("/user/login",async (req,res,next)=>{
     try {
         // find user
+
         const user=await User.findOne({email:req.body.email})
         if(!user){return next({status:405,message:"user doesnt exist"})}
         // compare password
@@ -116,7 +88,7 @@ app.post("/user/login",async (req,res,next)=>{
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
-        res.send({token,_id:user._id})
+        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString()})
     } catch (error) {
         next({status:400,message:error})
     }

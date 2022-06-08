@@ -5,6 +5,7 @@ import Message from './MessageModel.js'
 //    fried:{type:[mongoose.Schema.Types.ObjectId],ref:"user"}
 //},{_id:false})
 
+
 const userSchema=new mongoose.Schema({
     messages:    { type: [mongoose.Schema.Types.ObjectId], ref: "message"},
     name:        { type:String,required:true},
@@ -13,16 +14,18 @@ const userSchema=new mongoose.Schema({
     password:    { type:String,required:true},
     userName:    { type:String},
     avatar:          String,
-    dateOfBirth: { type:Date,required:true},
+    dateOfBirth:   { type:Date,required:true},
     age:            Number,
-    gender:      { type:String, required:true, enum:["⚧","♂️","♀️"]},
+    gender:        { type:String, required:true, enum:["⚧","♂️","♀️"]},
     interests:    Array,
     //Stored last search?
     profileText:    String,
-//    friends:    {type:[friendsSchema]},
-    friends:        Array,
-    emailVerified:{type:Boolean,default:false},
-    score:        { type:Number, default:0}
+
+    friends:        { type: [Schema.Types.ObjectId], ref: "friends"},
+    emailVerified:  { type:Boolean,default:false},
+    score:          { type:Number, default:0},
+    profilePicture: { type: Schema.Types.ObjectId, ref: "file"}
+
 }, {
     timestamps: true,
     toJSON:{

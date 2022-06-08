@@ -12,6 +12,9 @@ export default function Login(props){
         .then(resp=>{
             props.setUser(resp.data._id)
             props.setToken(resp.data.token)
+            props.setUserProfPic(resp.data.profilePicture)
+            console.log(resp.data);
+            console.log(resp.data.profilePicture);
         })
         .catch(err=>{
             console.log(err)
