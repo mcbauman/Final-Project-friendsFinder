@@ -20,7 +20,6 @@ const userSchema=new mongoose.Schema({
     interests:    Array,
     //Stored last search?
     profileText:    String,
-
     friends:        { type: [mongoose.Schema.Types.ObjectId], ref: "friends"},
     emailVerified:  { type:Boolean,default:false},
     score:          { type:Number, default:0},
