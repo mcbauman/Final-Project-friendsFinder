@@ -27,12 +27,10 @@ export default function Singin(props){
         const data={age,email,password,userName,name,familyName,dateOfBirth,gender,interests:sendInterests,profileText}
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/create`,data)
             .then(resp=>{
-                console.log(interests)
                 props.setUser(resp.data._id)
                 props.setToken(resp.data.token)
             })
             .catch(err=>{
-                console.log(err)
                 alert(err?.response?.data?.error||"Something went wrong")
             })
     }

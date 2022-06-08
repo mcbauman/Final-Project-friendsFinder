@@ -7,12 +7,8 @@ export default function Login(props){
 
     function submitFunction(e){
         e.preventDefault()
-        console.log({email,password})
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/login`,{email,password})
         .then(resp=>{
-            console.log(resp)
-            console.log("email",email);
-            console.log(typeof email);
             props.setUser(resp.data._id)
             props.setToken(resp.data.token)
         })
@@ -24,7 +20,7 @@ export default function Login(props){
     return(
         <article>
             Login
-            <form onSubmit={submitFunction}>
+            <form className="signin" onSubmit={submitFunction}>
                 <input type="email" placeholder="@" value={email} onChange={e=>setEmail(e.target.value)} />
                 <input type="password" placeholder="***" value={password} onChange={e=>setPassword(e.target.value)} />
                 <button type="submit">Log In</button>
