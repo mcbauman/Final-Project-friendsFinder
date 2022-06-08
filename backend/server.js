@@ -98,9 +98,9 @@ app.get("/file/:id", async(req, res, next)=> {
         if(!pic){
             return next(createError(404, "Picture is not found"))
         }
-        const absolutPath = path.resolve(pic.path)
-        console.log("Absolute Path: ",absolutPath);
-        res.sendFile(absolutPath)
+        const absolutePath = path.resolve(pic.path)
+        console.log("Absolute Path: ",absolutePath);
+        res.sendFile(absolutePath)
     } catch (error) {
         next(createError(400, error.message))
     }
@@ -113,7 +113,7 @@ app.post("/user/login",async (req,res,next)=>{
         const user=await User.findOne({email:req.body.email})
         // compare password
         const loginSuccess = await compare(req.body.password, user.password)
-        if(!loginSuccess){throw {error:"Password missmatch"}}
+        if(!loginSuccess){throw {error:"Password mismatch"}}
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token

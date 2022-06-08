@@ -4,15 +4,15 @@ body{
     padding:0;
     box-sizing: border-box;
     font-family: "Helvetica Neue", sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 200;
     background-color: hsl(211, 49%, 14%);
     header{
         position: sticky;
         top:0;
         z-index: 100;
-        background-color:rgb(188,70,58);
-        box-shadow: 0 0 7px black inset;
+        background-color:rgb(190, 51, 36);
+       
         nav{
             max-width: 1200px;
             width: 95%;
@@ -54,20 +54,20 @@ body{
                 button{
                     background-color: white;
                     color:black;
-                    height: 52px;
+                    height: 43px;
                 }
                 input{
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     width:120px;
                     font-family: "Helvetica Neue", sans-serif;
-                    font-weight: 200;
+                    font-weight: 90;
                 }
                 >div{
                     display: inline-flex;
                     flex-direction: column;
                 }
                 select{
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     font-family: "Helvetica Neue", sans-serif;
                     font-weight: 200;
                     option{
