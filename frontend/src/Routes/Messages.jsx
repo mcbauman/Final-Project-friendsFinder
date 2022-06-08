@@ -5,7 +5,6 @@ import exmpl from "../exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
 import {isFriend,checkFriends,addFriend} from "../functions";
 
-
 export default function Messages(props){
     const [allMsg, setAllMsg] = useState([])
     const [vis,setVis]=useState(false)

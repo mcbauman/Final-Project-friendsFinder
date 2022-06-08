@@ -70,14 +70,13 @@ app.get("/messageList",checkAuth,  async(req, res, next) => {
     }
 })
 
+//Picture Router
 app.use("/picture", pictureRouter)
-
 
 // LOGIN User:
 app.post("/user/login",async (req,res,next)=>{
     try {
         // find user
-
         const user=await User.findOne({email:req.body.email})
         if(!user){return next({status:405,message:"user doesnt exist"})}
         // compare password
@@ -87,6 +86,7 @@ app.post("/user/login",async (req,res,next)=>{
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
         res.send({token,_id:user._id, profilePicture:user.profilePicture.toString()})
+//        res.send({token,_id:user._id, profilePicture:user.profilePicture?user.profilePicture.toString():null})
     } catch (error) {
         next({status:400,message:error})
     }

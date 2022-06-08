@@ -19,7 +19,10 @@ pictureRouter.post("/createPicture", checkAuth, handleUpload, async(req, res, ne
     console.log(req.files);
     try {
         const file = await File.create(req.files.selectedFile[0])
-        req.user.profilePicture.push(file._id)
+        console.log(req.user.profilePicture);
+
+        req.user.profilePicture = file._id
+        console.log(file._id);
         await req.user.save()
         res.send(file)
     } catch (error) {

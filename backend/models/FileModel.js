@@ -9,7 +9,7 @@ const fileSchema = new mongoose.Schema({
     filename:       { required, type: String },
     path:           { required, type: String },
     size:           { required, type: Number },
-    user:           { type: [mongoose.Schema.Types.ObjectId], ref: "user"}
+    user:           { type: mongoose.Schema.Types.ObjectId, ref: "user"}
 })
 
 const File = mongoose.model("file", fileSchema)

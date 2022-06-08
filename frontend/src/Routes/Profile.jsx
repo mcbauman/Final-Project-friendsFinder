@@ -4,9 +4,7 @@ import axios from "axios";
 
 export default function Profile(props){
     const [file, setFile] = useState(null)
-
-    console.log(props);
-
+    console.log(props)
     function handleSelectedFile(e){
         setFile(e.target.files[0]) // we use [] because key is a number here.
         console.log(e.target.files);
@@ -16,10 +14,10 @@ export default function Profile(props){
         // const [picture, setPicture ] = useState(null)
         if(!file){
             return alert("Select a file first:)")
-        } 
+        }
         const formData = new FormData()
         formData.append("selectedFile", file)
-        
+
         const headers = { Authorization: `Bearer ${props.token}`}
 
         const config = {
@@ -29,7 +27,7 @@ export default function Profile(props){
         axios.post(`${process.env.REACT_APP_BE_SERVER}/picture/createPicture`, formData, config )
             .then(result =>  props.setUserProfPic(result))
             .catch(error => console.log(error))
-        
+
     }
 
     return(
@@ -37,10 +35,7 @@ export default function Profile(props){
             PROFILE
             <input type="file" onChange={handleSelectedFile} />
             <button onClick={saveFile}>Save Picture</button>
-
-            {/* {alert ? <p>{alert}</p> : null} */}
-
-            <img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}` }alt="Ups, no picture;)"/>
+            {props.userProfPic.data&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic.data._id}`} alt="Ups, no picture;)"/>}
         </article>
     )
 }
