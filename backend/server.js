@@ -125,9 +125,7 @@ app.post("/user/login",async (req,res,next)=>{
 
 // CreateUser:
 app.post("/user/create",userValidator, async(req, res, next)=>{
-    console.log(req.files);
     const errors=validationResult(req)
-    console.log(errors);
     if(!errors.isEmpty()){
         return next(errors)
     } try {
@@ -203,7 +201,9 @@ app.get("/user/checkFriends",checkAuth, async (req,res,next)=>{
 // add an Friend
 app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
     try {
-//        const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:{friends:req.body}})
+//        const query= User.findByIdAndUpdate(req.user._id, {$addToSet:{id:req.body}})
+//        query.populate("name","userName")
+//        const user=await query.exec()      
         const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:req.body})
         res.send(user)
     } catch (error) {
@@ -214,9 +214,7 @@ app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
 // Create Message:
 app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
     try {
-        console.log("message/create l183", req.user.id)
         const user = await User.findById(req.user.id)
-        console.log("MESSAGE CREATE",req.body);
         if(user){
             const message = await Message.create(req.body)
             res.send({message})
@@ -233,7 +231,6 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
         query.populate("author", "userName")
         const messages = await query.exec()
         res.send(messages)
-        
     } catch (error) {
         next(createError(400, error.message))
     }
