@@ -2,8 +2,9 @@ import { useState } from "react";
 import Activities from "../ActivitiesArray";
 import axios from "axios";
 
-export default function Profile(props){
-    const [file, setFile] = useState(null)
+export default function Profile(props) {
+  const [file, setFile] = useState(null);
+
 
     console.log(props);
 
@@ -19,9 +20,7 @@ export default function Profile(props){
         } 
         const formData = new FormData()
         formData.append("selectedFile", file)
-        
         const headers = { Authorization: `Bearer ${props.token}`}
-
         const config = {
             // data: formData,
             headers
@@ -32,11 +31,18 @@ export default function Profile(props){
         
     }
 
-    return(
-        <article>
-            PROFILE
-            <input type="file" onChange={handleSelectedFile} />
-            <button onClick={saveFile}>Save Picture</button>
+      const config = {
+        method: "POST",
+        body: formData,
+      };
+      
+        fetch(`${process.env.REACT_APP_BE_SERVER}/user/createPicture`, config)
+        .then((res) => res.json())
+        .then((res) => res.send({}))
+        .catch();
+    }
+  }
+
 
             {/* {alert ? <p>{alert}</p> : null} */}
 
@@ -44,3 +50,4 @@ export default function Profile(props){
         </article>
     )
 }
+

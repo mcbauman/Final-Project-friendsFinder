@@ -14,7 +14,7 @@ function checkFriends(token,setFriends){
     const headers = { Authorization: `Bearer ${token}` }
     axios.get(`${process.env.REACT_APP_BE_SERVER}/user/checkFriends`,{headers})
         .then(res=>{
-            console.log(res.data)
+            // console.log(res.data)
             setFriends(res.data)
         })
 }
