@@ -21,10 +21,10 @@ const userSchema=new mongoose.Schema({
     //Stored last search?
     profileText:    String,
 
-    friends:        { type: [Schema.Types.ObjectId], ref: "friends"},
+    friends:        { type: [mongoose.Schema.Types.ObjectId], ref: "friends"},
     emailVerified:  { type:Boolean,default:false},
     score:          { type:Number, default:0},
-    profilePicture: { type: Schema.Types.ObjectId, ref: "file"}
+    profilePicture: { type: mongoose.Schema.Types.ObjectId, ref: "file"}
 
 }, {
     timestamps: true,

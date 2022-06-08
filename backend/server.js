@@ -12,8 +12,6 @@ import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
-import File from "./models/ProfileModel.js"
-import path from "path"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
