@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken"
 import User from "./models/UserModel.js"
 
 async function checkAuth(req,res,next){
+    console.log(req.headers);
+    console.log(req.url);
     try {
         const authHeader=req.headers.authorization
         // console.log(authHeader);
