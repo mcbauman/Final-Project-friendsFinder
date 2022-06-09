@@ -15,11 +15,11 @@ const tokenFromLS=localStorage.getItem("token")
 const tokenDefault=tokenFromLS?tokenFromLS:null
 
 export default function App(){
-   const [user,setUser]=useState(userDefault)
-   const [token,setToken]=useState(tokenDefault)
-   const [userProfPic, setUserProfPic] = useState(userProfPicDefault)
-   console.log(userProfPic);
-
+    const [user,setUser]=useState(userDefault)
+    const [token,setToken]=useState(tokenDefault)
+    const [userProfPic, setUserProfPic] = useState(userProfPicDefault)
+    const [theme,setTheme]=useState("BW")
+    
    useEffect(()=>{
       if(user){localStorage.setItem("user",JSON.stringify(user))
       }else{localStorage.removeItem("user")}
@@ -36,14 +36,14 @@ export default function App(){
     },[userProfPic])
 
    return(
-      <>
+      <div className={theme}>
          {user?
          <>
             <Header setUser={setUser} setToken={setToken}/>
-            <Main user = {user} token = {token} userProfPic = {userProfPic} setUserProfPic={setUserProfPic}/>
+            <Main user={user} token={token} userProfPic={userProfPic} setUserProfPic={setUserProfPic} theme={theme} setTheme={setTheme}/>
          </>
-         :<Log setUser={setUser} setToken={setToken} setUserProfPic= {setUserProfPic} />
+         :<Log setUser={setUser} setToken={setToken} setUserProfPic={setUserProfPic} />
          }
-      </>
+      </div>
    )
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import React from "react";
 import exmpl from "../exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
+import {MdOutlineEmail} from "react-icons/md";
 import {isFriend,checkFriends,addFriend} from "../functions";
 
 export default function Messages(props){
@@ -15,7 +16,10 @@ export default function Messages(props){
     function requestMessages(){
         const headers = { Authorization: `Bearer ${props.token}` }
         axios.get(`${process.env.REACT_APP_BE_SERVER}/message/find`, {headers})
-            .then(res => setAllMsg(res.data))
+            .then(res => {
+                setAllMsg(res.data)
+                console.log(res.data)
+            })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
     useEffect(() => {
@@ -45,12 +49,12 @@ export default function Messages(props){
                 {allMsg.map(item=>(
                     <div key={item._id} className="messages">
                         <div className="messageHeader">
-                            <img src={exmpl} alt="ProfilePicture"/>
+                            <img src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
                             <div>{item.author.userName}</div>
                             <div>{item.subject}</div>
                             <div className="btns">
                                 <button className={isFriend(item.author._id,friends)} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
-                                <button onClick={()=>writeMessage(item._id,item.author._id)}>Answer</button>
+                                <button onClick={()=>writeMessage(item._id,item.author._id)}><MdOutlineEmail/></button>
                             </div>
                         </div>
                         <form className={vis===item._id?"show":"hide"}>

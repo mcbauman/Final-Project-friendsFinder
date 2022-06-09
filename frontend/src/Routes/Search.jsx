@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Activities from "../ActivitiesArray";
 import Select from 'react-select';
 import {useState} from "react";
 import axios from "axios";
 import {FaUserFriends} from "react-icons/fa"
+import {MdOutlineEmail,MdSearch} from "react-icons/md";
 import exmpl from "../exmpl.jpeg"
 import {isFriend,checkFriends,addFriend} from "../functions";
+import Log from "../Log";
 
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
@@ -19,10 +21,9 @@ export default function Search(props){
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
     
-    function submitFunction(e){
-        e.preventDefault()
-        const headers = { Authorization: `Bearer ${props.token}` }
+    function requestServer(){
         const body={interests,minAge,maxAge,srchdGender}
+        const headers = { Authorization: `Bearer ${props.token}` }
         body.interests=body.interests.map(item=>item.value)
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/find`, body,{headers})
             .then(res => {
@@ -31,6 +32,15 @@ export default function Search(props){
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         checkFriends(props.token,setFriends)
+    }
+    
+    useEffect(()=>{
+        requestServer()
+    },[])
+    
+    function submitFunction(e){
+        e.preventDefault()
+        requestServer()
     }
     
     function writeMessage(id){
@@ -60,19 +70,20 @@ export default function Search(props){
                     <option>♀️</option>
                     <option>⚧</option>
                 </select>
-                <button type="submit">search</button>
+                <button type="submit"><MdSearch/></button>
             </form>
             <section id="messages">
                 {listOfUsers.map(item=>(
                         <div key={item._id} className="ProfileCard">
                             <div>
                                 <div className="profileHeader">
-                                    <img src={exmpl}/>
+                                    <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
                                     <div>{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
                                     <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
-                                    <button onClick={()=>writeMessage(item._id)}>send Message</button>
+                                    {console.log(item.profilePicture)}
+                                    <button onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>
                             </div>
