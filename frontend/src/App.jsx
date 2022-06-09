@@ -7,8 +7,9 @@ const userFromLS=localStorage.getItem("user")
 const userDefault=userFromLS?JSON.parse(userFromLS):null
 
 const userProfPicLS = localStorage.getItem("userProfPic")
-console.log(userProfPicLS);
+console.log("LOCAL STORAGE USER PROFILE PIC from APP.JSX",userProfPicLS);
 const userProfPicDefault=userFromLS?userProfPicLS:null
+console.log("USERPROFDEFAULT",userProfPicDefault)
 
 const tokenFromLS=localStorage.getItem("token")
 const tokenDefault=tokenFromLS?tokenFromLS:null
@@ -30,8 +31,8 @@ export default function App(){
     },[token])
 
     useEffect(()=>{
-      if(userProfPic){localStorage.setItem("userProfPic",(userProfPic))
-      }else{localStorage.removeItem("userProfPic")}
+      localStorage.setItem("userProfPic",(userProfPic))
+          console.log("USERPROFPIC from APP.JS L34",userProfPic)
     },[userProfPic])
 
    return(
