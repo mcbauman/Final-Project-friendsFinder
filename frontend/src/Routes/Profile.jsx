@@ -17,17 +17,11 @@ export default function Profile(props){
         }
         const formData = new FormData()
         formData.append("selectedFile", file)
-
         const headers = { Authorization: `Bearer ${props.token}`}
-
-        const config = {
-            // data: formData,
-            headers
-        }
+        const config = {headers}
         axios.post(`${process.env.REACT_APP_BE_SERVER}/picture/createPicture`, formData, config )
             .then(result =>  props.setUserProfPic(result.data._id))
             .catch(error => console.log(error))
-
     }
 
     console.log("USER PROFILE from PROFILE.JSX L 34",props.userProfPic)
@@ -35,6 +29,12 @@ export default function Profile(props){
     return(
         <article>
             PROFILE
+            <select onChange={(e)=>props.setTheme(e.target.value)}>
+                <option>BW</option>
+                <option>red</option>
+                <option>blue</option>
+                <option>green</option>
+            </select>
             <input type="file" onChange={handleSelectedFile} />
             <button onClick={saveFile}>Save Picture</button>
             {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
