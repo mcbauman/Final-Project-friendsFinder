@@ -29,7 +29,7 @@ export default function Profile(props){
     return(
         <article>
             PROFILE
-            <select onChange={(e)=>props.setTheme(e.target.value)}>
+            <select value={props.theme} onChange={(e)=>props.setTheme(e.target.value)}>
                 <option>BW</option>
                 <option>red</option>
                 <option>blue</option>

@@ -199,8 +199,9 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
     try {
         const query = Message.find({recipient: req.user.id})
         query.populate("author", "userName profilePicture")
-//        query.populate("author","profilePicture")
+//        query.sort("author","profilePicture")
         const messages = await query.exec()
+        messages.reverse()
         res.send(messages)
     } catch (error) {
         next({status:400, message:err.message})
