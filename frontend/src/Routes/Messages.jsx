@@ -16,7 +16,10 @@ export default function Messages(props){
     function requestMessages(){
         const headers = { Authorization: `Bearer ${props.token}` }
         axios.get(`${process.env.REACT_APP_BE_SERVER}/message/find`, {headers})
-            .then(res => setAllMsg(res.data))
+            .then(res => {
+                setAllMsg(res.data)
+                console.log(res.data)
+            })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
     useEffect(() => {
@@ -46,7 +49,7 @@ export default function Messages(props){
                 {allMsg.map(item=>(
                     <div key={item._id} className="messages">
                         <div className="messageHeader">
-                            <img src={exmpl} alt="ProfilePicture"/>
+                            <img src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
                             <div>{item.author.userName}</div>
                             <div>{item.subject}</div>
                             <div className="btns">

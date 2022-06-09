@@ -1,8 +1,8 @@
 import axios from "axios";
 
 function isFriend(id,friends){
-    console.log(friends)
-    console.log(id)
+//    console.log(friends)
+//    console.log(id)
     if(friends.includes(id)){
         return "activeFriend"
     }else{

@@ -198,7 +198,8 @@ app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
 app.get("/message/find",checkAuth,async(req, res, next) => {
     try {
         const query = Message.find({recipient: req.user.id})
-        query.populate("author", "userName")
+        query.populate("author", "userName profilePicture")
+//        query.populate("author","profilePicture")
         const messages = await query.exec()
         res.send(messages)
     } catch (error) {
