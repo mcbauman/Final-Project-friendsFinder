@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Activities from "../ActivitiesArray";
 import Select from 'react-select';
 import {useState} from "react";
@@ -20,10 +20,9 @@ export default function Search(props){
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
     
-    function submitFunction(e){
-        e.preventDefault()
-        const headers = { Authorization: `Bearer ${props.token}` }
+    function requestServer(){
         const body={interests,minAge,maxAge,srchdGender}
+        const headers = { Authorization: `Bearer ${props.token}` }
         body.interests=body.interests.map(item=>item.value)
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/find`, body,{headers})
             .then(res => {
@@ -32,6 +31,15 @@ export default function Search(props){
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         checkFriends(props.token,setFriends)
+    }
+    
+    useEffect(()=>{
+        requestServer()
+    },[])
+    
+    function submitFunction(e){
+        e.preventDefault()
+        requestServer()
     }
     
     function writeMessage(id){
