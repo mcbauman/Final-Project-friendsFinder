@@ -7,6 +7,7 @@ import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail,MdSearch} from "react-icons/md";
 import exmpl from "../exmpl.jpeg"
 import {isFriend,checkFriends,addFriend} from "../functions";
+import Log from "../Log";
 
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
@@ -76,11 +77,12 @@ export default function Search(props){
                         <div key={item._id} className="ProfileCard">
                             <div>
                                 <div className="profileHeader">
-                                    <img src={exmpl}/>
+                                    <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
                                     <div>{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
                                     <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
+                                    {console.log(item.profilePicture)}
                                     <button onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>
