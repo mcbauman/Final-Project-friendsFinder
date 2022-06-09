@@ -4,6 +4,7 @@ import Select from 'react-select';
 import {useState} from "react";
 import axios from "axios";
 import {FaUserFriends} from "react-icons/fa"
+import {MdOutlineEmail,MdSearch} from "react-icons/md";
 import exmpl from "../exmpl.jpeg"
 import {isFriend,checkFriends,addFriend} from "../functions";
 
@@ -60,7 +61,7 @@ export default function Search(props){
                     <option>♀️</option>
                     <option>⚧</option>
                 </select>
-                <button type="submit">search</button>
+                <button type="submit"><MdSearch/></button>
             </form>
             <section id="messages">
                 {listOfUsers.map(item=>(
@@ -72,7 +73,7 @@ export default function Search(props){
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
                                     <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
-                                    <button onClick={()=>writeMessage(item._id)}>send Message</button>
+                                    <button onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>
                             </div>
