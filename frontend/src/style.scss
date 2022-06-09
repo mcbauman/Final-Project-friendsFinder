@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
 .BW{
     --background:rgb(240,240,240);
     --darkmain:rgb(100, 100, 100);
@@ -53,6 +56,9 @@ body{
             display: flex;
             align-items: center;
             justify-content:space-between;
+            .active{
+                border-bottom:solid var(--brightthirdly);
+            }
             a{
                 display: flex;
                 align-items: center;
@@ -61,10 +67,7 @@ body{
                 &:hover{
                     color:black;
                 }
-                &:active{
-                    color:red;
-                    border-bottom:solid var(--brightthirdly);
-                }
+                
             }
             svg{
                 // padding:15px;
