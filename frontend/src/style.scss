@@ -86,9 +86,12 @@ body{
             padding: 10px;
             background-color: var(--brightmain);
             form{
+                position: sticky;
+                top:50px;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
+                margin-bottom: 20px;
  //               button{
  //                   background-color: white;
  //                   color:black;
@@ -141,17 +144,10 @@ body{
                         margin-top: 10px;
                         border-radius: 10px;
                     }
-                    div{
- //                       button{
- //                           background-color: white;
- //                           border-radius: 10px;
- //                           height: 52px;
- //                       }
-                        .activeFriend{
- //                           background-color: var(--darkmain);
- //                           color:white;
-                            color:var(--darkmain);
-                        }
+                    .activeFriend{
+//                           background-color: var(--darkmain);
+//                           color:white;
+                        color:var(--darkmain);
                     }
                     .show {
                         display: block;
@@ -164,50 +160,49 @@ body{
                     }
                 }
                 >.ProfileCard{
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    div{
-                        width: 100%;
-                        .profileHeader{
-                            display: grid;
-                            // grid-template-columns: [first] 50px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end] ;
-                            grid-template-columns: repeat(5, 1fr);
-                            grid-template-rows: repeat(2, 50px) repeat(2, 50px);
-                            grid-template-areas: 
-                                "img userName userName userName userName"
-                                "img gender age . buttons"
-                                "text text text text text"
-                                "text text text text text";
-                            .imgSearch{
-                                grid-area: img;
-                                width: auto;
-                                height: 100px;
-                            }
-
-                            .searchDivUserName{
-                                grid-area: userName;
-                            }
-                            .gender{
-                                grid-area: gender;
-                            }
-                            .age{
-                                grid-area: age; 
-                            }
-                            .buttons{
-                                grid-area: buttons;
-                                display: flex;
-                                justify-content: flex-end;
-                                button{
-                                    width: 60px;
-                                    height: 50px;
-                                    border: 1px black solid;
-                                }
-                                .activeFriend{
-                                    margin-right: 10px;
-                                }
-                            }
-                        }
+                    display: grid;
+                    // grid-template-columns: [first] 50px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end] ;
+                    grid-template-columns: repeat(4, 1fr) repeat(2,75px);
+//                    grid-template-rows: repeat(5, 50px);
+                    grid-template-areas: 
+                        "img userName userName userName userName userName"
+                        "img gender age . btn1 btn2 "
+                        "text text text text text text"
+                        "text text text text text text"
+                        "form form form form form form";
+                    .imgSearch{
+                        grid-area: img;
+                        width: auto;
+                        height: 100px;
+                    }
+                    .searchDivUserName{
+                        grid-area: userName;
+                    }
+                    .gender{
+                        grid-area: gender;
+                    }
+                    .age{
+                        grid-area: age; 
+                    }
+                    button{
+                        width: 60px;
+                        height: 50px;
+                        border: 1px black solid;
+                    }
+                    .btn1{
+                        grid-area: btn1;
+                    }
+                    .btn2{
+                        grid-area: btn2;
+                    }
+                    .activeFriend{
+                        margin-right: 10px;
+                    }
+                    .profileText{
+                        grid-area: text;
+                    }
+                    form{
+                        grid-area: form;
                     }
                 }
                 >.messages{
