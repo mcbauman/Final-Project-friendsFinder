@@ -66,16 +66,17 @@ export default function Profile(props){
     
     return(
         <article>
-            PROFILE
-            <select value={props.theme} onChange={(e)=>props.setTheme(e.target.value)}>
-                <option>BW</option>
-                <option>red</option>
-                <option>blue</option>
-                <option>green</option>
-            </select>
-            <input type="file" onChange={handleSelectedFile} />
-            <button onClick={saveFile}>Save Picture</button>
-            {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
+            <section>
+                <select value={props.theme} onChange={(e)=>props.setTheme(e.target.value)}>
+                    <option>BW</option>
+                    <option>red</option>
+                    <option>blue</option>
+                    <option>green</option>
+                </select>
+                <input type="file" onChange={handleSelectedFile} />
+                <button onClick={saveFile}>Save Picture</button>
+                {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
+            </section>
             <hr/>
             {usr?(
                 <form onSubmit={changeProfile}>
