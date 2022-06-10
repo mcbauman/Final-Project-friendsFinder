@@ -78,7 +78,7 @@ export default function Search(props){
                             <div>
                                 <div className="profileHeader">
                                     <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
-                                    <div>{item.userName}</div>
+                                    <div className="searchDivUserName">{item.userName}</div>
                                     <div>{item.gender}</div>
                                     <div>{item.age}</div>
                                     <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>

@@ -172,6 +172,21 @@ body{
                         .profileHeader{
                             display: flex;
                             justify-content: space-between;
+                            img{
+                                margin-right: 10px;
+                            }
+                            .searchDivUserName{
+                                width: 100%;
+                            }
+                            .activeFriend{
+                                margin-right: 10px;
+                            }
+                            button{
+                                width: 60px;
+                                height: 50px;
+                                text-align: center;
+                                border: 1px black solid;
+                            }
                         }
                     }
                 }
