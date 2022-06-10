@@ -40,17 +40,19 @@ export default function Profile(props){
             .catch(error => console.log(error))
     }
     useEffect(()=>loadUser(),[])
-    usr?(console.log(usr.friends)):console.log(usr)
     
     function changeProfile(e){
         e.preventDefault()
-        const sendInterests=interests?interests.map(item=>item.value):usr.interests;
+        const sendInterests=interests.length>1?interests.map(item=>item.value):usr.interests.map(item=>item.value);
+        console.log("DISC",interests.length>1?"exists":"loaded from usr")
+        console.log("HERE",interests.length>1?interests:usr.interests)
         const body={
             name:name?name:usr.name,
             familyName:familyName?familyName:usr.familyName,
             email:email?email:usr.email,
 //            password:password?password:null,
             userName:userName?userName:usr.userName,
+            profileText:profileText?profileText:usr.profileText,
             interests:sendInterests
         }
         console.log("BODY TO SEVER",body)

@@ -151,9 +151,9 @@ app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
 
 // Update Profile
 app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(req,res,next)=>{
-    console.log(validationResult(req));
     try {
         const user=await User.findByIdAndUpdate(req.user._id,req.body,{new:true})
+        console.log(user)
         res.send(user)
     } catch (error) {
         next({status:400, message:error.message}) 
