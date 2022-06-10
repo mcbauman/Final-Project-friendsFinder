@@ -170,22 +170,42 @@ body{
                     div{
                         width: 100%;
                         .profileHeader{
-                            display: flex;
-                            justify-content: space-between;
-                            img{
-                                margin-right: 10px;
+                            display: grid;
+                            // grid-template-columns: [first] 50px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end] ;
+                            grid-template-columns: repeat(5, 1fr);
+                            grid-template-rows: repeat(2, 50px) repeat(2, 50px);
+                            grid-template-areas: 
+                                "img userName userName userName userName"
+                                "img gender age . buttons"
+                                "text text text text text"
+                                "text text text text text";
+                            .imgSearch{
+                                grid-area: img;
+                                width: auto;
+                                height: 100px;
                             }
+
                             .searchDivUserName{
-                                width: 100%;
+                                grid-area: userName;
                             }
-                            .activeFriend{
-                                margin-right: 10px;
+                            .gender{
+                                grid-area: gender;
                             }
-                            button{
-                                width: 60px;
-                                height: 50px;
-                                text-align: center;
-                                border: 1px black solid;
+                            .age{
+                                grid-area: age; 
+                            }
+                            .buttons{
+                                grid-area: buttons;
+                                display: flex;
+                                justify-content: flex-end;
+                                button{
+                                    width: 60px;
+                                    height: 50px;
+                                    border: 1px black solid;
+                                }
+                                .activeFriend{
+                                    margin-right: 10px;
+                                }
                             }
                         }
                     }

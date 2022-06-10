@@ -77,13 +77,15 @@ export default function Search(props){
                         <div key={item._id} className="ProfileCard">
                             <div>
                                 <div className="profileHeader">
-                                    <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
+                                    <img className='imgSearch' src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
                                     <div className="searchDivUserName">{item.userName}</div>
-                                    <div>{item.gender}</div>
-                                    <div>{item.age}</div>
-                                    <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
-                                    {console.log(item.profilePicture)}
-                                    <button onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
+                                    <div className='gender'>{item.gender}</div>
+                                    <div className='age'>{item.age}</div>
+                                    <div className='buttons'>
+                                        <button className={isFriend(item._id,friends)} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
+                                        {console.log(item.profilePicture)}
+                                        <button onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
+                                    </div>
                                 </div>
                                 <div className="profileText">{item.profileText}</div>
                             </div>
