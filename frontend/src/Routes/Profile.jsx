@@ -78,27 +78,28 @@ export default function Profile(props){
                 {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
             </section>
             <hr/>
-            {usr?(
-                <form onSubmit={changeProfile}>
-                    <input type="text" placeholder={usr.name} value={name}  onChange={(e)=>setName(e.target.value)}/>
-                    <input type="text" placeholder={usr.familyName} value={familyName}  onChange={(e)=>setFamilyName(e.target.value)}/>
-                    <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
-                    <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
-                    <hr/>
-                    <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
-                    <button type="submit"><MdOutlineSaveAlt/></button>
-                    <hr/>
-                    {usr.friends.map(item=>(
-                        <div>
-                            <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
-                            <div>{item.userName}</div>
-                            <button><MdOutlineDeleteForever/></button>
-                            <hr/>
-                        </div>
+            <section>
+                {usr?(
+                    <form onSubmit={changeProfile}>
+                        <input type="text" placeholder={usr.name} value={name}  onChange={(e)=>setName(e.target.value)}/>
+                        <input type="text" placeholder={usr.familyName} value={familyName}  onChange={(e)=>setFamilyName(e.target.value)}/>
+                        <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
+                        <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
+                        <hr/>
+                        <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
+                        <button type="submit"><MdOutlineSaveAlt/></button>
+                        <hr/>
+                        {usr.friends.map(item=>(
+                            <div>
+                                <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
+                                <div>{item.userName}</div>
+                                <button><MdOutlineDeleteForever/></button>
+                                <hr/>
+                            </div>
                         ))}
-                </form>
-                ):<div>LOADING</div>
-            }
+                    </form>
+                ):<div>LOADING</div>}
+            </section>
         </article>
     )
 }

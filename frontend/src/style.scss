@@ -85,9 +85,12 @@ body{
             margin:0 auto;
             padding: 10px;
             background-color: var(--brightmain);
-            form{
+            >form{
                 position: sticky;
                 top:50px;
+                width: 100%;
+                background-color: white;
+                border-radius: 20px;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
@@ -99,7 +102,7 @@ body{
  //               }
                 input{
                     font-size: 1.5rem;
-                    width:120px;
+//                    width:120px;
                     font-family: "Helvetica Neue", sans-serif;
                     font-weight: 90;
                 }
