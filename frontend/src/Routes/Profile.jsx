@@ -2,14 +2,21 @@ import {useEffect, useState} from "react";
 import Activities from "../ActivitiesArray";
 import axios from "axios";
 import Select from "react-select";
-import {MdOutlineDeleteForever} from "react-icons/md";
+import {MdOutlineDeleteForever,MdOutlineSaveAlt} from "react-icons/md";
 import exmpl from "../exmpl.jpeg";
 import React from "react";
 
 export default function Profile(props){
     const [file, setFile] = useState(null)
+    const [name,setName] = useState("")
+    const [familyName, setFamilyName] = useState("")
+    const [email, setEmail]=useState("")
+    const [password, setPassword]=useState("")
+    const [userName, setUserName]=useState("")
+    const [interests,setInterests]=useState([])
+    const [profileText,setProfileText]=useState("")
+
     const [usr,setUsr]=useState(null)
-    const [interests,setInterests]=useState()
     
     function handleSelectedFile(e){
         setFile(e.target.files[0]) // we use [] because key is a number here.
@@ -35,12 +42,24 @@ export default function Profile(props){
     useEffect(()=>loadUser(),[])
     usr?(console.log(usr.friends)):console.log(usr)
     
-    //                    <textarea value={usr.profileText} onChange={(e)=>setUsr(prevState=>({
-    //                         ...prevState,[e.target.name]:e.target.value
-    //                     }))}/>
-    
-    function updateValue(e){
-        console.log(e.target.value)
+    function changeProfile(e){
+        e.preventDefault()
+        const sendInterests=interests?interests.map(item=>item.value):usr.interests;
+        const body={
+            name:name?name:usr.name,
+            familyName:familyName?familyName:usr.familyName,
+            email:email?email:usr.email,
+//            password:password?password:null,
+            userName:userName?userName:usr.userName,
+            interests:sendInterests
+        }
+        console.log("BODY TO SEVER",body)
+        const headers = { Authorization: `Bearer ${props.token}`}
+        axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
+            .then(result=> {
+                alert("changed User to",result.data)
+            })
+            .catch(error => console.log(error))
     }
     
     return(
@@ -57,15 +76,14 @@ export default function Profile(props){
             {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
             <hr/>
             {usr?(
-                <form>
-                    <input type="text" placeholder="name" value={usr.name}  onChange={updateValue}/>
-                    <input type="text" placeholder="family name" value={usr.familyName}  onChange={updateValue}/>
-                    <input type="email" placeholder="@" value={usr.email}  onChange={updateValue}/>
-                    <input type="password" placeholder="password" />
-                    <input type="password" placeholder="password" />
-                    <textarea value={usr.profileText} onChange={updateValue}/>
+                <form onSubmit={changeProfile}>
+                    <input type="text" placeholder={usr.name} value={name}  onChange={(e)=>setName(e.target.value)}/>
+                    <input type="text" placeholder={usr.familyName} value={familyName}  onChange={(e)=>setFamilyName(e.target.value)}/>
+                    <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
+                    <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
                     <hr/>
                     <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
+                    <button type="submit"><MdOutlineSaveAlt/></button>
                     <hr/>
                     {usr.friends.map(item=>(
                         <div>
