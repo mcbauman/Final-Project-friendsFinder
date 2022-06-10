@@ -2,6 +2,8 @@
 body::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
 }
+
+//THEME-COLOR_SETS
 .BW{
     --background:rgb(240,240,240);
     --darkmain:rgb(100, 100, 100);
@@ -34,6 +36,8 @@ body::-webkit-scrollbar {
     --brightmain:var(--background);
     --brightsecondary:var(--background);
 }
+
+//Structured Styling
 body{
     margin:0;
     padding:0;
@@ -95,32 +99,10 @@ body{
                 flex-wrap: wrap;
                 justify-content: center;
                 margin-bottom: 20px;
- //               button{
- //                   background-color: white;
- //                   color:black;
- //                   height: 43px;
- //               }
-                input{
-                    font-size: 1.5rem;
-//                    width:120px;
-                    font-family: "Helvetica Neue", sans-serif;
-                    font-weight: 90;
-                }
+                
                 >div{
                     display: inline-flex;
                     flex-direction: column;
-                }
-                select{
-                    font-size: 1.5rem;
-                    font-family: "Helvetica Neue", sans-serif;
-                    font-weight: 200;
-                    option{
-                    }
-                }
-                textarea{
-                    font-size: 2rem;
-                    font-family: "Helvetica Neue", sans-serif;
-                    font-weight: 200;
                 }
             }
             .signin{
@@ -164,19 +146,15 @@ body{
                 }
                 >.ProfileCard{
                     display: grid;
-                    // grid-template-columns: [first] 50px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end] ;
                     grid-template-columns: repeat(4, 1fr) repeat(2,75px);
-//                    grid-template-rows: repeat(5, 50px);
                     grid-template-areas: 
                         "img userName userName userName userName userName"
-                        "img gender age . btn1 btn2 "
+                        "img gender age . btn1 btn2"
                         "text text text text text text"
                         "text text text text text text"
                         "form form form form form form";
                     .imgSearch{
                         grid-area: img;
-                        width: auto;
-                        height: 100px;
                     }
                     .searchDivUserName{
                         grid-area: userName;
@@ -187,19 +165,11 @@ body{
                     .age{
                         grid-area: age; 
                     }
-                    button{
-                        width: 60px;
-                        height: 50px;
-                        border: 1px black solid;
-                    }
                     .btn1{
                         grid-area: btn1;
                     }
                     .btn2{
                         grid-area: btn2;
-                    }
-                    .activeFriend{
-                        margin-right: 10px;
                     }
                     .profileText{
                         grid-area: text;
@@ -209,8 +179,34 @@ body{
                     }
                 }
                 >.messages{
-                    img{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr) 75px;
+                    grid-template-areas: 
+                        "img author . btn4"
+                        "img subject . btn3"
+                        "text text text text"
+                        "form form form form";
+                    .img2{
                         width: 100px;
+                        grid-area: img;
+                    }
+                    .author{
+                        grid-area: author;
+                    }
+                    .subject{
+                        grid-area: subject;
+                    }
+                    .btn1{
+                        grid-area: btn3;
+                    }
+                    .btn2{
+                        grid-area: btn4;
+                    }
+                    form{
+                        grid-area: form;
+                    }
+                    .profileText{
+                        grid-area: text;
                     }
                 }
             }
@@ -218,9 +214,11 @@ body{
     }
 }
 
+// Styling over whole Document
 button{
     font-family: "Helvetica Neue", sans-serif;
     font-size: 1.6rem;
+    height: 32px;
     font-weight: 200;
     border-radius: 5px;
 //    background-color:var(--darksecondary);
@@ -233,21 +231,70 @@ button{
         color: var(--brightthirdly);
     }
 }
+input{
+    font-size: 1.5rem;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 90;
+}
+select{
+    font-size: 1.5rem;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 200;
+    option{
+    }
+}
+textarea{
+    font-size: 2rem;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 200;
+}
+
 //On Small Screens
 @media only screen and (max-width:650px) {
+    body{
+        div{
+            header{
+            }
+            main{
+                article{
+                    form{
+                    }
+                    section{
+                        .ProfileCard{
+                            grid-template-columns: repeat(2, 1fr) repeat(2,75px);
+                            grid-template-areas: 
+                            "userName userName userName userName"
+                            "img img img img"
+                            "gender age btn1 btn2 "
+                            "text text text text"
+                            "text text text text"
+                            "form form form form";
+                        }
+                        .messages{
+                            grid-template-columns: repeat(3, 1fr) 75px;
+                            grid-template-areas: 
+                        "img author . . "
+                        "img subject . btn3"
+                        "text text text  btn4"
+                        "form form form form";
+                        }
+                    }
+                }
+            } 
+        }
+    }
+
     .bigScreen{
         display: none;
     }
     .messageHeader{
         display: block;
     }
-    .profileHeader{
-        flex-wrap: wrap;
-    }
     img{
         width: 100%;
     }
 }
+
 //On Big Screens
 @media only screen and (min-width:650px) {
     .smallScreen{
@@ -261,3 +308,27 @@ button{
         width: 200px;
     }
 }
+
+
+/*
+STUCTURE
+header
+    nav
+        a
+        svg
+main
+    article
+        form
+            Section/Div
+            input
+            select
+            button
+        section
+            div/profileCard
+                img
+                div
+                button
+                form/hide/show
+            div/messages
+                
+ */
