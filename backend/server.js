@@ -138,11 +138,13 @@ app.post("/user/find",checkAuth,async (req,res,next)=>{
 
 // Find Profile
 app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
-    // console.log(req);
     try {
-        const user=await User.findById(req.user._id)
+ //       const user=await User.findById(req.user._id)
+ //       res.send(user)
+        const user=await User.findById(req.user._id).populate("friends","userName profilePicture")
+        console.log(user)
         res.send(user)
-    } catch (error) {
+    } catch (err) {
         next({status:400, message:err.message})  
     }
 })
@@ -171,9 +173,6 @@ app.get("/user/checkFriends",checkAuth, async (req,res,next)=>{
 // add an Friend
 app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
     try {
-//        const query= User.findByIdAndUpdate(req.user._id, {$addToSet:{id:req.body}})
-//        query.populate("name","userName")
-//        const user=await query.exec()      
         const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:req.body})
         res.send(user)
     } catch (error) {

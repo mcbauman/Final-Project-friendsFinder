@@ -1,35 +1,47 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Activities from "../ActivitiesArray";
 import axios from "axios";
 import Select from "react-select";
 import {MdOutlineDeleteForever} from "react-icons/md";
+import exmpl from "../exmpl.jpeg";
+import React from "react";
 
 export default function Profile(props){
     const [file, setFile] = useState(null)
-    console.log(props)
+    const [usr,setUsr]=useState(null)
+    const [interests,setInterests]=useState()
+    
     function handleSelectedFile(e){
         setFile(e.target.files[0]) // we use [] because key is a number here.
-        console.log(e.target.files);
-        console.log(e.target.files[0]);
     }
     function saveFile(e){
-        // const [picture, setPicture ] = useState(null)
-        if(!file){
-            return alert("Select a file first:)")
-        }
+        if(!file){return alert("Select a file first:)")}
         const formData = new FormData()
         formData.append("selectedFile", file)
         const headers = { Authorization: `Bearer ${props.token}`}
-        const config = {headers}
-        axios.post(`${process.env.REACT_APP_BE_SERVER}/picture/createPicture`, formData, config )
+        axios.post(`${process.env.REACT_APP_BE_SERVER}/picture/createPicture`, formData, {headers} )
             .then(result =>  props.setUserProfPic(result.data._id))
             .catch(error => console.log(error))
     }
-
-    console.log("USER PROFILE from PROFILE.JSX L 34",props.userProfPic)
-//    console.log("USER PROFILE ID from PROFILE.JSX L 34",props.userProfPic.data._id)
+    function loadUser(){
+        const headers = { Authorization: `Bearer ${props.token}`}
+        axios.get(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,{headers})
+            .then(result=> {
+                result.data.interests=result.data.interests.map(item=>({"value":item,"label":item}))
+                setUsr(result.data)
+            })
+            .catch(error => console.log(error))
+    }
+    useEffect(()=>loadUser(),[])
+    usr?(console.log(usr.friends)):console.log(usr)
     
-    // {friends.map(item=><div>{item.picture}</div><div>{item.name}</div><button><MdOutlineDeleteForever/></button>)}
+    //                    <textarea value={usr.profileText} onChange={(e)=>setUsr(prevState=>({
+    //                         ...prevState,[e.target.name]:e.target.value
+    //                     }))}/>
+    
+    function updateValue(e){
+        console.log(e.target.value)
+    }
     
     return(
         <article>
@@ -44,18 +56,28 @@ export default function Profile(props){
             <button onClick={saveFile}>Save Picture</button>
             {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
             <hr/>
-            <form>
-                <input type="text" placeholder="name" />
-                <input type="text" placeholder="family name" />
-                <input type="email" placeholder="@" />
-                <input type="password" placeholder="password" />
-                <input type="password" placeholder="password" />
-                <textarea/>
-                <hr/>
-                <Select/>
-            </form>
-            <hr/>
-           
+            {usr?(
+                <form>
+                    <input type="text" placeholder="name" value={usr.name}  onChange={updateValue}/>
+                    <input type="text" placeholder="family name" value={usr.familyName}  onChange={updateValue}/>
+                    <input type="email" placeholder="@" value={usr.email}  onChange={updateValue}/>
+                    <input type="password" placeholder="password" />
+                    <input type="password" placeholder="password" />
+                    <textarea value={usr.profileText} onChange={updateValue}/>
+                    <hr/>
+                    <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
+                    <hr/>
+                    {usr.friends.map(item=>(
+                        <div>
+                            <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
+                            <div>{item.userName}</div>
+                            <button><MdOutlineDeleteForever/></button>
+                            <hr/>
+                        </div>
+                        ))}
+                </form>
+                ):<div>LOADING</div>
+            }
         </article>
     )
 }

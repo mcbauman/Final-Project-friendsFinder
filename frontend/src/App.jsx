@@ -32,7 +32,6 @@ export default function App(){
 
     useEffect(()=>{
       localStorage.setItem("userProfPic",(userProfPic))
-          console.log("USERPROFPIC from APP.JS L34",userProfPic)
     },[userProfPic])
 
    return(
