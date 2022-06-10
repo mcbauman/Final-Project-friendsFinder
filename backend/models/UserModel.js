@@ -20,7 +20,7 @@ const userSchema=new mongoose.Schema({
     interests:    Array,
     //Stored last search?
     profileText:    String,
-    friends:        { type: [mongoose.Schema.Types.ObjectId], ref: "friends"},
+    friends:        { type: [mongoose.Schema.Types.ObjectId], ref: "user"},
     emailVerified:  { type:Boolean,default:false},
     score:          { type:Number, default:0},
     profilePicture: { type: mongoose.Schema.Types.ObjectId, ref: "file"}
