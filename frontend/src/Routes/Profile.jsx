@@ -98,9 +98,11 @@ export default function Profile(props){
                     <button type="submit"><MdOutlineSaveAlt/></button>
                 </form>
                 <hr/>
-                <input type="file" onChange={handleSelectedFile} />
-                <button onClick={saveFile}><MdOutlineSaveAlt/></button>
-                {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
+                <form>
+                    <input id="fileSelector" type="file" onChange={handleSelectedFile} />
+                    <button onClick={saveFile}><MdOutlineSaveAlt/></button>
+                    {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
+                </form>
             </section>
             <hr/>
             <section>
