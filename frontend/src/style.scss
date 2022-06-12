@@ -99,7 +99,6 @@ body{
                 flex-wrap: wrap;
                 justify-content: center;
                 margin-bottom: 20px;
-                
                 >div{
                     display: inline-flex;
                     flex-direction: column;
@@ -142,6 +141,22 @@ body{
                     }
                     img {
                         border-radius: 25px;
+                    }
+                }
+                form{
+                    .friendsView{
+                        display: grid;
+                        grid-template-areas: 
+                    " img div button";
+                        img{
+                            grid-area: img;
+                        }
+                        div{
+                            grid-area:div;
+                        }
+                        button{
+                            grid-area:button;
+                        }
                     }
                 }
                 >.ProfileCard{

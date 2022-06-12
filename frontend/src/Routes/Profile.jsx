@@ -90,7 +90,7 @@ export default function Profile(props){
                         <button type="submit"><MdOutlineSaveAlt/></button>
                         <hr/>
                         {usr.friends.map(item=>(
-                            <div>
+                            <div className="friendsView">
                                 <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
                                 <div>{item.userName}</div>
                                 <button><MdOutlineDeleteForever/></button>
