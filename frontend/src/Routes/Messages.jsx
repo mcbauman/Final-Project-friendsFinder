@@ -1,10 +1,10 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import React from "react";
-import exmpl from "../exmpl.jpeg"
+import exmpl from "../components/exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail} from "react-icons/md";
-import {isFriend,checkFriends,addFriend} from "../functions";
+import {isFriend,checkFriends,addFriend} from "../components/functions";
 
 export default function Messages(props){
     const [allMsg, setAllMsg] = useState([])
@@ -44,7 +44,6 @@ export default function Messages(props){
     
     return(
         <article>
-            MESSAGES
             <section id="messages">
                 {allMsg.map(item=>(
                     <div key={item._id} className="messages">

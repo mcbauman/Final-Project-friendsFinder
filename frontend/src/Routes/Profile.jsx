@@ -1,10 +1,13 @@
 import {useEffect, useState} from "react";
-import Activities from "../ActivitiesArray";
+import Activities from "../components/ActivitiesArray";
 import axios from "axios";
 import Select from "react-select";
 import {MdOutlineDeleteForever,MdOutlineSaveAlt} from "react-icons/md";
-import exmpl from "../exmpl.jpeg";
+import exmpl from "../components/exmpl.jpeg";
 import React from "react";
+import {Context}from "../components/context"
+import trans from "../components/trans";
+import {useContext} from "react";
 
 export default function Profile(props){
     const [file, setFile] = useState(null)
@@ -15,7 +18,8 @@ export default function Profile(props){
     const [userName, setUserName]=useState("")
     const [interests,setInterests]=useState([])
     const [profileText,setProfileText]=useState("")
-
+    const {lang,setLang}=useContext(Context)
+    const {theme,setTheme}=useContext(Context)
     const [usr,setUsr]=useState(null)
     
     function handleSelectedFile(e){
@@ -40,12 +44,9 @@ export default function Profile(props){
             .catch(error => console.log(error))
     }
     useEffect(()=>loadUser(),[])
-    
     function changeProfile(e){
         e.preventDefault()
         const sendInterests=interests.length>1?interests.map(item=>item.value):usr.interests.map(item=>item.value);
-        console.log("DISC",interests.length>1?"exists":"loaded from usr")
-        console.log("HERE",interests.length>1?interests:usr.interests)
         const body={
             name:name?name:usr.name,
             familyName:familyName?familyName:usr.familyName,
@@ -55,7 +56,6 @@ export default function Profile(props){
             profileText:profileText?profileText:usr.profileText,
             interests:sendInterests
         }
-        console.log("BODY TO SEVER",body)
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
             .then(result=> {
@@ -63,18 +63,43 @@ export default function Profile(props){
             })
             .catch(error => console.log(error))
     }
+    function setDefaults(e){
+        e.preventDefault()
+        localStorage.setItem("theme",JSON.stringify(theme))
+        localStorage.setItem("lang",JSON.stringify(lang))
+        const body2={theme,lang,email:usr.email}
+        const headers = { Authorization: `Bearer ${props.token}`}
+        axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body2,{headers})
+            .then(result=> {
+                alert("changed User to",result.data)
+            })
+            .catch(error => console.log(error))
+    }
+    
+    //Load Default of Theme and Lang into the Select
+    //delete the props.theme
     
     return(
         <article>
             <section>
-                <select value={props.theme} onChange={(e)=>props.setTheme(e.target.value)}>
-                    <option>BW</option>
-                    <option>red</option>
-                    <option>blue</option>
-                    <option>green</option>
-                </select>
+                <form onSubmit={setDefaults}>
+                    {trans[lang].Theme}:
+                    <select value={theme} onChange={(e)=>setTheme(e.target.value)}>
+                        <option>BW</option>
+                        <option>red</option>
+                        <option>blue</option>
+                        <option>green</option>
+                    </select>
+                    {trans[lang].language}:
+                    <select value={lang} onChange={(e)=>setLang(e.target.value)}>
+                        <option value="de">🇩🇪</option>
+                        <option value="en">🇬🇧</option>
+                    </select>
+                    <button type="submit"><MdOutlineSaveAlt/></button>
+                </form>
+                <hr/>
                 <input type="file" onChange={handleSelectedFile} />
-                <button onClick={saveFile}>Save Picture</button>
+                <button onClick={saveFile}><MdOutlineSaveAlt/></button>
                 {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
             </section>
             <hr/>
@@ -89,9 +114,9 @@ export default function Profile(props){
                         <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
                         <button type="submit"><MdOutlineSaveAlt/></button>
                         <hr/>
-                        Your Friends:
+                        {trans[lang].YoureFriends}:
                         {usr.friends.map(item=>(
-                            <div className="friendsView">
+                            <div className="friendsView" id={item.userName}>
                                 <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
                                 <div>{item.userName}</div>
                                 <button><MdOutlineDeleteForever/></button>
