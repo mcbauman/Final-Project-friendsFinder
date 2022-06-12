@@ -38,7 +38,7 @@ export default function App(){
       <div className={theme}>
          {user?
          <>
-            <Header setUser={setUser} setToken={setToken}/>
+            <Header setUser={setUser} setToken={setToken} setUserProfPic={setUserProfPic}/>
             <Main user={user} token={token} userProfPic={userProfPic} setUserProfPic={setUserProfPic}/>
          </>
          :<Log setUser={setUser} setToken={setToken} setUserProfPic={setUserProfPic} />

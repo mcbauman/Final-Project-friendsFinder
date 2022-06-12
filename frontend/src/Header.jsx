@@ -7,10 +7,16 @@ import trans from "./components/trans";
 import {useContext} from "react";
 
 export default function Header(props){
-    const {lang}=useContext(Context)
+    const {lang,setLang}=useContext(Context)
+    const {theme,setTheme}=useContext(Context)
     function logout(){
         props.setUser(null)
         props.setToken(null)
+        props.setUserProfPic(null)
+        setTheme("BW")
+        setLang("de")
+        localStorage.setItem("theme",JSON.stringify(null))
+        localStorage.setItem("lang",JSON.stringify(null))
     }
    return(
        <header>
