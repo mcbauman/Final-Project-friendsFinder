@@ -1,7 +1,7 @@
 import { useState} from "react"
 import axios from "axios"
 import Select from "react-select";
-import Activities from "../ActivitiesArray";
+import Activities from "../components/ActivitiesArray";
 
 
 export default function Singin(props){

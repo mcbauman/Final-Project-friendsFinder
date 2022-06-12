@@ -85,7 +85,7 @@ app.post("/user/login",async (req,res,next)=>{
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
-        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString()})
+        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString(),theme:user.theme,lang:user.lang})
 //        res.send({token,_id:user._id, profilePicture:user.profilePicture?user.profilePicture.toString():null})
     } catch (error) {
         next({status:400,message:error})
