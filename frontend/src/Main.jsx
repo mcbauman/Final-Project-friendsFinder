@@ -3,7 +3,8 @@ import Search from "./Routes/Search.jsx"
 import Messages from "./Routes/Messages"
 import Profile from "./Routes/Profile"
 import {Routes,Route} from "react-router-dom"
-import { useState } from "react"
+
+// line for a check!
 
 export default function Main(props){
     return(
@@ -16,12 +17,7 @@ export default function Main(props){
                     userProfPic={props.userProfPic} 
                     setUserProfPic={props.setUserProfPic} 
                     user= {props.user} 
-                    token= {props.token}  
-                    theme={props.theme} 
-                    setTheme={props.setTheme}/> }/>
-
-                    // line for a check!
-
+                    token= {props.token}/> }/>
             </Routes>
         </main>
     )

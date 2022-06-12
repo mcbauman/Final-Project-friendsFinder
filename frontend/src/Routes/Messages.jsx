@@ -1,10 +1,10 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import React from "react";
-import exmpl from "../exmpl.jpeg"
+import exmpl from "../components/exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail} from "react-icons/md";
-import {isFriend,checkFriends,addFriend} from "../functions";
+import {isFriend,checkFriends,addFriend} from "../components/functions";
 
 export default function Messages(props){
     const [allMsg, setAllMsg] = useState([])
@@ -44,19 +44,14 @@ export default function Messages(props){
     
     return(
         <article>
-            MESSAGES
             <section id="messages">
                 {allMsg.map(item=>(
                     <div key={item._id} className="messages">
-                        <div className="messageHeader">
-                            <img src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
-                            <div>{item.author.userName}</div>
-                            <div>{item.subject}</div>
-                            <div className="btns">
-                                <button className={isFriend(item.author._id,friends)} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
-                                <button onClick={()=>writeMessage(item._id,item.author._id)}><MdOutlineEmail/></button>
-                            </div>
-                        </div>
+                        <img className="img2" src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
+                        <div className="author">{item.author.userName}</div>
+                        <div className="subject">{item.subject}</div>
+                        <button className={isFriend(item.author._id,friends)+" btn1"} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
+                        <button className="btn2" onClick={()=>writeMessage(item._id,item.author._id)}><MdOutlineEmail/></button>
                         <form className={vis===item._id?"show":"hide"}>
                             <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                             <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>

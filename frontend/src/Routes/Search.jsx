@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react';
-import Activities from "../ActivitiesArray";
+import Activities from "../components/ActivitiesArray";
 import Select from 'react-select';
 import {useState} from "react";
 import axios from "axios";
 import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail,MdSearch} from "react-icons/md";
-import exmpl from "../exmpl.jpeg"
-import {isFriend,checkFriends,addFriend} from "../functions";
-import Log from "../Log";
+import exmpl from "../components/exmpl.jpeg"
+import {isFriend,checkFriends,addFriend} from "../components/functions";
+import {Context}from "../components/context"
+import trans from "../components/trans";
+import {useContext} from "react";
 
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
@@ -20,6 +22,7 @@ export default function Search(props){
     const [subject,setSubject]=useState("")
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
+    const {lang}=useContext(Context)
     
     function requestServer(){
         const body={interests,minAge,maxAge,srchdGender}
@@ -61,10 +64,10 @@ export default function Search(props){
         <article>
             <form onSubmit={submitFunction}>
                 <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
-                <input type="text" onChange={(e)=>setMinAge(e.target.value||0)} placeholder="min age"/>
-                <input type="text" onChange={(e)=>setMaxAge(e.target.value||150)} placeholder="max age"/>
+                <input type="text" onChange={(e)=>setMinAge(e.target.value||0)} placeholder={trans[lang].minAge}/>
+                <input type="text" onChange={(e)=>setMaxAge(e.target.value||150)} placeholder={trans[lang].maxAge}/>
                 <select onChange={(e)=>setSrchdGender(e.target.value)}>
-                    <option>any</option>
+                    <option>{trans[lang].any}</option>
                     <option>♂️</option>
                     <option>♀️</option>
                     <option>⚧</option>
@@ -73,20 +76,19 @@ export default function Search(props){
             </form>
             <section id="messages">
                 {listOfUsers.map(item=>(
-                        <div key={item._id} className="ProfileCard">
-                            <img className='imgSearch' src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
-                            <div className="searchDivUserName">{item.userName}</div>
-                            <div className='gender'>{item.gender}</div>
-                            <div className='age'>{item.age}</div>
-                            <button className={isFriend(item._id,friends)+" btn1"} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
-                            <button className="btn2" onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
-                            <div className="profileText">{item.profileText}</div>
-                            <form className={vis===item._id?"show":"hide"}>
-                                <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
-                                <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
-                            </form>
-                            
-                        </div>
+                    <div key={item._id} className="ProfileCard">
+                        <img className='imgSearch' src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
+                        <div className="searchDivUserName">{item.userName}</div>
+                        <div className='gender'>{item.gender}</div>
+                        <div className='age'>{item.age}</div>
+                        <button className={isFriend(item._id,friends)+" btn1"} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
+                        <button className="btn2" onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
+                        <div className="profileText">{item.profileText}</div>
+                        <form className={vis===item._id?"show":"hide"}>
+                            <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
+                            <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
+                        </form>
+                    </div>
                 ))}
             </section>
         </article>
