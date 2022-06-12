@@ -89,6 +89,7 @@ export default function Profile(props){
                         <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
                         <button type="submit"><MdOutlineSaveAlt/></button>
                         <hr/>
+                        Your Friends:
                         {usr.friends.map(item=>(
                             <div className="friendsView">
                                 <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>

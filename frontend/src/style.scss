@@ -145,11 +145,17 @@ body{
                 }
                 form{
                     .friendsView{
+                        border-radius: 20px;
+                        box-shadow: 0 0 7px 1px var(--darksecondary);
+                        padding: 20px 10px;
+                        margin-bottom: 10px;
                         display: grid;
+                        grid-template-columns:  1fr 1fr 75px;
                         grid-template-areas: 
                     " img div button";
                         img{
                             grid-area: img;
+                            border-radius: 25px;
                         }
                         div{
                             grid-area:div;
@@ -234,6 +240,7 @@ button{
     font-family: "Helvetica Neue", sans-serif;
     font-size: 1.6rem;
     height: 32px;
+    width: 59px;
     font-weight: 200;
     border-radius: 5px;
 //    background-color:var(--darksecondary);
