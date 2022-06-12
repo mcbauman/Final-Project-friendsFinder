@@ -8,7 +8,7 @@ import {useContext} from "react";
 
 export default function Header(props){
     const {lang,setLang}=useContext(Context)
-    const {theme,setTheme}=useContext(Context)
+    const {setTheme}=useContext(Context)
     function logout(){
         props.setUser(null)
         props.setToken(null)

@@ -3,16 +3,13 @@ import axios from "axios"
 import {NavLink} from "react-router-dom";
 import {MdLogin} from "react-icons/md"
 import {Context}from "../components/context"
-// import trans from "../components/trans";
-//import {useContext} from "react";
-//const {lang,setLang}=useContext(Context)
-//const {theme,setTheme}=useContext(Context)
+import {useContext} from "react";
 
 export default function Login(props){
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
-//    const {lang,setLang}=useContext(Context)
-//    const {theme,setTheme}=useContext(Context)
+    const {lang,setLang}=useContext(Context)
+    const {theme,setTheme}=useContext(Context)
 
     function submitFunction(e){
         e.preventDefault()
@@ -21,8 +18,10 @@ export default function Login(props){
             props.setUser(resp.data._id)
             props.setToken(resp.data.token)
             props.setUserProfPic(resp.data.profilePicture)
-            console.log(resp.data);
-            console.log(resp.data.profilePicture);
+            setLang(resp.data.lang)
+            setTheme(resp.data.theme)
+            localStorage.setItem("theme",JSON.stringify(theme))
+            localStorage.setItem("lang",JSON.stringify(lang))
         })
         .catch(err=>{
             console.log(err)

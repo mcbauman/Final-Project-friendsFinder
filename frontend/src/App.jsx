@@ -9,7 +9,7 @@ const userFromLS=localStorage.getItem("user")
 const userDefault=userFromLS?JSON.parse(userFromLS):null
 
 const userProfPicLS = localStorage.getItem("userProfPic")
-const userProfPicDefault=userFromLS?userProfPicLS:"BW"
+const userProfPicDefault=userFromLS?userProfPicLS:null
 
 const tokenFromLS=localStorage.getItem("token")
 const tokenDefault=tokenFromLS?tokenFromLS:null
