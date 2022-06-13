@@ -74,6 +74,7 @@ export default function Search(props){
                 </select>
                 <button type="submit"><MdSearch/></button>
             </form>
+            {listOfUsers?(
             <section id="messages">
                 {listOfUsers.map(item=>(
                     <div key={item._id} className="ProfileCard">
@@ -90,7 +91,7 @@ export default function Search(props){
                         </form>
                     </div>
                 ))}
-            </section>
+            </section>):(<div>LOADING}</div>)}
         </article>
     )
 }
