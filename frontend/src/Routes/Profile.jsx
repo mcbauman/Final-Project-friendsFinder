@@ -8,6 +8,7 @@ import React from "react";
 import {Context}from "../components/context"
 import trans from "../components/trans";
 import {useContext} from "react";
+import {toast, ToastContainer} from "react-toastify";
 
 export default function Profile(props){
     const [file, setFile] = useState(null)
@@ -21,6 +22,9 @@ export default function Profile(props){
     const {lang,setLang}=useContext(Context)
     const {theme,setTheme}=useContext(Context)
     const [usr,setUsr]=useState(null)
+    const notifySuccess = () => toast("Your profile is updated");
+    const notifyDelFrien=()=>toast("friend removed ")
+    const notifyError = (text) => toast(text);
     
     function handleSelectedFile(e){
         setFile(e.target.files[0]) // we use [] because key is a number here.
@@ -59,9 +63,13 @@ export default function Profile(props){
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
             .then(result=> {
-                alert("changed User to",result.data)
+                notifySuccess()
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                notifyError(error)
+            })
+            
     }
     function setDefaults(e){
         e.preventDefault()
@@ -71,9 +79,12 @@ export default function Profile(props){
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body2,{headers})
             .then(result=> {
-                alert("changed User to",result.data)
+                notifySuccess()
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                notifyError(error)
+            })
     }
     
     //Load Default of Theme and Lang into the Select
@@ -128,6 +139,15 @@ export default function Profile(props){
                     </form>
                 ):<div>LOADING</div>}
             </section>
+            <ToastContainer position="bottom-center"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover/>
         </article>
     )
 }
