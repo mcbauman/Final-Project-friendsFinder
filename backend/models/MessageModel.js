@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 import User from "./UserModel.js"
 
-const { Schema, model } = mongoose
-
 const messageSchema = new mongoose.Schema({
-    author:    { type: Schema.Types.ObjectId, ref: "user", required: true },
+    author:    { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
     content:   { type: String, trim: true, required: true },
-    recipient: { type: Schema.Types.ObjectId, ref: "user", required: true },
+    recipient: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
     subject:   { type: String }
 }, {
     timestamps: true,

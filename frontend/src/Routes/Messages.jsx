@@ -12,6 +12,22 @@ export default function Messages(props){
     const [subject,setSubject]=useState("")
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
+    const [chatPartners,setChatPartners]=useState([])
+    
+    function addChatPartner(){
+        console.log("allMSG",allMsg)
+        const array=[]
+        allMsg.map((item)=>{
+//            if(array.includes(item.author.id)){
+//                console.log(`array dosnt include ${item.author.id}`)
+//            }else{
+                array.push(item.id)
+                console.log(array)
+  //          }
+        })
+        setChatPartners(array)
+        console.log(chatPartners)
+    }
     
     function requestMessages(){
         const headers = { Authorization: `Bearer ${props.token}` }
@@ -27,6 +43,9 @@ export default function Messages(props){
         checkFriends(props.token,setFriends)
     }, [])
 
+    useEffect(()=>{
+        addChatPartner()
+    },[allMsg])
     function writeMessage(id,author){
         setVis(vis?0:id)
         if(vis&&subject.length>1){
