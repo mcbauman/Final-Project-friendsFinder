@@ -13,6 +13,7 @@ import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
 import ApiData from "./models/ApiSchema.js"
+import Chat from "./models/chatSchema.js"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -200,7 +201,7 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
     }
 })
 
-// Chat Message:
+// Chat new entry:
 app.post("/chat/add", checkAuth, async(req, res, next) => {
     try {
         const existingChat = await Chat.findById(req.user.id)

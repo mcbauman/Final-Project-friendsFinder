@@ -130,7 +130,10 @@ export default function Profile(props){
                         {trans[lang].YoureFriends}:
                         {usr.friends.map(item=>(
                             <div className="friendsView" id={item.userName}>
-                                <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
+                                <div className="profPicDiv" style={item.profilePicture ? `background-image: url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})` : `background-image: url(${exmpl})`}>
+                                    
+                                </div>
+                                {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
                                 <div>{item.userName}</div>
                                 <button><MdOutlineDeleteForever/></button>
                                 <hr/>
