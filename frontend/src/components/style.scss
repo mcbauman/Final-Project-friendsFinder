@@ -11,6 +11,7 @@ body::-webkit-scrollbar {
     --darksecondary:rgb(50,50,50);
     --brightthirdly:rgb(230,230,230);
     --brightmain:var(--background);
+    --brightmainOpacity:rgba(240,240,240, .4);
     --brightsecondary:var(--background);
 }
 .blue{
@@ -19,6 +20,7 @@ body::-webkit-scrollbar {
     --darksecondary:rgb(100,100,150);
     --brightthirdly:rgb(240,255,240);
     --brightmain:var(--background);
+    --brightmainOpacity:rgba(250,250,255, .4);
     --brightsecondary:var(--background);
 }
 .green{
@@ -27,6 +29,7 @@ body::-webkit-scrollbar {
     --darksecondary:rgb(50,50,50);
     --brightthirdly:rgb(240,255,240);
     --brightmain:var(--background);
+    --brightmainOpacity:rgba(250,255,250, .4);
     --brightsecondary:var(--background);
 }
 .red{
@@ -35,6 +38,7 @@ body::-webkit-scrollbar {
     --darksecondary:rgb(50,50,50);
     --brightthirdly:rgb(255,235,205);
     --brightmain:var(--background);
+    --brightmainOpacity:rgba(255,252,245, .4);
     --brightsecondary:var(--background);
 }
 
@@ -88,12 +92,12 @@ body{
     }
     main{
         height: 90%;
-        article{
+        >article{
             width: 95%;
             max-width: 1200px;
             margin:0 auto;
             padding: 20px;
-            background-color: var(--brightmain);
+            background-color: var(--brightmainOpacity);
             >form{
                 position: sticky;
                 top:50px;
@@ -153,10 +157,11 @@ body{
                 }
                 form{
                     .friendsView{
-                        border-radius: 20px;
+                        border-radius: 5px;
                         box-shadow: 0 0 7px 1px var(--darksecondary);
+                        background-color: var(--brightmain);
                         padding: 20px 10px;
-                        margin-bottom: 10px;
+                        margin-bottom: 20px;
                         display: grid;
                         grid-template-columns:  1fr 1fr 75px;
                         grid-template-areas: 
