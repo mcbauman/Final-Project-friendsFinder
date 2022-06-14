@@ -23,7 +23,7 @@ export default function Profile(props){
     const {theme,setTheme}=useContext(Context)
     const [usr,setUsr]=useState(null)
     const notifySuccess = () => toast("Your profile is updated");
-    const notifyDelFrien=()=>toast("friend removed ")
+    const notifyDelFriend=()=>toast("friend removed ")
     const notifyError = (text) => toast(text);
     
     function handleSelectedFile(e){
@@ -137,7 +137,7 @@ export default function Profile(props){
                             </div>
                         ))}
                     </form>
-                ):<div>LOADING</div>}
+                ):(<div class="loadingio-spinner-ripple-jjyczsl43u"><div class="ldio-qydde5o934a"><div></div><div></div></div></div>)}
             </section>
             <ToastContainer position="bottom-center"
                             autoClose={5000}
