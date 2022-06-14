@@ -86,7 +86,7 @@ export default function Profile(props){
                 notifyError(error)
             })
     }
-    
+
     //Load Default of Theme and Lang into the Select
     //delete the props.theme
     
