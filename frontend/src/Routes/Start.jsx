@@ -1,4 +1,5 @@
 
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,6 +20,21 @@ export default function Start(){
                                 pauseOnFocusLoss
                                 draggable
                                 pauseOnHover/>
+
         </article>
     )
 }
+    // useEffect(() => {
+    //     if(data){
+    //         const config = {
+    //             method: "POST",
+    //             body: JSON.stringify({data}),
+    //             headers: {
+    //              "Content-type": "application/json"
+    //             }
+    //         }
+    //            fetch("/apidata", {config})
+    //             .then(res => res.json())
+    //             .then(result => console.log(result))
+    //        }
+    // }, [])
