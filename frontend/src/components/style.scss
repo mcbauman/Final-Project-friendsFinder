@@ -56,6 +56,7 @@ body{
     background-size: contain;
     header{
         position: sticky;
+        width: 100%;
         top:0;
         z-index: 100;
         background-color:var(--darkmain);
@@ -93,7 +94,7 @@ body{
     main{
         height: 90%;
         >article{
-            width: 95%;
+//            width: 95%;
             max-width: 1200px;
             margin:0 auto;
             padding: 20px;
@@ -299,6 +300,7 @@ textarea{
     body{
         div{
             header{
+                width: 100%;
             }
             main{
                 article{
