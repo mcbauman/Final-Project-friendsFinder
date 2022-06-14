@@ -91,7 +91,8 @@ export default function Search(props){
                         </form>
                     </div>
                 ))}
-            </section>):<div>LOADING</div>}
+            </section>):(<div class="loadingio-spinner-ripple-jjyczsl43u"><div class="ldio-qydde5o934a"><div></div><div></div></div></div>)}
+
         </article>
     )
 }

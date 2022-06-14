@@ -137,7 +137,7 @@ export default function Profile(props){
                             </div>
                         ))}
                     </form>
-                ):<div>LOADING</div>}
+                ):(<div class="loadingio-spinner-ripple-jjyczsl43u"><div class="ldio-qydde5o934a"><div></div><div></div></div></div>)}
             </section>
             <ToastContainer position="bottom-center"
                             autoClose={5000}
