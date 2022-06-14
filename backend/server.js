@@ -206,9 +206,10 @@ app.post("/chat/add", checkAuth, async(req, res, next) => {
         const existingChat = await Chat.findById(req.user.id)
         if(!existingChat){
             const chat = await Chat.create(req.body)
-            res.send({cjat})
+            res.send(chat)
         }else{
             const chat=await Chat.findByIdAndUpdate(req.user.id,{$addToSet:req.body})
+            res.send(chat)
         }
     } catch (err){
         next({status: 400, message: err.message })
