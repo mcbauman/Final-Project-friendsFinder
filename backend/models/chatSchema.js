@@ -3,9 +3,10 @@ import Message from './MessageModel.js'
 import User from "./UserModel.js"
 
 const chatSchema=new mongoose.Schema({
-    user:       {type:[mongoose.Schema.Types.ObjectId], ref:"user"},
-    content:    { type: [mongoose.Schema.Types.ObjectId], ref: "message"},
-    
+    user:       {type:[mongoose.Schema.Types.ObjectId], ref:"user", required:true},
+    content:    {type: String, required:true,},
+    member:     {type:[mongoose.Schema.Types.ObjectId], ref:"user", required:true},
+    unread:     {type:Boolean}
 }, {
     timestamps: true,
     toJSON:{
