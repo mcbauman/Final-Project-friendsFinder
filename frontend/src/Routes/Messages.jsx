@@ -44,7 +44,7 @@ export default function Messages(props){
     
     return(
         <article>
-            {allMsg?(
+            {allMsg&&allMsg.length?(
             <section id="messages">
                 {allMsg.map(item=>(
                     <div key={item._id} className="messages">
@@ -60,7 +60,7 @@ export default function Messages(props){
                         <div className="profileText">{item.content}</div>
                     </div>
                 ))}
-            </section>):(<div>LOADING</div>)}
+            </section>):<div>LOADING</div>}
         </article>
     )
 }
