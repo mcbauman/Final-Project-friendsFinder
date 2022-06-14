@@ -2,6 +2,7 @@ import { useState} from "react"
 import axios from "axios"
 import Select from "react-select";
 import Activities from "../components/ActivitiesArray";
+import {toast, ToastContainer} from "react-toastify";
 
 
 export default function Singin(props){
@@ -16,6 +17,8 @@ export default function Singin(props){
     const [interests,setInterests]=useState([])
     const [profileText,setProfileText]=useState("")
     const options=Activities
+    const notifySuccess = () => toast("Your profile is created");
+    const notifyError = (text) => toast(text);
 
     function ageFunction(e){
         setDateOfBirth(e.target.value)
@@ -29,9 +32,10 @@ export default function Singin(props){
             .then(resp=>{
                 props.setUser(resp.data._id)
                 props.setToken(resp.data.token)
+                notifySuccess()
             })
             .catch(err=>{
-                alert(err?.response?.data?.error||"Something went wrong")
+                notifyError(err?.response?.data?.error||"Something went wrong")
             })
     }
     
@@ -54,6 +58,15 @@ export default function Singin(props){
                 <Select closeMenuOnSelect={false} isMulti options={options} onChange={setInterests} />
                 <button type="submit">save user</button>
             </form>
+            <ToastContainer position="bottom-center"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover/>
         </article>
     )
 }
