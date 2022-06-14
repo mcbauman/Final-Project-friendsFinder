@@ -23,7 +23,7 @@ export default function Profile(props){
     const {theme,setTheme}=useContext(Context)
     const [usr,setUsr]=useState(null)
     const notifySuccess = () => toast("Your profile is updated");
-    const notifyDelFrien=()=>toast("friend removed ")
+    const notifyDelFriend=()=>toast("friend removed ")
     const notifyError = (text) => toast(text);
     
     function handleSelectedFile(e){
@@ -86,7 +86,7 @@ export default function Profile(props){
                 notifyError(error)
             })
     }
-    
+
     //Load Default of Theme and Lang into the Select
     //delete the props.theme
     

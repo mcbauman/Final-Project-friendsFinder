@@ -112,12 +112,6 @@ app.post("/user/create",userValidator, async(req, res, next)=>{
 
 // Find users matching criteria
 app.post("/user/find",checkAuth,async (req,res,next)=>{
-    //console.log(req.body)
-    // let age=(Date.now()-(new Date(reg.body.birthday)).getTime())/(365*24*60*60*1000)
-    // console.log(Date.now())
-    // console.log(new Date("1990-02-05T00:00:00.000Z").getTime())
-    // console.log("YEAR",new Date("1990-02-05T00:00:00.000Z").getDate())
-    // console.log("AGE from l88",age)
     const filter={age:{$gte:req.body.minAge, $lte:req.body.maxAge}}
     if(req.body.interests&&req.body.interests.length>0){
         filter.interests={
@@ -140,8 +134,6 @@ app.post("/user/find",checkAuth,async (req,res,next)=>{
 // Find Profile
 app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
     try {
- //       const user=await User.findById(req.user._id)
- //       res.send(user)
         const user=await User.findById(req.user._id).populate("friends","userName profilePicture")
         console.log(user)
         res.send(user)
@@ -205,6 +197,34 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
         res.send(messages)
     } catch (error) {
         next({status:400, message:err.message})
+    }
+})
+
+// Chat Message:
+app.post("/chat/add", checkAuth, async(req, res, next) => {
+    try {
+        const existingChat = await Chat.findById(req.user.id)
+        if(!existingChat){
+            const chat = await Chat.create(req.body)
+            res.send({cjat})
+        }else{
+            const chat=await Chat.findByIdAndUpdate(req.user.id,{$addToSet:req.body})
+        }
+    } catch (err){
+        next({status: 400, message: err.message })
+    }
+})
+
+// Chat List:
+app.get("/chat/find",checkAuth,async(req, res, next) => {
+    try {
+        const query = Chat.find({user: req.user.id})
+        query.populate("member", "userName profilePicture")
+        const chats = await query.exec()
+        chats.reverse()
+        res.send(chats)
+    } catch (error) {
+        next({status:400, message:error.message})
     }
 })
 
