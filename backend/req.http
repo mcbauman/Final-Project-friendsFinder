@@ -1,5 +1,5 @@
 
-@url = {process.env.REACT_APP_BE_SERVER}
+@url = http://localhost:9000
 
 
 GET {{url}}
@@ -27,8 +27,8 @@ POST {{url}}/user/login
 Content-Type: application/json
 
 {
-    "email":"torge@jepleting.de",
-    "password":"aB@123456"
+    "email":"maze@online.de",
+    "password":"aA@123456"
 }
 ###
 # PUT http://localhost:9000/updateProfile
@@ -77,3 +77,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk3YTk5NDQzMzY4
 DELETE {{url}}/message/629526a45abae0bce2be8c2c
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5ZGI2NjkxZGZhMzlhYzZiMmEiLCJpYXQiOjE2NTQwMDM5OTV9.8PSDnl9fF-3Fjtrh6APGVI5SGJrDGSRzbVWeb9evgEo
+
+### Chat POST:
+POST {{url}}/chat/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
+
+{
+    "user": "62961c6e7ab347678994e6c8",
+    "content": "Good by guys!",
+    "member": "62a1e7ef285f86c8cb71dbb0"
+}
