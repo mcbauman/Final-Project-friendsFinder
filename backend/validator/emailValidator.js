@@ -1,4 +1,4 @@
-igit switchmport React from 'react'
+import React from 'react'
 const emailState = {
     email: '',
     error: ''
@@ -8,7 +8,7 @@ class FormComponent extends React.Component {
     constructor(){
         super();
         this.state = emailState;
-        this.onChange = this.onChange.bind(this);
+        this.onChange = this.onChange.bind(this);a
     }
     onChange(e) {
         this.setState({
