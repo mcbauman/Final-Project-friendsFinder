@@ -86,9 +86,8 @@ export default function Profile(props){
                 notifyError(error)
             })
     }
-
-    //Load Default of Theme and Lang into the Select
-    //delete the props.theme
+    
+    //<div className="profPicDiv" style={item.profilePicture ? `background-image: url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})` : `background-image: url(${exmpl})`}></div>
     
     return(
         <article>
@@ -138,7 +137,7 @@ export default function Profile(props){
                             </div>
                         ))}
                     </form>
-                ):(<div class="loadingio-spinner-ripple-jjyczsl43u"><div class="ldio-qydde5o934a"><div></div><div></div></div></div>)}
+                ):(<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>)}
             </section>
             <ToastContainer position="bottom-center"
                             autoClose={5000}
