@@ -217,11 +217,24 @@ app.post("/chat/add", checkAuth, async(req, res, next) => {
     }
 })
 
-// Chat List:
-app.get("/chat/find",checkAuth,async(req, res, next) => {
+// Chat List incoming:
+app.get("/chat/find/incoming",checkAuth,async(req, res, next) => {
     try {
         const query = Chat.find({user: req.user.id})
         query.populate("member", "userName profilePicture")
+        const chats = await query.exec()
+        chats.reverse()
+        res.send(chats)
+    } catch (error) {
+        next({status:400, message:error.message})
+    }
+})
+
+// Chat List send:
+app.get("/chat/find/send",checkAuth,async(req, res, next) => {
+    try {
+        const query = Chat.find({member: req.user.id})
+        query.populate("user", "userName profilePicture")
         const chats = await query.exec()
         chats.reverse()
         res.send(chats)
