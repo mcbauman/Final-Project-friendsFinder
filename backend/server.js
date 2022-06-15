@@ -12,6 +12,8 @@ import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
+import ApiData from "./models/ApiSchema.js"
+import Chat from "./models/chatSchema.js"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -85,7 +87,7 @@ app.post("/user/login",async (req,res,next)=>{
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
-        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString()})
+        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString(),theme:user.theme,lang:user.lang})
 //        res.send({token,_id:user._id, profilePicture:user.profilePicture?user.profilePicture.toString():null})
     } catch (error) {
         next({status:400,message:error})
@@ -111,12 +113,6 @@ app.post("/user/create",userValidator, async(req, res, next)=>{
 
 // Find users matching criteria
 app.post("/user/find",checkAuth,async (req,res,next)=>{
-    //console.log(req.body)
-    // let age=(Date.now()-(new Date(reg.body.birthday)).getTime())/(365*24*60*60*1000)
-    // console.log(Date.now())
-    // console.log(new Date("1990-02-05T00:00:00.000Z").getTime())
-    // console.log("YEAR",new Date("1990-02-05T00:00:00.000Z").getDate())
-    // console.log("AGE from l88",age)
     const filter={age:{$gte:req.body.minAge, $lte:req.body.maxAge}}
     if(req.body.interests&&req.body.interests.length>0){
         filter.interests={
@@ -139,8 +135,6 @@ app.post("/user/find",checkAuth,async (req,res,next)=>{
 // Find Profile
 app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
     try {
- //       const user=await User.findById(req.user._id)
- //       res.send(user)
         const user=await User.findById(req.user._id).populate("friends","userName profilePicture")
         console.log(user)
         res.send(user)
@@ -207,6 +201,48 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
     }
 })
 
+// Chat new entry:
+app.post("/chat/add", checkAuth, async(req, res, next) => {
+    try {
+        const existingChat = await Chat.findById(req.user.id)
+        if(!existingChat){
+            const chat = await Chat.create(req.body)
+            res.send(chat)
+        }else{
+            const chat=await Chat.findByIdAndUpdate(req.user.id,{$addToSet:req.body})
+            res.send(chat)
+        }
+    } catch (err){
+        next({status: 400, message: err.message })
+    }
+})
+
+// Chat List incoming:
+app.get("/chat/find/incoming",checkAuth,async(req, res, next) => {
+    try {
+        const query = Chat.find({user: req.user.id})
+        query.populate("member", "userName profilePicture")
+        const chats = await query.exec()
+        chats.reverse()
+        res.send(chats)
+    } catch (error) {
+        next({status:400, message:error.message})
+    }
+})
+
+// Chat List send:
+app.get("/chat/find/send",checkAuth,async(req, res, next) => {
+    try {
+        const query = Chat.find({member: req.user.id})
+        query.populate("user", "userName profilePicture")
+        const chats = await query.exec()
+        chats.reverse()
+        res.send(chats)
+    } catch (error) {
+        next({status:400, message:error.message})
+    }
+})
+
 // Delete Message:
 app.delete("/message/:id", checkAuth, async (req, res, next) => {
     try {
@@ -218,6 +254,17 @@ app.delete("/message/:id", checkAuth, async (req, res, next) => {
         res.send({ ok: true, deleted: message })
     } catch (error) {
         next({status:400, message:err.message})
+    }
+})
+
+// API data saver:
+app.post("/apidata", async (req,res, next) => {
+    try {
+        const data = await ApiData.create(req.body)
+        res.send({ data })
+        console.log(data);
+    } catch (error) {
+        next({status: 400, message: error.message})
     }
 })
 

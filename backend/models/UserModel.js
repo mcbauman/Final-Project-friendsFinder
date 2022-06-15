@@ -23,8 +23,9 @@ const userSchema=new mongoose.Schema({
     friends:        { type: [mongoose.Schema.Types.ObjectId], ref: "user"},
     emailVerified:  { type:Boolean,default:false},
     score:          { type:Number, default:0},
-    profilePicture: { type: mongoose.Schema.Types.ObjectId, ref: "file"}
-
+    profilePicture: { type: mongoose.Schema.Types.ObjectId, ref: "file"},
+    lang:           { type:String,default:"de",enum:["de","en"]},
+    theme:          { type:String,default:"red", enum:["BW","red","green","blue"]}
 }, {
     timestamps: true,
     toJSON:{
