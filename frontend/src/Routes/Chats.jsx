@@ -64,7 +64,7 @@ export default function Messages(props){
                     {allMsg.map(item=>(
                         <div key={item._id} className="messages">
                             <img className="img2" src={item.member.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.member.profilePicture}`:exmpl}/>
-                            <div className="author">{item.member}</div>
+                            <div className="author">{item.member.userName?item.member.userName:item.user.userName}</div>
                             <button className={isFriend(item.member._id,friends)+" btn1"} onClick={()=>addFriend(item.member._id,props.token,setFriends)}><FaUserFriends/></button>
                             <button className="btn2" onClick={()=>writeMessage(item._id,item.member._id)}><MdOutlineEmail/></button>
                             <form className={vis===item._id?"show":"hide"}>

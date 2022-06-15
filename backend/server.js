@@ -221,7 +221,7 @@ app.post("/chat/add", checkAuth, async(req, res, next) => {
 app.get("/chat/find/incoming",checkAuth,async(req, res, next) => {
     try {
         const query = Chat.find({user: req.user.id})
-//        query.populate("member", "userName profilePicture")
+        query.populate("member", "userName profilePicture")
         const chats = await query.exec()
         chats.reverse()
         res.send(chats)
