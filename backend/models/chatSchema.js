@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
 
 const chatSchema=new mongoose.Schema({
-    user:       {type:[mongoose.Schema.Types.ObjectId], ref:"user", required:true},
+    user:       {type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
     content:    {type: String, required:true,},
-    member:     {type:[mongoose.Schema.Types.ObjectId], ref:"user", required:true},
-    type:       {enum:["incoming","outgoing"]},
+    member:     {type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
+    type:       {enum:["incoming","outgoing",null]},
     unread:     {type:Boolean}
 }, {
     timestamps: true,
