@@ -10,6 +10,7 @@ export default function Messages(props){
     const [inMsg,setInMsg]=useState([])
     const [outMsg, setOutMsg]=useState([])
     const [allMsg, setAllMsg] = useState([])
+    const [resDat,setResDat]=useState(false)
     const [vis,setVis]=useState(false)
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
@@ -18,24 +19,36 @@ export default function Messages(props){
         const headers = { Authorization: `Bearer ${props.token}` }
         axios.get(`${process.env.REACT_APP_BE_SERVER}/chat/find/incoming`, {headers})
             .then(res => {
-                setInMsg(res.data)
-                console.log(res.data)
+                const data2=res.data.map(item=>item={...item,type:"incoming"})
+                setInMsg(data2)
+            })
+            .catch(error => alert(error.response?.data?.error || "Unknown error"))
+        axios.get(`${process.env.REACT_APP_BE_SERVER}/chat/find/send`, {headers})
+            .then(res => {
+                const data2=res.data.map(item=>item={...item,type:"outgoing"})
+                setOutMsg(data2)
+                setResDat(true)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
+
     useEffect(() => {
         requestMessages()
         checkFriends(props.token,setFriends)
     }, [])
-
+    
+    if(resDat){
+        setAllMsg(inMsg.concat(outMsg))
+        setResDat(false)
+    }
+    
     function writeMessage(id,author){
         setVis(vis?0:id)
-        if(vis&&subject.length>1){
+        if(vis&&content.length>1){
             const headers = { Authorization: `Bearer ${props.token}` }
-            const data={subject,content,author:props.user,recipient:author}
+            const data={content,author:props.user,recipient:author}
             axios.post(`${process.env.REACT_APP_BE_SERVER}/message/create`,data, {headers})
                 .then(res => {
-                    setSubject("")
                     setContent("")
                     requestMessages()
                 })
@@ -43,19 +56,18 @@ export default function Messages(props){
         }
     }
 
+    console.log(allMsg)
     return(
         <article>
             {allMsg&&allMsg.length?(
                 <section id="messages">
                     {allMsg.map(item=>(
                         <div key={item._id} className="messages">
-                            <img className="img2" src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
-                            <div className="author">{item.author.userName}</div>
-                            <div className="subject">{item.subject}</div>
-                            <button className={isFriend(item.author._id,friends)+" btn1"} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
-                            <button className="btn2" onClick={()=>writeMessage(item._id,item.author._id)}><MdOutlineEmail/></button>
+                            <img className="img2" src={item.member.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.member.profilePicture}`:exmpl}/>
+                            <div className="author">{item.member}</div>
+                            <button className={isFriend(item.member._id,friends)+" btn1"} onClick={()=>addFriend(item.member._id,props.token,setFriends)}><FaUserFriends/></button>
+                            <button className="btn2" onClick={()=>writeMessage(item._id,item.member._id)}><MdOutlineEmail/></button>
                             <form className={vis===item._id?"show":"hide"}>
-                                <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                                 <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                             </form>
                             <div className="profileText">{item.content}</div>
