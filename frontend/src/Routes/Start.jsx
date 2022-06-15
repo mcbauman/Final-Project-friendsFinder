@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import {checkFriends} from "../components/functions";
 
-export default function Start(){
+export default function Start(props){
     const notify = () => toast("Wow so easy!");
 
     function wakeUpServer(){
@@ -18,8 +18,8 @@ export default function Start(){
     return(
         <article>
             Start
-            <div>some text</div>
-                <button onClick={notify}>Notify!</button>
+            <br />
+            <button onClick={notify}>Notify!</button>
                 <ToastContainer position="bottom-center"
                                 autoClose={5000}
                                 hideProgressBar={false}
@@ -29,6 +29,39 @@ export default function Start(){
                                 pauseOnFocusLoss
                                 draggable
                                 pauseOnHover/>
+            <ol>
+                <li className='rowForum'>
+                    <a href="/item">
+                        <h4 className='titleForum'>
+                            Thread 1
+                        </h4>
+                        <div className='bottomForum'>
+                            <p className='timestampForum'>
+                                15/06/2022
+                            </p>
+                            <p className='commentCountForum'>
+                                comments
+                            </p>
+                        </div>
+                    </a>                   
+                </li>
+                <li className='rowForum'>
+                    <a href="/item">
+                        <h4 className='titleForum'>
+                            Thread 2
+                        </h4>
+                        <div className='bottomForum'>
+                            <p className='timestampForum'>
+                                15/06/2022
+                            </p>
+                            <p className='commentCountForum'>
+                                comments
+                            </p>
+                        </div>
+                    </a>                   
+                </li>
+            </ol>
+
 
         </article>
     )

@@ -60,7 +60,7 @@ export default function Messages(props){
                         <div className="profileText">{item.content}</div>
                     </div>
                 ))}
-            </section>):<div>LOADING</div>}
+            </section>):<div class="loadingio-spinner-ripple-jjyczsl43u"><div class="ldio-qydde5o934a"><div></div><div></div></div></div>}
         </article>
     )
 }

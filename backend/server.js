@@ -12,7 +12,6 @@ import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
-import ApiData from "./models/ApiSchema.js"
 import Chat from "./models/chatSchema.js"
 
 export function connect() {
@@ -254,17 +253,6 @@ app.delete("/message/:id", checkAuth, async (req, res, next) => {
         res.send({ ok: true, deleted: message })
     } catch (error) {
         next({status:400, message:err.message})
-    }
-})
-
-// API data saver:
-app.post("/apidata", async (req,res, next) => {
-    try {
-        const data = await ApiData.create(req.body)
-        res.send({ data })
-        console.log(data);
-    } catch (error) {
-        next({status: 400, message: error.message})
     }
 })
 
