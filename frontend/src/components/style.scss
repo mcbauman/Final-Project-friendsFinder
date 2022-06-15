@@ -168,9 +168,14 @@ body{
                         grid-template-columns:  1fr 1fr 75px;
                         grid-template-areas: 
                     " img div button";
-                        img{
+                    .profPicDiv{
                             grid-area: img;
-                            border-radius: 25px;
+                            border-radius: 5px;
+                            height: 200px;
+                            width: 200px;
+                            // background-size: 200px 200px;
+                            // background-position: center;
+                            // background-repeat: no-repeat;
                         }
                         div{
                             grid-area:div;
@@ -350,7 +355,7 @@ textarea{
     body{
         div{
             header{
-                width: 100%;
+                // width: 100%;
             }
             main{
                 article{
@@ -380,7 +385,17 @@ textarea{
             } 
         }
     }
-
+    .friendsView{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+        "img img"
+        "div button";
+        // width: 20%;
+    }
+    .profPicDiv{
+        width: 100%;
+        grid-area: img;
+    }
     .bigScreen{
         display: none;
     }
