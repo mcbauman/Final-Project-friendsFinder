@@ -122,7 +122,6 @@ export default function Profile(props){
                         <input type="text" placeholder={usr.familyName} value={familyName}  onChange={(e)=>setFamilyName(e.target.value)}/>
                         <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
                         <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
-                        {/* <hr/> */}
                         <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                         <hr/>
