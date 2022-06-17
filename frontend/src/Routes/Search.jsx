@@ -64,8 +64,8 @@ export default function Search(props){
         <article>
             <form onSubmit={submitFunction}>
                 <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
-                <input type="text" onChange={(e)=>setMinAge(e.target.value||0)} placeholder={trans[lang].minAge}/>
-                <input type="text" onChange={(e)=>setMaxAge(e.target.value||150)} placeholder={trans[lang].maxAge}/>
+                <input className="ageInput" type="text" onChange={(e)=>setMinAge(e.target.value||0)} placeholder={trans[lang].minAge}/>
+                <input className="ageInput" type="text" onChange={(e)=>setMaxAge(e.target.value||150)} placeholder={trans[lang].maxAge}/>
                 <select onChange={(e)=>setSrchdGender(e.target.value)}>
                     <option>{trans[lang].any}</option>
                     <option>♂️</option>

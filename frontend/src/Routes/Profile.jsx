@@ -131,7 +131,7 @@ export default function Profile(props){
                                 <div className="profPicDiv" style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
                                 {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
                                 <div>{item.userName}</div>
-                                <div className="divInFriendsView"><button><MdOutlineDeleteForever/></button></div>
+                                <button><MdOutlineDeleteForever/></button>
                             </div>
                         ))}
                     </form>

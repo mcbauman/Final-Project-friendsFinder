@@ -164,25 +164,6 @@ body{
                          background-color: var(--brightmain);
                          padding: 20px 10px;
                          margin-bottom: 20px;
-                    //     display: grid;
-                    //     grid-template-columns:  1fr 1fr 75px;
-                    //     grid-template-areas: 
-                    // " img div button";
-                    // .profPicDiv{
-                    //         grid-area: img;
-                    //         border-radius: 5px;
-                    //         height: 200px;
-                    //         width: 200px;
-                    //         // background-size: 200px 200px;
-                    //         // background-position: center;
-                    //         // background-repeat: no-repeat;
-                    //     }
-                        div{
-                            grid-area:div;
-                        }
-                        button{
-                            grid-area:button;
-                        }
                     }
                 }
                 >.ProfileCard{
@@ -287,6 +268,9 @@ input{
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
+}
+.ageInput{
+    width: 100px;
 }
 select{
     font-size: 1.5rem;
@@ -404,13 +388,13 @@ textarea{
     }
     .friendsView{
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: 1fr 75px;
         grid-template-areas: 
         "img button"
         "div div";
         .profPicDiv{
-            width: 50%;
+            width: 100px;
+            height: 100px;
             border-radius: 5px;
             grid-area: img;
         }
