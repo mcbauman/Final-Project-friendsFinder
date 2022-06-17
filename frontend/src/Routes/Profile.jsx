@@ -105,12 +105,12 @@ export default function Profile(props){
                         <option value="de">🇩🇪</option>
                         <option value="en">🇬🇧</option>
                     </select>
-                    <button type="submit"><MdOutlineSaveAlt/></button>
+                    <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
                 <hr/>
                 <form>
                     <input id="fileSelector" type="file" onChange={handleSelectedFile} />
-                    <button onClick={saveFile}><MdOutlineSaveAlt/></button>
+                    <button className="buttonSubmit" onClick={saveFile}><MdOutlineSaveAlt/></button>
                     {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
                 </form>
             </section>
@@ -122,9 +122,8 @@ export default function Profile(props){
                         <input type="text" placeholder={usr.familyName} value={familyName}  onChange={(e)=>setFamilyName(e.target.value)}/>
                         <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
                         <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
-                        <hr/>
                         <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
-                        <button type="submit"><MdOutlineSaveAlt/></button>
+                        <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                         <hr/>
                         {trans[lang].YoureFriends}:
                         {usr.friends.map(item=>(
@@ -132,8 +131,7 @@ export default function Profile(props){
                                 <div className="profPicDiv" style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
                                 {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
                                 <div>{item.userName}</div>
-                                <button><MdOutlineDeleteForever/></button>
-                                <hr/>
+                                <div className="divInFriendsView"><button><MdOutlineDeleteForever/></button></div>
                             </div>
                         ))}
                     </form>

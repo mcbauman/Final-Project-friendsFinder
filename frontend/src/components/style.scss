@@ -159,24 +159,24 @@ body{
                 }
                 form{
                     .friendsView{
-                        border-radius: 5px;
-                        box-shadow: 0 0 7px 1px var(--darksecondary);
-                        background-color: var(--brightmain);
-                        padding: 20px 10px;
-                        margin-bottom: 20px;
-                        display: grid;
-                        grid-template-columns:  1fr 1fr 75px;
-                        grid-template-areas: 
-                    " img div button";
-                    .profPicDiv{
-                            grid-area: img;
-                            border-radius: 5px;
-                            height: 200px;
-                            width: 200px;
-                            // background-size: 200px 200px;
-                            // background-position: center;
-                            // background-repeat: no-repeat;
-                        }
+                    //     border-radius: 5px;
+                    //     box-shadow: 0 0 7px 1px var(--darksecondary);
+                    //     background-color: var(--brightmain);
+                    //     padding: 20px 10px;
+                    //     margin-bottom: 20px;
+                    //     display: grid;
+                    //     grid-template-columns:  1fr 1fr 75px;
+                    //     grid-template-areas: 
+                    // " img div button";
+                    // .profPicDiv{
+                    //         grid-area: img;
+                    //         border-radius: 5px;
+                    //         height: 200px;
+                    //         width: 200px;
+                    //         // background-size: 200px 200px;
+                    //         // background-position: center;
+                    //         // background-repeat: no-repeat;
+                    //     }
                         div{
                             grid-area:div;
                         }
@@ -264,6 +264,7 @@ body{
 
 // Styling over whole Document
 #fileSelector{
+    background-color: rgb(195, 198, 201);
     width: 100%;
 }
 button{
@@ -356,11 +357,25 @@ textarea{
     body{
         div{
             header{
-                // width: 100%;
             }
             main{
                 article{
                     form{
+                        select{
+                            width: 20%;
+                            display: flex;
+                            align-self: flex-end;
+                            background-color: rgb(195, 198, 201);
+                        }
+                        input{
+                            width: 97%;
+                            background-color: rgb(195, 198, 201);
+
+                        }
+                        textarea{
+                            width: 98%;
+                            background-color: rgb(195, 198, 201);
+                        }
                     }
                     section{
                         .ProfileCard{
@@ -386,16 +401,44 @@ textarea{
             } 
         }
     }
-    .friendsView{
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-areas: 
-        "img img"
-        "div button";
-        // width: 20%;
+    .buttonSubmit{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 0px 5px 0px;
+        background-color: rgb(195, 198, 201);
+
     }
-    .profPicDiv{
-        width: 100%;
-        grid-area: img;
+    .friendsView{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas: 
+        "img button"
+        "div div";
+        .profPicDiv{
+            width: 50%;
+            border-radius: 5px;
+            grid-area: img;
+        }
+        div{
+            grid-area: div;
+        }
+        .divInFriendsView{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-area: button;
+            button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-self: center;
+                background-color: rgb(195, 198, 201);
+
+            }
+        }
+       
     }
     .bigScreen{
         display: none;
@@ -420,6 +463,32 @@ textarea{
     img{
         width: 200px;
     }
+    .friendsView{
+            border-radius: 5px;
+            box-shadow: 0 0 7px 1px var(--darksecondary);
+            background-color: var(--brightmain);
+            padding: 20px 10px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns:  1fr 1fr 75px;
+            grid-template-areas: 
+        " img div button";
+        .profPicDiv{
+                grid-area: img;
+                border-radius: 5px;
+                height: 200px;
+                width: 200px;
+                // background-size: 200px 200px;
+                // background-position: center;
+                // background-repeat: no-repeat;
+            }
+            div{
+                grid-area:div;
+            }
+            button{
+                grid-area:button;
+            }
+        }
 }
 
 

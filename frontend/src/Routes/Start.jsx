@@ -29,38 +29,6 @@ export default function Start(props){
                                 pauseOnFocusLoss
                                 draggable
                                 pauseOnHover/>
-            <ol>
-                <li className='rowForum'>
-                    <a href="/item">
-                        <h4 className='titleForum'>
-                            Thread 1
-                        </h4>
-                        <div className='bottomForum'>
-                            <p className='timestampForum'>
-                                15/06/2022
-                            </p>
-                            <p className='commentCountForum'>
-                                comments
-                            </p>
-                        </div>
-                    </a>                   
-                </li>
-                <li className='rowForum'>
-                    <a href="/item">
-                        <h4 className='titleForum'>
-                            Thread 2
-                        </h4>
-                        <div className='bottomForum'>
-                            <p className='timestampForum'>
-                                15/06/2022
-                            </p>
-                            <p className='commentCountForum'>
-                                comments
-                            </p>
-                        </div>
-                    </a>                   
-                </li>
-            </ol>
 
 
         </article>
