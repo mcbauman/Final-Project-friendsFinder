@@ -159,11 +159,11 @@ body{
                 }
                 form{
                     .friendsView{
-                    //     border-radius: 5px;
-                    //     box-shadow: 0 0 7px 1px var(--darksecondary);
-                    //     background-color: var(--brightmain);
-                    //     padding: 20px 10px;
-                    //     margin-bottom: 20px;
+                         border-radius: 5px;
+                         box-shadow: 0 0 7px 1px var(--darksecondary);
+                         background-color: var(--brightmain);
+                         padding: 20px 10px;
+                         margin-bottom: 20px;
                     //     display: grid;
                     //     grid-template-columns:  1fr 1fr 75px;
                     //     grid-template-areas: 
@@ -264,7 +264,6 @@ body{
 
 // Styling over whole Document
 #fileSelector{
-    background-color: rgb(195, 198, 201);
     width: 100%;
 }
 button{
@@ -365,16 +364,13 @@ textarea{
                             width: 20%;
                             display: flex;
                             align-self: flex-end;
-                            background-color: rgb(195, 198, 201);
                         }
                         input{
                             width: 97%;
-                            background-color: rgb(195, 198, 201);
 
                         }
                         textarea{
                             width: 98%;
-                            background-color: rgb(195, 198, 201);
                         }
                     }
                     section{
@@ -405,9 +401,6 @@ textarea{
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 5px 0px 5px 0px;
-        background-color: rgb(195, 198, 201);
-
     }
     .friendsView{
         display: grid;
@@ -434,11 +427,8 @@ textarea{
                 justify-content: center;
                 align-items: center;
                 align-self: center;
-                background-color: rgb(195, 198, 201);
-
             }
         }
-       
     }
     .bigScreen{
         display: none;
@@ -464,11 +454,6 @@ textarea{
         width: 200px;
     }
     .friendsView{
-            border-radius: 5px;
-            box-shadow: 0 0 7px 1px var(--darksecondary);
-            background-color: var(--brightmain);
-            padding: 20px 10px;
-            margin-bottom: 20px;
             display: grid;
             grid-template-columns:  1fr 1fr 75px;
             grid-template-areas: 
