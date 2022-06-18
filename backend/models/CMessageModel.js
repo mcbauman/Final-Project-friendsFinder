@@ -3,11 +3,11 @@ import User from "./UserModel.js"
 
 const { Schema, model } = mongoose
 
-const messageSchema = new mongoose.Schema({
-    author:    { type: Schema.Types.ObjectId, ref: "user", required: true },
-    content:   { type: String, trim: true, required: true },
-    recipient: { type: Schema.Types.ObjectId, ref: "user", required: true },
-    subject:   { type: String }
+const cMessageSchema = new mongoose.Schema({
+    author:   { type: Schema.Types.ObjectId, ref: "user", required: true },
+    content:  { type: String, trim: true, required: true },
+    chatId:   { type: Schema.Types.ObjectId, ref: "chat", required: true },
+    readBy:   { type:Schema.Types.ObjectId, ref:"user" }
 }, {
     timestamps: true,
     toJSON:{
@@ -18,7 +18,7 @@ const messageSchema = new mongoose.Schema({
     },
 })
 
-messageSchema.pre("remove", async function(){
+cMessageSchema.pre("remove", async function(){
     const id = this._id.toString()
     console.log("Message is being removed " + id)
 
@@ -30,6 +30,6 @@ messageSchema.pre("remove", async function(){
     // next() 
 })
 
-const Message = mongoose.model("message", messageSchema)
+const cMessage = mongoose.model("cMessage", cMessageSchema)
 
-export default Message
+export default cMessage
