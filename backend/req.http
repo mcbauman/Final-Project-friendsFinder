@@ -1,4 +1,3 @@
-
 @url = http://localhost:9000
 
 
@@ -87,4 +86,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
     "user": "62961c6e7ab347678994e6c8",
     "content": "Good by guys!",
     "member": "62a1e7ef285f86c8cb71dbb0"
+}
+### Look for Chats
+GET {{url}}/chats
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
+
+### Post into Chats
+POST {{url}}/chat/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
+
+{
+    "user":"62961c6e7ab347678994e6c8",
+    "recipient":"62961a247ab347678994e6c5",
+    "content":"the first BackendMessage for Chats System"
 }

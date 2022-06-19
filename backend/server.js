@@ -10,9 +10,14 @@ import { hash, compare } from "./crypto.js"
 import jwt from "jsonwebtoken"
 import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
-import { messageRules } from "./validator/messageValidator.js"
+// import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
-import Chat from "./models/chatSchema.js"
+// import Chat from "./models/chatSchema.js"
+// import cMessage from "./models/CMessageModel.js"
+
+import { router as messageRouter } from './routes/message.js'
+import { router as chatRouter } from './routes/chat.js'
+import { getChats } from './routes/getChats.js'
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -173,88 +178,122 @@ app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
     }
 })
 
-// Create Message:
-app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
-    try {
-        const user = await User.findById(req.user.id)
-        if(user){
-            const message = await Message.create(req.body)
-            res.send({message})
-        }  
-    } catch (err){
-        next({status: 400, message: err.message })
-    }
-})
+// THE FOLLOWING THREE LINES...
+app.use("/message", messageRouter)
+app.use("/chat", chatRouter)
+app.get("/chats", checkAuth, getChats)
 
-// Messages List:
-app.get("/message/find",checkAuth,async(req, res, next) => {
-    try {
-        const query = Message.find({recipient: req.user.id})
-        query.populate("author", "userName profilePicture")
-//        query.sort("author","profilePicture")
-        const messages = await query.exec()
-        messages.reverse()
-        res.send(messages)
-    } catch (error) {
-        next({status:400, message:err.message})
-    }
-})
+// ... DELEGATE ALL THE COMMENTED CODE BELOW TO SPECIALIZED SCRIPTS
+// // Create Message:
+// app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
+//     try {
+//         const user = await User.findById(req.user.id)
+//         if(user){
+//             const message = await Message.create(req.body)
+//             res.send({message})
+//         }  
+//     } catch (err){
+//         next({status: 400, message: err.message })
+//     }
+// })
 
-// Chat new entry:
-app.post("/chat/add", checkAuth, async(req, res, next) => {
-    try {
-        const existingChat = await Chat.findById(req.user.id)
-        if(!existingChat){
-            const chat = await Chat.create(req.body)
-            res.send(chat)
-        }else{
-            const chat=await Chat.findByIdAndUpdate(req.user.id,{$addToSet:req.body})
-            res.send(chat)
-        }
-    } catch (err){
-        next({status: 400, message: err.message })
-    }
-})
+// // Messages List:
+// app.get("/message/find",checkAuth,async(req, res, next) => {
+//     try {
+//         const query = Message.find({recipient: req.user.id})
+//         query.populate("author", "userName profilePicture")
+// //        query.sort("author","profilePicture")
+//         const messages = await query.exec()
+//         messages.reverse()
+//         res.send(messages)
+//     } catch (error) {
+//         next({status:400, message:err.message})
+//     }
+// })
 
-// Chat List incoming:
-app.get("/chat/find/incoming",checkAuth,async(req, res, next) => {
-    try {
-        const query = Chat.find({user: req.user.id})
-        query.populate("member", "userName profilePicture")
-        const chats = await query.exec()
-        chats.reverse()
-        res.send(chats)
-    } catch (error) {
-        next({status:400, message:error.message})
-    }
-})
+// //Get CHAT-Members
+// app.get("/chats", checkAuth, async (req,res,next)=>{
+//     try {
+// //        console.log("REQ_USER",req.user);
+//         const chats = Chat.find({members: { $elemMatch: {$eq: req.user._id} }}).populate("members","userName profilePicture");
+// //        query.populate("members","userName profilePicture")
+// //        const chats=await query.exec()
+//         console.log("EXISTINGCHATS SERVER L207",chats)
+// // {
+// //     "_id": "62ac4e6e48fe636cf41af079",
+// //     "members": [],
+// //     "__v": 0
+// //   }
+//             res.send(chats)
+//     } catch (err){
+//         next({status: 400, message: err.message })
+//     }
+// })
 
-// Chat List send:
-app.get("/chat/find/send",checkAuth,async(req, res, next) => {
-    try {
-        const query = Chat.find({member: req.user.id})
-        query.populate("user", "userName profilePicture")
-        const chats = await query.exec()
-        chats.reverse()
-        res.send(chats)
-    } catch (error) {
-        next({status:400, message:error.message})
-    }
-})
+// // Chat new entry: 
+// app.post("/chat/add", checkAuth, async(req, res, next) => {
+//     try {
+// //        const existingChats = await Chat.find({members:{$elemMatch:{$eq: req.user._id}}}, {members:{$elemMatch:{$eq: req.body.recipient}}})
+// let existingChats = await Chat.find({members:[{id:req.user._id},{id:req.body.recipient}]})
+// //        const existingChats = await Chat.find({members:req.user._id,member:req.body.recipient})
+//         console.log("USER ID Sended",req.user._id);
+//         console.log("RECRIPIENT ID Sended", req.body.recipient);
+//         if(!existingChats.length){
+//             const chat = await Chat.create({members:[{id:req.user._id},{id:req.body.recipient}]})
+//             // const chat = await Chat.create({members:[req.user._id,req.recipient]})
+//             existingChats=Chat
+//         }
+// //        console.log("l237",existingChats[0]._id);
+//         const body2={chatId:existingChats[0]._id}
+//         console.log("BODY2",body2);
+//         req.chatId=existingChats
+//         console.log("BODY",req.body);
+//         const message=await cMessage.create(req.body)
+//         res.send(message)
+//     } catch (err){
+//         next({status: 400, message: err.message })
+//     }
+// })
 
-// Delete Message:
-app.delete("/message/:id", checkAuth, async (req, res, next) => {
-    try {
-        const message = await Message.findById(req.params.id)
-        if(!message){
-            next({status:400, message:"Message not found"})
-        }
-        await message.remove()
-        res.send({ ok: true, deleted: message })
-    } catch (error) {
-        next({status:400, message:err.message})
-    }
-})
+// // Chat List Chats: 
+// app.get("/chat/find",checkAuth,async(req, res, next) => {
+//     try {
+//         const query = Chat.find({members: req.user.id})
+// //        query.populate("member", "userName profilePicture")
+//         const chats = await query.exec()
+//         chats.reverse()
+//         res.send(chats)
+//     } catch (error) {
+//         next({status:400, message:error.message})
+//     }
+// })
+
+// // Chat List send:
+// app.get("/chat/find/send",checkAuth,async(req, res, next) => {
+//     try {
+//         const query = Chat.find({member: req.user.id})
+//         query.populate("user", "userName profilePicture")
+//         const chats = await query.exec()
+//         chats.reverse()
+//         res.send(chats)
+//     } catch (error) {
+//         next({status:400, message:error.message})
+//     }
+// })
+
+// // Delete Message:
+// app.delete("/message/:id", checkAuth, async (req, res, next) => {
+//     try {
+//         const message = await Message.findById(req.params.id)
+//         if(!message){
+//             next({status:400, message:"Message not found"})
+//         }
+//         await message.remove()
+//         res.send({ ok: true, deleted: message })
+//     } catch (error) {
+//         next({status:400, message:err.message})
+//     }
+// })
 
 // Global Error Handler:
 app.use("/",(error, req, res, next)=>{
