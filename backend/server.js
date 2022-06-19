@@ -205,7 +205,7 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
 app.get("/chats", checkAuth, async (req,res,next)=>{
     try {
 //        console.log("REQ_USER",req.user);
-        const chats = Chat.find({members: { $elemMatch: {$eq: req.user._id} }});
+        const chats = Chat.find({members: { $elemMatch: {$eq: req.user._id} }}).populate("members","userName profilePicture");
 //        query.populate("members","userName profilePicture")
 //        const chats=await query.exec()
         console.log("EXISTINGCHATS SERVER L207",chats)
@@ -234,9 +234,11 @@ let existingChats = await Chat.find({members:[{id:req.user._id},{id:req.body.rec
             existingChats=Chat
         }
 //        console.log("l237",existingChats[0]._id);
-        const body={chatId:existingChats[0]._id,author:req.user._id}
-        console.log(body);
-        const message=await cMessage.create(req.body,body)
+        const body2={chatId:existingChats[0]._id}
+        console.log("BODY2",body2);
+        req.chatId=existingChats
+        console.log("BODY",req.body);
+        const message=await cMessage.create(req.body)
         res.send(message)
     } catch (err){
         next({status: 400, message: err.message })
