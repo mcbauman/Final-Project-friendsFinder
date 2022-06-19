@@ -201,13 +201,14 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
     }
 })
 
-//Get CHAT-Members
+//Get CHAT-Members )
 app.get("/chats", checkAuth, async (req,res,next)=>{
     try {
 //        console.log("REQ_USER",req.user);
-        const chats = Chat.find({members: { $elemMatch: {$eq: req.user._id} }}).populate("members","userName profilePicture");
-//        query.populate("members","userName profilePicture")
-//        const chats=await query.exec()
+ //       const chats = await Chat.find({members:{$elemMatch:{$eq:req.user._id}}})
+        const query = Chat.find({members:{$elemMatch:{$eq:req.user._id}}})
+        query.populate("members","userName profilePicture")
+        const chats=await query.exec()
         console.log("EXISTINGCHATS SERVER L207",chats)
 // {
 //     "_id": "62ac4e6e48fe636cf41af079",
@@ -224,7 +225,7 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
 app.post("/chat/add", checkAuth, async(req, res, next) => {
     try {
 //        const existingChats = await Chat.find({members:{$elemMatch:{$eq: req.user._id}}}, {members:{$elemMatch:{$eq: req.body.recipient}}})
-let existingChats = await Chat.find({members:[{id:req.user._id},{id:req.body.recipient}]})
+        let existingChats = await Chat.find({members:[{id:req.user._id},{id:req.body.recipient}]})
 //        const existingChats = await Chat.find({members:req.user._id,member:req.body.recipient})
         console.log("USER ID Sended",req.user._id);
         console.log("RECRIPIENT ID Sended", req.body.recipient);
@@ -235,10 +236,10 @@ let existingChats = await Chat.find({members:[{id:req.user._id},{id:req.body.rec
         }
 //        console.log("l237",existingChats[0]._id);
         const body2={chatId:existingChats[0]._id}
-        console.log("BODY2",body2);
+//        console.log("BODY2",body2);
         req.chatId=existingChats
-        console.log("BODY",req.body);
-        const message=await cMessage.create(req.body)
+//        console.log("BODY",req.body);
+        const message=await cMessage.create({...req.body,chatId:existingChats[0]._id})
         res.send(message)
     } catch (err){
         next({status: 400, message: err.message })

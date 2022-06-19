@@ -4,7 +4,7 @@ import User from "./UserModel.js"
 const { Schema, model } = mongoose
 
 const cMessageSchema = new mongoose.Schema({
-    user:   { type: Schema.Types.ObjectId, ref: "user"},
+    user:     { type: Schema.Types.ObjectId, ref: "user"},
     content:  { type: String, trim: true, required: true},
     chatId:   { type: Schema.Types.ObjectId, ref: "chat"},
     readBy:   { type:Schema.Types.ObjectId, ref:"user" }
@@ -12,7 +12,6 @@ const cMessageSchema = new mongoose.Schema({
     timestamps: true,
     toJSON:{
         transform(doc, ret){
-            delete ret.password
             delete ret.__v
         },
     },

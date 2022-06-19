@@ -100,5 +100,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 {
     "user":"62961c6e7ab347678994e6c8",
     "recipient":"62961a247ab347678994e6c5",
-    "content":"the first BackendMessage for Chats System"
+    "content":"Second Message hopefully with something populated"
 }
