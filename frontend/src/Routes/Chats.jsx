@@ -5,6 +5,8 @@ import exmpl from "../components/exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail} from "react-icons/md";
 import {isFriend,checkFriends,addFriend} from "../components/functions";
+import {NavLink} from "react-router-dom"
+import {Routes,Route} from "react-router-dom"
 
 export default function Messages(props){
     const [inMsg,setInMsg]=useState([])
@@ -40,18 +42,21 @@ export default function Messages(props){
 
     loopTrough()
 
-    // return(
-    //     <article>
-    //         {allMsg&&allMsg.length?(
-    //             <section id="messages">
-    //                 {allMsg.map(item=>(
-    //                     <div className="messages">
-    //                         <div className="author">{item.members[0]?item.members[1]:item.members[0]}</div>
-    //                     </div>
-    //                 ))}
-    //             </section>):<div>LOADING</div>}
-    //     </article>
-    // )
+    return(
+        <article>
+            
+            {allMsg&&allMsg.length?(
+                <section id="messages">
+                    {allMsg.map(item=>(
+                        <div key={item._id} className="messages">
+                            <NavLink to={item.id}>item.id</NavLink>
+                            <Route path={item.id} element={<ChatView id={item.id} user={props.user} token={props.token}/>}/>
+                            <div className="author">{item._id}</div>
+                        </div>
+                    ))}
+                </section>):<div>LOADING</div>}
+        </article>
+    )
 }
 //     function requestMessages(){
 //         const headers = { Authorization: `Bearer ${props.token}` }
