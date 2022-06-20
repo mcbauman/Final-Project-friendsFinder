@@ -14,7 +14,7 @@ export default function Messages(props){
     const [friends,setFriends]=useState([])
     
     function requestMessages(){
-        const headers = { Authorization: `Bearer ${props.token}` }
+        const headers = { Authorization: `Bearer ${props.token}`}
         axios.get(`${process.env.REACT_APP_BE_SERVER}/message/find`, {headers})
             .then(res => {
                 setAllMsg(res.data)
