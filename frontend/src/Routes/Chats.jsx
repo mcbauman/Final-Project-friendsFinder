@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import React from "react";
 import exmpl from "../components/exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
-import {MdOutlineEmail} from "react-icons/md";
+import {MdCardMembership, MdOutlineEmail} from "react-icons/md";
 import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {NavLink} from "react-router-dom"
 import {Routes,Route} from "react-router-dom"
@@ -34,7 +34,8 @@ export default function Messages(props){
             // console.log("ITEM.MEMBER[0]",item.members[0])
             // console.log("ITEM.MEMBER[1]",item.members[1])
             // console.log(item.members[0].id)
-            // console.log(item.members[0].id.userName)
+            console.log(item.members[0].id.userName)
+            console.log(item.members[1].id.userName)
         })
     }
     useEffect(()=>{
@@ -45,22 +46,26 @@ export default function Messages(props){
 
     return(
         <article>
+            <section id="messages">
             {allMsg&&allMsg.length?(
-                <section id="messages">
-                    <Routes>
+                <>
+                    <Routes> 
                         {allMsg.map(item=>(
                             <Route key={item._id} path={item._id} element={<Chatview  itemKey={item._id} user={props.user} token={props.token}/>}/>
                         ))} 
                     </Routes>                    
                     {allMsg.map(item=>(
-                        <div>
-                            <NavLink key={item._id} to={item._id}>{item._id}</NavLink>
+                        <div key={item._id} className="messages">
+                            <NavLink key={item._id} to={item._id}>
+                                <img className="img2" src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`:exmpl}/>
+                                {item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}
+                            </NavLink>
                         </div>
                     ))}
-
-                </section>)
+                </>)
                 :<div>LOADING</div>
             }
+            </section>
         </article>
     )
 }
