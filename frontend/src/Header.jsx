@@ -18,6 +18,8 @@ export default function Header(props){
         localStorage.setItem("theme",JSON.stringify(null))
         localStorage.setItem("lang",JSON.stringify(null))
     }
+    console.log(lang);
+    console.log(props.user);
    return(
        <header>
            <nav>
