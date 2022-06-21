@@ -78,6 +78,7 @@ app.use("/picture", pictureRouter)
 // LOGIN User:
 app.post("/user/login",async (req,res,next)=>{
     try {
+        console.log(req.body);
         // find user
         const user=await User.findOne({email:req.body.email})
         if(!user){return next({status:405,message:"user doesnt exist"})}
@@ -269,6 +270,26 @@ app.get("/chat/find/send",checkAuth,async(req, res, next) => {
         res.send(chats)
     } catch (error) {
         next({status:400, message:error.message})
+    }
+})
+
+// POST Forum:
+app.post("/subject/create", checkAuth, async(req, res, next) => {
+    try {
+        const forum = await Forum.create(req.body)
+        res.send(forum)
+    } catch (error) {
+        next({status: 400, message: error.message })
+    }
+})
+
+// GET Forum:
+app.get("/forum", checkAuth, async(req, res, next) => {
+    try {
+        const forum = await Forum.find()
+        res.send(forum)
+    } catch (error) {
+        next({status: 400, message: error.message })
     }
 })
 

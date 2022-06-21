@@ -15,8 +15,8 @@ export default function Header(props){
         props.setUserProfPic(null)
         setTheme("BW")
         setLang("de")
-        localStorage.setItem("theme",JSON.stringify(null))
-        localStorage.setItem("lang",JSON.stringify(null))
+        localStorage.setItem("theme", "")
+        localStorage.setItem("lang", "")
     }
    return(
        <header>
