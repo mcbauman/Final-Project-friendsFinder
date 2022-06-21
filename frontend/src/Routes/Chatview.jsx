@@ -8,7 +8,9 @@ export default function Chatview(props){
 //             })
     return(
         <>
-        
+            <div>Some Text</div>
+            <div>props.item.id</div>
+            <div>{props.itemKey}</div>
         </>
     )
 }
