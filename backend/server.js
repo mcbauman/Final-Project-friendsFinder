@@ -14,6 +14,7 @@ import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
 import Chat from "./models/chatSchema.js"
 import cMessage from "./models/CMessageModel.js"
+import Forum from "../backend/models/ForumModel.js"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env

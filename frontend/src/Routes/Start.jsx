@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import {checkFriends} from "../components/functions";
 import { useState, useEffect } from 'react';
+import {MdLogin} from "react-icons/md"
 
 export default function Start(props){
     const [subject, setSubject] = useState("")
@@ -48,7 +49,7 @@ export default function Start(props){
                 <form onSubmit={declareTopic}>
                     <input type="text" placeholder='subject' onChange={e => setSubject(e.target.value)}/>
                     <textarea type="text" placeholder='Input your ideas...' onChange={e => setContent(e.target.value)}/>
-                    <button type='submit'>Submit</button>
+                    <button type='submit'><MdLogin/></button>
                 </form>
                 <hr />
                 <div className="forumList">
