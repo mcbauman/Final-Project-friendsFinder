@@ -88,3 +88,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
     "content": "Good by guys!",
     "member": "62a1e7ef285f86c8cb71dbb0"
 }
+
+### Forum GET:
+GET {{url}}/forum
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
+

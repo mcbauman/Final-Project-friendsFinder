@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const forumSchema= new mongoose.Schema({
-    author:    { type: Schema.Types.ObjectId, ref: "user", required: true },
+    author:    { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
     content:   { type: String, trim: true, required: true },
     subject:   { type: String }
 },{
