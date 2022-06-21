@@ -27,32 +27,18 @@ export default function Messages(props){
         })
     }
 
-                    // <section id="messages">                    
-                    
-                //     {allMsg.map(item=>(
-                //         <div key={item._id} className="messages">
-                //             <NavLink to="{item.id}">HERE IS THE LINK{item.id}</NavLink>
-                            
-                //             <div className="author">{item._id}</div>
-                //         </div>
-                //     ))} 
-                //     <Routes>
-                //     <Route path="{item.id}" element={<Chatview user={props.user} token={props.token}/>}/>
-                //     </Routes>
-                // </section>):<div>LOADING</div>}
-
     function loopTrough(){
         allMsg.map(item=>{
             console.log("ITEM",item)
-            console.log("ITEM:MEMBER",item.members)
-            console.log("ITEM.MEMBER[0]",item.members[0])
-            console.log("ITEM.MEMBER[1]",item.members[1])
-            console.log(item.members[0].id)
+            // console.log("ITEM:MEMBER",item.members)
+            // console.log("ITEM.MEMBER[0]",item.members[0])
+            // console.log("ITEM.MEMBER[1]",item.members[1])
+            // console.log(item.members[0].id)
+            // console.log(item.members[0].id.userName)
         })
     }
     useEffect(()=>{
-        loadChats()
-        
+        loadChats() 
     },[])
 
     loopTrough()
@@ -60,18 +46,21 @@ export default function Messages(props){
     return(
         <article>
             {allMsg&&allMsg.length?(
-                            <section id="messages">                    
-                             {allMsg.map(item=>(
-                                <NavLink key={item._id} to={item._id}>{item._id}</NavLink>
-                             ))}
-                            <Routes>
-                            {allMsg.map(item=>(
-                                <Route key={item._id} path={item._id} element={<Chatview  itemKey={item._id} user={props.user} token={props.token}/>}/>
-                            ))} 
-                            </Routes>
-                        </section>):<div>LOADING</div>}
+                <section id="messages">
+                    <Routes>
+                        {allMsg.map(item=>(
+                            <Route key={item._id} path={item._id} element={<Chatview  itemKey={item._id} user={props.user} token={props.token}/>}/>
+                        ))} 
+                    </Routes>                    
+                    {allMsg.map(item=>(
+                        <div>
+                            <NavLink key={item._id} to={item._id}>{item._id}</NavLink>
+                        </div>
+                    ))}
 
-
+                </section>)
+                :<div>LOADING</div>
+            }
         </article>
     )
 }

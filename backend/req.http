@@ -99,6 +99,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 
 {
     "user":"6297a994433681038a55ada3",
-    "recipient":"62961a247ab347678994e6c5",
+    "recipient":"6297a994433681038a55ada3",
     "content":"Second Message hopefully with something populated"
 }
