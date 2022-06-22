@@ -1,4 +1,5 @@
 import {IoIosCloseCircleOutline} from "react-icons/io"
+import {NavLink} from "react-router-dom";
 
 export default function Chatview(props){
     //     function requestMessages(){
@@ -14,7 +15,7 @@ export default function Chatview(props){
             <div>Some Text</div>
             <div>props.item.id</div>
             <div>{props.itemKey}</div>
-            <IoIosCloseCircleOutline/>
+            <NavLink to="Chats"><IoIosCloseCircleOutline/></NavLink>
         </div>
     )
 }

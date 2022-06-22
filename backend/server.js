@@ -238,15 +238,17 @@ app.post("/chats", checkAuth, async(req, res, next) => {
         const existingChats = await Chat.find({members:{$elemMatch:{id:req.user._id}},members:{$elemMatch:{id:req.body.recipient}}})
         if(!existingChats.length>0){
             const chat = await Chat.create({members:[{id:req.user._id},{id:req.body.recipient}]})
-            chatId=await chat._id
+            chatId=chat._id
             console.log("SERVER/CHATS/NEW/240",chat);
             console.log("SERVER/CHATS/NEW/240",chat._id);
+            const message=await cMessage.create({...req.body,chatId:chatId})
+            res.send(message)
         }else{
             chatId=existingChats[0]._id
             console.log("SERVER/CHATS/EXISTING/243",existingChats[0]._id);
+            const message=await cMessage.create({...req.body,chatId:chatId})
+            res.send(message)
         }
-        const message=await cMessage.create({...req.body,chatId:chatId})
-        res.send(message)
     } catch (err){
         next({status: 400, message: err.message })
     }

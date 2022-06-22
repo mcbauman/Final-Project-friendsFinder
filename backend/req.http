@@ -99,8 +99,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 
 {
     "user":"6297a994433681038a55ada3",
-    "recipient":"6298b2bf5329e543f032b83c",
-    "content":"Matthias to Abba 2"
+    "recipient":"62989d553b8002f4488c40a9",
+    "content":"Matthias to AntonBaumer"
 }
 
 ### Check Messagage
@@ -109,7 +109,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
 
 {
-    "chatId":"62b2b85049af70b953ec3be4"
+    "chatId":"62b2c4dd71d762fdc2e03d3f"
 }
 
 ### TESTING Check Messagage
@@ -118,5 +118,5 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
 
 {
-    "chatId":"62b1d42e206fc367f93e2f76"
+    "chatId":"62b2b85049af70b953ec3be4"
 }
