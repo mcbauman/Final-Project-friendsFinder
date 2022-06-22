@@ -74,6 +74,7 @@ export default function Forum(props){
                     <div>{subject}</div>
                     <div>{content}</div>
                 </div> */}
+
             </section>
             
             <br />

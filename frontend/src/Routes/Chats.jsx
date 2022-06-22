@@ -3,15 +3,16 @@ import { useState, useEffect } from "react"
 import React from "react";
 import exmpl from "../components/exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
-import {MdOutlineEmail} from "react-icons/md";
+import {MdCardMembership, MdOutlineEmail} from "react-icons/md";
 import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {NavLink} from "react-router-dom"
 import {Routes,Route} from "react-router-dom"
+import Chatview from "./Chatview";
 
 export default function Messages(props){
     const [inMsg,setInMsg]=useState([])
     const [outMsg, setOutMsg]=useState([])
-    const [allMsg, setAllMsg] = useState([])
+    const [chats, setChats] = useState([])
     const [resDat,setResDat]=useState(false)
     const [vis,setVis]=useState(false)
     const [content,setContent]=useState("")
@@ -22,39 +23,49 @@ export default function Messages(props){
     axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
         .then (res=>{
             console.log(res.data)
-            setAllMsg(res.data)
+            setChats(res.data)
         })
     }
 
     function loopTrough(){
-        allMsg.map(item=>{
+        chats.map(item=>{
             console.log("ITEM",item)
-            console.log("ITEM:MEMBER",item.members)
-            console.log("ITEM.MEMBER[0]",item.members[0])
-            console.log("ITEM.MEMBER[1]",item.members[1])
-            console.log(item.members[0].id)
+            // console.log("ITEM:MEMBER",item.members)
+            // console.log("ITEM.MEMBER[0]",item.members[0])
+            // console.log("ITEM.MEMBER[1]",item.members[1])
+            // console.log(item.members[0].id)
+            console.log(item.members[0].id.userName)
+            console.log(item.members[1].id.userName)
         })
     }
     useEffect(()=>{
-        loadChats()
-        
+        loadChats() 
     },[])
 
     loopTrough()
 
     return(
         <article>
-            
-            {allMsg&&allMsg.length?(
-                <section id="messages">
-                    {allMsg.map(item=>(
-                        <div key={item._id} className="messages">
-                            <NavLink to={item.id}>item.id</NavLink>
-                            <Route path={item.id} element={<ChatView id={item.id} user={props.user} token={props.token}/>}/>
-                            <div className="author">{item._id}</div>
+            <section id="messages">
+            {chats&&chats.length?(
+                <>
+                    <Routes> 
+                        {chats.map(item=>(
+                            <Route key={item._id} path={item._id} element={<Chatview  itemKey={item._id} user={props.user} token={props.token}/>}/>
+                        ))} 
+                    </Routes>                    
+                    {chats.map(item=>(
+                        <div key={item._id} >
+                            <NavLink key={item._id} to={item._id} className="chatOV">
+                                <img className="img2" src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`:exmpl}/>
+                                <div className="author">{item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}</div>
+                            </NavLink>
                         </div>
                     ))}
-                </section>):<div>LOADING</div>}
+                </>)
+                :<div>LOADING</div>
+            }
+            </section>
         </article>
     )
 }
