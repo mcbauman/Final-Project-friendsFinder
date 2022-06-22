@@ -251,10 +251,13 @@ button{
     font-family: 'Barlow', sans-serif;
     font-size: 1.6rem;
     height: 32px;
-    width: 59px;
+    width: fit-content;
     font-weight: 200;
     border-radius: 5px;
-//    background-color:var(--darksecondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--darksecondary);
 //    color: var(--brightthirdly);
 //    border:none;
     background-color: var(--brightsecondary);
