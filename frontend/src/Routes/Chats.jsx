@@ -42,7 +42,9 @@ export default function Messages(props){
         loadChats() 
     },[])
 
-    loopTrough()
+    useEffect(()=>{
+        loopTrough()
+    },[chats])
 
     return(
         <article>
@@ -51,7 +53,8 @@ export default function Messages(props){
                 <>
                     <Routes> 
                         {chats.map(item=>(
-                            <Route key={item._id} path={item._id} element={<Chatview  itemKey={item._id} user={props.user} token={props.token}/>}/>
+                            <Route key={item._id} path={item._id} element={<Chatview  
+                                itemKey={item._id} user={props.user} token={props.token}/>}/>
                         ))} 
                     </Routes>                    
                     {chats.map(item=>(
