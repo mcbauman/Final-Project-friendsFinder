@@ -12,7 +12,7 @@ import Chatview from "./Chatview";
 export default function Messages(props){
     const [inMsg,setInMsg]=useState([])
     const [outMsg, setOutMsg]=useState([])
-    const [allMsg, setAllMsg] = useState([])
+    const [chats, setChats] = useState([])
     const [resDat,setResDat]=useState(false)
     const [vis,setVis]=useState(false)
     const [content,setContent]=useState("")
@@ -23,12 +23,12 @@ export default function Messages(props){
     axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
         .then (res=>{
             console.log(res.data)
-            setAllMsg(res.data)
+            setChats(res.data)
         })
     }
 
     function loopTrough(){
-        allMsg.map(item=>{
+        chats.map(item=>{
             console.log("ITEM",item)
             // console.log("ITEM:MEMBER",item.members)
             // console.log("ITEM.MEMBER[0]",item.members[0])
@@ -47,18 +47,18 @@ export default function Messages(props){
     return(
         <article>
             <section id="messages">
-            {allMsg&&allMsg.length?(
+            {chats&&chats.length?(
                 <>
                     <Routes> 
-                        {allMsg.map(item=>(
+                        {chats.map(item=>(
                             <Route key={item._id} path={item._id} element={<Chatview  itemKey={item._id} user={props.user} token={props.token}/>}/>
                         ))} 
                     </Routes>                    
-                    {allMsg.map(item=>(
-                        <div key={item._id} className="messages">
-                            <NavLink key={item._id} to={item._id}>
+                    {chats.map(item=>(
+                        <div key={item._id} >
+                            <NavLink key={item._id} to={item._id} className="chatOV">
                                 <img className="img2" src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`:exmpl}/>
-                                {item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}
+                                <div className="author">{item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}</div>
                             </NavLink>
                         </div>
                     ))}
