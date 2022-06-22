@@ -14,6 +14,7 @@ import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
 import Chat from "./models/chatSchema.js"
 import cMessage from "./models/CMessageModel.js"
+import Forum from "./models/ForumModel.js"
 
 export function connect() {
     const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
@@ -269,6 +270,26 @@ app.get("/chat/find/send",checkAuth,async(req, res, next) => {
         res.send(chats)
     } catch (error) {
         next({status:400, message:error.message})
+    }
+})
+
+// POST Forum:
+app.post("/subject/create", checkAuth, async(req, res, next) => {
+    try {
+        const forum = await Forum.create(req.body)
+        res.send(forum)
+    } catch (error) {
+        next({status: 400, message: error.message })
+    }
+})
+
+// GET Forum:
+app.get("/forum", checkAuth, async(req, res, next) => {
+    try {
+        const forum = await Forum.find()
+        res.send(forum)
+    } catch (error) {
+        next({status: 400, message: error.message })
     }
 })
 
