@@ -5,7 +5,7 @@ import {checkFriends} from "../components/functions";
 import { useState, useEffect } from 'react';
 import {MdLogin} from "react-icons/md"
 
-export default function Start(props){
+export default function Forum(props){
     const [subject, setSubject] = useState("")
     const [content, setContent] = useState("")
     const notify = () => toast("Wow so easy!");
@@ -27,20 +27,28 @@ export default function Start(props){
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.get(`${process.env.REACT_APP_BE_SERVER}/forum`, {headers})
             .then(res => {
-                console.log(res)
-                setForum(res)
+                // console.log(res)
+                setForum(res.data)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
-
+    useEffect(() => {
+        requestForum()
+    }, [])
+    
     function declareTopic(e){
         e.preventDefault()
         const data = {author:props.user, content, subject }
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.post(`${process.env.REACT_APP_BE_SERVER}/subject/create`,data, {headers})
-        .then(res => topicNotify())
+        .then(res => {
+            topicNotify()
+            requestForum()
+        })
         .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
+
+    wakeUpServer()
     
     return(
         <article>
@@ -50,12 +58,23 @@ export default function Start(props){
                     <input type="text" placeholder='subject' onChange={e => setSubject(e.target.value)}/>
                     <textarea type="text" placeholder='Input your ideas...' onChange={e => setContent(e.target.value)}/>
                     <button type='submit'><MdLogin/></button>
+                    <div className='wholeForum'>
+                    {forum.map(item => {
+                        <div key={item._id}>
+                            <div>{item.subject}</div>
+                            <div>{item.content}</div>
+                            <div>{item.createdAt}</div>
+                        </div>
+                    })}
+                </div>
                 </form>
                 <hr />
-                <div className="forumList">
+                
+                {/* <div className="forumList">
                     <div>{subject}</div>
                     <div>{content}</div>
-                </div>
+                </div> */}
+
             </section>
             
             <br />
