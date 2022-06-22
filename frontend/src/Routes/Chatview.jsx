@@ -1,3 +1,5 @@
+import {IoIosCloseCircleOutline} from "react-icons/io"
+
 export default function Chatview(props){
     //     function requestMessages(){
 //         const headers = { Authorization: `Bearer ${props.token}` }
@@ -12,6 +14,7 @@ export default function Chatview(props){
             <div>Some Text</div>
             <div>props.item.id</div>
             <div>{props.itemKey}</div>
+            <IoIosCloseCircleOutline/>
         </div>
     )
 }
