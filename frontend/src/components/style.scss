@@ -238,6 +238,22 @@ body{
                         grid-area: text;
                     }
                 }
+                .chatOV{
+                    display: grid;
+                    text-decoration: none;
+                    grid-template-areas: 
+                    "img author";
+                    .img2{
+                        grid-area: img;
+                    }
+                    .author{
+                        grid-area: author;
+                        font-size: 2rem;
+                        font-weight: 600;
+                        text-decoration: none;
+                        color:black
+                    }
+                }
             }
         }
     }
