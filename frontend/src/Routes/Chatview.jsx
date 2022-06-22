@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import {IoIosCloseCircleOutline} from "react-icons/io"
 import {FaUserFriends} from "react-icons/fa"
-import {MdCardMembership, MdOutlineEmail} from "react-icons/md";
+import {MdCardMembership, MdCleaningServices, MdOutlineEmail} from "react-icons/md";
 import {NavLink} from "react-router-dom";
 import axios from "axios"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
@@ -23,6 +23,20 @@ export default function Chatview(props){
             setMessages(res.data)
         })
     }
+    function sendMessage(e){
+        e.preventDefault()
+        if(content.length>1){
+            const headers = { Authorization: `Bearer ${props.token}` }
+            const data={content,user:props.user,recipient:props.memberId}
+            console.log(data);
+            axios.post(`${process.env.REACT_APP_BE_SERVER}/chats`,data, {headers})
+                .then(res => {
+                    setContent("")
+                    requestMessages()
+                })
+                .catch(error => alert(error.response?.data?.error || "Unknown error"))
+        }
+    }
     
     props.sethide(true)
     useEffect(()=>{
@@ -40,7 +54,7 @@ export default function Chatview(props){
             <form>
                 <input type="text" placeholder="your text" value={content} 
                 onChange={(e)=>setContent(e.target.value)}/>
-                <button className="btn2">
+                <button onClick={sendMessage} className="btn2">
                 <MdOutlineEmail/></button>
             </form>
             {messages?(<div>

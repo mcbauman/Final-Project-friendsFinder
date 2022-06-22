@@ -280,7 +280,7 @@ app.post("/subject/create", checkAuth, async(req, res, next) => {
 // GET Forum:
 app.get("/forum", checkAuth, async(req, res, next) => {
     try {
-        const forum = await Forum.find().popiulate("author", "userName profilPicture")
+        const forum = await Forum.find()
         res.send(forum)
     } catch (error) {
         next({status: 400, message: error.message })

@@ -42,8 +42,6 @@ export default function Messages(props){
         setHide(false)
     },[])
 
-    
-console.log(hide);
     useEffect(()=>{
         loopTrough()
     },[chats])
@@ -58,6 +56,7 @@ console.log(hide);
                             <Route key={item._id} path={item._id} element={<Chatview  
                                 itemKey={item._id} user={props.user} 
                                 member={item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}
+                                memberId={item.members[0].id._id=props.user?item.members[1].id._id:item.members[0].id._id}
                                 img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`}
                                 sethide={setHide} token={props.token}/>}/>
                         ))} 
