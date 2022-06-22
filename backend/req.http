@@ -100,11 +100,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 {
     "user":"6297a994433681038a55ada3",
     "recipient":"62989d553b8002f4488c40a9",
-    "content":"Matthias to AntonBaumer"
+    "content":"Matthias to AntonBaumer Message3"
 }
 
 ### Check Messagage
-GET {{url}}/messages
+POST {{url}}/messages
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
 

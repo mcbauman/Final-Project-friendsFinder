@@ -6,7 +6,7 @@ async function checkAuth(req,res,next){
 //    console.log("URL from CHECKAUTH l6",req.url);
     try {
         const authHeader=req.headers.authorization
-        // console.log(authHeader);
+        console.log(authHeader);
         const token=authHeader.split(" ")[1]
         const payload=jwt.verify(token,process.env.SECRET)
         const user= await User.findById(payload.uid)

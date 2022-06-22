@@ -255,7 +255,7 @@ app.post("/chats", checkAuth, async(req, res, next) => {
 })
 
 // Chat List Chats: 
-app.get("/messages",checkAuth,async(req, res, next) => {
+app.post("/messages",checkAuth,async(req, res, next) => {
     try {
         const query = cMessage.find({chatId: req.body.chatId})
 //        query.populate("member", "userName profilePicture")
@@ -280,7 +280,7 @@ app.post("/subject/create", checkAuth, async(req, res, next) => {
 // GET Forum:
 app.get("/forum", checkAuth, async(req, res, next) => {
     try {
-        const forum = await Forum.find()
+        const forum = await Forum.find().popiulate("author", "userName profilPicture")
         res.send(forum)
     } catch (error) {
         next({status: 400, message: error.message })
