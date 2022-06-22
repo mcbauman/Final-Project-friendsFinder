@@ -256,7 +256,7 @@ app.post("/chats", checkAuth, async(req, res, next) => {
 })
 
 // Chat List Chats: 
-app.get("/messages",checkAuth,async(req, res, next) => {
+app.post("/messages",checkAuth,async(req, res, next) => {
     try {
         const query = cMessage.find({chatId: req.body.chatId})
 //        query.populate("member", "userName profilePicture")

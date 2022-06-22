@@ -1,21 +1,70 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import {IoIosCloseCircleOutline} from "react-icons/io"
+import {FaUserFriends} from "react-icons/fa"
+import {MdCardMembership, MdCleaningServices, MdOutlineEmail} from "react-icons/md";
 import {NavLink} from "react-router-dom";
+import axios from "axios"
+import {isFriend,checkFriends,addFriend} from "../components/functions";
+import {Context}from "../components/context"
+import {useContext} from "react";
 
 export default function Chatview(props){
-    //     function requestMessages(){
-//         const headers = { Authorization: `Bearer ${props.token}` }
-//         axios.get(`${process.env.REACT_APP_BE_SERVER}/chat/find/incoming`, {headers})
-//             .then(res => {
-//                 const data2=res.data.map(item=>item={...item,type:"incoming"})
-//                 setInMsg(data2)
-//             })
+    const [messages,setMessages]=useState()
+    const [content,setContent]=useState("")
+    const [friends,setFriends]=useState([])
+    const {hide,setHide}=useContext(Context)
+
+    function requestMessages(){
+    const headers = { Authorization: `Bearer ${props.token}` }
+    const body={chatId:props.itemKey}
+    axios.post(`${process.env.REACT_APP_BE_SERVER}/messages`,body,{headers})
+        .then(res => {
+            setMessages(res.data)
+        })
+    }
+    function sendMessage(e){
+        e.preventDefault()
+        if(content.length>1){
+            const headers = { Authorization: `Bearer ${props.token}` }
+            const data={content,user:props.user,recipient:props.memberId}
+            console.log(data);
+            axios.post(`${process.env.REACT_APP_BE_SERVER}/chats`,data, {headers})
+                .then(res => {
+                    setContent("")
+                    requestMessages()
+                })
+                .catch(error => alert(error.response?.data?.error || "Unknown error"))
+        }
+    }
+    
+    props.sethide(true)
+    useEffect(()=>{
+        requestMessages()
+    },[])
+
     return(
-        <div className="messages">
-            {/* <img className="img2" src={`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/> */}
-            <div>Some Text</div>
-            <div>props.item.id</div>
-            <div>{props.itemKey}</div>
-            <NavLink to="Chats"><IoIosCloseCircleOutline/></NavLink>
+        <div className="cMessages">
+            <img src="props.img" alt="UserProfile" />
+            <div>{props.member}</div>
+            <NavLink onClick={()=>props.sethide(false)} to="/Chats">
+                <IoIosCloseCircleOutline/></NavLink>
+            <button className={" btn1"}>
+                <FaUserFriends/></button>
+            <form>
+                <input type="text" placeholder="your text" value={content} 
+                onChange={(e)=>setContent(e.target.value)}/>
+                <button onClick={sendMessage} className="btn2">
+                <MdOutlineEmail/></button>
+            </form>
+            {messages?(<div>
+                {messages.map(item=>(
+                    <div className="profileText">{item.content}</div>
+                ))}
+            </div>)
+            :<div className="loadingio-spinner-ripple-jjyczsl43u">
+                <div className="ldio-qydde5o934a">
+                <div></div><div></div></div></div>}
         </div>
     )
 }

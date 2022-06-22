@@ -8,15 +8,14 @@ import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {NavLink} from "react-router-dom"
 import {Routes,Route} from "react-router-dom"
 import Chatview from "./Chatview";
+import {Context}from "../components/context"
+import {useContext} from "react";
 
 export default function Messages(props){
-    const [inMsg,setInMsg]=useState([])
-    const [outMsg, setOutMsg]=useState([])
     const [chats, setChats] = useState([])
     const [resDat,setResDat]=useState(false)
-    const [vis,setVis]=useState(false)
-    const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
+    const {hide,setHide}=useContext(Context)
 
     function loadChats(){
     const headers = { Authorization: `Bearer ${props.token}` }
@@ -40,6 +39,7 @@ export default function Messages(props){
     }
     useEffect(()=>{
         loadChats() 
+        setHide(false)
     },[])
 
     useEffect(()=>{
@@ -54,19 +54,27 @@ export default function Messages(props){
                     <Routes> 
                         {chats.map(item=>(
                             <Route key={item._id} path={item._id} element={<Chatview  
-                                itemKey={item._id} user={props.user} token={props.token}/>}/>
+                                itemKey={item._id} user={props.user} 
+                                member={item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}
+                                memberId={item.members[0].id._id=props.user?item.members[1].id._id:item.members[0].id._id}
+                                img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`}
+                                sethide={setHide} token={props.token}/>}/>
                         ))} 
-                    </Routes>                    
-                    {chats.map(item=>(
+                    </Routes>
+                    {!hide&&                    
+                    chats.map(item=>(
                         <div key={item._id} >
                             <NavLink key={item._id} to={item._id} className="chatOV">
-                                <img className="img2" src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`:exmpl}/>
+                                <img className="img2" 
+                                src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`:exmpl}/>
                                 <div className="author">{item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}</div>
                             </NavLink>
                         </div>
                     ))}
                 </>)
-                :<div>LOADING</div>
+                :<div className="loadingio-spinner-ripple-jjyczsl43u">
+                    <div className="ldio-qydde5o934a">
+                        <div></div><div></div></div></div>
             }
             </section>
         </article>
