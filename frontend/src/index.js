@@ -7,6 +7,5 @@ import ContextProvider from "./components/context";
 import "./style.scss"
 import dotenv from "dotenv"
 
-
-
+reactDom.render(<ContextProvider><BrowserRouter><App/></BrowserRouter></ContextProvider>,document.getElementById("root"))
 
