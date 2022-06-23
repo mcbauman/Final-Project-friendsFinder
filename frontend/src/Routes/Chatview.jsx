@@ -15,8 +15,6 @@ export default function Chatview(props){
     const [friends,setFriends]=useState([])
     const {hide,setHide}=useContext(Context)
 
-    console.log("PROPS",props);
-
     function requestMessages(){
     const headers = { Authorization: `Bearer ${props.token}` }
     const body={chatId:props.itemKey}

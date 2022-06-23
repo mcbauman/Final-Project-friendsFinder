@@ -99,8 +99,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 
 {
     "user":"62961c6e7ab347678994e6c8",
-    "recipient":"6297a994433681038a55ada3",
-    "content":"Matthias to Torge from Backend"
+    "recipient":"62961a247ab347678994e6c5",
+    "content":"Matthias to Cynthia from Backend"
 }
 
 ### Check Messagage
@@ -109,7 +109,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
 
 {
-    "chatId":"62b1db81ee6333c431d893b1"
+    "chatId":"62b42a5abdb3c7651eafc0bb"
 }
 
 ### TESTING Check Messagage
