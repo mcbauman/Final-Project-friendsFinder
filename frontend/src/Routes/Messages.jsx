@@ -18,7 +18,7 @@ export default function Messages(props){
         axios.get(`${process.env.REACT_APP_BE_SERVER}/message/find`, {headers})
             .then(res => {
                 setAllMsg(res.data)
-                console.log(res.data)
+                console.log(allMsg)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
@@ -48,7 +48,7 @@ export default function Messages(props){
             <section id="messages">
                 {allMsg.map(item=>(
                     <div key={item._id} className="messages">
-                        <img className="img2" src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
+                        <img className="img2" src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:{exmpl}}/>
                         <div className="author">{item.author.userName}</div>
                         <div className="subject">{item.subject}</div>
                         <button className={isFriend(item.author._id,friends)+" btn1"} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
@@ -60,7 +60,7 @@ export default function Messages(props){
                         <div className="profileText">{item.content}</div>
                     </div>
                 ))}
-            </section>):<div class="loadingio-spinner-ripple-jjyczsl43u"><div class="ldio-qydde5o934a"><div></div><div></div></div></div>}
+            </section>):<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}
         </article>
     )
 }

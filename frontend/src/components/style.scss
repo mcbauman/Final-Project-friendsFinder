@@ -254,6 +254,31 @@ body{
                         color:black
                     }
                 }
+                .forum{
+                    display: grid;
+                    grid-template-columns: 25% 75%;
+                    grid-template-areas: 
+                   "photo name"
+                    "photo date"
+                    "subject subject"
+                    "content content";
+                    img{
+                        grid-area: photo;
+                    }
+                    .subj{
+                        padding: 10px;
+                        grid-area: subject;
+                    }
+                    .cont{
+                        padding: 10px;
+                        grid-area: content;
+                    }
+                    span{
+                        font-size: smaller;
+                        color: --brightmainOpacity;
+                        opacity: .5;
+                    }
+                }
             }
         }
     }
