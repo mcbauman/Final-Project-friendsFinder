@@ -25,7 +25,6 @@ export default function Forum(props){
     }, [])
     
     useEffect(() => {
-        console.log("forum: ");
         getForum()
     },[])
 
@@ -33,13 +32,16 @@ export default function Forum(props){
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.get(`${process.env.REACT_APP_BE_SERVER}/forum`, {headers})
             .then(res => {
+                // const d = new Date( "2022-06-21T13:43:11.750Z ");
+                // date = d.getMonth()
+                // date = d.getHours() + ":" + d.getMinutes() + ", " + d.toDateString();
+                // console.log( date );
                 setForum(res.data)
                 console.log(res.data);
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
   
-    
     function declareTopic(e){
         e.preventDefault()
         const data = { author:props.user, content, subject }
@@ -65,14 +67,12 @@ export default function Forum(props){
                 </form>
                 <hr />
                     {forum&&forum.length?(forum.map(item => 
-                        <div key={item._id}>
+                        <div key={item._id} className="forum">
                             <img src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
-                            <div>
-                                {item.author.userName}
-                            </div>
-                            <div>{item.subject}</div>
-                            <div>{item.content}</div>
-                            <div>{item.createdAt}</div>
+                            <div><span>Created by: </span>{item.author.userName}</div>
+                            <div><span>Created at: </span>{item.createdAt}</div>
+                            <div className='subj'><span>Subject: </span>{item.subject}</div>
+                            <div className='cont'>{item.content}</div>
                             <br />
                         </div>
                     )):<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}

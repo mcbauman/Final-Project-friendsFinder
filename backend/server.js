@@ -283,15 +283,6 @@ app.get("/forum", checkAuth, async(req, res, next) => {
     try {
         const query = Forum.find()
         query.populate("author", "userName profilePicture")
-            // query.populate({
-            //     path: Forum,
-            //     select: "profilePicture",
-            //     populate: {
-            //         path: "profilePicture",
-            //         model: "user",
-            //         select: "user"
-            //     }
-            // })
            const something = await query.exec()
            something.reverse()
            console.log(something);
