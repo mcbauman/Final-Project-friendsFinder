@@ -261,7 +261,8 @@ body{
                    "photo name"
                     "photo date"
                     "subject subject"
-                    "content content";
+                    "content content"
+                    ". button";
                     img{
                         grid-area: photo;
                     }
@@ -277,6 +278,11 @@ body{
                         font-size: smaller;
                         color: --brightmainOpacity;
                         opacity: .5;
+                    }
+                    button{
+                        grid-area: button;
+                        justify-self: end;
+                        padding: 10px;
                     }
                 }
             }
