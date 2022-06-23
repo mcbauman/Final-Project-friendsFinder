@@ -4,13 +4,14 @@ import axios from "axios";
 import {checkFriends} from "../components/functions";
 import { useState, useEffect } from 'react';
 import {MdLogin} from "react-icons/md"
+import exmpl from "../components/exmpl.jpeg"
 
 export default function Forum(props){
     const [subject, setSubject] = useState("")
     const [content, setContent] = useState("")
     const notify = () => toast("Wow so easy!");
     const topicNotify = () => toast("Topic is saved!")
-    const [forum, setForum] = useState([])
+    const [forum, setForum] = useState(null)
 
     function wakeUpServer(){
         axios.get(`${process.env.REACT_APP_BE_SERVER}/`)
@@ -20,30 +21,33 @@ export default function Forum(props){
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
     useEffect(() => {
-        requestForum()
+        wakeUpServer()
     }, [])
     
-    function requestForum(){
+    useEffect(() => {
+        console.log("forum: ");
+        getForum()
+    },[])
+
+    function getForum(){
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.get(`${process.env.REACT_APP_BE_SERVER}/forum`, {headers})
             .then(res => {
-                // console.log(res)
                 setForum(res.data)
+                console.log(res.data);
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
-    useEffect(() => {
-        requestForum()
-    }, [])
+  
     
     function declareTopic(e){
         e.preventDefault()
-        const data = {author:props.user, content, subject }
+        const data = { author:props.user, content, subject }
         const headers = { Authorization: `Bearer ${props.token}`}
-        axios.post(`${process.env.REACT_APP_BE_SERVER}/subject/create`,data, {headers})
+        axios.post(`${process.env.REACT_APP_BE_SERVER}/forum`,data, {headers})
         .then(res => {
+            getForum()
             topicNotify()
-            requestForum()
         })
         .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
@@ -57,24 +61,21 @@ export default function Forum(props){
                 <form onSubmit={declareTopic}>
                     <input type="text" placeholder='subject' onChange={e => setSubject(e.target.value)}/>
                     <textarea type="text" placeholder='Input your ideas...' onChange={e => setContent(e.target.value)}/>
-                    <button type='submit'><MdLogin/></button>
-                    <div className='wholeForum'>
-                    {forum.map(item => {
+                    <button type='submit'><MdLogin/></button>                  
+                </form>
+                <hr />
+                    {forum&&forum.length?(forum.map(item => 
                         <div key={item._id}>
+                            <img src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
+                            <div>
+                                {item.author.userName}
+                            </div>
                             <div>{item.subject}</div>
                             <div>{item.content}</div>
                             <div>{item.createdAt}</div>
+                            <br />
                         </div>
-                    })}
-                </div>
-                </form>
-                <hr />
-                
-                {/* <div className="forumList">
-                    <div>{subject}</div>
-                    <div>{content}</div>
-                </div> */}
-
+                    )):<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}
             </section>
             
             <br />
