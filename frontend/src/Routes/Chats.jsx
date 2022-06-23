@@ -22,6 +22,7 @@ export default function Messages(props){
     axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
         .then (res=>{
             console.log(res.data)
+            console.log("HERE>>>",res.data[0]);
             setChats(res.data)
         })
     }
@@ -34,7 +35,9 @@ export default function Messages(props){
             // console.log("ITEM.MEMBER[1]",item.members[1])
             // console.log(item.members[0].id)
             console.log(item.members[0].id.userName)
+            console.log(item.members[0].id._id)
             console.log(item.members[1].id.userName)
+            console.log(item.members[1].id._id)
         })
     }
     useEffect(()=>{
@@ -45,6 +48,8 @@ export default function Messages(props){
     useEffect(()=>{
         loopTrough()
     },[chats])
+
+    console.log("USER FROM PROPS",props.user);
 
     return(
         <article>
