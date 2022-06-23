@@ -12,6 +12,8 @@ export default function Forum(props){
     const notify = () => toast("Wow so easy!");
     const topicNotify = () => toast("Topic is saved!")
     const [forum, setForum] = useState(null)
+    const [hidden, setHidden] = useState("hide")
+    const [comment, setComment] = useState("")
 
     function wakeUpServer(){
         axios.get(`${process.env.REACT_APP_BE_SERVER}/`)
@@ -32,12 +34,12 @@ export default function Forum(props){
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.get(`${process.env.REACT_APP_BE_SERVER}/forum`, {headers})
             .then(res => {
-                // const d = new Date( "2022-06-21T13:43:11.750Z ");
+                const dt = res.createdAt
+                const d = new Date();
                 // date = d.getMonth()
                 // date = d.getHours() + ":" + d.getMinutes() + ", " + d.toDateString();
-                // console.log( date );
+                console.log( d.toDateString());
                 setForum(res.data)
-                console.log(res.data);
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
@@ -55,6 +57,12 @@ export default function Forum(props){
     }
 
     wakeUpServer()
+
+    function handleComment(e){
+        e.preventDefault()
+
+        setHidden("hide")
+    }
     
     return(
         <article>
@@ -67,12 +75,17 @@ export default function Forum(props){
                 </form>
                 <hr />
                     {forum&&forum.length?(forum.map(item => 
-                        <div key={item._id} className="forum">
+                        <div key={item._id} className="forum" onClick={() => setHidden("show")} >
                             <img src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
                             <div><span>Created by: </span>{item.author.userName}</div>
-                            <div><span>Created at: </span>{item.createdAt}</div>
+                            <div><span>Created at: </span>{new Date(item.createdAt).toLocaleDateString()}</div>
                             <div className='subj'><span>Subject: </span>{item.subject}</div>
                             <div className='cont'>{item.content}</div>
+                            <form onSubmit={handleComment}>
+                                <input className={hidden} onChange={(e)=> setComment(e.target.value)} placeholder='Leave comment' />
+                                <button className={hidden} type="submit" >Submit your comment</button>
+                            </form>
+                            <div> {comment} </div>
                             <br />
                         </div>
                     )):<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}
