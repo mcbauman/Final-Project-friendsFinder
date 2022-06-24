@@ -223,7 +223,7 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
         const query = Chat.find({members:{$elemMatch:{$eq:req.user._id}}})
         query.populate("members.id","userName profilePicture")
         const chats=await query.exec()
-        chats.reverse()
+        // chats.reverse()
         console.log("EXISTINGCHATS SERVER L207",chats)
         res.send(chats)
     } catch (err){
