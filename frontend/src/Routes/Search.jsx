@@ -10,6 +10,7 @@ import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {Context}from "../components/context"
 import trans from "../components/trans";
 import {useContext} from "react";
+import logo from "../components/COF.png";
 
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
@@ -91,7 +92,7 @@ export default function Search(props){
                         </form>
                     </div>
                 ))}
-            </section>):(<div class="loadingio-spinner-ripple-jjyczsl43u"><div class="ldio-qydde5o934a"><div></div><div></div></div></div>)}
+            </section>):(<img src={logo} id="henriksLoadingAnimation" />)}
 
         </article>
     )

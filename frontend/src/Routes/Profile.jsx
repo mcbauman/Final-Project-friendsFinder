@@ -9,6 +9,7 @@ import {Context}from "../components/context"
 import trans from "../components/trans";
 import {useContext} from "react";
 import {toast, ToastContainer} from "react-toastify";
+import logo from "../components/COF.png";
 
 export default function Profile(props){
     const [file, setFile] = useState(null)
@@ -135,7 +136,7 @@ export default function Profile(props){
                             </div>
                         ))}
                     </form>
-                ):(<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>)}
+                ):<img src={logo} id="henriksLoadingAnimation" />}
             </section>
             <ToastContainer position="bottom-center"
                             autoClose={5000}

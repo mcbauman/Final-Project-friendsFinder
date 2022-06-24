@@ -5,6 +5,7 @@ import {checkFriends} from "../components/functions";
 import { useState, useEffect } from 'react';
 import {MdLogin} from "react-icons/md"
 import exmpl from "../components/exmpl.jpeg"
+import logo from "../components/COF.png";
 
 export default function Forum(props){
     const [subject, setSubject] = useState("")
@@ -88,7 +89,7 @@ export default function Forum(props){
                             <div> {comment} </div>
                             <br />
                         </div>
-                    )):<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}
+                    )):<img src={logo} id="henriksLoadingAnimation" />}
             </section>
             
             <br />

@@ -10,6 +10,7 @@ import {Routes,Route} from "react-router-dom"
 import Chatview from "./Chatview";
 import {Context}from "../components/context"
 import {useContext} from "react";
+import logo from "../components/COF.png";
 
 export default function Messages(props){
     const [chats, setChats] = useState([])
@@ -77,9 +78,7 @@ export default function Messages(props){
                         </div>
                     ))}
                 </>)
-                :<div className="loadingio-spinner-ripple-jjyczsl43u">
-                    <div className="ldio-qydde5o934a">
-                        <div></div><div></div></div></div>
+                :<img src={logo} id="henriksLoadingAnimation" />
             }
             </section>
         </article>

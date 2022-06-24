@@ -5,6 +5,7 @@ import exmpl from "../components/exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail} from "react-icons/md";
 import {isFriend,checkFriends,addFriend} from "../components/functions";
+import logo from "../components/COF.png";
 
 export default function Messages(props){
     const [allMsg, setAllMsg] = useState([])
@@ -60,7 +61,7 @@ export default function Messages(props){
                         <div className="profileText">{item.content}</div>
                     </div>
                 ))}
-            </section>):<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}
+            </section>):<img src={logo} id="henriksLoadingAnimation" />}
         </article>
     )
 }
