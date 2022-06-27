@@ -5,13 +5,14 @@ import {checkFriends} from "../components/functions";
 import { useState, useEffect } from 'react';
 import {MdLogin} from "react-icons/md"
 import exmpl from "../components/exmpl.jpeg"
+import {BiSend} from "react-icons/bi"
 
 export default function Forum(props){
     const [subject, setSubject] = useState("")
     const [content, setContent] = useState("")
     const notify = () => toast("Wow so easy!");
     const topicNotify = () => toast("Topic is saved!")
-    const [forum, setForum] = useState(null)
+    const [posts, setPosts] = useState(null)
     const [hidden, setHidden] = useState("hide")
     const [comment, setComment] = useState("")
 
@@ -27,19 +28,14 @@ export default function Forum(props){
     }, [])
     
     useEffect(() => {
-        getForum()
+        getPosts()
     },[])
 
-    function getForum(){
+    function getPosts(){
         const headers = { Authorization: `Bearer ${props.token}`}
-        axios.get(`${process.env.REACT_APP_BE_SERVER}/forum`, {headers})
+        axios.get(`${process.env.REACT_APP_BE_SERVER}/posts`, {headers})
             .then(res => {
-                const dt = res.createdAt
-                const d = new Date();
-                // date = d.getMonth()
-                // date = d.getHours() + ":" + d.getMinutes() + ", " + d.toDateString();
-                console.log( d.toDateString());
-                setForum(res.data)
+                setPosts(res.data)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
@@ -48,20 +44,24 @@ export default function Forum(props){
         e.preventDefault()
         const data = { author:props.user, content, subject }
         const headers = { Authorization: `Bearer ${props.token}`}
-        axios.post(`${process.env.REACT_APP_BE_SERVER}/forum`,data, {headers})
-        .then(res => {
-            getForum()
-            topicNotify()
+        axios.post(`${process.env.REACT_APP_BE_SERVER}/posts`,data, {headers})
+            .then(res => {
+                getPosts()
+                topicNotify()
         })
         .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
 
     wakeUpServer()
 
-    function handleComment(e){
+    function handleComment(e, post){
         e.preventDefault()
-
-        setHidden("hide")
+        const data ={ author:props.user, post, comment }
+        const headers = { Authorization: `Bearer ${props.token}`}
+        axios.put(`${process.env.REACT_APP_BE_SERVER}/posts/addComment`,data, {headers})
+            .then(res=>getPosts())
+            .catch(error => alert(error.response?.data?.error || "Unknown error"))
+        // setHidden("hide")
     }
     
     return(
@@ -74,19 +74,21 @@ export default function Forum(props){
                     <button type='submit'><MdLogin/></button>                  
                 </form>
                 <hr />
-                    {forum&&forum.length?(forum.map(item => 
-                        <div key={item._id} className="forum" onClick={() => setHidden("show")} >
+                {/* <Post  /> */}
+                    {posts&&posts.length?(posts.map(item => 
+                        <div key={item._id} className="forum" 
+                        onClick={() => setHidden("show")} 
+                        >
                             <img src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
                             <div><span>Created by: </span>{item.author.userName}</div>
                             <div><span>Created at: </span>{new Date(item.createdAt).toLocaleDateString()}</div>
                             <div className='subj'><span>Subject: </span>{item.subject}</div>
                             <div className='cont'>{item.content}</div>
-                            <form onSubmit={handleComment}>
+                            <form onSubmit={(e)=>{handleComment(e, item)}}>
                                 <input className={hidden} onChange={(e)=> setComment(e.target.value)} placeholder='Leave comment' />
-                                <button className={hidden} type="submit" >Submit your comment</button>
+                                <button className={hidden} type="submit"> <BiSend/></button>
                             </form>
                             <div> {comment} </div>
-                            <br />
                         </div>
                     )):<div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}
             </section>

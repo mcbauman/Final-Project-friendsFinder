@@ -269,7 +269,7 @@ app.post("/messages",checkAuth,async(req, res, next) => {
 })
 
 // POST Forum:
-app.post("/forum", checkAuth, async(req, res, next) => {
+app.post("/posts", checkAuth, async(req, res, next) => {
     try {
         const forum = await Forum.create(req.body)
         res.send(forum)
@@ -279,16 +279,26 @@ app.post("/forum", checkAuth, async(req, res, next) => {
 })
 
 // GET Forum:
-app.get("/forum", checkAuth, async(req, res, next) => {
+app.get("/posts", checkAuth, async(req, res, next) => {
     try {
         const query = Forum.find()
         query.populate("author", "userName profilePicture")
            const something = await query.exec()
            something.reverse()
-           console.log(something);
+        //    console.log(something);
         res.send(something)
     } catch (error) {
         next({status: 400, message: error.message })
+    }
+})
+
+// PUT Forum:
+app.put("/posts/addComment", checkAuth, async(req, res, next) => {
+    try{
+        const forum = await Forum.findByIdAndUpdate(req.body.post._id, {$push:{comments:{author:req.body.author, comment: req.body.comment}}}) 
+        res.send(forum)
+    }catch (error) {
+        next({status:400, message:error.message})
     }
 })
 

@@ -114,6 +114,10 @@ body{
                     display: inline-flex;
                     flex-direction: column;
                 }
+                button{
+                    height: 100%;
+                    padding: 10px;
+                }
             }
             .signin{
                 >input{
@@ -258,11 +262,11 @@ body{
                     display: grid;
                     grid-template-columns: 25% 75%;
                     grid-template-areas: 
-                   "photo name"
+                    "photo name"
                     "photo date"
                     "subject subject"
                     "content content"
-                    ". button";
+                    "form form";
                     img{
                         grid-area: photo;
                     }
@@ -279,10 +283,13 @@ body{
                         color: --brightmainOpacity;
                         opacity: .5;
                     }
-                    button{
-                        grid-area: button;
-                        justify-self: end;
-                        padding: 10px;
+                    form{
+                        grid-area: form;
+                        display: flex;
+                        button{
+                            height: 100%;
+                            margin-left: 5px;
+                        }
                     }
                 }
             }
@@ -319,6 +326,10 @@ input{
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
 }
+// .formForumInput{
+//     display: flex;
+//     flex-direction: row;
+// }
 .ageInput{
     width: 100px;
 }
