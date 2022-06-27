@@ -4,7 +4,7 @@ import React from "react";
 import exmpl from "../components/exmpl.jpeg"
 import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail} from "react-icons/md";
-import {isFriend,checkFriends,addFriend} from "../components/functions";
+import {isFriend,checkFriends,addFriend} from "../frontend/src/components/functions";
 import logo from "../components/COF.png";
 
 export default function Messages(props){

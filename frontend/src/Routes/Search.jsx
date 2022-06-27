@@ -20,7 +20,6 @@ export default function Search(props){
     const [srchdGender,setSrchdGender]=useState("any")
     const options=Activities
     const [vis,setVis]=useState(false)
-    const [subject,setSubject]=useState("")
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
     const {lang}=useContext(Context)
@@ -49,12 +48,11 @@ export default function Search(props){
     
     function writeMessage(id){
         setVis(vis?0:id)
-        if(vis&&subject.length>1){
+        if(vis&&content.length>1){
             const headers = { Authorization: `Bearer ${props.token}` }
-            const data={subject,content,author:props.user,recipient:id}
-            axios.post(`${process.env.REACT_APP_BE_SERVER}/message/create`,data, {headers})
+            const data={content,user:props.user,recipient:id}
+            axios.post(`${process.env.REACT_APP_BE_SERVER}/chats`,data, {headers})
                 .then(res => {
-                    setSubject("")
                     setContent("")
                 })
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
@@ -87,7 +85,6 @@ export default function Search(props){
                         <button className="btn2" onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
                         <div className="profileText">{item.profileText}</div>
                         <form className={vis===item._id?"show":"hide"}>
-                            <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                             <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                         </form>
                     </div>
