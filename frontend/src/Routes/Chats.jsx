@@ -23,13 +23,13 @@ export default function Messages(props){
     axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
         .then (res=>{
             console.log(res.data)
-            console.log("HERE>>>",res.data[0]);
+            //console.log("HERE>>>",res.data[0]);
             setChats(res.data)
         })
     }
 
     function loopTrough(){
-        chats.map(item=>{
+        chats.map(item=>{return;
             console.log("ITEM",item)
             // console.log("ITEM:MEMBER",item.members)
             // console.log("ITEM.MEMBER[0]",item.members[0])
@@ -61,9 +61,9 @@ export default function Messages(props){
                         {chats.map(item=>(
                             <Route key={item._id} path={item._id} element={<Chatview  
                                 itemKey={item._id} user={props.user} 
-                                member={item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}
-                                memberId={item.members[0].id._id=props.user?item.members[1].id._id:item.members[0].id._id}
-                                img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`}
+                                member={item.members[0].id._id===props.user?item.members[1].id.userName:item.members[0].id.userName}
+                                memberId={item.members[0].id._id===props.user?item.members[1].id._id:item.members[0].id._id}
+                                img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id}`}
                                 sethide={setHide} token={props.token}/>}/>
                         ))} 
                     </Routes>
@@ -73,7 +73,7 @@ export default function Messages(props){
                             <NavLink key={item._id} to={item._id} className="chatOV">
                                 <img className="img2" 
                                 src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`:exmpl}/>
-                                <div className="author">{item.members[0].id._id=props.user?item.members[1].id.userName:item.members[0].id.userName}</div>
+                                <div className="author">{item.members[0].id._id===props.user?item.members[1].id.userName:item.members[0].id.userName}</div>
                             </NavLink>
                         </div>
                     ))}

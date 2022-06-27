@@ -90,7 +90,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 ### Look for Chats
 GET {{url}}/chats
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTYwNTcyNzl9.uT8zQPqEfPCZBOV-Mu32O64_7I9ROyg8M54N3TYbxN4
 
 ### Post into Chats
 POST {{url}}/chats
