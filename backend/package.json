@@ -14,6 +14,7 @@
     "express": "^4.18.1",
     "express-validator": "^6.14.1",
     "formik": "^2.2.9",
+    "geolocation": "^0.2.0",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.3",
@@ -21,6 +22,7 @@
     "node-email-validation": "^1.0.4",
     "nodemon": "^2.0.16",
     "simple-react-validator": "^1.6.1",
+    "sort-by-distance": "^2.0.0",
     "validator": "^13.7.0"
   }
 }

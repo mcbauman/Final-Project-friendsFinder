@@ -8,15 +8,17 @@ Post {{url}}/user/create
 Content-Type: application/json
 
 {
-    "name": "Torge",
+    "name": "UWE",
     "familyName": "Baumann",
     "dateOfBirth": "2012-01-23",
-    "email":"torge@jepleting.de",
-    "password":"aB@123456",
+    "email":"uwe@jepleting.de",
+    "password":"aA@123456",
     "userName":"TAJB",
     "avatar":"MongoPic",
-    "gender": "male",
-    "interests": [{"value":"Campen","labe":"Campen"}]
+    "gender": "♂️",
+    
+
+    "interests": [{"value":"Campen","label":"Campen"}]
 }
 ### GET ALL Users:
 GET {{url}}/users/listAll
