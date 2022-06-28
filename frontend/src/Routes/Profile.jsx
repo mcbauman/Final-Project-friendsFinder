@@ -19,6 +19,11 @@ export default function Profile(props){
     const [password, setPassword]=useState("")
     const [userName, setUserName]=useState("")
     const [interests,setInterests]=useState([])
+    const [street, setStreet]=useState("")
+    const [number, setNumber]=useState()
+    const [zipCode, setZipCode]=useState()
+    const [city, setCity]=useState("")
+    const [country, setCountry]=useState("")
     const [profileText,setProfileText]=useState("")
     const {lang,setLang}=useContext(Context)
     const {theme,setTheme}=useContext(Context)
@@ -48,7 +53,9 @@ export default function Profile(props){
             })
             .catch(error => console.log(error))
     }
+
     useEffect(()=>loadUser(),[])
+
     function changeProfile(e){
         e.preventDefault()
         const sendInterests=interests.length>1?interests.map(item=>item.value):usr.interests.map(item=>item.value);
@@ -59,7 +66,8 @@ export default function Profile(props){
 //            password:password?password:null,
             userName:userName?userName:usr.userName,
             profileText:profileText?profileText:usr.profileText,
-            interests:sendInterests
+            interests:sendInterests,
+            street, number, zipCode, city, country
         }
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
@@ -124,6 +132,11 @@ export default function Profile(props){
                         <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
                         <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
                         <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
+                        <input type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder={usr.street}/>
+                        <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder={usr.number}/>
+                        <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder={usr.zipCode}/>
+                        <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder={usr.city}/>
+                        <input type="text" value={country} onChange={e=>setCountry(e.target.value)} placeholder={usr.country}/>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                         <hr/>
                         {trans[lang].YoureFriends}:

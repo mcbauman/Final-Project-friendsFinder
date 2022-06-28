@@ -61,7 +61,7 @@ export default function App(){
       navigator.geolocation.getCurrentPosition(success, error, options); 
    return(
       <div className={theme}>
-         {user?
+         {user&&token?
          <>
             <Header setUser={setUser} setToken={setToken} setUserProfPic={setUserProfPic}/>
             <Main user={user} token={token} userProfPic={userProfPic} setUserProfPic={setUserProfPic}/>
