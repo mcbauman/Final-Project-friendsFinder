@@ -298,6 +298,7 @@ app.get("/posts", checkAuth, async(req, res, next) => {
 // PUT Forum:
 app.put("/posts/addComment", checkAuth, async(req, res, next) => {
     try{
+        console.log("Check from backend: ",req.body.post);
         const forum = await Forum.findByIdAndUpdate(req.body.post._id, {$push:{comments:{author:req.body.author, comment: req.body.comment}}}) 
         res.send(forum)
     }catch (error) {
