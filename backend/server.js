@@ -103,7 +103,8 @@ app.post("/user/login",async (req,res,next)=>{
         // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
         // send user the token
-        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString(),theme:user.theme,lang:user.lang})
+ //       res.send({user,token})
+        res.send({token,_id:user._id, profilePicture:user.profilePicture.toString(),theme:user.theme,lang:user.lang,userName:user.userName})
 //        res.send({token,_id:user._id, profilePicture:user.profilePicture?user.profilePicture.toString():null})
     } catch (error) {
         next({status:400,message:error})
@@ -223,9 +224,11 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
         const query = Chat.find({members:{$elemMatch:{$eq:req.user._id}}})
         query.populate("members.id","userName profilePicture")
         const chats=await query.exec()
+        const readableChats=chats.map(chat=>chat.toObject())
+        console.log("READABLECHATS",JSON.stringify(readableChats,null,"  "));
         chats.reverse()
         console.log("EXISTINGCHATS SERVER L207",chats)
-        res.send(chats)
+        res.send(readableChats)
     } catch (err){
         next({status: 400, message: err.message })
     }

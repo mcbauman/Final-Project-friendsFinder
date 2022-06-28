@@ -16,6 +16,11 @@ export default function Singin(props){
     const [gender, setGender] = useState("male")
     const [interests,setInterests]=useState([])
     const [profileText,setProfileText]=useState("")
+    const [street, setStreet]=useState("")
+    const [number, setNumber]=useState()
+    const [zipCode, setZipCode]=useState()
+    const [city, setCity]=useState("")
+    const [country, setCountry]=useState("")
     const options=Activities
     const notifySuccess = () => toast("Your profile is created");
     const notifyError = (text) => toast(text);
@@ -27,7 +32,7 @@ export default function Singin(props){
     function submitFunction(e){
         e.preventDefault()
         const sendInterests=interests.map(item=>item.value)
-        const data={age,email,password,userName,name,familyName,dateOfBirth,gender,interests:sendInterests,profileText}
+        const data={age,email,password,userName,name,familyName,dateOfBirth,gender,interests:sendInterests,profileText, street, number, zipCode, city, country}
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/create`,data)
             .then(resp=>{
                 props.setUser(resp.data._id)
@@ -45,9 +50,16 @@ export default function Singin(props){
                 <input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Name"/>
                 <input type="text" value={familyName} onChange={e=>setFamilyName(e.target.value)} placeholder="Family Name"/>
                 <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="@"/>
-                <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="password"/>
-                <input type="text" value={userName} onChange={e=>setUserName(e.target.value)} placeholder="user-name" />
-                <input type="date" value={dateOfBirth} onChange={ageFunction} placeholder="date of birth"/>
+                <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password"/>
+                <input type="text" value={userName} onChange={e=>setUserName(e.target.value)} placeholder="User-name" />
+                <input type="date" value={dateOfBirth} onChange={ageFunction} placeholder="Date of birth"/>
+
+                <input type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder="Street"/>
+                <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder="Number"/>
+                <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder="Zip-Code"/>
+                <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder="City"/>
+                <input type="text" value={country} onChange={e=>setCountry(e.target.value)} placeholder="Country"/>
+
                 <fieldset onChange={e=>setGender(e.target.id)}>
                     <input type="radio" name="gender" id="♂️"/><label htmlFor="♂️">♂️</label>
                     <input type="radio" name="gender" id="♀️"/><label htmlFor="♀️">♀️</label>

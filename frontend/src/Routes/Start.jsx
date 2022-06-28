@@ -5,7 +5,9 @@ import { checkFriends } from "../components/functions";
 import { useState, useEffect } from 'react';
 import { MdLogin } from "react-icons/md"
 import exmpl from "../components/exmpl.jpeg"
-import { BiSend } from "react-icons/bi"
+import {BiSend} from "react-icons/bi"
+import logo from "../components/COF.png";
+
 
 
 export default function Forum(props) {
@@ -107,7 +109,7 @@ export default function Forum(props) {
                             }
                         </form>
                     </div>
-                )) : <div className="loadingio-spinner-ripple-jjyczsl43u"><div className="ldio-qydde5o934a"><div></div><div></div></div></div>}
+                )) : <img src={logo} id="henriksLoadingAnimation" />}
             </section>
 
             <br />
