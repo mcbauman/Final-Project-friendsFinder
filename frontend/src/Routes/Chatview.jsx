@@ -8,6 +8,7 @@ import axios from "axios"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {Context}from "../components/context"
 import {useContext} from "react";
+import logo from "../components/COF.png";
 
 export default function Chatview(props){
     const [messages,setMessages]=useState()
@@ -64,9 +65,7 @@ export default function Chatview(props){
                     <div className="profileText">{item.content}</div>
                 ))}
             </div>)
-            :<div className="loadingio-spinner-ripple-jjyczsl43u">
-                <div className="ldio-qydde5o934a">
-                <div></div><div></div></div></div>}
+            :<img src={logo} id="henriksLoadingAnimation" />}
         </div>
     )
 }
