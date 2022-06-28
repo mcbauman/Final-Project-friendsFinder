@@ -18,13 +18,14 @@ export default function Login(props){
         e.preventDefault()
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/login`,{email,password})
         .then(resp=>{
+            console.log(resp.data);
             props.setUser(resp.data._id)
             props.setToken(resp.data.token)
             props.setUserProfPic(resp.data.profilePicture)
             setLang(resp.data.lang)
             setTheme(resp.data.theme)
-            localStorage.setItem("theme",JSON.stringify(theme))
-            localStorage.setItem("lang",JSON.stringify(lang))
+            localStorage.setItem("theme",JSON.stringify(resp.data.theme))
+            localStorage.setItem("lang",JSON.stringify(resp.data.lang))
             notifySuccess(resp.data.userName)
         })
         .catch(err=>{
