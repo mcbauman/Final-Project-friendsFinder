@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const forumSchema= new mongoose.Schema({
+const forumPostSchema= new mongoose.Schema({
     author:    { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
     content:   { type: String, trim: true, required: true },
     subject:   { type: String },
-    comment:   { type: Array }
+    comments:   { type: Array }
 },{
     timestamps: true,
     toJSON:{
@@ -14,6 +14,6 @@ const forumSchema= new mongoose.Schema({
     },
 })
 
-const Forum=mongoose.model("forum", forumSchema)
+const Forum=mongoose.model("forum", forumPostSchema)
 
 export default Forum
