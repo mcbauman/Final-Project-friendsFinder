@@ -53,7 +53,7 @@ export default function App(){
       setLeng(crd.longitude);
 
       }
-      console.log(lat,leng)
+      // console.log(lat,leng)
       function error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
       }
