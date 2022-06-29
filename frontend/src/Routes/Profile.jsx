@@ -95,7 +95,7 @@ export default function Profile(props){
                 notifyError(error)
             })
     }
-    
+ //   usr?console.log(usr):null;
     //<div className="profPicDiv" style={item.profilePicture ? `background-image: url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})` : `background-image: url(${exmpl})`}></div>
     
     return(

@@ -27,6 +27,7 @@ export default function Chatview(props){
         .then(res => {
             setMessages(res.data)
             console.log(res.data);
+            checkFriends(props.token,setFriends)
         })
     }
     function sendMessage(e){
@@ -45,6 +46,8 @@ export default function Chatview(props){
         }
     }
     
+    console.log(props);
+
     props.sethide(true)
     useEffect(()=>{
         requestMessages()
@@ -56,8 +59,11 @@ export default function Chatview(props){
             <div id="name">{props.member}</div>
             <NavLink onClick={()=>props.sethide(false)} to="/Chats">
                 <IoIosCloseCircleOutline/></NavLink>
-            <button className={" btn1"}>
-                <FaUserFriends/></button>
+                <button 
+                className={isFriend(props.memberId,friends)+" btn1"} 
+                onClick={()=>addFriend(props.memberId,props.token,setFriends)}>
+                    <FaUserFriends/>
+                </button>
             <form>
                 <input type="text" placeholder="your text" value={content} 
                 onChange={(e)=>setContent(e.target.value)}/>
