@@ -89,7 +89,7 @@ export default function Forum(props) {
                 {/* <Post  /> */}
                 {posts && posts.length ? (posts.map(item =>
                     <div>
-                        <div key={item._id} className="forum" onClick={() => setVis(vis ? 0 : item._id)}>
+                        <div key={item._id} className="forumClass" onClick={() => setVis(vis ? 0 : item._id)}>
                             <img src={item.author.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}` : exmpl} />
                             <div><span>Created by: </span>{item.author.userName}</div>
                             <div><span>Created at: </span>{new Date(item.createdAt).toLocaleDateString()}</div>
@@ -101,9 +101,11 @@ export default function Forum(props) {
                             <input value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Leave comment' />
                             <button type='submit' className="btn2"><BiSend /></button>                       
                         </form>
-                        <div className={vis === item._id ? "show" : "hide"}>
+                        <div className={vis === item._id ? "show" : "hide"} id="chats">
                             {item.comments && item.comments.length && (item.comments.map(answer => (
-                                    <div>{answer.comment} </div> 
+                                   <div className={answer.author==props.user?"right flex":"left flex"}>
+                                        <div className= "profileText">{answer.comment} </div><br /> 
+                                   </div>
                                 )))
                             }
                             </div>
