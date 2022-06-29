@@ -261,7 +261,7 @@ body{
                     "photo date"
                     "subject subject"
                     "content content"
-                    "form button";
+                    "form form";
                     img{
                         grid-area: photo;
                     }
@@ -286,6 +286,10 @@ body{
                             margin-left: 5px;
                         }
                     }
+                    table{
+                        height: 500px;
+                        display: flex;
+                    };
                 }
             }
         }

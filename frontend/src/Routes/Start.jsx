@@ -16,16 +16,16 @@ export default function Forum(props) {
     const notify = () => toast("Wow so easy!");
     const topicNotify = () => toast("Topic is saved!")
     const [posts, setPosts] = useState(null)
-    const [hidden, setHidden] = useState("hide")
-    const [comment, setComment] = useState([])
+    // const [hidden, setHidden] = useState("hide")
+    const [comment, setComment] = useState(null)
     const [vis, setVis] = useState(false)
 
-    console.log(props.user);
+    // console.log(props.user);
 
     function wakeUpServer() {
         axios.get(`${process.env.REACT_APP_BE_SERVER}/`)
             .then(res => {
-                console.log("SEVER IS UP")
+                // console.log("SEVER IS UP")
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
@@ -61,21 +61,19 @@ export default function Forum(props) {
 
     wakeUpServer()
 
-    function commentPost(post, e) {
+    function commentPost(post, userId, e) {
         e.preventDefault()
-        post.comments.push({author: props.user, comment})
+        post.comments.push({author: userId, comment})
         const headers = { Authorization: `Bearer ${props.token}` }
         console.log(post);
-        axios.put(`${process.env.REACT_APP_BE_SERVER}/posts/addComment`, post, { headers })
-            .then(res => getPosts())
+        if(comment){
+            axios.put(`${process.env.REACT_APP_BE_SERVER}/posts/addComment/${post._id}`, {author: userId, comment}, { headers })
+            .then(res => {
+                getPosts()
+                setComment("")
+            })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
-        // e.preventDefault()
-        // const data = { author: props.user, post, comment }
-        // const headers = { Authorization: `Bearer ${props.token}` }
-        // console.log("Post and comment: ", );
-        // axios.put(`${process.env.REACT_APP_BE_SERVER}/posts/addComment`, data, { headers })
-        //     .then(res => getPosts())
-        //     .catch(error => alert(error.response?.data?.error || "Unknown error"))
+        }
     }
 
     return (
@@ -99,15 +97,16 @@ export default function Forum(props) {
                             <div className='cont'>{item.content}</div>
                         </div>
 
-                        <form onSubmit={(e) => commentPost(item._id, e)} className={vis === item._id ? "show" : "hide"}>
+                        <form onSubmit={(e) => commentPost(item, props.user, e)} className={vis === item._id ? "show" : "hide"}>
                             <input value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Leave comment' />
-                            <button type='submit' className="btn2"><BiSend /></button>
-                            {item.comments && item.comments.length ? (item.comments.map(answer => (
-                                <div>{answer.comment}</div> 
-                                
-                            ))): null
-                            }
+                            <button type='submit' className="btn2"><BiSend /></button>                       
                         </form>
+                        <div className={vis === item._id ? "show" : "hide"}>
+                            {item.comments && item.comments.length && (item.comments.map(answer => (
+                                    <div>{answer.comment} </div> 
+                                )))
+                            }
+                            </div>
                     </div>
                 )) : <img src={logo} id="henriksLoadingAnimation" />}
             </section>
