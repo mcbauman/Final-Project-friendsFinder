@@ -36,12 +36,12 @@ body::-webkit-scrollbar {
 }
 .red{
     background-image: url("../components/bg2.jpg");
-    --background:rgb(255,252,245);
+    --background:rgba(255,252,245, .6);
     --darkmain:rgb(190, 51, 36);
     --darksecondary:rgb(50,50,50);
     --brightthirdly:rgb(255,235,205);
     --brightmain:var(--background);
-    --brightmainOpacity:rgba(255,252,245, .8);
+    --brightmainOpacity:rgba(255,252,245, .6);
     --brightsecondary:var(--background);
 }
 
@@ -211,40 +211,40 @@ body{
                         grid-area: form;
                     }
                 }
-                >.messages{
-                    display: grid;
-                    grid-template-columns: repeat(4, 1fr) 75px;
-                    grid-template-areas: 
-                        "img author . . btn4"
-                        "img subject . . btn3"
-                        "text text text text ."
-                        "form form form form form";
-                    .img2{
-                        width: 100px;
-                        grid-area: img;
-                    }
-                    .author{
-                        grid-area: author;
-                        font-size: 2rem;
-                        font-weight: 600;
-                    }
-                    .subject{
-                        grid-area: subject;
-                        font-weight: 600;
-                    }
-                    .btn1{
-                        grid-area: btn3;
-                    }
-                    .btn2{
-                        grid-area: btn4;
-                    }
-                    form{
-                        grid-area: form;
-                    }
-                    .profileText{
-                        grid-area: text;
-                    }
-                }
+                // >.messages{
+                //     display: grid;
+                //     grid-template-columns: repeat(4, 1fr) 75px;
+                //     grid-template-areas: 
+                //         "img author . . btn4"
+                //         "img subject . . btn3"
+                //         "text text text text ."
+                //         "form form form form form";
+                //     .img2{
+                //         width: 100px;
+                //         grid-area: img;
+                //     }
+                //     .author{
+                //         grid-area: author;
+                //         font-size: 2rem;
+                //         font-weight: 600;
+                //     }
+                //     .subject{
+                //         grid-area: subject;
+                //         font-weight: 600;
+                //     }
+                //     .btn1{
+                //         grid-area: btn3;
+                //     }
+                //     .btn2{
+                //         grid-area: btn4;
+                //     }
+                //     form{
+                //         grid-area: form;
+                //     }
+                //     .profileText{
+                //         grid-area: text;
+                //     }
+                // }
                 .chatOV{
                     display: grid;
                     text-decoration: none;
@@ -290,6 +290,7 @@ body{
                         grid-area: messages;
                         flex-direction: column;
                         text-decoration: underline;
+
                     }
                 }
                 .forumClass{

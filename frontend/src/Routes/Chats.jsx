@@ -49,7 +49,7 @@ export default function Messages(props){
                                 img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id}`}
                                 sethide={setHide} token={props.token}/>}/>
                         ))} 
-                    </Routes>
+                    </Routes>   
                     {!hide&&                    
                     chats.map(item=>(
                         <div key={item._id} >
