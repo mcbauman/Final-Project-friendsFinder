@@ -219,12 +219,13 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
 //Get CHAT-Members )
 app.get("/chats", checkAuth, async (req,res,next)=>{
     try {
-        // console.log("userId Request has Asked for",req.user._id);
+//        console.log("userId Request has Asked for",req.user._id);
         const query = Chat.find({members:{$elemMatch:{id:req.user._id}}})
         query.populate("members.id","userName profilePicture")
         const chats=await query.exec()
-        // const readableChats=chats.map(chat=>chat.toObject())
-        // console.log("READABLECHATS",JSON.stringify(readableChats,null,"  "));
+//        console.log("QUERY",chats);
+        const readableChats=chats.map(chat=>chat.toObject())
+//        console.log("READABLECHATS",JSON.stringify(readableChats,null,"  "));
         chats.reverse()
         res.send(chats)
     } catch (err){
@@ -237,13 +238,18 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
 app.post("/chats", checkAuth, async(req, res, next) => {
     try {
         let chatId
-        console.log("userId",req.user._id);
-        console.log("recipient",req.body.recipient);
-        const existingChats = await Chat.find({members:{$elemMatch:{id:req.user._id}},members:{$elemMatch:{id:mongoose.Types.ObjectId(req.body.recipient)}}})
+//        console.log("userId",req.user._id);
+//        console.log("recipient",req.body.recipient);
+//        const existingChats = await Chat.find({members:{$elemMatch:{id:req.user._id}},members:{$elemMatch:{id:mongoose.Types.ObjectId(req.body.recipient)}}})
 //        const existingChats = await Chat.find({members:{$all:[req.user._id,req.body.recipient]}})
 //       const existingChats = await Chat.find({members:{$all:[{id:req.user._id},{id:mongoose.Types.ObjectId(req.body.recipient)}]}})
         const filterone=await Chat.find({members:{$elemMatch:{id:req.user._id}}})
+        const existingChats=filterone.filter(item=>item.members.find(member=>{
+//            console.log("MEMBER", member);
+//            console.log("REVIPIENT",req.body.recipient);
+            return member.id.toString()===req.body.recipient}))
         console.log("FilterOne",filterone);
+        console.log("FilterTwo", existingChats);
        //$eq
         console.log(existingChats);
         if(!existingChats.length>0){

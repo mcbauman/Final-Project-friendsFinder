@@ -16,6 +16,8 @@ export default function Messages(props){
     const [friends,setFriends]=useState([])
     const {hide,setHide}=useContext(Context)
 
+console.log(props.user);
+
     function loadChats(){
     const headers = { Authorization: `Bearer ${props.token}` }
     axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
