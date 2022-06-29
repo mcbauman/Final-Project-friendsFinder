@@ -28,7 +28,7 @@ POST {{url}}/user/login
 Content-Type: application/json
 
 {
-    "email":"maze@online.de",
+    "email":"cynthia@jepleting.de",
     "password":"aA@123456"
 }
 ###

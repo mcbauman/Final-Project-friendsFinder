@@ -219,12 +219,12 @@ app.get("/message/find",checkAuth,async(req, res, next) => {
 //Get CHAT-Members )
 app.get("/chats", checkAuth, async (req,res,next)=>{
     try {
-        console.log("userId Request has Asked for",req.user._id);
+        // console.log("userId Request has Asked for",req.user._id);
         const query = Chat.find({members:{$elemMatch:{id:req.user._id}}})
         query.populate("members.id","userName profilePicture")
         const chats=await query.exec()
-        const readableChats=chats.map(chat=>chat.toObject())
-        console.log("READABLECHATS",JSON.stringify(readableChats,null,"  "));
+        // const readableChats=chats.map(chat=>chat.toObject())
+        // console.log("READABLECHATS",JSON.stringify(readableChats,null,"  "));
         chats.reverse()
         res.send(chats)
     } catch (err){
@@ -237,8 +237,17 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
 app.post("/chats", checkAuth, async(req, res, next) => {
     try {
         let chatId
-        const existingChats = await Chat.find({members:{$elemMatch:{id:req.user._id}},members:{$elemMatch:{id:req.body.recipient}}})
+        console.log("userId",req.user._id);
+        console.log("recipient",req.body.recipient);
+        const existingChats = await Chat.find({members:{$elemMatch:{id:req.user._id}},members:{$elemMatch:{id:mongoose.Types.ObjectId(req.body.recipient)}}})
+//        const existingChats = await Chat.find({members:{$all:[req.user._id,req.body.recipient]}})
+//       const existingChats = await Chat.find({members:{$all:[{id:req.user._id},{id:mongoose.Types.ObjectId(req.body.recipient)}]}})
+        const filterone=await Chat.find({members:{$elemMatch:{id:req.user._id}}})
+        console.log("FilterOne",filterone);
+       //$eq
+        console.log(existingChats);
         if(!existingChats.length>0){
+            console.log("IF-Condition-Exicuted");
             const chat = await Chat.create({members:[{id:req.user._id},{id:req.body.recipient}]})
             chatId=chat._id
             console.log("SERVER/CHATS/NEW/240",chat);
@@ -246,6 +255,8 @@ app.post("/chats", checkAuth, async(req, res, next) => {
             const message=await cMessage.create({...req.body,chatId:chatId})
             res.send(message)
         }else{
+            console.log("ELSE-Condition-Exicuted");
+            console.log(existingChats);
             chatId=existingChats[0]._id
             console.log("SERVER/CHATS/EXISTING/243",existingChats[0]._id);
             const message=await cMessage.create({...req.body,chatId:chatId})

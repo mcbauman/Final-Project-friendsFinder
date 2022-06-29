@@ -15,6 +15,7 @@ body::-webkit-scrollbar {
     --brightsecondary:var(--background);
 }
 .blue{
+    background-image: url("../components/amillionfriends.jpg");
     --background:rgb(250,250,255);
     --darkmain:rgb(80, 80, 150);
     --darksecondary:rgb(100,100,150);
@@ -24,6 +25,7 @@ body::-webkit-scrollbar {
     --brightsecondary:var(--background);
 }
 .green{
+    background-image: url("../components/bg3.jpg");
     --background:rgb(250,255,250);
     --darkmain:rgb(50, 100, 0);
     --darksecondary:rgb(50,50,50);
@@ -33,7 +35,7 @@ body::-webkit-scrollbar {
     --brightsecondary:var(--background);
 }
 .red{
-    background-image: url("../components/amillionfriends.jpg");
+    background-image: url("../components/bg2.jpg");
     --background:rgb(255,252,245);
     --darkmain:rgb(190, 51, 36);
     --darksecondary:rgb(50,50,50);
@@ -56,6 +58,11 @@ body{
     background-image: url("../components/people-4050698_1280.jpg");
     background-attachment: fixed;
     background-size: contain;
+    >div{
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 95vh;
+    }
     header{
         position: sticky;
         width: 100%;
