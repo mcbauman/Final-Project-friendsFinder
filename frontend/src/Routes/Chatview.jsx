@@ -53,7 +53,7 @@ export default function Chatview(props){
     return(
         <div className="cMessages">
             <img src="props.img" alt="UserProfile" />
-            <div>{props.member}</div>
+            <div id="name">{props.member}</div>
             <NavLink onClick={()=>props.sethide(false)} to="/Chats">
                 <IoIosCloseCircleOutline/></NavLink>
             <button className={" btn1"}>
@@ -64,7 +64,7 @@ export default function Chatview(props){
                 <button onClick={sendMessage} className="btn2">
                 <MdOutlineEmail/></button>
             </form>
-            {messages?(<div>
+            {messages?(<div id="chats">
                 {messages.map(item=>(
                     <div className={item.user==props.user?"right flex":"left flex"}>
                         <div className= "profileText">{item.content}</div>

@@ -261,6 +261,35 @@ body{
                         color:black
                     }
                 }
+                .cMessages{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-areas: 
+                    "profPic user close"
+                    "profPic btnfriend . "
+                    "form form form "
+                    "messages messages messages";
+                    img{
+                        grid-area: profPic;
+                    }
+                    #name{
+                        grid-area: user;
+                    }
+                    a{
+                        grid-area: close;
+                        text-align: end;
+                    }
+                    button{
+                        grid-area:btnfriend;
+                    }
+                    form{
+                        grid-area: form;
+                        display: flex;
+                    }
+                    #chats{
+                        grid-area: messages;
+                    }
+                }
                 .forum{
                     display: grid;
                     grid-template-columns: 25% 75%;
@@ -356,6 +385,12 @@ textarea{
 }
 .flex{
     display: flex;
+}
+.left{
+    .profileText{
+        background-color:var(--darkmain);
+    color:var(--brightthirdly);
+    }
 }
 .right{
     justify-content: end;

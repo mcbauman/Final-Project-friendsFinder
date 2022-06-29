@@ -279,7 +279,6 @@ app.post("/messages",checkAuth,async(req, res, next) => {
         const query = cMessage.find({chatId: req.body.chatId})
 //        query.populate("member", "userName profilePicture")
         const messages = await query.exec()
-        messages.reverse()
         res.send(messages)
     } catch (error) {
         next({status:400, message:error.message})
