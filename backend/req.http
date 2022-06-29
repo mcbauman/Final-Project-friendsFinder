@@ -28,7 +28,7 @@ POST {{url}}/user/login
 Content-Type: application/json
 
 {
-    "email":"maze@online.de",
+    "email":"cynthia@jepleting.de",
     "password":"aA@123456"
 }
 ###
@@ -82,7 +82,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MTI5Z
 ### Chat POST:
 POST {{url}}/chat/add
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWEyNDdhYjM0NzY3ODk5NGU2YzUiLCJpYXQiOjE2NTY0ODk5NTB9.5Xzb3Ge5btneoCHsPbBeO9XA6wA4vLOLYMlUS1n3N54
 
 {
     "user": "62961c6e7ab347678994e6c8",
@@ -92,7 +92,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 ### Look for Chats
 GET {{url}}/chats
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTYwNTcyNzl9.uT8zQPqEfPCZBOV-Mu32O64_7I9ROyg8M54N3TYbxN4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWEyNDdhYjM0NzY3ODk5NGU2YzUiLCJpYXQiOjE2NTY0ODk5NTB9.5Xzb3Ge5btneoCHsPbBeO9XA6wA4vLOLYMlUS1n3N54
 
 ### Post into Chats
 POST {{url}}/chats
@@ -100,9 +100,8 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2ZTdhYjM0NzY3ODk5NGU2YzgiLCJpYXQiOjE2NTUyMTI4MjF9.CS38u_61D3OKaD48gLuxQaBYi8j7MwHKELthWtt1NdU
 
 {
-    "user":"62961c6e7ab347678994e6c8",
     "recipient":"6297a994433681038a55ada3",
-    "content":"Matthias to Torge from Backend"
+    "content":"Cynthia to Torge from Backend"
 }
 
 ### Check Messagage

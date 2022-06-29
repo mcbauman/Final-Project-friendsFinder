@@ -11,6 +11,8 @@ import {Context}from "../components/context"
 import trans from "../components/trans";
 import {useContext} from "react";
 import logo from "../components/COF.png";
+import {toast, ToastContainer} from "react-toastify";
+const notifyFeedback = (text) => toast(text);
 
 export default function Search(props){
     const [listOfUsers, setListOfUser]=useState([])
@@ -54,6 +56,7 @@ export default function Search(props){
             axios.post(`${process.env.REACT_APP_BE_SERVER}/chats`,data, {headers})
                 .then(res => {
                     setContent("")
+                    notifyFeedback(`Your message was send`)
                 })
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
@@ -84,13 +87,21 @@ export default function Search(props){
                         <button className={isFriend(item._id,friends)+" btn1"} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
                         <button className="btn2" onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
                         <div className="profileText">{item.profileText}</div>
-                        <form className={vis===item._id?"show":"hide"}>
+                        <form className={vis===item._id?"show":"hide"} onSubmit={(e)=>{e.preventDefault();writeMessage(item._id)}}>
                             <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
                         </form>
                     </div>
                 ))}
             </section>):(<img src={logo} id="henriksLoadingAnimation" />)}
-
+            <ToastContainer position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover/>
         </article>
     )
 }

@@ -55,7 +55,7 @@ export default function Messages(props){
                         <div key={item._id} >
                             <NavLink key={item._id} to={item._id} className="chatOV">
                                 <img className="img2" 
-                                src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id=props.user}`:exmpl}/>
+                                src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id}`:exmpl}/>
                                 <div className="author">{item.members[0].id._id===props.user?item.members[1].id.userName:item.members[0].id.userName}</div>
                             </NavLink>
                             <button className={isFriend(
