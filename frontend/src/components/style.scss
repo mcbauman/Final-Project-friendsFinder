@@ -150,6 +150,7 @@ body{
                         background-color: var(--brightsecondary);
                         font-style: italic;
                         font-size: 1.4rem;
+                        width: fit-content;
                         padding:10px;
                         margin-top: 10px;
                         border-radius: 10px;
@@ -353,7 +354,12 @@ textarea{
 .hide {
     display: none;
 }
-
+.flex{
+    display: flex;
+}
+.right{
+    justify-content: end;
+}
 #logo871{
     width: 26px;
     height: 26px;

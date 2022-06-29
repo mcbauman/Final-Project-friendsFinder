@@ -9,6 +9,8 @@ import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {Context}from "../components/context"
 import {useContext} from "react";
 import logo from "../components/COF.png";
+import {toast, ToastContainer} from "react-toastify";
+const notifyFeedback = (text) => toast(text);
 
 export default function Chatview(props){
     const [messages,setMessages]=useState()
@@ -24,6 +26,7 @@ export default function Chatview(props){
     axios.post(`${process.env.REACT_APP_BE_SERVER}/messages`,body,{headers})
         .then(res => {
             setMessages(res.data)
+            console.log(res.data);
         })
     }
     function sendMessage(e){
@@ -36,6 +39,7 @@ export default function Chatview(props){
                 .then(res => {
                     setContent("")
                     requestMessages()
+                    notifyFeedback(`Your message was send`)
                 })
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
@@ -62,23 +66,21 @@ export default function Chatview(props){
             </form>
             {messages?(<div>
                 {messages.map(item=>(
-                    <div className="profileText">{item.content}</div>
+                    <div className={item.user==props.user?"right flex":"left flex"}>
+                        <div className= "profileText">{item.content}</div>
+                    </div>
                 ))}
             </div>)
             :<img src={logo} id="henriksLoadingAnimation" />}
+            <ToastContainer position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover/>
         </div>
     )
 }
-
-    {/* <div key={item._id} className="messages">
-            <img className="img2" src={item.author.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}`:exmpl}/>
-            <div className="author">{item.author.userName}</div>
-            <div className="subject">{item.subject}</div>
-            <button className={isFriend(item.author._id,friends)+" btn1"} onClick={()=>addFriend(item.author._id,props.token,setFriends)}><FaUserFriends/></button>
-            <button className="btn2" onClick={()=>writeMessage(item._id,item.author._id)}><MdOutlineEmail/></button>
-            <form className={vis===item._id?"show":"hide"}>
-                <input type="text" placeholder="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
-                <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
-            </form>
-            <div className="profileText">{item.content}</div>
-        </div> */}
