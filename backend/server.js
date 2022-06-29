@@ -310,11 +310,14 @@ app.get("/posts", checkAuth, async(req, res, next) => {
 })
 
 // PUT Forum:
-app.put("/posts/addComment", checkAuth, async(req, res, next) => {
+app.put("/posts/addComment/:id", checkAuth, async(req, res, next) => {
     try{
-        console.log("Check from backend: ",req.body.post);
-        const forum = await Forum.findByIdAndUpdate(req.body.post._id, {$push:{comments:{author:req.body.author, comment: req.body.comment}}}) 
+        console.log("Dta from frontend: ",req.body);
+        const forum = await Forum.findById(req.params.id) 
+        forum.comments.push(req.body)
+        await forum.save()
         res.send(forum)
+        console.log("Forum after save: ",forum);
     }catch (error) {
         next({status:400, message:error.message})
     }
