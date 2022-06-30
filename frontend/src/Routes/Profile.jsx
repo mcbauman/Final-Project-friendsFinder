@@ -137,7 +137,15 @@ export default function Profile(props){
                         <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder={usr.number}/>
                         <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder={usr.zipCode}/>
                         <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder={usr.city}/>
-                        <input type="text" value={country} onChange={e=>setCountry(e.target.value)} placeholder={usr.country}/>
+                        <select onchange={e=>setCountry(e.target.value)} defautl={usr.country}>
+                            <option>DE</option>
+                            <option>AUT</option>
+                            <option>CH</option>
+                            <option>DK</option>
+                            <option>NL</option>
+                            <option>KE</option>
+                            <option>PH</option>
+                        </select>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                         <hr/>
                         {trans[lang].YoureFriends}:
