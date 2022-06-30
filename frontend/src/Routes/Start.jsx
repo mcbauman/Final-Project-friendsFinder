@@ -60,7 +60,6 @@ export default function Forum(props) {
 
     return (
         <article>
-            Forum:
             <section id="forum">
                 <form onSubmit={declareTopic}>
                     <input type="text" placeholder='subject' onChange={e => setSubject(e.target.value)} />

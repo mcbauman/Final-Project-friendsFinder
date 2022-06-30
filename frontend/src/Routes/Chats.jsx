@@ -31,9 +31,7 @@ export default function Messages(props){
         setHide(false)
         checkFriends(props.token,setFriends)
     },[])
-    // chats.map(item=>{
-    //     console.log(item.members[1].id.profilePicture);
-    // })
+
     chats.forEach(item=>{
         if(item.members[0].id._id===props.user){
             item.self=item.members[0].id;
