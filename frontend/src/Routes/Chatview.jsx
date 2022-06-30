@@ -2,12 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import {IoIosCloseCircleOutline} from "react-icons/io"
 import {FaUserFriends} from "react-icons/fa"
-import {MdCardMembership, MdCleaningServices, MdOutlineEmail} from "react-icons/md";
+import {MdOutlineEmail} from "react-icons/md";
 import {NavLink} from "react-router-dom";
 import axios from "axios"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
-import {Context}from "../components/context"
-import {useContext} from "react";
 import logo from "../components/COF.png";
 import {toast, ToastContainer} from "react-toastify";
 const notifyFeedback = (text) => toast(text);
@@ -16,9 +14,6 @@ export default function Chatview(props){
     const [messages,setMessages]=useState()
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
-    const {hide,setHide}=useContext(Context)
-
-//    console.log("PROPS",props);
 
     function requestMessages(){
     const headers = { Authorization: `Bearer ${props.token}` }
@@ -27,6 +22,7 @@ export default function Chatview(props){
         .then(res => {
             setMessages(res.data)
             console.log(res.data);
+            checkFriends(props.token,setFriends)
         })
     }
     function sendMessage(e){
@@ -44,7 +40,7 @@ export default function Chatview(props){
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
     }
-    
+
     props.sethide(true)
     useEffect(()=>{
         requestMessages()
@@ -56,8 +52,11 @@ export default function Chatview(props){
             <div id="name">{props.member}</div>
             <NavLink onClick={()=>props.sethide(false)} to="/Chats">
                 <IoIosCloseCircleOutline/></NavLink>
-            <button className={" btn1"}>
-                <FaUserFriends/></button>
+                <button 
+                className={isFriend(props.memberId,friends)+" btn1"} 
+                onClick={()=>addFriend(props.memberId,props.token,setFriends)}>
+                    <FaUserFriends/>
+                </button>
             <form>
                 <input type="text" placeholder="your text" value={content} 
                 onChange={(e)=>setContent(e.target.value)}/>

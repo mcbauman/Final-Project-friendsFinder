@@ -61,7 +61,7 @@ export default function Messages(props){
                             <button className={isFriend(
                                     item.members[0].id._id===props.user?item.members[1].id._id:item.members[0].id._id,friends
                                     )+" btn1"} onClick={()=>addFriend(
-                                        item.members[0].id._id===props.user?item.members[1].id._id:item.members[0].id._id,friends,props.token,setFriends
+                                        item.members[0].id._id===props.user?item.members[1].id._id:item.members[0].id._id,props.token,setFriends
                                         )}><FaUserFriends/></button>
                         </div>
                     ))}

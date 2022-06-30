@@ -15,10 +15,10 @@ const tokenFromLS=localStorage.getItem("token")
 const tokenDefault=tokenFromLS?tokenFromLS:null
 
 export default function App(){
-    const [user,setUser]=useState(userDefault)
-    const [token,setToken]=useState(tokenDefault)
-    const [userProfPic, setUserProfPic] = useState(userProfPicDefault)
-    const {theme,setTheme}=useContext(Context)
+   const [user,setUser]=useState(userDefault)
+   const [token,setToken]=useState(tokenDefault)
+   const [userProfPic, setUserProfPic] = useState(userProfPicDefault)
+   const {theme,setTheme}=useContext(Context)
     
    const [lat, setLat]=useState(0)
    const [leng,setLeng]=useState(0)

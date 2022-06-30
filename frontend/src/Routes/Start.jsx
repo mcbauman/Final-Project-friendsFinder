@@ -1,9 +1,7 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-import { checkFriends } from "../components/functions";
 import { useState, useEffect } from 'react';
-import { MdLogin } from "react-icons/md"
 import exmpl from "../components/exmpl.jpeg"
 import {BiSend} from "react-icons/bi"
 import logo from "../components/COF.png";
@@ -16,22 +14,8 @@ export default function Forum(props) {
     const notify = () => toast("Wow so easy!");
     const topicNotify = () => toast("Topic is saved!")
     const [posts, setPosts] = useState(null)
-    // const [hidden, setHidden] = useState("hide")
     const [comment, setComment] = useState(null)
     const [vis, setVis] = useState(false)
-
-    // console.log(props.user);
-
-    function wakeUpServer() {
-        axios.get(`${process.env.REACT_APP_BE_SERVER}/`)
-            .then(res => {
-                // console.log("SEVER IS UP")
-            })
-            .catch(error => alert(error.response?.data?.error || "Unknown error"))
-    }
-    useEffect(() => {
-        wakeUpServer()
-    }, [])
 
     useEffect(() => {
         getPosts()
@@ -58,8 +42,6 @@ export default function Forum(props) {
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
-
-    wakeUpServer()
 
     function commentPost(post, userId, e) {
         e.preventDefault()
@@ -96,7 +78,6 @@ export default function Forum(props) {
                             <div className='subj'><span>Subject: </span>{item.subject}</div>
                             <div className='cont'>{item.content}</div>
                         </div>
-
                         <form onSubmit={(e) => commentPost(item, props.user, e)} className={vis === item._id ? "show" : "hide"}>
                             <input value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Leave comment' />
                             <button type='submit' className="btn2"><BiSend /></button>                       
@@ -105,14 +86,12 @@ export default function Forum(props) {
                             {item.comments && item.comments.length && (item.comments.map(answer => (
                                    <div className={answer.author==props.user?"right flex":"left flex"}>
                                         <div className= "profileText">{answer.comment} </div><br /> 
-                                   </div>
-                                )))
+                                   </div>)))
                             }
                             </div>
                     </div>
                 )) : <img src={logo} id="henriksLoadingAnimation" />}
             </section>
-
             <br />
             <button onClick={notify}>Notify!</button>
             <ToastContainer position="bottom-center"
@@ -124,8 +103,6 @@ export default function Forum(props) {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover />
-
-
         </article>
     )
 }
