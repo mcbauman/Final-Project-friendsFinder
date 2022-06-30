@@ -7,6 +7,7 @@ import {NavLink} from "react-router-dom";
 import axios from "axios"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
 import logo from "../components/COF.png";
+import exmpl from "../components/exmpl.jpeg"
 import {toast, ToastContainer} from "react-toastify";
 const notifyFeedback = (text) => toast(text);
 
@@ -48,7 +49,7 @@ export default function Chatview(props){
 
     return(
         <div className="cMessages">
-            <img src="props.img" alt="UserProfile" />
+            <img src={props.img?props.img:exmpl} alt="UserProfile" />
             <div id="name">{props.member}</div>
             <NavLink onClick={()=>props.sethide(false)} to="/Chats">
                 <IoIosCloseCircleOutline/></NavLink>

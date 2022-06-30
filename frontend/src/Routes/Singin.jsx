@@ -58,7 +58,16 @@ export default function Singin(props){
                 <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder="Number"/>
                 <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder="Zip-Code"/>
                 <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder="City"/>
-                <input type="text" value={country} onChange={e=>setCountry(e.target.value)} placeholder="Country"/>
+                
+                <select onchange={e=>setCountry(e.target.value)}>
+                    <option>DE</option>
+                    <option>AUT</option>
+                    <option>CH</option>
+                    <option>DK</option>
+                    <option>NL</option>
+                    <option>KE</option>
+                    <option>PH</option>
+                </select>
 
                 <fieldset onChange={e=>setGender(e.target.id)}>
                     <input type="radio" name="gender" id="♂️"/><label htmlFor="♂️">♂️</label>
