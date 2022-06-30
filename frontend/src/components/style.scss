@@ -36,12 +36,12 @@ body::-webkit-scrollbar {
 }
 .red{
     background-image: url("../components/bg2.jpg");
-    --background:rgba(255,252,245, .6);
+    --background:rgba(255,252,245, .9);
     --darkmain:rgb(190, 51, 36);
     --darksecondary:rgb(50,50,50);
     --brightthirdly:rgb(255,235,205);
     --brightmain:var(--background);
-    --brightmainOpacity:rgba(255,252,245, .6);
+    --brightmainOpacity:rgba(255,252,245, .4);
     --brightsecondary:var(--background);
 }
 
@@ -162,7 +162,7 @@ body{
                 form{
                     button{
                         height: 100%;
-                        margin-left: 5px;
+                        // margin-left: 5px;
                     }
                     #chats{
                         grid-area: messages;
