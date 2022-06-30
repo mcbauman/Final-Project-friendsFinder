@@ -36,6 +36,7 @@ export default function Profile(props){
         setFile(e.target.files[0])
     }
     function saveFile(e){
+        e.preventDefault()
         if(!file){return alert("Select a file first:)")}
         const formData = new FormData()
         formData.append("selectedFile", file)
@@ -117,9 +118,9 @@ export default function Profile(props){
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
                 <hr/>
-                <form>
+                <form onSubmit={saveFile}>
                     <input id="fileSelector" type="file" onChange={handleSelectedFile} />
-                    <button className="buttonSubmit" onClick={saveFile}><MdOutlineSaveAlt/></button>
+                    <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                     {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
                 </form>
             </section>

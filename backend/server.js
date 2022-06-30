@@ -241,7 +241,7 @@ app.put("/posts/addComment/:id", checkAuth, async(req, res, next) => {
 })
 
 // Global Error Handler:
-app.use("/",(error, req, res, next)=>{
+app.use((error, req, res, next)=>{
     console.log("GlobalError",error);
     res.status(error.status || 500).send({
         error: error.message || error.errors ||"Something went wrong"
