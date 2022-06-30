@@ -46,7 +46,7 @@ export default function Messages(props){
 
     return(
         <article>
-            <section id="messages">
+            <section id="chatsOV">
             {chats&&chats.length?(
                 <>
                     <Routes> 
@@ -61,8 +61,8 @@ export default function Messages(props){
                     </Routes>   
                     {!hide&&                    
                     chats.map(item=>(
-                        <div key={item._id} >
-                            <NavLink key={item._id} to={item._id} className="chatOV">
+                        <div key={item._id}  className="chatOV">
+                            <NavLink key={item._id} to={item._id}>
                                 <img className="img2" 
                                 src={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:exmpl}/>
                                 <div className="author">{item.other.userName}</div>
