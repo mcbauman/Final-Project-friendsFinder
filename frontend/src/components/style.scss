@@ -186,10 +186,9 @@ body{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr) repeat(2,75px);
                     grid-template-areas: 
-                        "img userName userName userName userName userName"
-                        "img gender age . btn1 btn2"
-                        "text text text text text text"
-                        "text text text text text text"
+                        "img userName gender age btn1 btn2"
+                        "img text text text text text"
+                        "img text text text text text"
                         "form form form form form form";
                     .imgSearch{
                         grid-area: img;
@@ -268,7 +267,7 @@ body{
                 }
                 .forumClass{
                     display: grid;
-                    grid-template-columns: 25% 75%;
+                    grid-template-columns: 1fr 1fr;
                     grid-template-areas: 
                     "photo name"
                     "photo date"
