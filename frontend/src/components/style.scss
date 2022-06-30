@@ -47,7 +47,6 @@ body::-webkit-scrollbar {
 
 //Structured Styling
 body{
-    
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -103,7 +102,6 @@ body{
     main{
         height: 90%;
         article{
-//            width: 95%;
             max-width: 1200px;
             margin:0 auto;
             padding: 20px;
@@ -144,7 +142,9 @@ body{
                     background-color: var(--brightsecondary);
                     border-radius: 5px;
                     box-shadow: 0 0 7px 1px var(--darksecondary);
- //                   border-bottom: solid 3px var(--darkmain);
+                    img {
+                        border-radius: 25px;
+                    }
                     .profileText{
                         border: 2px var(--darkmain) solid;
                         background-color: var(--brightsecondary);
@@ -156,15 +156,18 @@ body{
                         border-radius: 10px;
                     }
                     .activeFriend{
-//                           background-color: var(--darkmain);
-//                           color:white;
                         color:var(--darkmain);
-                    }
-                    img {
-                        border-radius: 25px;
                     }
                 }
                 form{
+                    button{
+                        height: 100%;
+                        margin-left: 5px;
+                    }
+                    #chats{
+                        grid-area: messages;
+                        flex-direction: column;
+                    }
                     .friendsView{
                          border-radius: 5px;
                          box-shadow: 0 0 7px 1px var(--darksecondary);
@@ -211,40 +214,6 @@ body{
                         grid-area: form;
                     }
                 }
-                // >.messages{
-                //     display: grid;
-                //     grid-template-columns: repeat(4, 1fr) 75px;
-                //     grid-template-areas: 
-                //         "img author . . btn4"
-                //         "img subject . . btn3"
-                //         "text text text text ."
-                //         "form form form form form";
-                //     .img2{
-                //         width: 100px;
-                //         grid-area: img;
-                //     }
-                //     .author{
-                //         grid-area: author;
-                //         font-size: 2rem;
-                //         font-weight: 600;
-                //     }
-                //     .subject{
-                //         grid-area: subject;
-                //         font-weight: 600;
-                //     }
-                //     .btn1{
-                //         grid-area: btn3;
-                //     }
-                //     .btn2{
-                //         grid-area: btn4;
-                //     }
-                //     form{
-                //         grid-area: form;
-                //     }
-                //     .profileText{
-                //         grid-area: text;
-                //     }
-                // }
                 .chatOV{
                     display: grid;
                     text-decoration: none;
@@ -317,18 +286,6 @@ body{
                         opacity: .5;
                     }
                 }
-                form{
-                        button{
-                            height: 100%;
-                            margin-left: 5px;
-                        }
-                        
-                    }
-                    #chats{
-                        grid-area: messages;
-                        flex-direction: column;
-                    }
-
             }
         }
     }
@@ -349,8 +306,6 @@ button{
     justify-content: center;
     align-items: center;
     background-color:var(--darksecondary);
-//    color: var(--brightthirdly);
-//    border:none;
     background-color: var(--brightsecondary);
     &:hover{
         box-shadow: 0 0 5px var(--darkmain) inset;
@@ -363,13 +318,6 @@ input{
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
 }
-// .formForumInput{
-//     display: flex;
-//     flex-direction: row;
-// }
-.ageInput{
-    width: 100px;
-}
 select{
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
@@ -381,7 +329,6 @@ textarea{
     font-weight: 200;
     width: 100%;
 }
-
 .show {
     display: flex;
 }
@@ -592,27 +539,3 @@ textarea{
             }
         }
 }
-
-
-/*
-STUCTURE
-header
-    nav
-        a
-        svg
-main
-    article
-        form
-            Section/Div
-            input
-            select
-            button
-        section
-            div/profileCard
-                img
-                div
-                button
-                form/hide/show
-            div/messages
-                
- */
