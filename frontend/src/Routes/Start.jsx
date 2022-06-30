@@ -79,8 +79,10 @@ export default function Forum(props) {
                             <div className='subj'><span>{trans[lang].subject} </span>{item.subject}</div>
                             <div className='cont'>{item.content}</div>
                         </div>
-                        <form onSubmit={(e) => commentPost(item, props.user, e)} className={vis === item._id ? "show" : "hide"}>
-                            <input value={comment} onChange={(e) => setComment(e.target.value)} placeholder={trans[lang].leaveComment} />
+                        <form onSubmit={(e) => commentPost(item, props.user, e)} 
+                        className={vis === item._id ? "show" : "hide"}>
+                            <input value={comment} onChange={(e) => setComment(e.target.value)} 
+                            placeholder={trans[lang].leaveComment} className="maxW"/>
                             <button type='submit' className="btn2"><BiSend /></button>                       
                         </form>
                         <div className={vis === item._id ? "show" : "hide"} id="chats">

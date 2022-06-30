@@ -65,30 +65,39 @@ export default function Search(props){
     return(
         <article>
             <form onSubmit={submitFunction}>
-                <Select onChange={setInterests} closeMenuOnSelect={false} isMulti options={options}/>
-                <input className="ageInput" type="text" onChange={(e)=>setMinAge(e.target.value||0)} placeholder={trans[lang].minAge}/>
-                <input className="ageInput" type="text" onChange={(e)=>setMaxAge(e.target.value||150)} placeholder={trans[lang].maxAge}/>
+                <input className="ageInput midW" type="text"
+                onChange={(e)=>setMinAge(e.target.value||0)} placeholder={trans[lang].minAge}/>
+                <input className="ageInput midW" type="text" 
+                onChange={(e)=>setMaxAge(e.target.value||150)} placeholder={trans[lang].maxAge}/>
                 <select onChange={(e)=>setSrchdGender(e.target.value)}>
                     <option>{trans[lang].any}</option>
                     <option>♂️</option>
                     <option>♀️</option>
                     <option>⚧</option>
                 </select>
+                <Select onChange={setInterests} closeMenuOnSelect={false} 
+                isMulti options={options}/>
                 <button type="submit"><MdSearch/></button>
             </form>
             {listOfUsers&&listOfUsers.length?(
             <section id="messages">
                 {listOfUsers.map(item=>(
                     <div key={item._id} className="ProfileCard">
-                        <img className='imgSearch' src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
+                        <img className='imgSearch' 
+                        src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
                         <div className="searchDivUserName">{item.userName}</div>
                         <div className='gender'>{item.gender}</div>
                         <div className='age'>{item.age}</div>
-                        <button className={isFriend(item._id,friends)+" btn1"} onClick={()=>addFriend(item._id,props.token,setFriends)}><FaUserFriends/></button>
-                        <button className="btn2" onClick={()=>writeMessage(item._id)}><MdOutlineEmail/></button>
+                        <button className={isFriend(item._id,friends)+" btn1"} 
+                            onClick={()=>addFriend(item._id,props.token,setFriends)}>
+                            <FaUserFriends/></button>
+                        <button className="btn2" onClick={()=>writeMessage(item._id)}>
+                            <MdOutlineEmail/></button>
                         <div className="profileText">{item.profileText}</div>
-                        <form className={vis===item._id?"show":"hide"} onSubmit={(e)=>{e.preventDefault();writeMessage(item._id)}}>
-                            <input type="text" placeholder="your text" value={content} onChange={(e)=>setContent(e.target.value)}/>
+                        <form className={vis===item._id?"show":"hide"} 
+                            onSubmit={(e)=>{e.preventDefault();writeMessage(item._id)}}>
+                            <input type="text" placeholder="your text" value={content} 
+                            onChange={(e)=>setContent(e.target.value)} className="maxW"/>
                         </form>
                     </div>
                 ))}

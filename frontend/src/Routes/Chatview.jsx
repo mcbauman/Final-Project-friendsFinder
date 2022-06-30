@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {IoIosCloseCircleOutline} from "react-icons/io"
 import {FaUserFriends} from "react-icons/fa"
 import {MdOutlineEmail} from "react-icons/md";
+import {CgCloseR} from "react-icons/cg"
 import {NavLink} from "react-router-dom";
 import axios from "axios"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
@@ -51,8 +51,9 @@ export default function Chatview(props){
         <div className="cMessages">
             <img src={props.img?props.img:exmpl} alt="UserProfile" />
             <div id="name">{props.member}</div>
+            <button className="bntX">
             <NavLink onClick={()=>props.sethide(false)} to="/Chats">
-                <IoIosCloseCircleOutline/></NavLink>
+                <CgCloseR/></NavLink></button>
                 <button 
                 className={isFriend(props.memberId,friends)+" btn1"} 
                 onClick={()=>addFriend(props.memberId,props.token,setFriends)}>
@@ -60,7 +61,8 @@ export default function Chatview(props){
                 </button>
             <form>
                 <input type="text" placeholder="your text" value={content} 
-                onChange={(e)=>setContent(e.target.value)}/>
+                onChange={(e)=>setContent(e.target.value)} 
+                className="maxW"/>
                 <button onClick={sendMessage} className="btn2">
                 <MdOutlineEmail/></button>
             </form>
