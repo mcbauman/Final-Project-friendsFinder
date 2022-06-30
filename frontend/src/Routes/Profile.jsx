@@ -133,7 +133,7 @@ export default function Profile(props){
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
                 <hr/>
-
+{/* PROFILPICTURE */}
                 <h1 onClick={()=>setP2(p2==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].profPic}</h1>
                 <form onSubmit={saveFile} className={p2} >
                     {usr&&usr.profilePicture?(<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${usr.profilePicture}`} alt="Profil-Picture"/>):<img src={exmpl}/>}
@@ -142,26 +142,36 @@ export default function Profile(props){
                 </form>
             </section>
             <hr/>
+{/* USERDATA */}
             <section>
                 {usr?(
                     <>
                     <h1 onClick={()=>setP3(p3==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].userData}</h1>
                     <form onSubmit={changeProfile} className={p3} >
-                        <input type="text" placeholder={usr.name} value={name}  onChange={(e)=>setName(e.target.value)}/>
-                        <input type="text" placeholder={usr.familyName} value={familyName}  onChange={(e)=>setFamilyName(e.target.value)}/>
-                        <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
-                        <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
-                        <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
+                        <input type="text" placeholder={usr.name} value={name} 
+                        onChange={(e)=>setName(e.target.value)} className="fullW"/>
+                        <input type="text" placeholder={usr.familyName} value={familyName} 
+                        onChange={(e)=>setFamilyName(e.target.value)} className="fullW"/>
+                        <input type="email" placeholder={usr.email} value={email} 
+                        onChange={(e)=>setEmail(e.target.value)} className="fullW"/>
+                        <textarea placeholder={usr.profileText} value={profileText} 
+                        onChange={(e)=>setProfileText(e.target.value)}/>
+                        <Select onChange={setInterests} closeMenuOnSelect={false} 
+                        isMulti options={Activities} defaultValue={usr.interests}/>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                     </form>
-
+{/* ADRESS */}
                     <hr/>
                     <h1 onClick={()=>setP4(p4==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].adress}</h1>
                     <form onSubmit={changeProfile} className={p4} >
-                        <input type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder={usr.street}/>
-                        <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder={usr.number}/>
-                        <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder={usr.zipCode}/>
-                        <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder={usr.city}/>
+                        <input type="text" value={street} onChange={e=>setStreet(e.target.value)} 
+                        placeholder={usr.street} className="fullW"/>
+                        <input type="number" value={number} onChange={e=>setNumber(e.target.value)} 
+                        placeholder={usr.number} className="smallW"/>
+                        <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} 
+                        placeholder={usr.zipCode}/>
+                        <input type="text" value={city} onChange={e=>setCity(e.target.value)} 
+                        placeholder={usr.city} className="fullW"/>
                         <select onchange={e=>setCountry(e.target.value)} defautl={usr.country}>
                             <option>DE</option>
                             <option>AUT</option>
@@ -173,7 +183,7 @@ export default function Profile(props){
                         </select>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                     </form>
-
+{/* FRIENDS */}
                         <hr/>
                         <h1 onClick={()=>setP5(p5==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].YoureFriends}:</h1>
                         <div className={p5}>

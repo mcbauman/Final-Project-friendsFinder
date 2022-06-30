@@ -145,6 +145,12 @@ body{
                     img {
                         border-radius: 25px;
                     }
+                    a{
+                        color:black;
+                        &:hover{
+                            color:var(--brightmain)
+                        }
+                    }
                     .profileText{
                         border: 2px var(--darkmain) solid;
                         background-color: var(--brightsecondary);
@@ -180,10 +186,9 @@ body{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr) repeat(2,75px);
                     grid-template-areas: 
-                        "img userName userName userName userName userName"
-                        "img gender age . btn1 btn2"
-                        "text text text text text text"
-                        "text text text text text text"
+                        "img userName gender age btn1 btn2"
+                        "img text text text text text"
+                        "img text text text text text"
                         "form form form form form form";
                     .imgSearch{
                         grid-area: img;
@@ -232,7 +237,7 @@ body{
                 }
                 .cMessages{
                     display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-columns: 1fr 1fr 50px;
                     grid-template-areas: 
                     "profPic user close"
                     "profPic btnfriend . "
@@ -244,11 +249,11 @@ body{
                     #name{
                         grid-area: user;
                     }
-                    a{
+                    .btnX{
                         grid-area: close;
                         text-align: end;
                     }
-                    button{
+                    .btn1{
                         grid-area:btnfriend;
                     }
                     form{
@@ -262,7 +267,7 @@ body{
                 }
                 .forumClass{
                     display: grid;
-                    grid-template-columns: 25% 75%;
+                    grid-template-columns: 1fr 1fr;
                     grid-template-areas: 
                     "photo name"
                     "photo date"
@@ -296,6 +301,7 @@ body{
     width: 100%;
 }
 button{
+    margin-top: 10px;
     font-family: 'Barlow', sans-serif;
     font-size: 1.6rem;
     height: 32px;
@@ -317,20 +323,39 @@ input{
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
+    margin-top: 10px;
+}
+.maxW{
+    width: 95%;
+}
+.fullW{
+    width: 350px;
+}
+.midW{
+    width: 150px;
+}
+.smallW{
+    width: 50px;;
 }
 select{
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 200;
+    margin-top: 10px;
 }
 textarea{
     font-size: 2rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 200;
     width: 100%;
+    margin-top: 10px;
+}
+.css-1s2u09g-control{
+    margin-top: 10px;
 }
 .show {
     display: flex;
+    flex-wrap: wrap;
 }
 .hide {
     display: none;
@@ -346,6 +371,9 @@ textarea{
 }
 .right{
     justify-content: end;
+}
+#chats{
+    flex-direction: column;
 }
 #logo871{
     width: 26px;
@@ -429,10 +457,10 @@ textarea{
                             display: flex;
                             align-self: flex-end;
                         }
-                        input{
-                            width: 97%;
+                        // input{
+                        //     width: 97%;
 
-                        }
+                        // }
                         textarea{
                             width: 98%;
                         }
@@ -502,6 +530,18 @@ textarea{
     }
     img{
         width: 100%;
+    }
+    .maxW{
+        width: 95%;
+    }
+    .fullW{
+        width: 100%;
+    }
+    .midW{
+        width: 100px;
+    }
+    .smallW{
+        width: 50px;;
     }
 }
 
