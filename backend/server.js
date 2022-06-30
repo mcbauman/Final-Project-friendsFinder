@@ -3,14 +3,12 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cors from "cors"
 import User from "./models/UserModel.js"
-import Message from "./models/MessageModel.js"
 import userValidator from "./validator/userValidator.js"
 import { validationResult } from "express-validator"
 import { hash, compare } from "./crypto.js"
 import jwt from "jsonwebtoken"
 import checkAuth from "./checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
-import { messageRules } from "./validator/messageValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
 import Chat from "./models/chatSchema.js"
 import cMessage from "./models/CMessageModel.js"
@@ -47,46 +45,6 @@ setInterval(()=>{
 },1000*60*60*24)
  */
 
-//TESTING BASIC REQUEST TO SEE THAT SERVER IS RESPONDING AT ALL
-app.get("/",(req,res)=>{
-    res.send("Answer to /")
-})
-
-//TESTING Get a List of Users
-app.get("/users/ListAll",async(req,res,next)=>{
-    try {
-        let users= await User.find()
-        res.send(users)
-    } catch (err) {
-        next({status:400, message:err.message})
-    }
-})
-
-//TESTING List all Messages:
-app.get("/messageList",checkAuth,  async(req, res, next) => {
-    try {
-        console.log("Message list all: ", req.user.id);
-
-        let messages = await Message.find()
-        res.send(messages)
-    } catch (error) {
-        next({status:400,message:error})
-    }
-})
-
-// TESTING Chat List Chats: 
-app.get("/messages/test",checkAuth,async(req, res, next) => {
-    try {
-        const query = cMessage.find()
-//        query.populate("member", "userName profilePicture")
-        const messages = await query.exec()
-        messages.reverse()
-        res.send(messages)
-    } catch (error) {
-        next({status:400, message:error.message})
-    }
-})
-
 //Picture Router
 app.use("/picture", pictureRouter)
 
@@ -94,18 +52,12 @@ app.use("/picture", pictureRouter)
 app.post("/user/login",async (req,res,next)=>{
     try {
         console.log(req.body);
-        // find user
         const user=await User.findOne({email:req.body.email})
         if(!user){return next({status:405,message:"user doesnt exist"})}
-        // compare password
         const loginSuccess = await compare(req.body.password, user.password)
         if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
-        // create token
         const token=jwt.sign({uid:user._id},process.env.SECRET)
-        // send user the token
- //       res.send({user,token})
         res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName})
-//        res.send({token,_id:user._id, profilePicture:user.profilePicture?user.profilePicture.toString():null})
     } catch (error) {
         next({status:400,message:error})
     }
@@ -189,43 +141,13 @@ app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
     }
 })
 
-// OLD Create Message:
-app.post("/message/create", checkAuth, messageRules, async(req, res, next) => {
-    try {
-        const user = await User.findById(req.user.id)
-        if(user){
-            const message = await Message.create(req.body)
-            res.send({message})
-        }  
-    } catch (err){
-        next({status: 400, message: err.message })
-    }
-})
-
-// OLD Messages List:
-app.get("/message/find",checkAuth,async(req, res, next) => {
-    try {
-        const query = Message.find({recipient: req.user.id})
-        query.populate("author", "userName profilePicture")
-//        query.sort("author","profilePicture")
-        const messages = await query.exec()
-        messages.reverse()
-        res.send(messages)
-    } catch (error) {
-        next({status:400, message:err.message})
-    }
-})
-
 //Get CHAT-Members )
 app.get("/chats", checkAuth, async (req,res,next)=>{
     try {
-//        console.log("userId Request has Asked for",req.user._id);
         const query = Chat.find({members:{$elemMatch:{id:req.user._id}}})
         query.populate("members.id","userName profilePicture")
         const chats=await query.exec()
-//        console.log("QUERY",chats);
         const readableChats=chats.map(chat=>chat.toObject())
-//        console.log("READABLECHATS",JSON.stringify(readableChats,null,"  "));
         chats.reverse()
         res.send(chats)
     } catch (err){
@@ -233,38 +155,20 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
     }
 })
 
-//ISSUE! ._id ist UNDIFIENED when posting Message into a NEW Chat when Console.Log is deleted
 // Chat new entry: 
 app.post("/chats", checkAuth, async(req, res, next) => {
     try {
         let chatId
-//        console.log("userId",req.user._id);
-//        console.log("recipient",req.body.recipient);
-//        const existingChats = await Chat.find({members:{$elemMatch:{id:req.user._id}},members:{$elemMatch:{id:mongoose.Types.ObjectId(req.body.recipient)}}})
-//        const existingChats = await Chat.find({members:{$all:[req.user._id,req.body.recipient]}})
-//       const existingChats = await Chat.find({members:{$all:[{id:req.user._id},{id:mongoose.Types.ObjectId(req.body.recipient)}]}})
         const filterone=await Chat.find({members:{$elemMatch:{id:req.user._id}}})
         const existingChats=filterone.filter(item=>item.members.find(member=>{
-//            console.log("MEMBER", member);
-//            console.log("REVIPIENT",req.body.recipient);
             return member.id.toString()===req.body.recipient}))
-        console.log("FilterOne",filterone);
-        console.log("FilterTwo", existingChats);
-       //$eq
-        console.log(existingChats);
         if(!existingChats.length>0){
-            console.log("IF-Condition-Exicuted");
             const chat = await Chat.create({members:[{id:req.user._id},{id:req.body.recipient}]})
             chatId=chat._id
-            console.log("SERVER/CHATS/NEW/240",chat);
-            console.log("SERVER/CHATS/NEW/240",chat._id);
             const message=await cMessage.create({...req.body,chatId:chatId})
             res.send(message)
         }else{
-            console.log("ELSE-Condition-Exicuted");
-            console.log(existingChats);
             chatId=existingChats[0]._id
-            console.log("SERVER/CHATS/EXISTING/243",existingChats[0]._id);
             const message=await cMessage.create({...req.body,chatId:chatId})
             res.send(message)
         }
@@ -273,11 +177,10 @@ app.post("/chats", checkAuth, async(req, res, next) => {
     }
 })
 
-// Chat List Chats: 
+// Chat List Messages: 
 app.post("/messages",checkAuth,async(req, res, next) => {
     try {
         const query = cMessage.find({chatId: req.body.chatId})
-//        query.populate("member", "userName profilePicture")
         const messages = await query.exec()
         res.send(messages)
     } catch (error) {
@@ -285,15 +188,19 @@ app.post("/messages",checkAuth,async(req, res, next) => {
     }
 })
 
-// POST Forum:
-app.post("/posts", checkAuth, async(req, res, next) => {
-    try {
-        const forum = await Forum.create(req.body)
-        res.send(forum)
-    } catch (error) {
-        next({status: 400, message: error.message })
-    }
-})
+// Delete Message:
+// app.delete("/message/:id", checkAuth, async (req, res, next) => {
+//     try {
+//         const message = await Message.findById(req.params.id)
+//         if(!message){
+//             next({status:400, message:"Message not found"})
+//         }
+//         await message.remove()
+//         res.send({ ok: true, deleted: message })
+//     } catch (error) {
+//         next({status:400, message:err.message})
+//     }
+// })
 
 // GET Forum:
 app.get("/posts", checkAuth, async(req, res, next) => {
@@ -309,7 +216,17 @@ app.get("/posts", checkAuth, async(req, res, next) => {
     }
 })
 
-// PUT Forum:
+// POST Forum:
+app.post("/posts", checkAuth, async(req, res, next) => {
+    try {
+        const forum = await Forum.create(req.body)
+        res.send(forum)
+    } catch (error) {
+        next({status: 400, message: error.message })
+    }
+})
+
+// Comment on Forum:
 app.put("/posts/addComment/:id", checkAuth, async(req, res, next) => {
     try{
         console.log("Dta from frontend: ",req.body);
@@ -320,20 +237,6 @@ app.put("/posts/addComment/:id", checkAuth, async(req, res, next) => {
         console.log("Forum after save: ",forum);
     }catch (error) {
         next({status:400, message:error.message})
-    }
-})
-
-// Delete Message:
-app.delete("/message/:id", checkAuth, async (req, res, next) => {
-    try {
-        const message = await Message.findById(req.params.id)
-        if(!message){
-            next({status:400, message:"Message not found"})
-        }
-        await message.remove()
-        res.send({ ok: true, deleted: message })
-    } catch (error) {
-        next({status:400, message:err.message})
     }
 })
 

@@ -2,12 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import {IoIosCloseCircleOutline} from "react-icons/io"
 import {FaUserFriends} from "react-icons/fa"
-import {MdCardMembership, MdCleaningServices, MdOutlineEmail} from "react-icons/md";
+import {MdOutlineEmail} from "react-icons/md";
 import {NavLink} from "react-router-dom";
 import axios from "axios"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
-import {Context}from "../components/context"
-import {useContext} from "react";
 import logo from "../components/COF.png";
 import {toast, ToastContainer} from "react-toastify";
 const notifyFeedback = (text) => toast(text);
@@ -16,9 +14,6 @@ export default function Chatview(props){
     const [messages,setMessages]=useState()
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
-    const {hide,setHide}=useContext(Context)
-
-//    console.log("PROPS",props);
 
     function requestMessages(){
     const headers = { Authorization: `Bearer ${props.token}` }
@@ -45,8 +40,6 @@ export default function Chatview(props){
                 .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
     }
-    
-    console.log(props);
 
     props.sethide(true)
     useEffect(()=>{

@@ -33,7 +33,7 @@ export default function Profile(props){
     const notifyError = (text) => toast(text);
     
     function handleSelectedFile(e){
-        setFile(e.target.files[0]) // we use [] because key is a number here.
+        setFile(e.target.files[0])
     }
     function saveFile(e){
         if(!file){return alert("Select a file first:)")}
