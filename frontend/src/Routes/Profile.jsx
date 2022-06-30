@@ -30,14 +30,23 @@ export default function Profile(props){
     const [usr,setUsr]=useState(null)
     const notifySuccess = () => toast("Your profile is updated");
     const notifyDelFriend=()=>toast("friend removed ")
-    const notifyError = (text) => toast(text);
+    const notify = (text) => toast(text);
     
     function handleSelectedFile(e){
-        setFile(e.target.files[0])
+        const extn = e.target.files[0].type.split('/')[1];
+        const valid = ["gif", "png", "jpg", "jpeg"];
+        if(e.target.files[0].size>2000000){
+            return notify("File should be less then 2Mb")
+        }else if(!valid.includes(extn)){
+            return notify("Excepted format: png, gif, jpg, jpeg")
+        }
+        else{
+            setFile(e.target.files[0])
+        }
     }
     function saveFile(e){
         e.preventDefault()
-        if(!file){return alert("Select a file first:)")}
+        if(!file){return notify("Select file first!")}
         const formData = new FormData()
         formData.append("selectedFile", file)
         const headers = { Authorization: `Bearer ${props.token}`}
