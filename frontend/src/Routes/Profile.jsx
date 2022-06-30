@@ -3,6 +3,7 @@ import Activities from "../components/ActivitiesArray";
 import axios from "axios";
 import Select from "react-select";
 import {MdOutlineDeleteForever,MdOutlineSaveAlt} from "react-icons/md";
+import { AiOutlineDown } from "react-icons/ai"
 import exmpl from "../components/exmpl.jpeg";
 import React from "react";
 import {Context}from "../components/context"
@@ -28,6 +29,11 @@ export default function Profile(props){
     const {lang,setLang}=useContext(Context)
     const {theme,setTheme}=useContext(Context)
     const [usr,setUsr]=useState(null)
+    const [p1,setP1]=useState("hide")
+    const [p2,setP2]=useState("hide")
+    const [p3,setP3]=useState("hide")
+    const [p4,setP4]=useState("hide")
+    const [p5,setP5]=useState("hide")
     const notifySuccess = () => toast("Your profile is updated");
     const notifyDelFriend=()=>toast("friend removed ")
     const notify = (text) => toast(text);
@@ -60,6 +66,7 @@ export default function Profile(props){
             .then(result=> {
                 result.data.interests=result.data.interests.map(item=>({"value":item,"label":item}))
                 setUsr(result.data)
+                console.log(result.data);
             })
             .catch(error => console.log(error))
     }
@@ -105,13 +112,12 @@ export default function Profile(props){
                 notifyError(error)
             })
     }
- //   usr?console.log(usr):null;
-    //<div className="profPicDiv" style={item.profilePicture ? `background-image: url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})` : `background-image: url(${exmpl})`}></div>
-    
+
     return(
         <article>
             <section>
-                <form onSubmit={setDefaults}>
+                <h1 onClick={()=>setP1(p1==="hide"?"show":"hide")} > <AiOutlineDown/> {trans[lang].desginAndLang}</h1>
+                <form onSubmit={setDefaults} className={p1} >
                     {trans[lang].Theme}:
                     <select value={theme} onChange={(e)=>setTheme(e.target.value)}>
                         <option>BW</option>
@@ -127,21 +133,31 @@ export default function Profile(props){
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
                 <hr/>
-                <form onSubmit={saveFile}>
+
+                <h1 onClick={()=>setP2(p2==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].profPic}</h1>
+                <form onSubmit={saveFile} className={p2} >
+                    {usr&&usr.profilePicture?(<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${usr.profilePicture}`} alt="Profil-Picture"/>):<img src={exmpl}/>}
                     <input id="fileSelector" type="file" onChange={handleSelectedFile} />
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
-                    {props.userProfPic&&<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${props.userProfPic}`} alt="Ups, no picture;)"/>}
                 </form>
             </section>
             <hr/>
             <section>
                 {usr?(
-                    <form onSubmit={changeProfile}>
+                    <>
+                    <h1 onClick={()=>setP3(p3==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].userData}</h1>
+                    <form onSubmit={changeProfile} className={p3} >
                         <input type="text" placeholder={usr.name} value={name}  onChange={(e)=>setName(e.target.value)}/>
                         <input type="text" placeholder={usr.familyName} value={familyName}  onChange={(e)=>setFamilyName(e.target.value)}/>
                         <input type="email" placeholder={usr.email} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
                         <textarea placeholder={usr.profileText} value={profileText} onChange={(e)=>setProfileText(e.target.value)}/>
                         <Select onChange={setInterests} closeMenuOnSelect={false}  isMulti options={Activities} defaultValue={usr.interests}/>
+                        <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
+                    </form>
+
+                    <hr/>
+                    <h1 onClick={()=>setP4(p4==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].adress}</h1>
+                    <form onSubmit={changeProfile} className={p4} >
                         <input type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder={usr.street}/>
                         <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder={usr.number}/>
                         <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder={usr.zipCode}/>
@@ -156,8 +172,11 @@ export default function Profile(props){
                             <option>PH</option>
                         </select>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
+                    </form>
+
                         <hr/>
-                        {trans[lang].YoureFriends}:
+                        <h1 onClick={()=>setP5(p5==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].YoureFriends}:</h1>
+                        <div className={p5}>
                         {usr.friends.map(item=>(
                             <div className="friendsView" id={item.userName}>
                                 <div className="profPicDiv" style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
@@ -166,7 +185,8 @@ export default function Profile(props){
                                 <button><MdOutlineDeleteForever/></button>
                             </div>
                         ))}
-                    </form>
+                        </div>
+                    </>
                 ):<img src={logo} id="henriksLoadingAnimation" />}
             </section>
             <ToastContainer position="bottom-center"
