@@ -99,7 +99,7 @@ app.post("/user/find",checkAuth,async (req,res,next)=>{
     }
 })
 
-// Find Profile
+// Find Profile to update
 app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
     try {
         const user=await User.findById(req.user._id).populate("friends","userName profilePicture")
@@ -138,6 +138,17 @@ app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
         res.send(user)
     } catch (error) {
         next({status:400, message:error.message})
+    }
+})
+
+//Delete Friend
+app.put("/deleteFriend/", checkAuth, async (req, res, next) => {
+    try {
+        const $pull={friends:req.body.friends}
+        const user = await User.findByIdAndUpdate(req.user._id,{$pull})
+        res.send(user)
+    } catch (error) {
+        next({status:400, message:err.message})
     }
 })
 
@@ -187,20 +198,6 @@ app.post("/messages",checkAuth,async(req, res, next) => {
         next({status:400, message:error.message})
     }
 })
-
-// Delete Message:
-// app.delete("/message/:id", checkAuth, async (req, res, next) => {
-//     try {
-//         const message = await Message.findById(req.params.id)
-//         if(!message){
-//             next({status:400, message:"Message not found"})
-//         }
-//         await message.remove()
-//         res.send({ ok: true, deleted: message })
-//     } catch (error) {
-//         next({status:400, message:err.message})
-//     }
-// })
 
 // GET Forum:
 app.get("/posts", checkAuth, async(req, res, next) => {

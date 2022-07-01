@@ -11,6 +11,7 @@ import trans from "../components/trans";
 import {useContext} from "react";
 import {toast, ToastContainer} from "react-toastify";
 import logo from "../components/COF.png";
+import {deleteFriend} from "../components/functions"
 
 export default function Profile(props){
     const [file, setFile] = useState(null)
@@ -34,6 +35,7 @@ export default function Profile(props){
     const [p3,setP3]=useState("hide")
     const [p4,setP4]=useState("hide")
     const [p5,setP5]=useState("hide")
+    const [friends,setFriends]=useState([])
     const notifySuccess = () => toast("Your profile is updated");
     const notifyDelFriend=()=>toast("friend removed ")
     const notify = (text) => toast(text);
@@ -112,7 +114,7 @@ export default function Profile(props){
                 notifyError(error)
             })
     }
-
+usr&&console.log(usr.friends);
     return(
         <article>
             <section>
@@ -189,25 +191,21 @@ export default function Profile(props){
                         <div className={p5}>
                         {usr.friends.map(item=>(
                             <div className="friendsView" id={item.userName}>
-                                <div className="profPicDiv" style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
+                                <div className="profPicDiv" 
+                                style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
                                 {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
                                 <div>{item.userName}</div>
-                                <button><MdOutlineDeleteForever/></button>
+                                <button onClick={()=>deleteFriend(item._id,props.token,setFriends)}>
+                                    <MdOutlineDeleteForever/></button>
                             </div>
                         ))}
                         </div>
                     </>
                 ):<img src={logo} id="henriksLoadingAnimation" />}
             </section>
-            <ToastContainer position="bottom-center"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover/>
+            <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar={false}
+                            newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss
+                            draggable pauseOnHover/>
         </article>
     )
 }
