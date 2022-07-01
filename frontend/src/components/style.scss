@@ -162,7 +162,7 @@ body{
                 form{
                     button{
                         height: 100%;
-                        margin-left: 5px;
+                        // margin-left: 5px;
                     }
                     #chats{
                         grid-area: messages;
@@ -295,6 +295,9 @@ body{
 #fileSelector{
     width: 100%;
 }
+form{
+    width: fit-content;
+}
 button{
     font-family: 'Barlow', sans-serif;
     font-size: 1.6rem;
@@ -317,16 +320,17 @@ input{
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
+    // padding: 20px;
 }
 select{
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
-    font-weight: 200;
+    font-weight: 90;
 }
 textarea{
     font-size: 2rem;
     font-family: 'Barlow', sans-serif;
-    font-weight: 200;
+    font-weight: 90;
     width: 100%;
 }
 .show {
