@@ -2,7 +2,7 @@ const trans={
     de:{
         Search:"Suche",
         minAge:"Alter ab",
-        maxAge:"alter bis",
+        maxAge:"Alter bis",
         any:"egal",
         Messages:"Nachrichten",
         Profile:"Profil",
