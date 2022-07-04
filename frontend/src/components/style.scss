@@ -345,11 +345,11 @@ button {
     border: none;
     border-radius: 45px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease 0s;
+    transition: all 0.2s ease 0s;
     cursor: pointer;
     outline: none;
   } 
-  button:hover {
+  button:hover{
     background-color: var(--darkmain);
     box-shadow: 0px 4px 20px var(--darksecondary);
     color: #fff;
@@ -357,6 +357,9 @@ button {
   }
   button:active {
     transform: translateY(-1px);
+  }
+  .activeFriend:hover{
+    color: white;
   }
 
 
