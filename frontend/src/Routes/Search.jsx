@@ -3,7 +3,8 @@ import Activities from "../components/ActivitiesArray";
 import Select from 'react-select';
 import {useState} from "react";
 import axios from "axios";
-import {FaUserFriends} from "react-icons/fa"
+// import {FaUserFriends} from "react-icons/fa"
+import {FaHandshake} from "react-icons/fa" 
 import {MdOutlineEmail,MdSearch} from "react-icons/md";
 import exmpl from "../components/exmpl.jpeg"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
@@ -75,9 +76,12 @@ export default function Search(props){
                     <option>♀️</option>
                     <option>⚧</option>
                 </select>
-                <Select onChange={setInterests} closeMenuOnSelect={false} 
+                <Select className='selectInSearch' onChange={setInterests} closeMenuOnSelect={false} 
                 isMulti options={options}/>
-                <button type="submit"><MdSearch/></button>
+                <button type="submit">
+                    <MdSearch/>
+                    {/* Search */}
+                </button>
             </form>
             {listOfUsers&&listOfUsers.length?(
             <section id="messages">
@@ -90,7 +94,9 @@ export default function Search(props){
                         <div className='age'>{item.age}</div>
                         <button className={isFriend(item._id,friends)+" btn1"} 
                             onClick={()=>addFriend(item._id,props.token,setFriends)}>
-                            <FaUserFriends/></button>
+                            {/* <FaUserFriends/> */}
+                            <FaHandshake/>
+                            </button>
                         <button className="btn2" onClick={()=>writeMessage(item._id)}>
                             <MdOutlineEmail/></button>
                         <div className="profileText">{item.profileText}</div>
