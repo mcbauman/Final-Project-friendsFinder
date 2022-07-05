@@ -8,7 +8,6 @@ import logo from "../components/COF.png";
 import {Context}from "../components/context"
 import trans from "../components/trans";
 import {useContext} from "react";
-import geolib from "geolib";
 
 export default function Forum(props) {
     const [subject, setSubject] = useState("")
@@ -36,6 +35,18 @@ export default function Forum(props) {
       .catch((error) => alert(error.response?.data?.error || "Unknown error"));
   }
 
+  function declareTopic(e) {
+    e.preventDefault()
+    const data = { author: props.user, content, subject }
+    const headers = { Authorization: `Bearer ${props.token}` }
+    axios.post(`${process.env.REACT_APP_BE_SERVER}/posts`, data, { headers })
+        .then(res => {
+            getPosts()
+            topicNotify()
+        })
+        .catch(error => alert(error.response?.data?.error || "Unknown error"))
+    }
+
     function commentPost(post, userId, e) {
         e.preventDefault()
         post.comments.push({author: userId, comment})
@@ -50,8 +61,6 @@ export default function Forum(props) {
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
     }
-  }
-
 
     return (
         <article>

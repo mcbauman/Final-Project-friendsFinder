@@ -55,38 +55,18 @@ setInterval(()=>{
 //Picture Router
 app.use("/picture", pictureRouter);
 
-
+//LOGIN USER
 app.post("/user/login",async (req,res,next)=>{
-    try {
-        console.log(req.body);
-        const user=await User.findOne({email:req.body.email})
-        if(!user){return next({status:405,message:"user doesnt exist"})}
-        const loginSuccess = await compare(req.body.password, user.password)
-        if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
-        const token=jwt.sign({uid:user._id},process.env.SECRET)
-        res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName})
-    } catch (error) {
-        next({status:400,message:error})
-    }
-    // compare password
-    const loginSuccess = await compare(req.body.password, user.password);
-    if (!loginSuccess) {
-      return next({ status: 405, message: "Password missmatch" });
-    }
-    // create token
-    const token = jwt.sign({ uid: user._id }, process.env.SECRET);
-    // send user the token
-    //       res.send({user,token})
-    res.send({
-      token,
-      _id: user._id,
-      theme: user.theme,
-      lang: user.lang,
-      userName: user.userName,
-    });
-    //        res.send({token,_id:user._id, profilePicture:user.profilePicture?user.profilePicture.toString():null})
+  try {
+      console.log(req.body);
+      const user=await User.findOne({email:req.body.email})
+      if(!user){return next({status:405,message:"user doesnt exist"})}
+      const loginSuccess = await compare(req.body.password, user.password)
+      if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
+      const token=jwt.sign({uid:user._id},process.env.SECRET)
+      res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName})
   } catch (error) {
-    next({ status: 400, message: error });
+      next({status:400,message:error})
   }
 });
 
@@ -236,9 +216,6 @@ app.post("/chats", checkAuth, async(req, res, next) => {
         next({status: 400, message: err.message })
 
     }
-  } catch (err) {
-    next({ status: 400, message: err.message });
-  }
 });
 
 // Chat List Messages: 

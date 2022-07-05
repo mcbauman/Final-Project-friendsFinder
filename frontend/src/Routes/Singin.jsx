@@ -20,7 +20,7 @@ export default function Singin(props){
     const [number, setNumber]=useState()
     const [zipCode, setZipCode]=useState()
     const [city, setCity]=useState("")
-    const [country, setCountry]=useState("")
+    const [country, setCountry]=useState("DE")
     const options=Activities
     const notifySuccess = () => toast("Your profile is created");
     const notifyError = (text) => toast(text);
@@ -59,7 +59,7 @@ export default function Singin(props){
                 <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder="Zip-Code"/>
                 <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder="City"/>
                 
-                <select onchange={e=>setCountry(e.target.value)}>
+                <select onChange={e=>setCountry(e.target.value)}>
                     <option>DE</option>
                     <option>AUT</option>
                     <option>CH</option>
