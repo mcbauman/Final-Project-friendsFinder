@@ -5,6 +5,7 @@ import {MdLogin} from "react-icons/md"
 import {Context}from "../components/context"
 import {useContext} from "react";
 import {toast, ToastContainer} from "react-toastify";
+import "../components/Log.scss";
 
 export default function Login(props){
     const [email, setEmail]=useState("")

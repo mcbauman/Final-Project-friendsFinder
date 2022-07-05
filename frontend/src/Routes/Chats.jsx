@@ -11,6 +11,7 @@ import {Context}from "../components/context"
 import {useContext} from "react";
 import logo from "../components/COF.png";
 import { IoMdHeartEmpty } from "react-icons/io";
+import "../components/Chat.scss";
 
 export default function Messages(props){
     const [chats, setChats] = useState([])

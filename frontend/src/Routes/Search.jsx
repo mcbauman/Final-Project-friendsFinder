@@ -13,6 +13,7 @@ import { useContext } from "react";
 import logo from "../components/COF.png";
 import { toast, ToastContainer } from "react-toastify";
 import { sortByDistance } from "sort-by-distance";
+import "../components/Search.scss";
 
 export default function Search(props) {
   const [listOfUsers, setListOfUser] = useState([]);

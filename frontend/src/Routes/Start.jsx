@@ -8,6 +8,7 @@ import logo from "../components/COF.png";
 import {Context}from "../components/context"
 import trans from "../components/trans";
 import {useContext} from "react";
+import "../components/Start.scss";
 
 export default function Forum(props) {
     const [subject, setSubject] = useState("")

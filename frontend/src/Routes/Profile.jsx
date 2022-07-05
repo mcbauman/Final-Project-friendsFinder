@@ -12,6 +12,7 @@ import {useContext} from "react";
 import {toast, ToastContainer} from "react-toastify";
 import logo from "../components/COF.png";
 import {deleteFriend} from "../components/functions"
+import "../components/Profile.scss";
 
 export default function Profile(props){
     const [file, setFile] = useState(null)

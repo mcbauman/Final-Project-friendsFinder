@@ -3,6 +3,7 @@ import axios from "axios"
 import Select from "react-select";
 import Activities from "../components/ActivitiesArray";
 import {toast, ToastContainer} from "react-toastify";
+import "../components/Log.scss";
 
 
 export default function Singin(props){
