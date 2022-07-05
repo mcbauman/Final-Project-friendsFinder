@@ -348,20 +348,19 @@ button {
     transition: all 0.2s ease 0s;
     cursor: pointer;
     outline: none;
-  } 
-  button:hover{
+} 
+button:hover{
     background-color: var(--darkmain);
     box-shadow: 0px 4px 20px var(--darksecondary);
     color: #fff;
     transform: translateY(-3px);
-  }
-  button:active {
+}
+button:active {
     transform: translateY(-1px);
-  }
-  .activeFriend:hover{
+}
+.activeFriend:hover{
     color: white;
-  }
-
+}
 
 input{
     height: 50%;
@@ -434,6 +433,9 @@ textarea{
 }
 #chats{
     flex-direction: column;
+}
+.addBG{
+    background-color: var(--brightmainOpacity);
 }
 #logo871{
     width: 26px;
