@@ -79,8 +79,7 @@ export default function Search(props){
                 <Select className='selectInSearch' onChange={setInterests} closeMenuOnSelect={false} 
                 isMulti options={options}/>
                 <button type="submit">
-                    <MdSearch/>
-                    {/* Search */}
+                    {/* <MdSearch/> */}
                 </button>
             </form>
             {listOfUsers&&listOfUsers.length?(

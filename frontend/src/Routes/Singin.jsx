@@ -20,7 +20,7 @@ export default function Singin(props){
     const [number, setNumber]=useState()
     const [zipCode, setZipCode]=useState()
     const [city, setCity]=useState("")
-    const [country, setCountry]=useState("")
+    const [country, setCountry]=useState("DE")
     const options=Activities
     const notifySuccess = () => toast("Your profile is created");
     const notifyError = (text) => toast(text);

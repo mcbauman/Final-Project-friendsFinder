@@ -32,6 +32,7 @@ export default function Forum(props) {
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
+    console.log(posts);
 
     function declareTopic(e) {
         e.preventDefault()
