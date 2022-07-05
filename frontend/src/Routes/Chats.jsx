@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import React from "react";
 import exmpl from "../components/exmpl.jpeg"
-import {FaUserFriends} from "react-icons/fa"
+import {FaHandshake} from "react-icons/fa"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {NavLink} from "react-router-dom"
 import {Routes,Route} from "react-router-dom"
@@ -10,7 +10,6 @@ import Chatview from "./Chatview";
 import {Context}from "../components/context"
 import {useContext} from "react";
 import logo from "../components/COF.png";
-import { IoMdHeartEmpty } from "react-icons/io";
 import "../components/Chat.scss";
 
 export default function Messages(props){
@@ -71,7 +70,7 @@ export default function Messages(props){
                                 item.other._id,friends
                                 )+" btn1"} onClick={()=>addFriend(
                                     item.other._id,props.token,setFriends
-                                    )}><FaUserFriends/></button>
+                                    )}><FaHandshake/></button>
                         </section>
                     ))}
                 </>)

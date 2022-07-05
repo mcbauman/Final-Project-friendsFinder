@@ -76,6 +76,7 @@ body {
         box-shadow: 0 0 10px var(--darksecondary);
         &:hover{
             background-color: var(--darksecondary);
+            transition: all 0.2s ease 0s;
         }
         nav {
             max-width: 1200px;
