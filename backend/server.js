@@ -1,3 +1,4 @@
+
 import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
@@ -13,27 +14,32 @@ import pictureRouter from "./routes/pictureRouter.js"
 import Chat from "./models/chatSchema.js"
 import cMessage from "./models/CMessageModel.js"
 import Forum from "./models/ForumModel.js"
+import locationFinder from "./middleware/locationFinder.js";
 
 
 export function connect() {
-    const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
-    const connectionString = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`
+  const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
+  const connectionString = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`;
 
-    mongoose.connection.on('connecting',    () => console.log("[DB] connecting"))
-    mongoose.connection.on('connected',     () => console.log("[DB] connected"))
-    mongoose.connection.on('disconnecting', () => console.log("[DB] disconnecting"))
-    mongoose.connection.on('disconnected',  () => console.log("[DB] disconnected"))
-    mongoose.connection.on('reconnected',   () => console.log("[DB] reconnected"))
-    mongoose.connection.on('error',         er => console.log("[DB] error", er))
+  mongoose.connection.on("connecting", () => console.log("[DB] connecting"));
+  mongoose.connection.on("connected", () => console.log("[DB] connected"));
+  mongoose.connection.on("disconnecting", () =>
+    console.log("[DB] disconnecting")
+  );
+  mongoose.connection.on("disconnected", () =>
+    console.log("[DB] disconnected")
+  );
+  mongoose.connection.on("reconnected", () => console.log("[DB] reconnected"));
+  mongoose.connection.on("error", (er) => console.log("[DB] error", er));
 
-    mongoose.connect(connectionString)
+  mongoose.connect(connectionString);
 }
 
-dotenv.config()
-const app=express()
-app.use(cors())
-app.use(express.json())
-connect()
+dotenv.config();
+const app = express();
+app.use(cors());
+app.use(express.json());
+connect();
 
 /*function async updateAge(){
     const Users=await User.find()
@@ -45,59 +51,72 @@ setInterval(()=>{
 },1000*60*60*24)
  */
 
-//Picture Router
-app.use("/picture", pictureRouter)
 
-// LOGIN User:
+//Picture Router
+app.use("/picture", pictureRouter);
+
+//LOGIN USER
 app.post("/user/login",async (req,res,next)=>{
-    try {
-        console.log(req.body);
-        const user=await User.findOne({email:req.body.email})
-        if(!user){return next({status:405,message:"user doesnt exist"})}
-        const loginSuccess = await compare(req.body.password, user.password)
-        if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
-        const token=jwt.sign({uid:user._id},process.env.SECRET)
-        res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName})
-    } catch (error) {
-        next({status:400,message:error})
-    }
-})
+  try {
+      console.log(req.body);
+      const user=await User.findOne({email:req.body.email})
+      if(!user){return next({status:405,message:"user doesnt exist"})}
+      const loginSuccess = await compare(req.body.password, user.password)
+      if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
+      const token=jwt.sign({uid:user._id},process.env.SECRET)
+      res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName})
+  } catch (error) {
+      next({status:400,message:error})
+  }
+});
 
 // CreateUser:
-app.post("/user/create",userValidator, async(req, res, next)=>{
-    const errors=validationResult(req)
-    console.log(errors)
-    if(!errors.isEmpty()){
-        return next({status:405,message:errors.errors.map(err=>err.msg)})
-    } try {
-        req.body.password=await hash(req.body.password)
-        const user = await User.create(req.body)
-        const user2=await User.findOne({email:req.body.email})
-        const token=jwt.sign({uid:user2._id},process.env.SECRET)
-        res.send({token,_id:user._id})
-    } catch (err) {
-        next({status:400, message:err.message})
+app.post(
+  "/user/create",
+  userValidator,
+  locationFinder,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+      return next({
+        status: 405,
+        message: errors.errors.map((err) => err.msg),
+      });
     }
-})
+    try {
+      console.log(req.userCoordinate);
+      req.body.password = await hash(req.body.password);
+      const user = await User.create({ ...req.body, ...req.userCoordinate });
+      const user2 = await User.findOne({ email: req.body.email });
+      const token = jwt.sign({ uid: user2._id }, process.env.SECRET);
+      console.log(user);
+
+      res.send({ token, _id: user._id });
+    } catch (err) {
+      next({ status: 400, message: err.message });
+    }
+  }
+);
 
 // Find users matching criteria
-app.post("/user/find",checkAuth,async (req,res,next)=>{
-    const filter={age:{$gte:req.body.minAge, $lte:req.body.maxAge}}
-    if(req.body.interests&&req.body.interests.length>0){
-        filter.interests={
-            $in:req.body.interests
-        }
-    }
-    if(req.body.srchdGender!=="any"){
-        filter.gender= req.body.srchdGender
-    }
-    try{
-        let users=await User.find(filter)
-        res.send(users)
-    }catch (e) {
-        next({status:400, message:e.message})
-    }
-})
+app.post("/user/find", checkAuth, async (req, res, next) => {
+  const filter = { age: { $gte: req.body.minAge, $lte: req.body.maxAge } };
+  if (req.body.interests && req.body.interests.length > 0) {
+    filter.interests = {
+      $in: req.body.interests,
+    };
+  }
+  if (req.body.srchdGender !== "any") {
+    filter.gender = req.body.srchdGender;
+  }
+  try {
+    let users = await User.find(filter);
+    res.send(users);
+  } catch (e) {
+    next({ status: 400, message: e.message });
+  }
+});
 
 // Find Profile to update
 app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
@@ -111,35 +130,45 @@ app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
 })
 
 // Update Profile
-app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),async(req,res,next)=>{
+app.put(
+  "/user/updateProfile",
+  checkAuth,
+  requestValidator(userValidator),
+  async (req, res, next) => {
     try {
-        const user=await User.findByIdAndUpdate(req.user._id,req.body,{new:true})
-        console.log(user)
-        res.send(user)
+      const user = await User.findByIdAndUpdate(req.user._id, req.body, {
+        new: true,
+      });
+      console.log(user);
+      res.send(user);
     } catch (error) {
-        next({status:400, message:error.message}) 
+      next({ status: 400, message: error.message });
     }
-})
+  }
+);
 
 // check friends
-app.get("/user/checkFriends",checkAuth, async (req,res,next)=>{
-    try {
-        const user=await User.findById(req.user._id)
-        res.send(user.friends)
-    } catch (error) {
-        next({status:400, message:error.message})
-    }
-})
+app.get("/user/checkFriends", checkAuth, async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.send(user.friends);
+  } catch (error) {
+    next({ status: 400, message: error.message });
+  }
+});
 
 // add an Friend
-app.put("/user/addFriend",checkAuth, async (req,res,next)=>{
-    try {
-        const user=await User.findByIdAndUpdate(req.user._id, {$addToSet:req.body})
-        res.send(user)
-    } catch (error) {
-        next({status:400, message:error.message})
-    }
-})
+app.put("/user/addFriend", checkAuth, async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.user._id, {
+      $addToSet: req.body,
+    });
+    res.send(user);
+  } catch (error) {
+    next({ status: 400, message: error.message });
+  }
+});
+
 
 //Delete Friend
 app.put("/deleteFriend/", checkAuth, async (req, res, next) => {
@@ -185,8 +214,9 @@ app.post("/chats", checkAuth, async(req, res, next) => {
         }
     } catch (err){
         next({status: 400, message: err.message })
+
     }
-})
+});
 
 // Chat List Messages: 
 app.post("/messages",checkAuth,async(req, res, next) => {
@@ -200,18 +230,19 @@ app.post("/messages",checkAuth,async(req, res, next) => {
 })
 
 // GET Forum:
-app.get("/posts", checkAuth, async(req, res, next) => {
-    try {
-        const query = Forum.find()
-        query.populate("author", "userName profilePicture")
-           const something = await query.exec()
-           something.reverse()
-        //    console.log(something);
-        res.send(something)
-    } catch (error) {
-        next({status: 400, message: error.message })
-    }
-})
+app.get("/posts", checkAuth, async (req, res, next) => {
+  try {
+    const query = Forum.find();
+    query.populate("author", "userName profilePicture");
+    const something = await query.exec();
+    something.reverse();
+    //    console.log(something);
+    res.send(something);
+  } catch (error) {
+    next({ status: 400, message: error.message });
+  }
+});
+
 
 // POST Forum:
 app.post("/posts", checkAuth, async(req, res, next) => {
@@ -245,6 +276,6 @@ app.use((error, req, res, next)=>{
     })
 })
 
-app.listen(process.env.PORT,()=>{
-    console.log("Server listening to " + process.env.PORT);
-})
+app.listen(process.env.PORT, () => {
+  console.log("Server listening to " + process.env.PORT);
+});

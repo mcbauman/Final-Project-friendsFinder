@@ -1,5 +1,5 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import exmpl from "../components/exmpl.jpeg"
@@ -23,27 +23,28 @@ export default function Forum(props) {
         getPosts()
     }, [])
 
-    function getPosts() {
-        const headers = { Authorization: `Bearer ${props.token}` }
-        axios.get(`${process.env.REACT_APP_BE_SERVER}/posts`, { headers })
-            .then(res => {
-                setPosts(res.data)
-                console.log("POSTS: ",res.data);
-            })
-            .catch(error => alert(error.response?.data?.error || "Unknown error"))
-    }
-    console.log(posts);
+  function getPosts() {
+    const headers = { Authorization: `Bearer ${props.token}` };
+    axios.get(`${process.env.REACT_APP_BE_SERVER}/posts`, { headers })
+      .then((res) => {
+        setPosts(res.data);
+        console.log("POSTS: ", res.data);
+      })
+      .catch((error) => alert(error.response?.data?.error || "Unknown error"));
+  }
 
-    function declareTopic(e) {
-        e.preventDefault()
-        const data = { author: props.user, content, subject }
-        const headers = { Authorization: `Bearer ${props.token}` }
-        axios.post(`${process.env.REACT_APP_BE_SERVER}/posts`, data, { headers })
-            .then(res => {
-                getPosts()
-                topicNotify()
-            })
-            .catch(error => alert(error.response?.data?.error || "Unknown error"))
+  function declareTopic(e) {
+    e.preventDefault()
+    const data = { author: props.user, content, subject }
+    const headers = { Authorization: `Bearer ${props.token}` }
+    axios.post(`${process.env.REACT_APP_BE_SERVER}/posts`, data, { headers })
+        .then(res => {
+            getPosts()
+            topicNotify()
+            setContent("")
+            setSubject("")
+        })
+        .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }
 
     function commentPost(post, userId, e) {
@@ -65,8 +66,8 @@ export default function Forum(props) {
         <article>
             <section id="forum">
                 <form onSubmit={declareTopic}>
-                    <input type="text" placeholder={trans[lang].subject} onChange={e => setSubject(e.target.value)} />
-                    <textarea type="text" placeholder={trans[lang].postText} onChange={e => setContent(e.target.value)} />
+                    <input type="text" placeholder={trans[lang].subject} value={subject} onChange={e => setSubject(e.target.value)} />
+                    <textarea type="text" placeholder={trans[lang].postText} value={content} onChange={e => setContent(e.target.value)} />
                     <button type='submit' className='biSend'><BiSend /></button>
                 </form>
                 <hr />
