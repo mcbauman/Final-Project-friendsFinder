@@ -36,18 +36,17 @@ body::-webkit-scrollbar {
 }
 .red{
     background-image: url("../components/bg2.jpg");
-    --background:rgba(255,252,245, .6);
+    --background:rgba(255,252,245, .9);
     --darkmain:rgb(190, 51, 36);
     --darksecondary:rgb(50,50,50);
     --brightthirdly:rgb(255,235,205);
     --brightmain:var(--background);
-    --brightmainOpacity:rgba(255,252,245, .6);
+    --brightmainOpacity:rgba(255,252,245, .4);
     --brightsecondary:var(--background);
 }
 
 //Structured Styling
 body{
-    
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -103,29 +102,32 @@ body{
     main{
         height: 90%;
         article{
-//            width: 95%;
             max-width: 1200px;
             margin:0 auto;
             padding: 20px;
-            background-color: var(--brightmainOpacity);
+            // background-color: var(--brightmainOpacity);
             >form{
                 position: sticky;
                 top:50px;
                 width: 100%;
                 background-color: white;
-                border-radius: 20px;
+                border-radius: 5px;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
+                align-items: center;
                 margin-bottom: 20px;
-                >div{
+                box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0,0,0,0);                >div{
                     display: inline-flex;
                     flex-direction: column;
                 }
-                button{
-                    height: 100%;
-                    padding: 10px;
+                .css-1s2u09g-control{
+                    border: 0;
                 }
+                // button{
+                //     height: 100%;
+                //     padding: 8px;
+                // }
             }
             .signin{
                 >input{
@@ -143,8 +145,16 @@ body{
                     margin-bottom: 20px;
                     background-color: var(--brightsecondary);
                     border-radius: 5px;
-                    box-shadow: 0 0 7px 1px var(--darksecondary);
- //                   border-bottom: solid 3px var(--darkmain);
+                    // box-shadow: 0 0 7px 1px var(--darksecondary);
+                    box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0,0,0,0);                    img {
+                        border-radius: 25px;
+                    }
+                    a{
+                        color:black;
+                        &:hover{
+                            color:var(--brightmain)
+                        }
+                    }
                     .profileText{
                         border: 2px var(--darkmain) solid;
                         background-color: var(--brightsecondary);
@@ -156,15 +166,18 @@ body{
                         border-radius: 10px;
                     }
                     .activeFriend{
-//                           background-color: var(--darkmain);
-//                           color:white;
                         color:var(--darkmain);
-                    }
-                    img {
-                        border-radius: 25px;
                     }
                 }
                 form{
+                    button{
+                        height: 100%;
+                        // margin-left: 5px;
+                    }
+                    #chats{
+                        grid-area: messages;
+                        flex-direction: column;
+                    }
                     .friendsView{
                          border-radius: 5px;
                          box-shadow: 0 0 7px 1px var(--darksecondary);
@@ -175,12 +188,11 @@ body{
                 }
                 >.ProfileCard{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr) repeat(2,75px);
+                    grid-tempselectlate-columns: repeat(4, 1fr) repeat(2,75px);
                     grid-template-areas: 
-                        "img userName userName userName userName userName"
-                        "img gender age . btn1 btn2"
-                        "text text text text text text"
-                        "text text text text text text"
+                        "img userName gender age btn1 btn2"
+                        "img text text text text text"
+                        "img text text text text text"
                         "form form form form form form";
                     .imgSearch{
                         grid-area: img;
@@ -211,59 +223,24 @@ body{
                         grid-area: form;
                     }
                 }
-                // >.messages{
-                //     display: grid;
-                //     grid-template-columns: repeat(4, 1fr) 75px;
-                //     grid-template-areas: 
-                //         "img author . . btn4"
-                //         "img subject . . btn3"
-                //         "text text text text ."
-                //         "form form form form form";
-                //     .img2{
-                //         width: 100px;
-                //         grid-area: img;
-                //     }
-                //     .author{
-                //         grid-area: author;
-                //         font-size: 2rem;
-                //         font-weight: 600;
-                //     }
-                //     .subject{
-                //         grid-area: subject;
-                //         font-weight: 600;
-                //     }
-                //     .btn1{
-                //         grid-area: btn3;
-                //     }
-                //     .btn2{
-                //         grid-area: btn4;
-                //     }
-                //     form{
-                //         grid-area: form;
-                //     }
-                //     .profileText{
-                //         grid-area: text;
-                //     }
-                // }
                 .chatOV{
-                    display: grid;
-                    text-decoration: none;
-                    grid-template-areas: 
-                    "img author";
-                    .img2{
-                        grid-area: img;
-                    }
-                    .author{
-                        grid-area: author;
-                        font-size: 2rem;
-                        font-weight: 600;
+                    display: flex;
+                    width: fit-content;
+                    a{
                         text-decoration: none;
-                        color:black
+                        display: flex;
+                        .author{
+                            grid-area: author;
+                            font-size: 2rem;
+                            font-weight: 600;
+                            text-decoration: none;
+                            color:black
+                        }
                     }
                 }
                 .cMessages{
                     display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-columns: 1fr 1fr 50px;
                     grid-template-areas: 
                     "profPic user close"
                     "profPic btnfriend . "
@@ -275,11 +252,11 @@ body{
                     #name{
                         grid-area: user;
                     }
-                    a{
+                    .btnX{
                         grid-area: close;
                         text-align: end;
                     }
-                    button{
+                    .btn1{
                         grid-area:btnfriend;
                     }
                     form{
@@ -289,13 +266,11 @@ body{
                     #chats{
                         grid-area: messages;
                         flex-direction: column;
-                        text-decoration: underline;
-
                     }
                 }
                 .forumClass{
                     display: grid;
-                    grid-template-columns: 25% 75%;
+                    grid-template-columns: 1fr 1fr;
                     grid-template-areas: 
                     "photo name"
                     "photo date"
@@ -319,18 +294,11 @@ body{
                         opacity: .5;
                     }
                 }
-                form{
-                        button{
-                            height: 100%;
-                            margin-left: 5px;
-                        }
-                        
-                    }
-                    #chats{
-                        grid-area: messages;
-                        flex-direction: column;
-                    }
-
+            }
+            #chatsOV{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
             }
         }
     }
@@ -340,52 +308,114 @@ body{
 #fileSelector{
     width: 100%;
 }
-button{
-    font-family: 'Barlow', sans-serif;
+// button{
+//     // padding: 15px ;
+//     margin-top: 10px;
+//     font-family: 'Barlow', sans-serif;
+//     font-size: 1.6rem;
+//     height: 32px;
+//     width: fit-content;
+//     font-weight: 200;
+//     border-radius: 5px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     color: black;
+//     // background-color:var(--darksecondary);
+//     background-color: var(--brightsecondary);
+//     &:hover{
+//         box-shadow: 3px 3px 3px var(--darkmain);
+//         background-color:var(--darksecondary);
+//         color: var(--brightthirdly);
+//     }
+// }
+
+// Button VERSION 2:
+button {
+    min-width: 3rem;
+    min-height: 3rem;
+    padding: .3em 1em .1em 1em;
     font-size: 1.6rem;
-    height: 32px;
-    width: fit-content;
-    font-weight: 200;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color:var(--darksecondary);
-//    color: var(--brightthirdly);
-//    border:none;
-    background-color: var(--brightsecondary);
-    &:hover{
-        box-shadow: 0 0 5px var(--darkmain) inset;
-        background-color:var(--darksecondary);
-        color: var(--brightthirdly);
-    }
-}
+    max-height: 2em;
+    margin-left: 2rem;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    outline: none;
+  } 
+  button:hover{
+    background-color: var(--darkmain);
+    box-shadow: 0px 4px 20px var(--darksecondary);
+    color: #fff;
+    transform: translateY(-3px);
+  }
+  button:active {
+    transform: translateY(-1px);
+  }
+  .activeFriend:hover{
+    color: white;
+  }
+
+
 input{
+    height: 50%;
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
+    border: 0;
+    border-right: 1px solid;
+    display: flex;
+    text-align: center;
 }
-// .formForumInput{
-//     display: flex;
-//     flex-direction: row;
-// }
-.ageInput{
-    width: 100px;
+.maxW{
+    width: 95%;
+}
+.fullW{
+    width: 350px;
+}
+.midW{
+    width: 150px;
+}
+.smallW{
+    width: 50px;;
 }
 select{
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
-    font-weight: 200;
+    font-weight: 90;
+    border: 0;
+    padding: 0 30px;
+    border-right: 1px solid;
+    background-color: white;
+    color: rgb(117,117,117);
+}
+.selectInSearch{
+    // height: 70%;
+    font-size: 1.5rem;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 90;
+    text-align: center;
+    padding: 0 20px 10px 20px;
 }
 textarea{
     font-size: 2rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 200;
     width: 100%;
+    margin-top: 10px;
 }
-
+.css-1s2u09g-control{
+    margin-top: 10px;
+}
 .show {
     display: flex;
+    flex-wrap: wrap;
 }
 .hide {
     display: none;
@@ -401,6 +431,9 @@ textarea{
 }
 .right{
     justify-content: end;
+}
+#chats{
+    flex-direction: column;
 }
 #logo871{
     width: 26px;
@@ -423,55 +456,6 @@ textarea{
     }
 }
 
-  /* generated by https://loading.io/ */
-@keyframes ldio-qydde5o934a {
-    0% {
-      top: 96px;
-      left: 96px;
-      width: 0;
-      height: 0;
-      opacity: 1;
-    }
-    100% {
-      top: -4px;
-      left: -4px;
-      width: 200px;
-      height: 200px;
-      opacity: 0;
-    }
-  }.ldio-qydde5o934a div {
-    position: absolute;
-    border-width: 4px;
-    border-style: solid;
-    opacity: 1;
-    border-radius: 50%;
-    animation: ldio-qydde5o934a 1.0526315789473684s cubic-bezier(0,0.2,0.8,1) infinite;
-  }.ldio-qydde5o934a div:nth-child(1) {
-    border-color: #bc3c68;
-    animation-delay: 0s;
-  }
-  .ldio-qydde5o934a div:nth-child(2) {
-    border-color: #32d1e2;
-    animation-delay: -0.5263157894736842s;
-  }
-  .loadingio-spinner-ripple-jjyczsl43u {
-    width: 200px;
-    height: 200px;
-    display: inline-block;
-    overflow: hidden;
-    background: none;
-  }
-  .ldio-qydde5o934a {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform: translateZ(0) scale(1);
-    backface-visibility: hidden;
-    transform-origin: 0 0; /* see note above */
-  }
-  .ldio-qydde5o934a div { box-sizing: content-box; }
-
-
 //On Small Screens
 @media only screen and (max-width:650px) {
     body{
@@ -483,13 +467,6 @@ textarea{
                             width: 20%;
                             display: flex;
                             align-self: flex-end;
-                        }
-                        input{
-                            width: 97%;
-
-                        }
-                        textarea{
-                            width: 98%;
                         }
                     }
                     section{
@@ -503,6 +480,14 @@ textarea{
                             "text text text text"
                             "form form form form";
                         }
+                        form{
+                            input{
+                                width: 100%;
+                            }
+                            textarea{
+                                width: 100%;
+                            }
+                        }
                         .messages{
                             grid-template-columns: repeat(3, 1fr) 75px;
                             grid-template-areas: 
@@ -512,14 +497,15 @@ textarea{
                         "form form form form";
                         }
                     }
+                    .chatOV{
+                        flex-direction: column;
+                        a{
+                            flex-direction: column;
+                        }
+                    }
                 }
             } 
         }
-    }
-    .buttonSubmit{
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
     .friendsView{
         display: grid;
@@ -558,6 +544,18 @@ textarea{
     img{
         width: 100%;
     }
+    .maxW{
+        width: 95%;
+    }
+    .fullW{
+        width: 100%;
+    }
+    .midW{
+        width: 100px;
+    }
+    .smallW{
+        width: 50px;;
+    }
 }
 
 //On Big Screens
@@ -594,27 +592,3 @@ textarea{
             }
         }
 }
-
-
-/*
-STUCTURE
-header
-    nav
-        a
-        svg
-main
-    article
-        form
-            Section/Div
-            input
-            select
-            button
-        section
-            div/profileCard
-                img
-                div
-                button
-                form/hide/show
-            div/messages
-                
- */

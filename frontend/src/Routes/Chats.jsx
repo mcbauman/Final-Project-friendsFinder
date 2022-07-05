@@ -10,6 +10,7 @@ import Chatview from "./Chatview";
 import {Context}from "../components/context"
 import {useContext} from "react";
 import logo from "../components/COF.png";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 export default function Messages(props){
     const [chats, setChats] = useState([])
@@ -31,37 +32,45 @@ export default function Messages(props){
         checkFriends(props.token,setFriends)
     },[])
 
+    chats.forEach(item=>{
+        if(item.members[0].id._id===props.user){
+            item.self=item.members[0].id;
+            item.other=item.members[1].id
+        }else{
+            item.self=item.members[1].id;
+            item.other=item.members[0].id
+        }
+    })
+
+    console.log(chats);
+
     return(
         <article>
-            <section id="messages">
+            <section id="chatsOV">
             {chats&&chats.length?(
                 <>
                     <Routes> 
                         {chats.map(item=>(
                             <Route key={item._id} path={item._id} element={<Chatview  
                                 itemKey={item._id} user={props.user} 
-                                member={item.members[0].id._id===props.user?
-                                    item.members[1].id.userName:
-                                    item.members[0].id.userName}
-                                memberId={item.members[0].id._id===props.user?
-                                    item.members[1].id._id:
-                                    item.members[0].id._id}
-                                img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id}`}
+                                member={item.other.userName}
+                                memberId={item.other._id}
+                                img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`}
                                 sethide={setHide} token={props.token}/>}/>
                         ))} 
                     </Routes>   
                     {!hide&&                    
                     chats.map(item=>(
-                        <div key={item._id} >
-                            <NavLink key={item._id} to={item._id} className="chatOV">
+                        <div key={item._id}  className="chatOV">
+                            <NavLink key={item._id} to={item._id}>
                                 <img className="img2" 
-                                src={item.members[1].id.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.members[1].id._id}`:exmpl}/>
-                                <div className="author">{item.members[0].id._id===props.user?item.members[1].id.userName:item.members[0].id.userName}</div>
+                                src={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:exmpl}/>
+                                <div className="author">{item.other.userName}</div>
                             </NavLink>
                             <button className={isFriend(
-                                    item.members[0].id._id===props.user?item.members[1].id._id:item.members[0].id._id,friends
+                                    item.other._id,friends
                                     )+" btn1"} onClick={()=>addFriend(
-                                        item.members[0].id._id===props.user?item.members[1].id._id:item.members[0].id._id,friends,props.token,setFriends
+                                        item.other._id,props.token,setFriends
                                         )}><FaUserFriends/></button>
                         </div>
                     ))}

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import {useState} from "react"
 import axios from "axios"
 import {NavLink} from "react-router-dom";
 import {MdLogin} from "react-icons/md"
@@ -9,8 +9,8 @@ import {toast, ToastContainer} from "react-toastify";
 export default function Login(props){
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
-    const {lang,setLang}=useContext(Context)
-    const {theme,setTheme}=useContext(Context)
+    const {setLang}=useContext(Context)
+    const {setTheme}=useContext(Context)
     const notifySuccess = (name) => toast(`welcome back!${name}`);
     const notifyError = (text) => toast(text);
 
