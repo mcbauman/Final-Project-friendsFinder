@@ -116,9 +116,9 @@ export default function Profile(props){
     }
 usr&&console.log(usr.friends);
     return(
-        <article className="addBG">
-            <section>
+        <article className="profile">
                 <h1 onClick={()=>setP1(p1==="hide"?"show":"hide")} > <AiOutlineDown/> {trans[lang].desginAndLang}</h1>
+            <section>
                 <form onSubmit={setDefaults} className={p1} >
                     {trans[lang].Theme}:
                     <select value={theme} onChange={(e)=>setTheme(e.target.value)}>
@@ -134,9 +134,11 @@ usr&&console.log(usr.friends);
                     </select>
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
+                </section>
                 <hr/>
 {/* PROFILPICTURE */}
                 <h1 onClick={()=>setP2(p2==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].profPic}</h1>
+                <section>
                 <form onSubmit={saveFile} className={p2} >
                     {usr&&usr.profilePicture?(<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${usr.profilePicture}`} alt="Profil-Picture"/>):<img src={exmpl}/>}
                     <input id="fileSelector" type="file" onChange={handleSelectedFile} />
@@ -145,10 +147,11 @@ usr&&console.log(usr.friends);
             </section>
             <hr/>
 {/* USERDATA */}
-            <section>
+            <>
                 {usr?(
                     <>
                     <h1 onClick={()=>setP3(p3==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].userData}</h1>
+                    <section>
                     <form onSubmit={changeProfile} className={p3} >
                         <input type="text" placeholder={usr.name} value={name} 
                         onChange={(e)=>setName(e.target.value)} className="fullW"/>
@@ -162,10 +165,12 @@ usr&&console.log(usr.friends);
                         isMulti options={Activities} defaultValue={usr.interests}/>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                     </form>
+                    </section>
 {/* ADRESS */}
                     <hr/>
                     <h1 onClick={()=>setP4(p4==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].adress}</h1>
-                    <form onSubmit={changeProfile} className={p4} >
+                   <section>
+                   <form onSubmit={changeProfile} className={p4} >
                         <input type="text" value={street} onChange={e=>setStreet(e.target.value)} 
                         placeholder={usr.street} className="fullW"/>
                         <input type="number" value={number} onChange={e=>setNumber(e.target.value)} 
@@ -185,12 +190,14 @@ usr&&console.log(usr.friends);
                         </select>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                     </form>
+                   </section>
 {/* FRIENDS */}
                         <hr/>
                         <h1 onClick={()=>setP5(p5==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].YoureFriends}:</h1>
                         <div className={p5}>
                         {usr.friends.map(item=>(
-                            <div className="friendsView" id={item.userName}>
+                            <section>
+                                <div className="friendsView" id={item.userName}>
                                 <div className="profPicDiv" 
                                 style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
                                 {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
@@ -198,11 +205,12 @@ usr&&console.log(usr.friends);
                                 <button onClick={()=>deleteFriend(item._id,props.token,setFriends)}>
                                     <MdOutlineDeleteForever/></button>
                             </div>
+                            </section>
                         ))}
                         </div>
                     </>
                 ):<img src={logo} id="henriksLoadingAnimation" />}
-            </section>
+            </>
             <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar={false}
                             newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss
                             draggable pauseOnHover/>

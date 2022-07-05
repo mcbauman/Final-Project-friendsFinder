@@ -89,9 +89,9 @@ export default function Search(props) {
         <button type="submit"></button>
       </form>
       {listOfUsers && listOfUsers.length ? (
-        <section id="messages">
+        <div className="Wapper" id="messages">
           {listOfUsers.map(item => (
-            <div key={item._id} className="ProfileCard">
+            <section key={item._id} className="ProfileCard">
               <img className='imgSearch'
                 src={item.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}` : exmpl} />
               <div className="searchDivUserName">{item.userName}</div>
@@ -108,9 +108,9 @@ export default function Search(props) {
                 <input type="text" placeholder="your text" value={content}
                   onChange={(e) => setContent(e.target.value)} className="maxW" />
               </form>
-            </div>
+            </section>
           ))}
-        </section>) : (<img src={logo} id="henriksLoadingAnimation" />)}
+        </div>) : (<img src={logo} id="henriksLoadingAnimation" />)}
       <ToastContainer position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}

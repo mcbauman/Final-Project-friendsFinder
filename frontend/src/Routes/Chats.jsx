@@ -45,8 +45,7 @@ export default function Messages(props){
     console.log(chats);
 
     return(
-        <article>
-            <section id="chatsOV">
+        <article id="chats">
             {chats&&chats.length?(
                 <>
                     <Routes> 
@@ -61,23 +60,22 @@ export default function Messages(props){
                     </Routes>   
                     {!hide&&                    
                     chats.map(item=>(
-                        <div key={item._id}  className="chatOV">
+                        <section key={item._id}>
                             <NavLink key={item._id} to={item._id}>
                                 <img className="img2" 
                                 src={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:exmpl}/>
                                 <div className="author">{item.other.userName}</div>
                             </NavLink>
                             <button className={isFriend(
-                                    item.other._id,friends
-                                    )+" btn1"} onClick={()=>addFriend(
-                                        item.other._id,props.token,setFriends
-                                        )}><FaUserFriends/></button>
-                        </div>
+                                item.other._id,friends
+                                )+" btn1"} onClick={()=>addFriend(
+                                    item.other._id,props.token,setFriends
+                                    )}><FaUserFriends/></button>
+                        </section>
                     ))}
                 </>)
                 :<img src={logo} id="henriksLoadingAnimation" />
             }
-            </section>
         </article>
     )
 }

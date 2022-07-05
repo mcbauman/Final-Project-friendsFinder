@@ -48,7 +48,7 @@ export default function Chatview(props){
     },[])
 
     return(
-        <div className="cMessages">
+        <section className="cMessages">
             <img src={props.img?props.img:exmpl} alt="UserProfile" />
             <div id="name">{props.member}</div>
             <button className="bntX">
@@ -83,6 +83,6 @@ export default function Chatview(props){
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover/>
-        </div>
+        </section>
     )
 }
