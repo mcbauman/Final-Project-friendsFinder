@@ -238,64 +238,7 @@ body {
                 //     }
                 // }
 
-                // .chatOV {
-                //     display: flex;
-                //     width: fit-content;
 
-                //     a {
-                //         text-decoration: none;
-                //         display: flex;
-
-                //         .author {
-                //             grid-area: author;
-                //             font-size: 2rem;
-                //             font-weight: 600;
-                //             text-decoration: none;
-                //             color: black
-                //         }
-                //     }
-                // }
-
-                // .cMessages {
-                //     display: grid;
-                //     grid-template-columns: 1fr 1fr 1fr 1fr;
-                //     grid-template-areas:
-                //         "profPic user user close"
-                //         "profPic . . btnfriend"
-                //         "form form form  sendMessage"
-                //         "messages messages messages";
-
-                //     img {
-                //         grid-area: profPic;
-                //     }
-
-                //     #name {
-                //         grid-area: user;
-                //     }
-
-                //     .btnX {
-                //         grid-area: close;
-                //         // text-align: end;
-                //     }
-
-                //     .btn1 {
-                //         grid-area: btnfriend;
-                //     }
-
-                //     .btn2 {
-                //         grid-area: sendMessage;
-                //     }
-
-                //     form {
-                //         grid-area: form;
-                //         display: flex;
-                //     }
-
-                //     #chats {
-                //         grid-area: messages;
-                //         flex-direction: column;
-                //     }
-                // }
 
                 // .forumClass {
                 //     display: grid;
@@ -376,7 +319,7 @@ input {
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
     border: 0;
-    border-right: 1px solid;
+    // border-right: 1px solid;
     display: flex;
     text-align: center;
 }
@@ -388,7 +331,7 @@ select {
     font-weight: 90;
     border: 0;
     padding: 0 30px;
-    border-right: 1px solid;
+    // border-right: 1px solid;
     background-color: white;
     color: rgb(117, 117, 117);
 }
@@ -409,22 +352,22 @@ img {
     width: 100%;
 }
 
-.maxW {
-    width: 95%;
-}
+// .maxW {
+//     width: 95%;
+// }
 
-.fullW {
-    width: 350px;
-}
+// .fullW {
+//     width: 350px;
+// }
 
-.midW {
-    width: 150px;
-}
+// .midW {
+//     width: 150px;
+// }
 
-.smallW {
-    width: 50px;
-    ;
-}
+// .smallW {
+//     width: 50px;
+//     ;
+// }
 
 .selectInSearch {
     height: 70%;
@@ -666,11 +609,6 @@ img {
 @media only screen and (min-width:740px) {
     .smallScreen {
         display: none;
-    }
-
-    .messageHeader {
-        display: flex;
-        justify-content: space-between;
     }
 
     img {
