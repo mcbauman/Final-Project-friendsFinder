@@ -73,7 +73,7 @@ export default function Search(props) {
   }
 
   return (
-    <article>
+    <article id="search">
       <form onSubmit={submitFunction}>
         <input className="ageInput midW" type="text"
           onChange={(e) => setMinAge(e.target.value || 0)} placeholder={trans[lang].minAge} />

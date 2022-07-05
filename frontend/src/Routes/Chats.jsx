@@ -54,7 +54,7 @@ export default function Messages(props){
                                 itemKey={item._id} user={props.user} 
                                 member={item.other.userName}
                                 memberId={item.other._id}
-                                img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`}
+                                img={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:null}
                                 sethide={setHide} token={props.token}/>}/>
                         ))} 
                     </Routes>   

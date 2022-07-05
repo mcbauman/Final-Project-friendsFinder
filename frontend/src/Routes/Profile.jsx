@@ -117,7 +117,7 @@ export default function Profile(props){
     }
 usr&&console.log(usr.friends);
     return(
-        <article className="profile">
+        <article id="profile">
                 <h1 onClick={()=>setP1(p1==="hide"?"show":"hide")} > <AiOutlineDown/> {trans[lang].desginAndLang}</h1>
             <section>
                 <form onSubmit={setDefaults} className={p1} >

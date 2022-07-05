@@ -349,24 +349,6 @@ body {
             //     flex-wrap: wrap;
             // }
         }
-        #chats{
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            section{
-                width: fit-content;
-                a{
-                    text-decoration: none;
-                    color: black;
-                }
-            }
-        }
-        .profile{
-            section{
-                padding:0;
-                margin:0;
-            }
-        }
     }
 }
 
