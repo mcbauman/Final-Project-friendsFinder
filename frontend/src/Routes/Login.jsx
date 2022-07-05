@@ -35,7 +35,7 @@ export default function Login(props){
         })
     }
     return(
-        <article>
+        <article id="logIn">
             <section>
                 <form className="signin" onSubmit={submitFunction}>
                     <input type="email" placeholder="@" value={email} onChange={e=>setEmail(e.target.value)} />

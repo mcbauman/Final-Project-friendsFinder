@@ -3,6 +3,7 @@ import axios from "axios"
 import Select from "react-select";
 import Activities from "../components/ActivitiesArray";
 import {toast, ToastContainer} from "react-toastify";
+import {MdOutlineSaveAlt} from "react-icons/md";
 import "../components/Log.scss";
 
 
@@ -91,7 +92,7 @@ export default function Singin(props){
                 </fieldset>
                 <input type="file" placeholder="choose avatar" />
                 <Select closeMenuOnSelect={false} isMulti options={options} onChange={setInterests} />
-                <button type="submit">save user</button>
+                <button type="submit"><MdOutlineSaveAlt/></button>
                 </section>
             </form>
             <ToastContainer position="bottom-center"

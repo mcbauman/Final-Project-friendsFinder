@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 import exmpl from "../components/exmpl.jpeg"
 import {BiSend} from "react-icons/bi"
+import {MdOutlineSaveAlt} from "react-icons/md";
 import logo from "../components/COF.png";
 import {Context}from "../components/context"
 import trans from "../components/trans";
@@ -69,7 +70,7 @@ export default function Forum(props) {
         <article id="forum">
                 <form onSubmit={declareTopic}>
                     <input type="text" placeholder={trans[lang].subject} value={subject} onChange={e => setSubject(e.target.value)} />
-                    <button type='submit' className='biSend'></button>
+                    <button type='submit' ><MdOutlineSaveAlt/></button>
                     <textarea type="text" placeholder={trans[lang].postText} value={content} onChange={e => setContent(e.target.value)} />
                 </form>
                 <hr />
