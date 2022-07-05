@@ -77,13 +77,13 @@ export default function Forum(props) {
                 {/* <Post  /> */}
                 {posts && posts.length ? (posts.map(item =>
                     <section>
-                        <img src={item.author.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}` : exmpl} />
                         <div key={item._id} className="forumClass" onClick={() => setVis(vis ? 0 : item._id)}>
+                        <img src={item.author.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}` : exmpl} />
                             <div><span>{trans[lang].createdBy}</span>{item.author.userName}</div>
                             <div><span>{trans[lang].createdAt} </span>{new Date(item.createdAt).toLocaleDateString()}</div>
                             <div className='subj'><span>{trans[lang].subject} </span>{item.subject}</div>
-                        </div>
                         <div className='cont'>{item.content}</div>
+                        </div>
                         <form onSubmit={(e) => commentPost(item, props.user, e)} 
                         className={vis === item._id ? "show" : "hide"}>
                             <input value={comment} onChange={(e) => setComment(e.target.value)} 
