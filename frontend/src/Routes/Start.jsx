@@ -1,5 +1,5 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import exmpl from "../components/exmpl.jpeg"
@@ -8,6 +8,7 @@ import logo from "../components/COF.png";
 import {Context}from "../components/context"
 import trans from "../components/trans";
 import {useContext} from "react";
+import geolib from "geolib";
 
 export default function Forum(props) {
     const [subject, setSubject] = useState("")
@@ -23,27 +24,17 @@ export default function Forum(props) {
         getPosts()
     }, [])
 
-    function getPosts() {
-        const headers = { Authorization: `Bearer ${props.token}` }
-        axios.get(`${process.env.REACT_APP_BE_SERVER}/posts`, { headers })
-            .then(res => {
-                setPosts(res.data)
-                console.log("POSTS: ",res.data);
-            })
-            .catch(error => alert(error.response?.data?.error || "Unknown error"))
-    }
 
-    function declareTopic(e) {
-        e.preventDefault()
-        const data = { author: props.user, content, subject }
-        const headers = { Authorization: `Bearer ${props.token}` }
-        axios.post(`${process.env.REACT_APP_BE_SERVER}/posts`, data, { headers })
-            .then(res => {
-                getPosts()
-                topicNotify()
-            })
-            .catch(error => alert(error.response?.data?.error || "Unknown error"))
-    }
+  function getPosts() {
+    const headers = { Authorization: `Bearer ${props.token}` };
+    axios
+      .get(`${process.env.REACT_APP_BE_SERVER}/posts`, { headers })
+      .then((res) => {
+        setPosts(res.data);
+        console.log("POSTS: ", res.data);
+      })
+      .catch((error) => alert(error.response?.data?.error || "Unknown error"));
+  }
 
     function commentPost(post, userId, e) {
         e.preventDefault()
@@ -59,6 +50,8 @@ export default function Forum(props) {
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
         }
     }
+  }
+
 
     return (
         <article>
