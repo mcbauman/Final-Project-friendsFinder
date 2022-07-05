@@ -86,7 +86,7 @@ export default function Search(props) {
         </select>
         <Select onChange={setInterests} closeMenuOnSelect={false}
           isMulti options={options} />
-        <button type="submit"><MdSearch /></button>
+        <button type="submit"></button>
       </form>
       {listOfUsers && listOfUsers.length ? (
         <section id="messages">
@@ -99,7 +99,7 @@ export default function Search(props) {
               <div className='age'>{item.age}</div>
               <button className={isFriend(item._id, friends) + " btn1"}
                 onClick={() => addFriend(item._id, props.token, setFriends)}>
-                <FaUserFriends /></button>
+                <FaHandshake/></button>
               <button className="btn2" onClick={() => writeMessage(item._id)}>
                 <MdOutlineEmail /></button>
               <div className="profileText">{item.profileText}</div>

@@ -56,7 +56,7 @@ body{
     background-color: var(--background);
     background-image: url("../components/people-4050698_1280.jpg");
     background-attachment: fixed;
-    background-size: contain;
+    background-size: cover;
     >div{
         background-size: cover;
         background-attachment: fixed;
@@ -124,10 +124,23 @@ body{
                 .css-1s2u09g-control{
                     border: 0;
                 }
-                // button{
-                //     height: 100%;
-                //     padding: 8px;
-                // }
+                button{
+                    background-image: url(../components/icons8-search.gif);
+                    background-position: center;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    height: 25px;
+                    border: none;
+                    box-shadow: none;
+                    margin: 0 10px 0 0;
+                }
+                button:hover{
+                    background-color: white;
+                    border: none;
+                    box-shadow: none;
+                    transform: none;
+                    transform: scale(1.4);
+                }
             }
             .signin{
                 >input{
@@ -140,6 +153,12 @@ body{
                 }
             }
             section{
+                h1{
+                    color:var(--brightsecondary);
+                    svg{
+                        margin-right: 10px;
+                    }
+                }
                 >div {
                     padding: 20px 10px;
                     margin-bottom: 20px;
@@ -152,7 +171,7 @@ body{
                     a{
                         color:black;
                         &:hover{
-                            color:var(--brightmain)
+                            color:var(--brightmain);
                         }
                     }
                     .profileText{
@@ -170,8 +189,12 @@ body{
                     }
                 }
                 form{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-around;
                     button{
-                        height: 100%;
+                        align-self: end;
+                        // height: 100%;
                         // margin-left: 5px;
                     }
                     #chats{
@@ -188,7 +211,7 @@ body{
                 }
                 >.ProfileCard{
                     display: grid;
-                    grid-tempselectlate-columns: repeat(4, 1fr) repeat(2,75px);
+                    grid-template-columns: repeat(4, 1fr) repeat(2,150px);
                     grid-template-areas: 
                         "img userName gender age btn1 btn2"
                         "img text text text text text"
@@ -199,22 +222,31 @@ body{
                     }
                     .searchDivUserName{
                         grid-area: userName;
-                        font-size: 2rem;
+                        font-size: 1.5rem;
                         font-weight: 600;
+                        display: flex;
+                        justify-content: flex-start;
+                        padding-left: 10px;
+                        overflow: hidden;
                     }
                     .gender{
                         grid-area: gender;
                         font-weight: 600;
+                        display: flex;
+                        justify-content: center;
                     }
                     .age{
                         grid-area: age;
                         font-weight: 600;
+                        display: flex;
+                        justify-content: center;
                     }
                     .btn1{
                         grid-area: btn1;
                     }
                     .btn2{
                         grid-area: btn2;
+                        margin-left: 15px;
                     }
                     .profileText{
                         grid-area: text;
@@ -240,11 +272,11 @@ body{
                 }
                 .cMessages{
                     display: grid;
-                    grid-template-columns: 1fr 1fr 50px;
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
                     grid-template-areas: 
-                    "profPic user close"
-                    "profPic btnfriend . "
-                    "form form form "
+                    "profPic user user close"
+                    "profPic . . btnfriend"
+                    "form form form  sendMessage"
                     "messages messages messages";
                     img{
                         grid-area: profPic;
@@ -254,10 +286,13 @@ body{
                     }
                     .btnX{
                         grid-area: close;
-                        text-align: end;
+                        // text-align: end;
                     }
                     .btn1{
                         grid-area:btnfriend;
+                    }
+                    .btn2{
+                        grid-area: sendMessage;
                     }
                     form{
                         grid-area: form;
@@ -308,59 +343,37 @@ body{
 #fileSelector{
     width: 100%;
 }
-// button{
-//     // padding: 15px ;
-//     margin-top: 10px;
-//     font-family: 'Barlow', sans-serif;
-//     font-size: 1.6rem;
-//     height: 32px;
-//     width: fit-content;
-//     font-weight: 200;
-//     border-radius: 5px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     color: black;
-//     // background-color:var(--darksecondary);
-//     background-color: var(--brightsecondary);
-//     &:hover{
-//         box-shadow: 3px 3px 3px var(--darkmain);
-//         background-color:var(--darksecondary);
-//         color: var(--brightthirdly);
-//     }
-// }
 
 // Button VERSION 2:
 button {
-    min-width: 3rem;
-    min-height: 3rem;
+    height: 2.5rem;
+    width: 4em;
     padding: .3em 1em .1em 1em;
-    font-size: 1.6rem;
-    max-height: 2em;
-    margin-left: 2rem;
+    font-size: 1.4rem;
     letter-spacing: 2.5px;
     font-weight: 500;
     color: #000;
     background-color: #fff;
     border: none;
     border-radius: 45px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease 0s;
     cursor: pointer;
     outline: none;
-} 
-button:hover{
+  } 
+  button:hover{
     background-color: var(--darkmain);
     box-shadow: 0px 4px 20px var(--darksecondary);
     color: #fff;
     transform: translateY(-3px);
-}
-button:active {
+  }
+  button:active {
     transform: translateY(-1px);
-}
-.activeFriend:hover{
+  }
+  .activeFriend:hover{
     color: white;
-}
+  }
+
 
 input{
     height: 50%;
@@ -395,7 +408,7 @@ select{
     color: rgb(117,117,117);
 }
 .selectInSearch{
-    // height: 70%;
+    height: 70%;
     font-size: 1.5rem;
     font-family: 'Barlow', sans-serif;
     font-weight: 90;
@@ -434,9 +447,6 @@ textarea{
 #chats{
     flex-direction: column;
 }
-.addBG{
-    background-color: var(--brightmainOpacity);
-}
 #logo871{
     width: 26px;
     height: 26px;
@@ -468,7 +478,10 @@ textarea{
                         select{
                             width: 20%;
                             display: flex;
-                            align-self: flex-end;
+                            // align-self: flex-end;
+                        }
+                        fieldset{
+                            border: none;
                         }
                     }
                     section{
@@ -481,6 +494,30 @@ textarea{
                             "text text text text"
                             "text text text text"
                             "form form form form";
+                            .imgSearch{
+                                margin-bottom: 5px;
+                            }
+                            .gender,
+                            .age{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                            .profileText{
+                                border: 1px var(--darkmain) solid;
+                                background-color: var(--brightsecondary);
+                                font-style: italic;
+                                font-size: 1.4rem;
+                                // width: fit-content;
+                                // padding:10px;
+                                // margin-top: 10px;
+                                border-radius: 10px;
+                                    }
+                            button{
+                                padding: 5px 0 0 0;
+                                margin: 5px;
+                            }
+
                         }
                         form{
                             input{
