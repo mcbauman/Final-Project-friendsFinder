@@ -3,6 +3,8 @@ import axios from "axios"
 import Select from "react-select";
 import Activities from "../components/ActivitiesArray";
 import {toast, ToastContainer} from "react-toastify";
+import {MdOutlineSaveAlt} from "react-icons/md";
+import "../components/Log.scss";
 
 
 export default function Singin(props){
@@ -45,20 +47,16 @@ export default function Singin(props){
     }
     
     return(
-        <article>
+        <article id="signUp">
             <form className="signin" onSubmit={submitFunction}>
+{/* PROFILEDATA */}
+                <section>
                 <input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Name"/>
                 <input type="text" value={familyName} onChange={e=>setFamilyName(e.target.value)} placeholder="Family Name"/>
                 <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="@"/>
                 <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password"/>
                 <input type="text" value={userName} onChange={e=>setUserName(e.target.value)} placeholder="User-name" />
                 <input type="date" value={dateOfBirth} onChange={ageFunction} placeholder="Date of birth"/>
-
-                <input type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder="Street"/>
-                <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder="Number"/>
-                <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder="Zip-Code"/>
-                <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder="City"/>
-                
                 <select onChange={e=>setCountry(e.target.value)}>
                     <option>DE</option>
                     <option>AUT</option>
@@ -68,16 +66,34 @@ export default function Singin(props){
                     <option>KE</option>
                     <option>PH</option>
                 </select>
-
+                </section>
+                <hr/>
+{/* Adress */}
+                <section>
+                <input type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder="Street"/>
+                <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder="Number"/>
+                <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder="Zip-Code"/>
+                <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder="City"/>
+                </section>
+                <hr/>
+{/* ABOUTTEXT */}
+                <section>
+                 <textarea rows="5" value={profileText} 
+                 onChange={e=>setProfileText(e.target.value)} 
+                 placeholder="tell us a bit about yourself"/>
+                </section>
+                <hr/>
+{/* ABOUTTEXT */}
+                <section>
                 <fieldset onChange={e=>setGender(e.target.id)}>
                     <input type="radio" name="gender" id="♂️"/><label htmlFor="♂️">♂️</label>
                     <input type="radio" name="gender" id="♀️"/><label htmlFor="♀️">♀️</label>
                     <input type="radio" name="gender" id="⚧"/><label htmlFor="⚧">⚧</label>
                 </fieldset>
-                <textarea rows="5" value={profileText} onChange={e=>setProfileText(e.target.value)} placeholder="tell us a bit about yourself"/>
                 <input type="file" placeholder="choose avatar" />
                 <Select closeMenuOnSelect={false} isMulti options={options} onChange={setInterests} />
-                <button type="submit">save user</button>
+                <button type="submit"><MdOutlineSaveAlt/></button>
+                </section>
             </form>
             <ToastContainer position="bottom-center"
                             autoClose={5000}

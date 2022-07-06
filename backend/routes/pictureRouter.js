@@ -3,7 +3,7 @@ import File from '../models/FileModel.js'
 import multer from 'multer'
 import path from 'path'
 import createError from "http-errors"
-import checkAuth from '../checkAuth.js'
+import checkAuth from '../middleware/checkAuth.js'
 
 
 const pictureRouter = express.Router()

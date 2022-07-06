@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import React from "react";
 import exmpl from "../components/exmpl.jpeg"
-import {FaUserFriends} from "react-icons/fa"
+import {FaHandshake} from "react-icons/fa"
 import {isFriend,checkFriends,addFriend} from "../components/functions";
 import {NavLink} from "react-router-dom"
 import {Routes,Route} from "react-router-dom"
@@ -10,7 +10,7 @@ import Chatview from "./Chatview";
 import {Context}from "../components/context"
 import {useContext} from "react";
 import logo from "../components/COF.png";
-import { IoMdHeartEmpty } from "react-icons/io";
+import "../components/Chat.scss";
 
 export default function Messages(props){
     const [chats, setChats] = useState([])
@@ -45,8 +45,7 @@ export default function Messages(props){
     console.log(chats);
 
     return(
-        <article>
-            <section id="chatsOV">
+        <article id="chats">
             {chats&&chats.length?(
                 <>
                     <Routes> 
@@ -55,29 +54,28 @@ export default function Messages(props){
                                 itemKey={item._id} user={props.user} 
                                 member={item.other.userName}
                                 memberId={item.other._id}
-                                img={`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`}
+                                img={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:null}
                                 sethide={setHide} token={props.token}/>}/>
                         ))} 
                     </Routes>   
                     {!hide&&                    
                     chats.map(item=>(
-                        <div key={item._id}  className="chatOV">
+                        <section key={item._id}>
                             <NavLink key={item._id} to={item._id}>
                                 <img className="img2" 
                                 src={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:exmpl}/>
                                 <div className="author">{item.other.userName}</div>
                             </NavLink>
                             <button className={isFriend(
-                                    item.other._id,friends
-                                    )+" btn1"} onClick={()=>addFriend(
-                                        item.other._id,props.token,setFriends
-                                        )}><FaUserFriends/></button>
-                        </div>
+                                item.other._id,friends
+                                )+" btn1"} onClick={()=>addFriend(
+                                    item.other._id,props.token,setFriends
+                                    )}><FaHandshake/></button>
+                        </section>
                     ))}
                 </>)
                 :<img src={logo} id="henriksLoadingAnimation" />
             }
-            </section>
         </article>
     )
 }

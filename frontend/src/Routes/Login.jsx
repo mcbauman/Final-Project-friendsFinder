@@ -5,6 +5,7 @@ import {MdLogin} from "react-icons/md"
 import {Context}from "../components/context"
 import {useContext} from "react";
 import {toast, ToastContainer} from "react-toastify";
+import "../components/Log.scss";
 
 export default function Login(props){
     const [email, setEmail]=useState("")
@@ -34,17 +35,19 @@ export default function Login(props){
         })
     }
     return(
-        <article>
-            <form className="signin" onSubmit={submitFunction}>
-                <input type="email" placeholder="@" value={email} onChange={e=>setEmail(e.target.value)} />
-                <input type="password" placeholder="***" value={password} onChange={e=>setPassword(e.target.value)} />
-                <button type="submit"><MdLogin/></button>
-            </form>
-            <nav>
-                No account yet? press 
-                <NavLink to="Singin"> Sign up </NavLink>
-                to sign up your profile
-            </nav>
+        <article id="logIn">
+            <section>
+                <form className="signin" onSubmit={submitFunction}>
+                    <input type="email" placeholder="@" value={email} onChange={e=>setEmail(e.target.value)} />
+                    <input type="password" placeholder="***" value={password} onChange={e=>setPassword(e.target.value)} />
+                    <button type="submit"><MdLogin/></button>
+                </form>
+                <nav>
+                    No account yet? press 
+                    <NavLink to="Singin"> Sign up </NavLink>
+                    to sign up your profile
+                </nav>
+            </section>
             <ToastContainer position="bottom-center"
                             autoClose={5000}
                             hideProgressBar={false}

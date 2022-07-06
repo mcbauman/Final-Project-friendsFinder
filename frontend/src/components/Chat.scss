@@ -1,0 +1,33 @@
+body{
+    div{
+        main{
+            #chats{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                section{
+                    width: fit-content;
+                    a{
+                        text-decoration: none;
+                        color: black;
+                    }
+                }
+                .cMessages{
+                    width: 100%;
+                    span{
+                        display: flex;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                    }
+                    form{
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    #chat{
+                        flex-direction: column;
+                    }
+                }
+            } 
+        }
+    }
+}

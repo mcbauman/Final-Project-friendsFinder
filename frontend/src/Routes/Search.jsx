@@ -13,6 +13,7 @@ import { useContext } from "react";
 import logo from "../components/COF.png";
 import { toast, ToastContainer } from "react-toastify";
 import { sortByDistance } from "sort-by-distance";
+import "../components/Search.scss";
 
 export default function Search(props) {
   const [listOfUsers, setListOfUser] = useState([]);
@@ -72,7 +73,7 @@ export default function Search(props) {
   }
 
   return (
-    <article>
+    <article id="search">
       <form onSubmit={submitFunction}>
         <input className="ageInput midW" type="text"
           onChange={(e) => setMinAge(e.target.value || 0)} placeholder={trans[lang].minAge} />
@@ -89,9 +90,9 @@ export default function Search(props) {
         <button type="submit"></button>
       </form>
       {listOfUsers && listOfUsers.length ? (
-        <section id="messages">
+        <div className="Wapper" id="messages">
           {listOfUsers.map(item => (
-            <div key={item._id} className="ProfileCard">
+            <section key={item._id} className="ProfileCard">
               <img className='imgSearch'
                 src={item.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}` : exmpl} />
               <div className="searchDivUserName">{item.userName}</div>
@@ -108,9 +109,9 @@ export default function Search(props) {
                 <input type="text" placeholder="your text" value={content}
                   onChange={(e) => setContent(e.target.value)} className="maxW" />
               </form>
-            </div>
+            </section>
           ))}
-        </section>) : (<img src={logo} id="henriksLoadingAnimation" />)}
+        </div>) : (<img src={logo} id="henriksLoadingAnimation" />)}
       <ToastContainer position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}

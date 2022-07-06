@@ -26,7 +26,7 @@ export default function Header(props){
                <NavLink to="Search"> <span className="bigScreen">{trans[lang].Search}</span><MdSearch className="smallScreen"/></NavLink>
                <NavLink onClick={()=>setHide(false)}to="Chats"> <span className="bigScreen">{trans[lang].Messages}</span><MdOutlineEmail className="smallScreen"/></NavLink>
                <NavLink to="Profile"> <span className="bigScreen">{trans[lang].Profile}</span><CgProfile className="smallScreen"/></NavLink>
-               <MdLogout onClick={logout}/>
+               <MdLogout id="LogOutBTN" onClick={logout}/>
            </nav>
        </header>
    )
