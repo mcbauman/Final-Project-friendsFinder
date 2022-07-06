@@ -1,8 +1,10 @@
 import { body } from "express-validator";
 
 export const messageRules = [
-    body("message").isLength({min: 0, max: 200 }).withMessage("message-length"),
-    body("message").isAlphanumeric("de-DE").withMessage("message-invalid"),
-    body("message").trim(),
-    body("message").blacklist("<SCRIPT>")
+    body("content").isLength({min: 0, max: 200 }).withMessage("message-length"),
+    body("content").isAlphanumeric("de-DE",{ignore:" ,.-!?"}).withMessage("message-invalid"),
+    body("content").trim(),
+    body("content").blacklist("<SCRIPT>")
 ]
+
+export default messageRules
