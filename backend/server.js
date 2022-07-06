@@ -250,7 +250,7 @@ app.post("/posts", checkAuth,requestValidator(forumValidator), async(req, res, n
 })
 
 // Comment on Forum:
-app.put("/posts/addComment/:id", checkAuth, async(req, res, next) => {
+app.put("/posts/addComment/:id", checkAuth, requestValidator(commentValidator), async(req, res, next) => {
     try{
         console.log("Dta from frontend: ",req.body);
         const forum = await Forum.findById(req.params.id) 
