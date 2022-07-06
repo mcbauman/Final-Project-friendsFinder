@@ -82,7 +82,7 @@ export default function Forum(props) {
                             <div><span>{trans[lang].createdBy}</span>{item.author.userName}</div>
                             <div><span>{trans[lang].createdAt} </span>{new Date(item.createdAt).toLocaleDateString()}</div>
                             <div className='subj'><span>{trans[lang].subject} </span>{item.subject}</div>
-                        <div className='cont'>{item.content}</div>
+                            <div className='cont'>{item.content}</div>
                         </div>
                         <form onSubmit={(e) => commentPost(item, props.user, e)} 
                         className={vis === item._id ? "show" : "hide"}>
