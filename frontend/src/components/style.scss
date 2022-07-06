@@ -15,17 +15,19 @@ body::-webkit-scrollbar {
     --brightmain: var(--background);
     --brightmainOpacity: rgba(240, 240, 240, .4);
     --brightsecondary: var(--background);
+    --forbluedark: rgba(255, 255, 255, 0);
 }
 
 .blue {
     background-image: url("../components/amillionfriends.jpg");
     --background: rgb(250, 250, 255);
-    --darkmain: rgb(80, 80, 150);
-    --darksecondary: rgb(100, 100, 150);
+    --darkmain: rgba(28, 28, 167, 0.601);
+    --darksecondary: rgb(30, 30, 153);
     --brightthirdly: rgb(240, 255, 240);
     --brightmain: var(--background);
     --brightmainOpacity: rgba(250, 250, 255, .4);
     --brightsecondary: var(--background);
+    --forbluedark: rgba(0, 0, 139, 0.68);
 }
 
 .green {
@@ -37,6 +39,7 @@ body::-webkit-scrollbar {
     --brightmain: var(--background);
     --brightmainOpacity: rgba(250, 255, 250, .4);
     --brightsecondary: var(--background);
+    --forbluedark: rgba(255, 255, 255, 0);
 }
 
 .red {
@@ -48,6 +51,7 @@ body::-webkit-scrollbar {
     --brightmain: var(--background);
     --brightmainOpacity: rgba(255, 252, 245, .4);
     --brightsecondary: var(--background);
+     --forbluedark: rgba(255, 255, 255, 0);
 }
 
 //Structured Styling

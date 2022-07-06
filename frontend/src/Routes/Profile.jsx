@@ -143,6 +143,10 @@ usr&&console.log(usr.friends);
                 <form onSubmit={saveFile} className={p2} >
                     {usr&&usr.profilePicture?(<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${usr.profilePicture}`} alt="Profil-Picture"/>):<img src={exmpl}/>}
                     <input id="fileSelector" type="file" onChange={handleSelectedFile} />
+                    <a href="javascript:void(0)" className="hide">
+                    <span className="hide">UPLOAD</span>
+                    <div className="wave hide"></div>
+                    </a>
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
             </section>

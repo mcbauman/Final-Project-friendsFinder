@@ -2,11 +2,27 @@ body{
     div{
         main{
             #profile{
-                section{
+                h1{
+                    color: var(--background);
+                    background-color: var(--forbluedark);
+                    font-size: 2em;
+                    font-weight: bold;
+                }
+
+                section{ 
                     padding:0;
                     margin:0;
+                    form{
+                        justify-content: space-around;
+                        align-items: center;
+                    }
+                    
+
+                    }
+                    
+                    
+                   
                 }
             }
         }
     }
-}
