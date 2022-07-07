@@ -62,7 +62,7 @@ app.post("/user/login",async (req,res,next)=>{
       if(!user){return next({status:405,message:"user doesnt exist"})}
       const loginSuccess = await compare(req.body.password, user.password)
       if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
-      const token=jwt.sign({uid:user._id},process.env.SECRET)
+      const token=jwt.sign({uid:user._id},process.env.SECRET,{expiresIn:"1d"})
       res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName})
   } catch (error) {
       next({status:400,message:error})
@@ -140,22 +140,16 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator), async (
 app.delete("/user/delete", checkAuth, async (req,res,next)=>{
   console.log("Deleting")
   try {
-    // await User.deleteOne({ _id: req.user._id });
+    await User.deleteOne({ _id: req.user._id });
     // //Delete Messages
     // await CMessage.deleteMany({user:req.user._id})
     // //Delete Chats
-    // await Chat.deleteMany({members:{$elemMatch:{id:req.user._id}}})
+    await Chat.deleteMany({members:{$elemMatch:{id:req.user._id}}})
     // //Delete Forum
-    // await Forum.deleteMany({author:req.user._id})
+   await Forum.deleteMany({author:req.user._id})
     // //Delete Comments?
-
-    let newComments =await Forum.updateMany({comments:{$elemMatch:{author:req.user._id}}},{$pull:{"comments.comment":{author:req.user._id}}})
-    console.log(newComments);
-
-    // let C = Forum.find({comments:{$elemMatch:{author:req.user._id}}})
-    // C.populate("comments", "comment author")
-    // let c = await C.exec()
-    // console.log("COMMENT TO BE DELETED",c);
+    let newComments =await Forum.updateMany({comments:{$elemMatch:{author:req.user._id}}},
+      {$pull:{"comments":{author:req.user._id}}})
     res.send("User deleted");
   } catch (error) {
     next({ status: 400, message: error.message });
@@ -220,11 +214,11 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
         if(!existingChats.length>0){
             const chat = await Chat.create({members:[{id:req.user._id},{id:req.body.recipient}]})
             chatId=chat._id
-            const message=await cMessage.create({...req.body,chatId:chatId})
+            const message=await CMessage.create({...req.body,chatId:chatId})
             res.send(message)
         }else{
             chatId=existingChats[0]._id
-            const message=await cMessage.create({...req.body,chatId:chatId})
+            const message=await CMessage.create({...req.body,chatId:chatId})
             res.send(message)
         }
     } catch (err){

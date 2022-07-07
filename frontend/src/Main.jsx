@@ -11,7 +11,8 @@ export default function Main(props){
                 <Route path="*" element={<Start user= {props.user} token= {props.token} /> }/>
                 <Route path="Search" element={<Search user= {props.user} token= {props.token}/>}/>
                 <Route path="Chats/*" element={<Chats user= {props.user} token= {props.token}/>}/>
-                <Route path="Profile" element={<Profile 
+                <Route path="Profile" element={<Profile
+                    setUser={props.setUser} 
                     userProfPic={props.userProfPic} 
                     setUserProfPic={props.setUserProfPic} 
                     user= {props.user} 
