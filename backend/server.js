@@ -220,11 +220,11 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
         if(!existingChats.length>0){
             const chat = await Chat.create({members:[{id:req.user._id},{id:req.body.recipient}]})
             chatId=chat._id
-            const message=await cMessage.create({...req.body,chatId:chatId})
+            const message=await CMessage.create({...req.body,chatId:chatId})
             res.send(message)
         }else{
             chatId=existingChats[0]._id
-            const message=await cMessage.create({...req.body,chatId:chatId})
+            const message=await CMessage.create({...req.body,chatId:chatId})
             res.send(message)
         }
     } catch (err){
