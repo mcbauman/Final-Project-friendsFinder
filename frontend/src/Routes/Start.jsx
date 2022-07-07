@@ -71,7 +71,7 @@ export default function Forum(props) {
     }
 
     return (
-        <article id="forum">
+        <article id="forumStart">
             <form onSubmit={declareTopic}>
                 <input type="text" placeholder={trans[lang].subject} value={subject} onChange={e => setSubject(e.target.value)} />
                 <button type='submit' ><MdOutlineSaveAlt /></button>

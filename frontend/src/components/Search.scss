@@ -36,13 +36,14 @@ body{
                         width: 100px;
                         height: 38px;
                         box-shadow: none;
+                        background-size:2rem;
                     }
                     button:hover {
                         background-color: white;
                         border: none;
                         box-shadow: none;
                         transform: none;
-                        transform: scale(1.4);
+                        transform: scale(1.1);
                     }
                 }
                 #messagesSearch{
@@ -53,7 +54,7 @@ body{
                         }
                         .searchDivUserName{
                             grid-area: name;
-                            margin-left: 10px;
+                            margin-left: 20px;
                             align-self: center;
                             font-weight: 900;
                         }
@@ -87,7 +88,9 @@ body{
                             grid-area: profT;
                             padding-left: 10px;
                             border-top: 2px solid var(--darkmain);
-                            margin-top: 3px;
+                            margin: 3px 0 0 10px;
+                            display: inline-block;
+
                         }
                         form{
                             width: 100%;
