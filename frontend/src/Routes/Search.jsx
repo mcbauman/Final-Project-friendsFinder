@@ -76,6 +76,7 @@ export default function Search(props) {
         .catch(error => notifyFeedback(error.response.data.error[0].content || "Unknown error"))
     }
   }
+
     return(
         <article id="forum">
             <form onSubmit={submitFunction}>
@@ -133,3 +134,4 @@ export default function Search(props) {
         </article>
     )
 }
+
