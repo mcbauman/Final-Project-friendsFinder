@@ -35,6 +35,10 @@ export default function Forum(props) {
                 console.log("POSTS: ", res.data);
             })
             .catch((error) => {
+                if(error.response.data.error.message=="jwt expired"){
+                    localStorage.removeItem("token")
+                    props.setToken(null)
+                }
                 if(error.response)
                     {if(error.response.data)
                         {notifyFeedback(error.response?.data?.error)}}

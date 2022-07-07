@@ -25,6 +25,12 @@ export default function Chatview(props){
             console.log(res.data);
             checkFriends(props.token,setFriends)
         })
+        .catch(error => {
+            if(error.response.data.error.message=="jwt expired"){
+                localStorage.removeItem("token")
+                props.setToken(null)
+            }
+            console.log(error)})
     }
     function sendMessage(e){
         e.preventDefault()

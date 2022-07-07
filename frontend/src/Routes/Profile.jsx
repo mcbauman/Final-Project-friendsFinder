@@ -72,7 +72,12 @@ export default function Profile(props){
                 setUsr(result.data)
                 console.log(result.data);
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                if(error.response.data.error.message=="jwt expired"){
+                    localStorage.removeItem("token")
+                    props.setToken(null)
+                }
+                console.log(error)})
     }
 
     useEffect(()=>loadUser(),[])
