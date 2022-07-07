@@ -69,56 +69,59 @@ export default function Search(props) {
         .catch(error => notifyFeedback(error.response.data.error[0].content || "Unknown error"))
     }
   }
-
-  return (
-    <article id="search">
-      <form onSubmit={submitFunction}>
-        <input className="ageInput midW" type="text"
-          onChange={(e) => setMinAge(e.target.value || 0)} placeholder={trans[lang].minAge} />
-        <input className="ageInput midW" type="text"
-          onChange={(e) => setMaxAge(e.target.value || 150)} placeholder={trans[lang].maxAge} />
-        <select onChange={(e) => setSrchdGender(e.target.value)}>
-          <option>{trans[lang].any}</option>
-          <option>♂️</option>
-          <option>♀️</option>
-          <option>⚧</option>
-        </select>
-        <Select onChange={setInterests} closeMenuOnSelect={false}
-          isMulti options={options} />
-        <button type="submit"></button>
-      </form>
-      {listOfUsers && listOfUsers.length ? (
-        <div className="Wapper" id="messages">
-          {listOfUsers.map(item => (
-            <section key={item._id} className="ProfileCard">
-              <img className='imgSearch'
-                src={item.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}` : exmpl} />
-              <div className="searchDivUserName">{item.userName}</div>
-              <div className='gender'>{item.gender}</div>
-              <div className='age'>{item.age}</div>
-              <button className={isFriend(item._id, friends) + " btn1"}
-                onClick={() => addFriend(item._id, props.token, setFriends)}>
-                <FaHandshake/></button>
-              <button className="btn2" onClick={() => writeMessage(item._id)}>
-                <MdOutlineEmail /></button>
-              <div className="profileText">{item.profileText}</div>
-              <form className={vis === item._id ? "show" : "hide"}
-                onSubmit={(e) => { e.preventDefault(); writeMessage(item._id) }}>
-                <input type="text" placeholder="your text" value={content}
-                  onChange={(e) => setContent(e.target.value)} className="maxW" />
-              </form>
-            </section>
-          ))}
-        </div>) : (<img src={logo} id="henriksLoadingAnimation" />)}
-      <ToastContainer position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover />
-    </article>
-  )
+    return(
+        <article>
+            <form onSubmit={submitFunction}>
+                <input className="ageInput midW" type="text"
+                onChange={(e)=>setMinAge(e.target.value||0)} placeholder={trans[lang].minAge}/>
+                <input className="ageInput midW" type="text" 
+                onChange={(e)=>setMaxAge(e.target.value||150)} placeholder={trans[lang].maxAge}/>
+                <select onChange={(e)=>setSrchdGender(e.target.value)}>
+                    <option>{trans[lang].any}</option>
+                    <option>♂️</option>
+                    <option>♀️</option>
+                    <option>⚧</option>
+                </select>
+                <Select className='selectInSearch' onChange={setInterests} closeMenuOnSelect={false} 
+                isMulti options={options}/>
+                <button type="submit">
+                    {/* <MdSearch/> */}
+                </button>
+            </form>
+            {listOfUsers&&listOfUsers.length?(
+            <section id="messages">
+                {listOfUsers.map(item=>(
+                    <div key={item._id} className="ProfileCard">
+                        <img className='imgSearch' 
+                        src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
+                        <div className="searchDivUserName">{item.userName}</div>
+                        <div className='gender'>{item.gender}</div>
+                        <div className='age'>{item.age}</div>
+                        <button className={isFriend(item._id,friends)+" btn1"} 
+                            onClick={()=>addFriend(item._id,props.token,setFriends)}>
+                            {/* <FaUserFriends/> */}
+                            <FaHandshake/>
+                            </button>
+                        <button className="btn2" onClick={()=>writeMessage(item._id)}>
+                            <MdOutlineEmail/></button>
+                        <div className="profileText">{item.profileText}</div>
+                        <form className={vis===item._id?"show":"hide"} 
+                            onSubmit={(e)=>{e.preventDefault();writeMessage(item._id)}}>
+                            <input type="text" placeholder="your text" value={content} 
+                            onChange={(e)=>setContent(e.target.value)} className="maxW"/>
+                        </form>
+                    </div>
+                ))}
+            </section>):(<img src={logo} id="henriksLoadingAnimation" />)}
+            <ToastContainer position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover/>
+        </article>
+    )
 }

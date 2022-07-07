@@ -62,7 +62,7 @@ body {
     background-image: url("../components/people-4050698_1280.jpg");
     background-attachment: fixed;
     background-size: cover;
-    >div {
+    >div{
         background-size: cover;
         background-attachment: fixed;
         min-height: 95vh;
@@ -134,17 +134,63 @@ body {
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 20px;
-                padding:10px;
-                box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0, 0, 0, 0);
+                box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0,0,0,0);                >div{
+                    display: inline-flex;
+                    flex-direction: column;
+                }
+                .css-1s2u09g-control{
+                    border: 0;
+                }
+                button{
+                    background-image: url(../components/icons8-search.gif);
+                    background-position: center;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    height: 25px;
+                    border: none;
+                    box-shadow: none;
+                }
+                button:hover{
+                    background-color: white;
+                    border: none;
+                    box-shadow: none;
+                    transform: none;
+                    transform: scale(1.4);
+                }
             }
-            section {
-                background-color: var(--brightsecondary);
-                box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0, 0, 0, 0);
-                border-radius: 5px;
-                margin-bottom: 20px;
-                padding: 20px;
+            .signin{
+                >input{
+                    width: 300px;
+                }
+                fieldset{
+                    input{
+                        width: 20px;
+                    }
+                }
+            }
+            section{
+                h1{
+                    color:var(--brightsecondary);
+                    svg{
+                        margin-right: 10px;
+                    }
+                }
                 >div {
-                    .profileText {
+                    padding: 20px 10px;
+                    margin-bottom: 20px;
+                    background-color: var(--brightsecondary);
+                    border-radius: 5px;
+                    // box-shadow: 0 0 7px 1px var(--darksecondary);
+                    box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0,0,0,0);                    img {
+                        border-radius: 25px;
+                    }
+                    a{
+                        color:black;
+                        &:hover{
+                            color:var(--brightmain);
+                        }
+                    }
+                    .profileText{
                         border: 2px var(--darkmain) solid;
                         background-color: var(--brightsecondary);
                         font-style: italic;
@@ -154,7 +200,138 @@ body {
                         margin-top: 10px;
                         border-radius: 10px;
                     }
-
+                    .activeFriend{
+                        color:var(--darkmain);
+                    }
+                }
+                form{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    button{
+                        align-self: end;
+                        // height: 100%;
+                        // margin-left: 5px;
+                    }
+                    #chats{
+                        grid-area: messages;
+                        flex-direction: column;
+                    }
+                    .friendsView{
+                         border-radius: 5px;
+                         box-shadow: 0 0 7px 1px var(--darksecondary);
+                         background-color: var(--brightmain);
+                         padding: 20px 10px;
+                         margin-bottom: 20px;
+                    }
+                }
+                >.ProfileCard{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr) repeat(2,150px);
+                    grid-template-areas: 
+                        "img userName gender age btn1 btn2"
+                        "img text text text text text"
+                        "img text text text text text"
+                        "form form form form form form";
+                    .imgSearch{
+                        grid-area: img;
+                    }
+                    .searchDivUserName{
+                        grid-area: userName;
+                        font-size: 2rem;
+                        font-weight: 600;
+                    }
+                    .gender{
+                        grid-area: gender;
+                        font-weight: 600;
+                    }
+                    .age{
+                        grid-area: age;
+                        font-weight: 600;
+                    }
+                    .btn1{
+                        grid-area: btn1;
+                    }
+                    .btn2{
+                        grid-area: btn2;
+                    }
+                    .profileText{
+                        grid-area: text;
+                    }
+                    form{
+                        grid-area: form;
+                    }
+                }
+                .chatOV{
+                    display: flex;
+                    width: fit-content;
+                    a{
+                        text-decoration: none;
+                        display: flex;
+                        .author{
+                            grid-area: author;
+                            font-size: 2rem;
+                            font-weight: 600;
+                            text-decoration: none;
+                            color:black
+                        }
+                    }
+                }
+                .cMessages{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 50px;
+                    grid-template-areas: 
+                    "profPic user close"
+                    "profPic btnfriend . "
+                    "form form form "
+                    "messages messages messages";
+                    img{
+                        grid-area: profPic;
+                    }
+                    #name{
+                        grid-area: user;
+                    }
+                    .btnX{
+                        grid-area: close;
+                        text-align: end;
+                    }
+                    .btn1{
+                        grid-area:btnfriend;
+                    }
+                    form{
+                        grid-area: form;
+                        display: flex;
+                    }
+                    #chats{
+                        grid-area: messages;
+                        flex-direction: column;
+                    }
+                }
+                .forumClass{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-areas: 
+                    "photo name"
+                    "photo date"
+                    "subject subject"
+                    "content content"
+                    "form form";
+                    img{
+                        grid-area: photo;
+                    }
+                    .subj{
+                        padding: 10px;
+                        grid-area: subject;
+                    }
+                    .cont{
+                        padding: 10px;
+                        grid-area: content;
+                    }
+                    span{
+                        font-size: smaller;
+                        color: --brightmainOpacity;
+                        opacity: .5;
+                    }
 
                 }
 
@@ -281,16 +458,28 @@ body {
 }
 
 // Styling over whole Document
+
+#fileSelector{
+    width: 100%;
+}
+
+// Button VERSION 2:
 button {
-    height: 2.5rem;
-    width: 4em;
+    max-width: 5em;
+    min-width: 2em;
+    // min-height: 3rem;
     padding: .3em 1em .1em 1em;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    height: 2.7rem;
+    // max-height: 2em;
+    margin-left: 2rem;
+
     letter-spacing: 2.5px;
     font-weight: 500;
     color: #000;
     background-color: #fff;
     border: none;
+
     border-radius: 5px;
     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease 0s;
@@ -348,7 +537,10 @@ textarea {
     font-weight: 200;
     width: 100%;
     margin-top: 10px;
+    border-radius: 5px;
 }
+
+
 
 img {
     border-radius: 5px;
@@ -460,8 +652,112 @@ img {
 }
 
 //On Small Screens
-@media only screen and (max-width:740px) {
-    .bigScreen {
+@media only screen and (max-width:650px) {
+    body{
+        div{
+            main{
+                article{
+                    form{
+                        select{
+                            width: 20%;
+                            display: flex;
+                            // align-self: flex-end;
+                        }
+                        fieldset{
+                            border: none;
+                        }
+                    }
+                    section{
+                        .ProfileCard{
+                            grid-template-columns: repeat(2, 1fr) repeat(2,75px);
+                            grid-template-areas: 
+                            "userName userName userName userName"
+                            "img img img img"
+                            "gender age btn1 btn2 "
+                            "text text text text"
+                            "text text text text"
+                            "form form form form";
+                            .imgSearch{
+                                margin-bottom: 5px;
+                            }
+                            .gender,
+                            .age{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                            .profileText{
+                                border: 1px var(--darkmain) solid;
+                                background-color: var(--brightsecondary);
+                                font-style: italic;
+                                font-size: 1.4rem;
+                                // width: fit-content;
+                                // padding:10px;
+                                // margin-top: 10px;
+                                border-radius: 10px;
+                                    }
+                            button{
+                                padding: 5px 0 0 0;
+                                margin: 5px;
+                            }
+
+                        }
+                        form{
+                            input{
+                                width: 100%;
+                            }
+                            textarea{
+                                width: 100%;
+                            }
+                        }
+                        .messages{
+                            grid-template-columns: repeat(3, 1fr) 75px;
+                            grid-template-areas: 
+                        "img author . . "
+                        "img subject . btn3"
+                        "text text text  btn4"
+                        "form form form form";
+                        }
+                    }
+                    .chatOV{
+                        flex-direction: column;
+                        a{
+                            flex-direction: column;
+                        }
+                    }
+                }
+            } 
+        }
+    }
+    .friendsView{
+        display: grid;
+        grid-template-columns: 1fr 75px;
+        grid-template-areas: 
+        "img button"
+        "div div";
+        .profPicDiv{
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            grid-area: img;
+        }
+        div{
+            grid-area: div;
+        }
+        .divInFriendsView{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-area: button;
+            button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-self: center;
+            }
+        }
+    }
+    .bigScreen{
         display: none;
     }
     .messageHeader {
@@ -515,7 +811,7 @@ img {
     //                             "text text text text"
     //                             "form form form form";
 
-    //                         .imgSearch {
+    //                         . {
     //                             margin-bottom: 5px;
     //                         }
 
