@@ -66,9 +66,7 @@ export default function Search(props) {
           setContent("");
           notifyFeedback(`Your message was send`);
         })
-        .catch((error) =>
-          alert(error.response?.data?.error || "Unknown error")
-        );
+        .catch(error => notifyFeedback(error.response.data.error[0].content || "Unknown error"))
     }
   }
     return(

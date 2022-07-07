@@ -14,7 +14,7 @@ import "../components/Start.scss";
 export default function Forum(props) {
     const [subject, setSubject] = useState("")
     const [content, setContent] = useState("")
-    const notify = () => toast("Wow so easy!");
+    const notifyFeedback = (text) => toast(text);
     const topicNotify = () => toast("Topic is saved!")
     const [posts, setPosts] = useState(null)
     const [comment, setComment] = useState(null)
@@ -34,7 +34,11 @@ export default function Forum(props) {
                 setPosts(res.data);
                 console.log("POSTS: ", res.data);
             })
-            .catch((error) => alert(error.response?.data?.error || "Unknown error"));
+            .catch((error) => {
+                if(error.response)
+                    {if(error.response.data)
+                        {notifyFeedback(error.response?.data?.error)}}
+                else{notifyFeedback( "Unknown error")}})
     }
 
     function declareTopic(e) {
@@ -48,7 +52,7 @@ export default function Forum(props) {
                 setContent("")
                 setSubject("")
             })
-            .catch(error => alert(error.response?.data?.error || "Unknown error"))
+            .catch(error => notifyFeedback(error.response.data.error[0].content || "Unknown error"))
     }
 
     function commentPost(post, userId, e) {
@@ -62,7 +66,7 @@ export default function Forum(props) {
                     getPosts()
                     setComment("")
                 })
-                .catch(error => alert(error.response?.data?.error || "Unknown error"))
+                .catch(error => notifyFeedback(error.response.data.error[0].content || "Unknown error"))
         }
     }
 
