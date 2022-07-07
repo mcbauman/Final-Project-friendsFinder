@@ -62,7 +62,7 @@ app.post("/user/login",async (req,res,next)=>{
       const loginSuccess = await compare(req.body.password, user.password)
       if(!loginSuccess){return next({status:405,message:"Password missmatch"})}
       const token=jwt.sign({uid:user._id},process.env.SECRET,{expiresIn:"1d"})
-      res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName})
+      res.send({token,_id:user._id,theme:user.theme,lang:user.lang,userName:user.userName,latitude:user.latitude,longitude:user.longitude})
   } catch (error) {
       next({status:400,message:error})
   }
@@ -84,7 +84,7 @@ app.post("/user/create",userValidator,locationFinder,async (req, res, next) => {
       const user = await User.create({ ...req.body, ...req.userCoordinate });
       const user2 = await User.findOne({ email: req.body.email });
       const token = jwt.sign({ uid: user2._id }, process.env.SECRET);
-      res.send({ token, _id: user._id });
+      res.send({ token, _id: user._id});
     } catch (err) {
       next({ status: 400, message: err.message });
     }

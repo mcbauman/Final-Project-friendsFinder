@@ -11,8 +11,8 @@ export default function Login(props){
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
     const {setLang}=useContext(Context)
-    const {setTheme}=useContext(Context)
-    const notifySuccess = (name) => toast(`welcome back!${name}`);
+    const {setTheme,setLatitude,setLongitude}=useContext(Context)
+    const notifySuccess = (name) => toast(`welcome back ${name}`);
     const notifyError = (text) => toast(text);
 
     function submitFunction(e){
@@ -25,8 +25,12 @@ export default function Login(props){
             props.setUserProfPic(resp.data.profilePicture)
             setLang(resp.data.lang)
             setTheme(resp.data.theme)
+            setLatitude(resp.data.latitude)
+            setLongitude(resp.data.longitude)
             localStorage.setItem("theme",JSON.stringify(resp.data.theme))
             localStorage.setItem("lang",JSON.stringify(resp.data.lang))
+            localStorage.setItem("latitude",JSON.stringify(resp.data.latitude))
+            localStorage.setItem("longitude",JSON.stringify(resp.data.longitude))
             notifySuccess(resp.data.userName)
         })
         .catch(err=>{

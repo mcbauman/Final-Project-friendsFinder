@@ -286,7 +286,10 @@ usr&&usr.friends;
                             <div className="profPicDiv" 
                             style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
                             <div>{item.userName}</div>
-                            <button onClick={()=>deleteFriend(item._id,props.token,setFriends)}>
+                            <button onClick={()=>{
+                                deleteFriend(item._id,props.token,setFriends)
+                                notify("friend removed, you see after reload")
+                            }}>
                                 <MdOutlineDeleteForever/></button>
                         </div>
                         </section>

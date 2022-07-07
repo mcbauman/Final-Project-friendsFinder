@@ -25,7 +25,7 @@ export default function Search(props) {
   const [vis, setVis] = useState(false);
   const [content, setContent] = useState("");
   const [friends, setFriends] = useState([]);
-  const { lang } = useContext(Context);
+  const { lang,latitude, longitude } = useContext(Context);
   const notifyFeedback = (text) => toast(text);
 
   function requestServer() {
@@ -36,7 +36,7 @@ export default function Search(props) {
       .post(`${process.env.REACT_APP_BE_SERVER}/user/find`, body, { headers })
       .then((res) => {
         const opts = {yName: "latitude", xName: "longitude"};
-        const origin = { longitude: 10.0368384, latitude: 53.5658496 };
+        const origin = { longitude: latitude, latitude: longitude };
         // console.log(sortByDistance(origin, res.data, opts));
         const sortedByDistance = sortByDistance(origin, res.data, opts);
         setListOfUser(sortedByDistance);
@@ -104,6 +104,7 @@ export default function Search(props) {
                         <div className="searchDivUserName">{item.userName}</div>
                         <div className='gender'>{item.gender}</div>
                         <div className='age'>{item.age}</div>
+                        <div>{item.distance}</div>
                         <button className={isFriend(item._id,friends)+" btn1"} 
                             onClick={()=>addFriend(item._id,props.token,setFriends)}>
                             {/* <FaUserFriends/> */}
