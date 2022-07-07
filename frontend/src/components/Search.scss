@@ -19,6 +19,30 @@ body{
                         transform: scale(1.4);
                     }
                 }
+                #messages{
+                    .ProfileCard{
+                        width: 96.5%;
+                        display: flex;
+                    }
+                    .divToPlaceUserData{
+                        width: 75%;
+                        // display: flex;
+                        // flex-wrap: wrap;
+                        .divUserDataSearch{
+                            width: 100%;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: space-between;
+                            padding-left: 10px;
+                        }
+                        .profileText{
+                            border: none;
+                        }
+                        form{
+                            width: 100%;
+                        }
+                    }
+                }
             }
         }
     }
