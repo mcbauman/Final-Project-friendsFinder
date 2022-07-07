@@ -37,12 +37,19 @@ export default function Search(props) {
       .then((res) => {
         const opts = {yName: "latitude", xName: "longitude"};
         const origin = { longitude: 10.0368384, latitude: 53.5658496 };
-        console.log(sortByDistance(origin, res.data, opts));
+        // console.log(sortByDistance(origin, res.data, opts));
         const sortedByDistance = sortByDistance(origin, res.data, opts);
         setListOfUser(sortedByDistance);
         console.log("SEARCH RES.DATA l24", res.data);
       })
-      .catch((error) => alert(error.response?.data?.error || "Unknown error"));
+      .catch((error) => {
+        console.log(error);
+        if(error.response.data.error.message=="jwt expired"){
+          localStorage.removeItem("token")
+          props.setToken(null)
+          return
+      }
+        alert(error.response?.data?.error || "Unknown error")});
     checkFriends(props.token, setFriends);
   }
 

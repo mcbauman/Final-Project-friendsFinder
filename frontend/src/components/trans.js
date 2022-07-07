@@ -18,7 +18,8 @@ const trans={
         createdBy:"erstellt von:",
         createdAt:"erstellt am:",
         leaveComment:"kommentieren",
-        deleteUser:"LÖSCHE DEINEN NUTZER"
+        deleteUser:"LÖSCHE DEINEN NUTZER",
+        changeLogInData:"EINLOG-DATEN ÄNDERN"
     },
     en:{
         Search:"Search",
@@ -39,7 +40,8 @@ const trans={
         createdBy:"created by:",
         createdAt:"created at:",
         leaveComment:"comment the post",
-        deleteUser:"DELETE YOUR PROFILE"
+        deleteUser:"DELETE YOUR PROFILE",
+        changeLogInData:"CHANGE LOGIN DATA"
     }
 }
 

@@ -8,10 +8,11 @@ export default function Main(props){
     return(
         <main>
             <Routes>
-                <Route path="*" element={<Start user= {props.user} token= {props.token} /> }/>
-                <Route path="Search" element={<Search user= {props.user} token= {props.token}/>}/>
-                <Route path="Chats/*" element={<Chats user= {props.user} token= {props.token}/>}/>
+                <Route path="*" element={<Start user= {props.user} setToken={props.setToken} token= {props.token} /> }/>
+                <Route path="Search" element={<Search user= {props.user} setToken={props.setToken} token= {props.token}/>}/>
+                <Route path="Chats/*" element={<Chats user= {props.user} setToken={props.setToken} token= {props.token}/>}/>
                 <Route path="Profile" element={<Profile
+                    setToken={props.setToken}
                     setUser={props.setUser} 
                     userProfPic={props.userProfPic} 
                     setUserProfPic={props.setUserProfPic} 
