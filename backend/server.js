@@ -19,7 +19,6 @@ import CMessage from "./models/CMessageModel.js"
 import Forum from "./models/ForumModel.js"
 import locationFinder from "./middleware/locationFinder.js";
 
-
 export function connect() {
   const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
   const connectionString = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`;
@@ -135,6 +134,7 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator), async (
     }
   }
 );
+
 
 // Delete Profile
 app.delete("/user/delete", checkAuth, async (req,res,next)=>{

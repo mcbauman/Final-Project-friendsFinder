@@ -19,7 +19,6 @@ export default function Profile(props){
     const [name,setName] = useState("")
     const [familyName, setFamilyName] = useState("")
     const [email, setEmail]=useState("")
-    const [password, setPassword]=useState("")
     const [userName, setUserName]=useState("")
     const [interests,setInterests]=useState([])
     const [street, setStreet]=useState("")
@@ -37,11 +36,31 @@ export default function Profile(props){
     const [p4,setP4]=useState("hide")
     const [p5,setP5]=useState("hide")
     const [p6,setP6]=useState("hide")
+    const [p7,setP7]=useState("hide")
+    const [passwords, setPasswords]=useState({pw1:"",pw2:""})
     const [friends,setFriends]=useState([])
     const notifySuccess = () => toast("Your profile is updated");
     const notifyDelFriend=()=>toast("friend removed ")
     const notify = (text) => toast(text);
-    
+
+    function loadUser(){
+        const headers = { Authorization: `Bearer ${props.token}`}
+        axios.get(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,{headers})
+        .then(result=> {
+            result.data.interests=result.data.interests.map(item=>({"value":item,"label":item}))
+            setUsr(result.data)
+            console.log(result.data);
+        })
+        .catch(error => {
+            if(error.response.data.error.message=="jwt expired"){
+                localStorage.removeItem("token")
+                props.setToken(null)
+            }
+    console.log(error)})
+    }
+        
+    useEffect(()=>loadUser(),[])
+
     function handleSelectedFile(e){
         const extn = e.target.files[0].type.split('/')[1];
         const valid = ["gif", "png", "jpg", "jpeg"];
@@ -64,23 +83,6 @@ export default function Profile(props){
             .then(result =>  props.setUserProfPic(result.data._id))
             .catch(error => console.log(error))
     }
-    function loadUser(){
-        const headers = { Authorization: `Bearer ${props.token}`}
-        axios.get(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,{headers})
-            .then(result=> {
-                result.data.interests=result.data.interests.map(item=>({"value":item,"label":item}))
-                setUsr(result.data)
-                console.log(result.data);
-            })
-            .catch(error => {
-                if(error.response.data.error.message=="jwt expired"){
-                    localStorage.removeItem("token")
-                    props.setToken(null)
-                }
-                console.log(error)})
-    }
-
-    useEffect(()=>loadUser(),[])
 
     function changeProfile(e){
         e.preventDefault()
@@ -89,11 +91,14 @@ export default function Profile(props){
             name:name?name:usr.name,
             familyName:familyName?familyName:usr.familyName,
             email:email?email:usr.email,
-//            password:password?password:null,
             userName:userName?userName:usr.userName,
             profileText:profileText?profileText:usr.profileText,
             interests:sendInterests,
-            street, number, zipCode, city, country
+            street:street?street:usr.street, 
+            number:number?number:usr.number, 
+            zipCode:zipCode?zipCode:usr.zipCode, 
+            city:city?city:usr.city, 
+            country:country?country:usr.country
         }
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
@@ -102,7 +107,7 @@ export default function Profile(props){
             })
             .catch(error => {
                 console.log(error)
-                notifyError(error)
+                notify(error)
             })
             
     }
@@ -111,7 +116,20 @@ export default function Profile(props){
         e.preventDefault()
         localStorage.setItem("theme",JSON.stringify(theme))
         localStorage.setItem("lang",JSON.stringify(lang))
-        const body2={theme,lang,email:usr.email}
+        const body2={
+            theme,
+            lang,
+            name:name?name:usr.name,
+            familyName:familyName?familyName:usr.familyName,
+            email:email?email:usr.email,
+            userName:userName?userName:usr.userName,
+            profileText:profileText?profileText:usr.profileText,
+            street:street?street:usr.street, 
+            number:number?number:usr.number, 
+            zipCode:zipCode?zipCode:usr.zipCode, 
+            city:city?city:usr.city, 
+            country:country?country:usr.country
+        }
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body2,{headers})
             .then(result=> {
@@ -119,7 +137,7 @@ export default function Profile(props){
             })
             .catch(error => {
                 console.log(error)
-                notifyError(error)
+                notify(error)
             })
     }
 
@@ -140,7 +158,28 @@ export default function Profile(props){
         localStorage.setItem("lang", "")
     }
 
-usr&&console.log(usr.friends);
+    function changePasswordsF(e){
+        e.preventDefault()
+        console.log(passwords.pw1);
+        console.log(passwords.pw2);
+        if(passwords.pw1===passwords.pw2){
+        body={password:passwords.pw1}
+        const headers = { Authorization: `Bearer ${props.token}`}
+        axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
+            .then(result=> {
+                console.log(result.data);
+                notify("Youre Password is Changed")
+            })
+            .catch(error => {
+                if(error.response.data.error.message=="jwt expired"){
+                    localStorage.removeItem("token")
+                    props.setToken(null)
+                }
+                console.log(error)})
+        }else{notify("Youre passwords are different")}
+    }
+
+usr&&usr.friends;
     return(
         <article id="profile">
                 <h1 onClick={()=>setP1(p1==="hide"?"show":"hide")} > <AiOutlineDown/> {trans[lang].desginAndLang}</h1>
@@ -160,6 +199,26 @@ usr&&console.log(usr.friends);
                     </select>
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
+                </section>
+                <hr/>
+{/* CHANGE LOGINDATA */}
+                <h1 onClick={()=>setP7(p7==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].changeLogInData}</h1>
+                <section>
+                    <form className={p7} onSubmit={(e)=>changePasswordsF}>
+                        {/* <input name="opw" type="password" defaultValue={passwords.opw} onChange={(e)=>{
+                                    const x=e.target.name
+                                    setPasswords({...passwords,x:e.target.value})
+                        }} /> */}
+                        <input name="pw1" type="password" defaultValue={passwords.pw1} onChange={(e)=>{
+                                    const x=e.target.name
+                                    setPasswords({...passwords,x:e.target.value})
+                        }} />
+                        <input name="pw2" type="password" defaultValue={passwords.pw2} onChange={(e)=>{
+                                    const x=e.target.name
+                                    setPasswords({...passwords,x:e.target.value})
+                        }} />
+                        <button type="submit"><MdOutlineSaveAlt/></button>
+                    </form>
                 </section>
                 <hr/>
 {/* PROFILPICTURE */}
@@ -205,7 +264,7 @@ usr&&console.log(usr.friends);
                         placeholder={usr.zipCode}/>
                         <input type="text" value={city} onChange={e=>setCity(e.target.value)} 
                         placeholder={usr.city} className="fullW"/>
-                        <select onchange={e=>setCountry(e.target.value)} defautl={usr.country}>
+                        <select onChange={e=>setCountry(e.target.value)} defautl={usr.country}>
                             <option>DE</option>
                             <option>AUT</option>
                             <option>CH</option>
@@ -226,7 +285,6 @@ usr&&console.log(usr.friends);
                             <div className="friendsView" id={item.userName}>
                             <div className="profPicDiv" 
                             style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
-                            {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
                             <div>{item.userName}</div>
                             <button onClick={()=>deleteFriend(item._id,props.token,setFriends)}>
                                 <MdOutlineDeleteForever/></button>
