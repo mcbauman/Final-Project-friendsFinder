@@ -70,7 +70,7 @@ export default function Search(props) {
           alert(error.response?.data?.error || "Unknown error")
         );
     }
-   
+  }
     return(
         <article>
             <form onSubmit={submitFunction}>
@@ -126,10 +126,4 @@ export default function Search(props) {
                 pauseOnHover/>
         </article>
     )
-
 }
-
-
-{/* <div className="searchDivUserName">{item.userName}</div>
-                  <div className='gender'>{item.gender}</div>
-                  <div className='age'>{item.age}</div> */}
