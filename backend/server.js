@@ -26,12 +26,8 @@ export function connect() {
 
   mongoose.connection.on("connecting", () => console.log("[DB] connecting"));
   mongoose.connection.on("connected", () => console.log("[DB] connected"));
-  mongoose.connection.on("disconnecting", () =>
-    console.log("[DB] disconnecting")
-  );
-  mongoose.connection.on("disconnected", () =>
-    console.log("[DB] disconnected")
-  );
+  mongoose.connection.on("disconnecting", () =>console.log("[DB] disconnecting"));
+  mongoose.connection.on("disconnected", () =>console.log("[DB] disconnected"));
   mongoose.connection.on("reconnected", () => console.log("[DB] reconnected"));
   mongoose.connection.on("error", (er) => console.log("[DB] error", er));
 
@@ -142,6 +138,17 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator), async (
   }
 );
 
+// Delete Profile
+app.delete("/user/delete", checkAuth, async (req,res,next)=>{
+  const user=User.findById(req.user._id)
+  try {
+    await user.deleteOne();
+    res.send("User deleted");
+  } catch (error) {
+    next({ status: 400, message: error.message });
+  }
+})
+
 // check friends
 app.get("/user/checkFriends", checkAuth, async (req, res, next) => {
   try {
@@ -237,7 +244,6 @@ app.get("/posts", checkAuth, async (req, res, next) => {
     next({ status: 400, message: error.message });
   }
 });
-
 
 // POST Forum:
 app.post("/posts", checkAuth,requestValidator(forumValidator), async(req, res, next) => {

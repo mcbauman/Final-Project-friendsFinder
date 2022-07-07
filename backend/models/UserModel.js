@@ -37,11 +37,11 @@ const userSchema=new mongoose.Schema({
     },
 })
 
-userSchema.pre('remove', async function() {
+userSchema.pre('deleteOne',{document:true,query:false}, function() {
     console.log("User is being removed " + this._id)
-    await cMessage.deleteMany({ author: this._id })
-    await Chat.deleteMany({members:{$elemMatch:{id:this._id}}})
-    await Forum.deleteMany({author:this._id})
+    cMessage.deleteMany({ user: this._id })
+    Chat.deleteMany({members:{$elemMatch:{id:this._id}}})
+    Forum.deleteMany({author:this._id})
 })
 
 const User=mongoose.model("user", userSchema)
