@@ -91,7 +91,7 @@ export default function Search(props) {
                 </select>
                 <Select className='selectInSearch' onChange={setInterests} closeMenuOnSelect={false} 
                 isMulti options={options}/>
-                <button type="submit">
+                <button className="searchBTN" type="submit">
                     {/* <MdSearch/> */}
                 </button>
             </form>

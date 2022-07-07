@@ -209,11 +209,11 @@ usr&&usr.friends;
                                     const x=e.target.name
                                     setPasswords({...passwords,x:e.target.value})
                         }} /> */}
-                        <input name="pw1" type="password" defaultValue={passwords.pw1} onChange={(e)=>{
+                        <input name="pw1" type="password" placeholder="*****" defaultValue={passwords.pw1} onChange={(e)=>{
                                     const x=e.target.name
                                     setPasswords({...passwords,x:e.target.value})
                         }} />
-                        <input name="pw2" type="password" defaultValue={passwords.pw2} onChange={(e)=>{
+                        <input name="pw2" type="password" placeholder="*****" defaultValue={passwords.pw2} onChange={(e)=>{
                                     const x=e.target.name
                                     setPasswords({...passwords,x:e.target.value})
                         }} />

@@ -3,24 +3,24 @@ body{
         main{
             #forum{
                 >form{
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-around;
+                    // display: flex;
+                    // flex-wrap: wrap;
+                    // justify-content: space-around;
                     input{
-                        width: 100px;
+                        // width: 100px;
                     }
-                    .selectInSearch{
-                        width: 100px;
-                        padding: 0;
-                        .css-319lph-ValueContainer{
-                            padding: 0%;
-                            .css-6j8wv5-Input{
-                                padding: 0%;
-                                margin: 0;
-                            }
-                        }
-                    }
-                    button {
+                    // .selectInSearch{
+                    //     width: 100px;
+                    //     padding: 0;
+                    //     .css-319lph-ValueContainer{
+                    //         padding: 0%;
+                    //         .css-6j8wv5-Input{
+                    //             padding: 0%;
+                    //             margin: 0;
+                    //         }
+                    //     }
+                    // }
+                    .searchBTN {
                         background-image: url(../components/icons8-search.gif);
                         background-position: center;
                         background-size: contain;
@@ -28,7 +28,7 @@ body{
                         height: 30px;
                         box-shadow: none;
                     }
-                    button:hover {
+                    .searchBTN:hover {
                         background-color: white;
                         border: none;
                         box-shadow: none;
