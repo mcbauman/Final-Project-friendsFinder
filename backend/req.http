@@ -35,7 +35,7 @@ Content-Type: application/json
 ### DELETE USER
 DELETE {{url}}/user/delete
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MmM1OWZkNjViYjM2ZTI5MGZkMGRiNzgiLCJpYXQiOjE2NTcxMTg2ODZ9.S9ChJK5sjge87c7MDI_CdZ7MFze06tAvgvCldBUcqAY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MmM2YTQ1MDk0MWY0NmY5YzVhYTBkYzQiLCJpYXQiOjE2NTcxODU0MTJ9.o-HZVz2HGUnXOgn0AWxpFKhs5UCLnYt-i9YDZRcFquc
 
 ###
 # PUT http://localhost:9000/updateProfile

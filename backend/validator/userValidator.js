@@ -10,7 +10,8 @@ const userValidator=[
     body("number").isNumeric().withMessage("only the Number please!"),
     body("city").isAlpha("de-DE",{ignore:" -"}).withMessage("type in your city!"),
     body("zipCode").isNumeric().withMessage("only the Number please!"),
-    body("country").isAlpha().withMessage("choose your country!")
+    body("country").isAlpha().withMessage("choose your country!"),
+    body("profileText").isAlphanumeric("de-DE",{ignore:" ';:()/,.-!?"}).withMessage("not allowed terms in Profile Text")
 ]
 
 export default userValidator
