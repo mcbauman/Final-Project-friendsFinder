@@ -70,7 +70,7 @@ export default function Search(props) {
     }
   }
     return(
-        <article>
+        <article id="messages">
             <form onSubmit={submitFunction}>
                 <input className="ageInput midW" type="text"
                 onChange={(e)=>setMinAge(e.target.value||0)} placeholder={trans[lang].minAge}/>
@@ -89,9 +89,9 @@ export default function Search(props) {
                 </button>
             </form>
             {listOfUsers&&listOfUsers.length?(
-            <section id="messages">
+            <>
                 {listOfUsers.map(item=>(
-                    <div key={item._id} className="ProfileCard">
+                    <section key={item._id} className="ProfileCard">
                         <img className='imgSearch' 
                         src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/>
                         <div className="searchDivUserName">{item.userName}</div>
@@ -110,9 +110,9 @@ export default function Search(props) {
                             <input type="text" placeholder="your text" value={content} 
                             onChange={(e)=>setContent(e.target.value)} className="maxW"/>
                         </form>
-                    </div>
+                    </section>
                 ))}
-            </section>):(<img src={logo} id="henriksLoadingAnimation" />)}
+            </>):(<img src={logo} id="henriksLoadingAnimation" />)}
             <ToastContainer position="bottom-center"
                 autoClose={5000}
                 hideProgressBar={false}
