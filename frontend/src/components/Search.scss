@@ -21,25 +21,41 @@ body{
                 }
                 #messages{
                     .ProfileCard{
-                        width: 96.5%;
-                        display: flex;
-                    }
-                    .divToPlaceUserData{
-                        width: 75%;
-                        // display: flex;
-                        // flex-wrap: wrap;
-                        .divUserDataSearch{
-                            width: 100%;
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: space-between;
-                            padding-left: 10px;
+                        display: grid;
+                        // grid-template-columns: 200px repeat(5, 1fr);
+                        // grid-template-areas: 
+                        // "img name gender age btn1 btn2" 
+                        // "img profT profT profT profT profT" 
+                        // "form form form form form form";
+                        img{
+                            grid-area: img;
+                        }
+                        .searchName{
+                            grid-area: name;
+                            margin-left: 10px;
+                        }
+                        .gender{
+                            grid-area: gender;
+                        }
+                        .age{
+                            grid-area: age;
+                        }
+                        .btn1{
+                            grid-area: btn1;
+                        }
+                        .btn2{
+                            grid-area: btn2;
                         }
                         .profileText{
-                            border: none;
+                            grid-area: profT;
+                            // margin-left: 10px;
                         }
                         form{
-                            width: 100%;
+                            grid-area: form;
+                            margin-top: 10px;
+                            input{
+                                width: 100%;
+                            }
                         }
                     }
                 }
@@ -47,3 +63,57 @@ body{
         }
     }
 }
+@media only screen and (min-width:740px){
+    .ProfileCard{
+        // display: grid;
+        grid-template-columns: 200px repeat(5, 1fr);
+        grid-template-areas: 
+        "img name gender age btn1 btn2" 
+        "img profT profT profT profT profT" 
+        "form form form form form form";
+    }
+}
+@media only screen and (max-width:740px){
+        .ProfileCardSearch{
+            display: grid;
+            grid-template-columns:  repeat(3, 1fr);
+            grid-template-areas: 
+            "img img img"
+            "img img img"
+            "name gender age"
+            " . btn1 btn2"
+            "profT profT profT"
+            "form form form";
+            // img{
+            //     grid-area: img;
+            // }
+            // .searchName{
+            //     grid-area: name;
+            //     margin-left: 10px;
+            // }
+            // .gender{
+            //     grid-area: gender;
+            //     background-color: red;
+            // }
+            // .age{
+            //     grid-area: age;
+            // }
+            // .btn1{
+            //     grid-area: btn1;
+            // }
+            // .btn2{
+            //     grid-area: btn2;
+            // }
+            // .profileText{
+            //     grid-area: profT;
+            //     margin-left: 10px;
+            // }
+            // form{
+            //     grid-area: form;
+            //     margin-top: 10px;
+            //     input{
+            //         width: 100%;
+            //     }
+            // }
+        }
+    }

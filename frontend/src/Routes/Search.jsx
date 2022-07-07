@@ -93,26 +93,25 @@ export default function Search(props) {
         <div className="Wapper" id="messages">
           {listOfUsers.map(item => (
 
-            <section key={item._id} className="ProfileCard">
+            <section key={item._id} className="ProfileCard ProfileCardSearch">
               <img className='imgSearch'
                 src={item.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}` : exmpl} />
-              <div className="divToPlaceUserData">
-                
-                <div className="divUserDataSearch"><span>{item.userName}</span><span>{item.gender} </span><span>{item.age}</span> 
-                  <button className={isFriend(item._id, friends) + " btn1"}
+              <div className="searchName">{item.userName}</div>
+              <div className='gender'>{item.gender}</div>
+              <div className='age'>{item.age}</div>
+              <button className={isFriend(item._id, friends) + " btn1"}
                   onClick={() => addFriend(item._id, props.token, setFriends)}>
                   <FaHandshake/></button>
-                  <button className="btn2" onClick={() => writeMessage(item._id)}>
+              <button className="btn2" onClick={() => writeMessage(item._id)}>
                   <MdOutlineEmail /></button>
-                </div>              
-                <div className="profileText">{item.profileText}</div>
-              </div>
+              <div className="profileText">{item.profileText}</div>
               <form className={vis === item._id ? "show" : "hide"}
                 onSubmit={(e) => { e.preventDefault(); writeMessage(item._id) }}>
                 <input type="text" placeholder="your text" value={content}
                   onChange={(e) => setContent(e.target.value)} className="maxW" />
               </form>
             </section>
+
           ))}
         </div>) : (<img src={logo} id="henriksLoadingAnimation" />)}
       <ToastContainer position="bottom-center"
@@ -129,6 +128,3 @@ export default function Search(props) {
 }
 
 
-{/* <div className="searchDivUserName">{item.userName}</div>
-                  <div className='gender'>{item.gender}</div>
-                  <div className='age'>{item.age}</div> */}
