@@ -36,6 +36,7 @@ export default function Profile(props){
     const [p3,setP3]=useState("hide")
     const [p4,setP4]=useState("hide")
     const [p5,setP5]=useState("hide")
+    const [p6,setP6]=useState("hide")
     const [friends,setFriends]=useState([])
     const notifySuccess = () => toast("Your profile is updated");
     const notifyDelFriend=()=>toast("friend removed ")
@@ -100,6 +101,7 @@ export default function Profile(props){
             })
             
     }
+
     function setDefaults(e){
         e.preventDefault()
         localStorage.setItem("theme",JSON.stringify(theme))
@@ -115,6 +117,24 @@ export default function Profile(props){
                 notifyError(error)
             })
     }
+
+    function deleteUserF(){
+        const headers = { Authorization: `Bearer ${props.token}`}
+        axios.delete(`${process.env.REACT_APP_BE_SERVER}/user/delete`,{headers})
+            .then(result=> {
+                notify(trans[lang].deleteUser)
+            })
+        console.log("delete user Function");
+        console.log(props);
+        props.setUser(null)
+        props.setToken(null)
+        props.setUserProfPic(null)
+        setTheme("BW")
+        setLang("de")
+        localStorage.setItem("theme", "")
+        localStorage.setItem("lang", "")
+    }
+
 usr&&console.log(usr.friends);
     return(
         <article id="profile">
@@ -193,22 +213,28 @@ usr&&console.log(usr.friends);
                     </form>
                    </section>
 {/* FRIENDS */}
-                        <hr/>
-                        <h1 onClick={()=>setP5(p5==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].YoureFriends}:</h1>
-                        <div className={p5}>
-                        {usr.friends.map(item=>(
-                            <section>
-                                <div className="friendsView" id={item.userName}>
-                                <div className="profPicDiv" 
-                                style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
-                                {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
-                                <div>{item.userName}</div>
-                                <button onClick={()=>deleteFriend(item._id,props.token,setFriends)}>
-                                    <MdOutlineDeleteForever/></button>
-                            </div>
-                            </section>
+                    <hr/>
+                    <h1 onClick={()=>setP5(p5==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].YoureFriends}:</h1>
+                    <div className={p5}>
+                    {usr.friends.map(item=>(
+                        <section>
+                            <div className="friendsView" id={item.userName}>
+                            <div className="profPicDiv" 
+                            style={{background:item.profilePicture?`url(${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture})`:`url(${exmpl})`, backgroundPosition: "center", backgroundSize: "cover"}}></div>
+                            {/* <img src={item.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.profilePicture}`:exmpl}/> */}
+                            <div>{item.userName}</div>
+                            <button onClick={()=>deleteFriend(item._id,props.token,setFriends)}>
+                                <MdOutlineDeleteForever/></button>
+                        </div>
+                        </section>
                         ))}
                         </div>
+{/* DELETEUSER */}
+                    <hr/>
+                    <h1 onClick={()=>setP6(p6==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].deleteUser}:</h1>
+                    <div className={p6}>
+                        <button onClick={deleteUserF} id="deleteUser">{trans[lang].deleteUser}</button>
+                    </div>
                     </>
                 ):<img src={logo} id="henriksLoadingAnimation" />}
             </>

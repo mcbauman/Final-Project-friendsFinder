@@ -64,7 +64,7 @@ export default function App(){
          {user&&token?
          <>
             <Header setUser={setUser} setToken={setToken} setUserProfPic={setUserProfPic}/>
-            <Main user={user} token={token} userProfPic={userProfPic} setUserProfPic={setUserProfPic}/>
+            <Main setUser={setUser} user={user} token={token} userProfPic={userProfPic} setUserProfPic={setUserProfPic}/>
          </>
          :<Log setUser={setUser} setToken={setToken} setUserProfPic={setUserProfPic} />
          }
