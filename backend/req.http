@@ -28,9 +28,15 @@ POST {{url}}/user/login
 Content-Type: application/json
 
 {
-    "email":"cynthia@jepleting.de",
+    "email":"maze1@online.de",
     "password":"aA@123456"
 }
+
+### DELETE USER
+DELETE {{url}}/user/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MmM1OWZkNjViYjM2ZTI5MGZkMGRiNzgiLCJpYXQiOjE2NTcxMTg2ODZ9.S9ChJK5sjge87c7MDI_CdZ7MFze06tAvgvCldBUcqAY
+
 ###
 # PUT http://localhost:9000/updateProfile
 # Content-Type: application/json
