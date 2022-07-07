@@ -25,6 +25,12 @@ export default function Chatview(props){
             console.log(res.data);
             checkFriends(props.token,setFriends)
         })
+        .catch(error => {
+            if(error.response.data.error.message=="jwt expired"){
+                localStorage.removeItem("token")
+                props.setToken(null)
+            }
+            console.log(error)})
     }
     function sendMessage(e){
         e.preventDefault()
@@ -71,7 +77,7 @@ export default function Chatview(props){
             </form>
             {messages?(<div id="chat">
                 {messages.map(item=>(
-                    <div className={item.user==props.user?"right flex":"left flex"}>
+                    <div key={item._id} className={item.user==props.user?"right flex":"left flex"}>
                         <div className= "profileText">{item.content}</div>
                     </div>
                 ))}

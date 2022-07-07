@@ -37,12 +37,13 @@ const userSchema=new mongoose.Schema({
     },
 })
 
-userSchema.pre('deleteOne',{document:true,query:false}, function() {
-    console.log("User is being removed " + this._id)
-    cMessage.deleteMany({ user: this._id })
-    Chat.deleteMany({members:{$elemMatch:{id:this._id}}})
-    Forum.deleteMany({author:this._id})
-})
+// userSchema.pre('deleteOne', function() {
+//     const idToDelete = this._conditions._id
+//     console.log("User is being removed " + idToDelete)
+//     cMessage.deleteMany({ user: idToDelete })
+//     Chat.deleteMany({members:{$elemMatch:{id:idToDelete}}})
+//     Forum.deleteMany({author:idToDelete})
+// })
 
 const User=mongoose.model("user", userSchema)
 

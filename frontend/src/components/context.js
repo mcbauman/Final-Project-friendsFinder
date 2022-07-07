@@ -10,10 +10,18 @@ export default function ContextProvider(props){
     const langFromLS=localStorage.getItem("lang")
     const langDefault=langFromLS?JSON.parse(langFromLS):"de"
 
+    const latitudeFromLS=localStorage.getItem("latitude")
+    const latitudeDefault=latitudeFromLS?latitudeFromLS:null
+    
+    const longitudeFromLS=localStorage.getItem("longitude")
+    const longitudeDefault=longitudeFromLS?longitudeFromLS:null
+
     const [hide, setHide]=useState(false)
     const [lang,setLang]=useState(langDefault)
     const [theme,setTheme]=useState(themeDefault)
-    const contextValue={lang,setLang,theme,setTheme,hide,setHide}
+    const [latitude,setLatitude]=useState(latitudeDefault)
+    const [longitude, setLongitude]=useState(longitudeDefault)
+    const contextValue={lang,setLang,theme,setTheme,hide,setHide,latitude,setLatitude,longitude, setLongitude}
     return(
         <Context.Provider value={contextValue}>
             {props.children}

@@ -17,7 +17,9 @@ const trans={
         postText:"Text Deines Posts",
         createdBy:"erstellt von:",
         createdAt:"erstellt am:",
-        leaveComment:"kommentieren"
+        leaveComment:"kommentieren",
+        deleteUser:"LÖSCHE DEINEN NUTZER",
+        changeLogInData:"EINLOG-DATEN ÄNDERN"
     },
     en:{
         Search:"Search",
@@ -37,7 +39,9 @@ const trans={
         postText:"Your posts text",
         createdBy:"created by:",
         createdAt:"created at:",
-        leaveComment:"comment the post"
+        leaveComment:"comment the post",
+        deleteUser:"DELETE YOUR PROFILE",
+        changeLogInData:"CHANGE LOGIN DATA"
     }
 }
 
