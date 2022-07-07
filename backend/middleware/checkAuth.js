@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import User from "./models/UserModel.js"
+import User from "../models/UserModel.js"
 
 async function checkAuth(req,res,next){
 //    console.log("HEADER from CHECKAUTH l5",req.headers);

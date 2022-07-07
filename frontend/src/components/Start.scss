@@ -1,0 +1,48 @@
+body{
+    div{
+        main{
+            #forum{
+                input{
+                    width: 50%;
+                }
+                section{
+                    .forumClass{
+                        display: flex;
+                        flex-wrap: wrap;
+                            .divStartNextPicture{
+                                width: 65%;
+                                span{
+                                    display: inline-block;
+                                    padding-left: 10px;
+                                    overflow: hidden;
+                                    width: 40%;
+                                }
+                            }
+                        .cont{
+                            width: 100%;
+                            word-wrap: break-word;
+                        }
+                    }
+                    form{
+                        margin-top: 10px;
+                        justify-content: space-between;
+                        input{
+                            width: 80%;
+                            padding: 0;
+                        }
+                    }
+                    >div{
+                        div{
+                            span{
+                                color:grey;
+                            }
+                        }
+                    }
+                    #startChat{
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+}

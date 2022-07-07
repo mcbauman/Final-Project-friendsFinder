@@ -5,10 +5,13 @@ import mongoose from "mongoose"
 import cors from "cors"
 import User from "./models/UserModel.js"
 import userValidator from "./validator/userValidator.js"
+import messageRules from "./validator/messageValidator.js"
+import forumValidator from "./validator/forumValidator.js"
+import commentValidator from "./validator/commentValidator.js"
 import { validationResult } from "express-validator"
 import { hash, compare } from "./crypto.js"
 import jwt from "jsonwebtoken"
-import checkAuth from "./checkAuth.js"
+import checkAuth from "./middleware/checkAuth.js"
 import requestValidator from "./validator/requestValidator.js"
 import pictureRouter from "./routes/pictureRouter.js"
 import Chat from "./models/chatSchema.js"
@@ -23,12 +26,8 @@ export function connect() {
 
   mongoose.connection.on("connecting", () => console.log("[DB] connecting"));
   mongoose.connection.on("connected", () => console.log("[DB] connected"));
-  mongoose.connection.on("disconnecting", () =>
-    console.log("[DB] disconnecting")
-  );
-  mongoose.connection.on("disconnected", () =>
-    console.log("[DB] disconnected")
-  );
+  mongoose.connection.on("disconnecting", () =>console.log("[DB] disconnecting"));
+  mongoose.connection.on("disconnected", () =>console.log("[DB] disconnected"));
   mongoose.connection.on("reconnected", () => console.log("[DB] reconnected"));
   mongoose.connection.on("error", (er) => console.log("[DB] error", er));
 
@@ -71,11 +70,7 @@ app.post("/user/login",async (req,res,next)=>{
 });
 
 // CreateUser:
-app.post(
-  "/user/create",
-  userValidator,
-  locationFinder,
-  async (req, res, next) => {
+app.post("/user/create",userValidator,locationFinder,async (req, res, next) => {
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {
@@ -130,11 +125,7 @@ app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
 })
 
 // Update Profile
-app.put(
-  "/user/updateProfile",
-  checkAuth,
-  requestValidator(userValidator),
-  async (req, res, next) => {
+app.put("/user/updateProfile",checkAuth,requestValidator(userValidator), async (req, res, next) => {
     try {
       const user = await User.findByIdAndUpdate(req.user._id, req.body, {
         new: true,
@@ -146,6 +137,17 @@ app.put(
     }
   }
 );
+
+// Delete Profile
+app.delete("/user/delete", checkAuth, async (req,res,next)=>{
+  const user=User.findById(req.user._id)
+  try {
+    await user.deleteOne();
+    res.send("User deleted");
+  } catch (error) {
+    next({ status: 400, message: error.message });
+  }
+})
 
 // check friends
 app.get("/user/checkFriends", checkAuth, async (req, res, next) => {
@@ -196,7 +198,7 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
 })
 
 // Chat new entry: 
-app.post("/chats", checkAuth, async(req, res, next) => {
+app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, next) => {
     try {
         let chatId
         const filterone=await Chat.find({members:{$elemMatch:{id:req.user._id}}})
@@ -243,9 +245,8 @@ app.get("/posts", checkAuth, async (req, res, next) => {
   }
 });
 
-
 // POST Forum:
-app.post("/posts", checkAuth, async(req, res, next) => {
+app.post("/posts", checkAuth,requestValidator(forumValidator), async(req, res, next) => {
     try {
         const forum = await Forum.create(req.body)
         res.send(forum)
@@ -255,7 +256,7 @@ app.post("/posts", checkAuth, async(req, res, next) => {
 })
 
 // Comment on Forum:
-app.put("/posts/addComment/:id", checkAuth, async(req, res, next) => {
+app.put("/posts/addComment/:id", checkAuth, requestValidator(commentValidator), async(req, res, next) => {
     try{
         console.log("Dta from frontend: ",req.body);
         const forum = await Forum.findById(req.params.id) 

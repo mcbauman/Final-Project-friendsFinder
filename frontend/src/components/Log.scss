@@ -1,0 +1,23 @@
+body{
+    div{
+        main{
+            #signUp{
+                form{
+                    display: block;
+                    section{
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: stretch;
+                    }
+                }
+            }
+            #logIn{
+               form{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+               } 
+            }
+        }
+    }
+}

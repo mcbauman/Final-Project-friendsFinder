@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {FaUserFriends} from "react-icons/fa"
+import {FaHandshake} from "react-icons/fa"
 import {MdOutlineEmail} from "react-icons/md";
 import {CgCloseR} from "react-icons/cg"
 import {NavLink} from "react-router-dom";
@@ -38,7 +38,7 @@ export default function Chatview(props){
                     requestMessages()
                     notifyFeedback(`Your message was send`)
                 })
-                .catch(error => alert(error.response?.data?.error || "Unknown error"))
+                .catch(error => notifyFeedback(error.response.data.error[0].content || "Unknown error"))
         }
     }
 
@@ -48,17 +48,20 @@ export default function Chatview(props){
     },[])
 
     return(
-        <div className="cMessages">
-            <img src={props.img?props.img:exmpl} alt="UserProfile" />
-            <div id="name">{props.member}</div>
-            <button className="bntX">
-            <NavLink onClick={()=>props.sethide(false)} to="/Chats">
-                <CgCloseR/></NavLink></button>
+        <section className="cMessages">
+            <span>
+                <img src={props.img?props.img:exmpl} alt="UserProfile" />
+                <div id="name">{props.member}</div>
                 <button 
-                className={isFriend(props.memberId,friends)+" btn1"} 
-                onClick={()=>addFriend(props.memberId,props.token,setFriends)}>
-                    <FaUserFriends/>
+                    className={isFriend(props.memberId,friends)+" btn1"} 
+                    onClick={()=>addFriend(props.memberId,props.token,setFriends)}>
+                    <FaHandshake/>
                 </button>
+                <button className="bntX">
+                <NavLink onClick={()=>props.sethide(false)} to="/Chats">
+                    <CgCloseR/></NavLink>
+                </button>       
+            </span> 
             <form>
                 <input type="text" placeholder="your text" value={content} 
                 onChange={(e)=>setContent(e.target.value)} 
@@ -66,7 +69,7 @@ export default function Chatview(props){
                 <button onClick={sendMessage} className="btn2">
                 <MdOutlineEmail/></button>
             </form>
-            {messages?(<div id="chats">
+            {messages?(<div id="chat">
                 {messages.map(item=>(
                     <div className={item.user==props.user?"right flex":"left flex"}>
                         <div className= "profileText">{item.content}</div>
@@ -83,6 +86,6 @@ export default function Chatview(props){
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover/>
-        </div>
+        </section>
     )
 }
