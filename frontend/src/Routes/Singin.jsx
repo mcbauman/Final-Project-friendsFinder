@@ -6,7 +6,6 @@ import {toast, ToastContainer} from "react-toastify";
 import {MdOutlineSaveAlt} from "react-icons/md";
 import "../components/Log.scss";
 
-
 export default function Singin(props){
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
