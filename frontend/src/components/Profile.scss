@@ -2,9 +2,33 @@ body{
     div{
         main{
             #profile{
-                section{
+                .profSec1{
                     padding:0;
                     margin:0;
+                    form{
+                        div{
+                            width: 100%;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: space-around;
+                            align-items: center;
+                            padding: 5px 20px;
+                            wrap{
+                                width: 250px;
+                                display: flex;
+                                justify-content: center;
+                                select{
+                                    width: 100px;
+                                    text-align:center;
+                                    padding: 0%;
+                                }
+                                button{
+                                }
+                            }
+                           
+                        }
+                       
+                    }
                 }
             }
         }

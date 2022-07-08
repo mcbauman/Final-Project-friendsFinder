@@ -119,23 +119,31 @@ usr&&console.log(usr.friends);
     return(
         <article id="profile">
                 <h1 onClick={()=>setP1(p1==="hide"?"show":"hide")} > <AiOutlineDown/> {trans[lang].desginAndLang}</h1>
-            <section>
+            <section className="profSec1">
                 <form onSubmit={setDefaults} className={p1} >
-                    {trans[lang].Theme}:
-                    <select value={theme} onChange={(e)=>setTheme(e.target.value)}>
-                        <option>BW</option>
-                        <option>red</option>
-                        <option>blue</option>
-                        <option>green</option>
-                    </select>
-                    {trans[lang].language}:
-                    <select value={lang} onChange={(e)=>setLang(e.target.value)}>
-                        <option value="de">🇩🇪</option>
-                        <option value="en">🇬🇧</option>
-                    </select>
-                    <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
+                    <div>
+                        <>
+                            {trans[lang].Theme}:
+                            <select value={theme} onChange={(e)=>setTheme(e.target.value)}>
+                                Check
+                                <option>BW</option>
+                                <option>red</option>
+                                <option>blue</option>
+                                <option>green</option>
+                            </select>
+                        </>
+                        <wrap>
+                            {trans[lang].language}:
+                            <select value={lang} onChange={(e)=>setLang(e.target.value)}>
+                            <option value="de">🇩🇪</option>
+                            <option value="en">🇬🇧</option>
+                        </select>
+                        </wrap>
+                        
+                        <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
+                    </div>
                 </form>
-                </section>
+            </section>
                 <hr/>
 {/* PROFILPICTURE */}
                 <h1 onClick={()=>setP2(p2==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].profPic}</h1>

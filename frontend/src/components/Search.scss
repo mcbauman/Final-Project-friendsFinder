@@ -18,8 +18,9 @@ body{
                         margin-bottom: 2px;
                     }
                     .selectInSearch{
-                        width: 100px;
+                        min-width: 100px;
                         padding: 0;
+                        display: flex;
                         .css-319lph-ValueContainer{
                             padding: 0%;
                             .css-6j8wv5-Input{
@@ -37,6 +38,7 @@ body{
                         height: 38px;
                         box-shadow: none;
                         background-size:2rem;
+                        z-index: 1;
                     }
                     button:hover {
                         background-color: white;
