@@ -15,6 +15,7 @@ body::-webkit-scrollbar {
     --brightmain: var(--background);
     --brightmainOpacity: rgba(240, 240, 240, .4);
     --brightsecondary: var(--background);
+    --optBG: rgba(50, 50, 50, 0.7);
 }
 
 .blue {
@@ -26,17 +27,19 @@ body::-webkit-scrollbar {
     --brightmain: var(--background);
     --brightmainOpacity: rgba(250, 250, 255, .4);
     --brightsecondary: var(--background);
+    --optBG: rgba(100, 100, 150, 0.7);
 }
 
 .green {
     background-image: url("../components/bg3.jpg");
     --background: rgb(250, 255, 250);
     --darkmain: rgb(50, 100, 0);
-    --darksecondary: rgb(50, 50, 50);
+    --darksecondary: rgb(30, 80, 0);
     --brightthirdly: rgb(240, 255, 240);
     --brightmain: var(--background);
     --brightmainOpacity: rgba(250, 255, 250, .4);
     --brightsecondary: var(--background);
+    --optBG: rgba(50, 100, 0, 0);
 }
 
 .red {
@@ -48,6 +51,7 @@ body::-webkit-scrollbar {
     --brightmain: var(--background);
     --brightmainOpacity: rgba(255, 252, 245, .4);
     --brightsecondary: var(--background);
+    --optBG: rgba(190, 51, 36, 0);
 }
 
 //Structured Styling
@@ -59,14 +63,15 @@ body {
     font-size: 1.6rem;
     font-weight: 300;
     background-color: var(--background);
-    background-image: url("../components/people-4050698_1280.jpg");
     background-attachment: fixed;
     background-size: cover;
+
     >div {
         background-size: cover;
         background-attachment: fixed;
         min-height: 95vh;
     }
+
     header {
         position: sticky;
         width: 100%;
@@ -74,10 +79,12 @@ body {
         z-index: 100;
         background-color: var(--darkmain);
         box-shadow: 0 0 10px var(--darksecondary);
-        &:hover{
+
+        &:hover {
             background-color: var(--darksecondary);
             transition: all 0.2s ease 0s;
         }
+
         nav {
             max-width: 1200px;
             width: 95%;
@@ -87,17 +94,20 @@ body {
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             .active {
                 // border-bottom: solid 2px var(--brightthirdly);
                 // box-shadow: 0px 0px 2px var(--darksecondary) inset;
                 // transform: scale(1.2);
                 text-decoration: underline;
             }
+
             a {
                 padding: .3em 1em .1em 1em;
                 border-radius: 5px;
                 color: var(--brightthirdly);
                 text-decoration: none;
+
                 &:hover {
                     background-color: var(--darkmain);
                     box-shadow: 0px 0px 5px var(--darksecondary);
@@ -109,8 +119,10 @@ body {
                     transform: scale(1.1);
                 }
             }
+
             svg {
                 color: var(--brightthirdly);
+
                 &:hover {
                     color: rgb(50, 50, 50);
                 }
@@ -120,10 +132,12 @@ body {
 
     main {
         height: 90%;
+
         article {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+
             >form {
                 position: sticky;
                 top: 50px;
@@ -135,15 +149,17 @@ body {
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 20px;
-                padding:10px;
+                padding: 10px;
                 box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0, 0, 0, 0);
             }
+
             section {
                 background-color: var(--brightsecondary);
                 box-shadow: 0px 10px 13px -7px #000000, 6px 5px 15px 2px rgba(0, 0, 0, 0);
                 border-radius: 5px;
                 margin-bottom: 20px;
                 padding: 20px;
+
                 >div {
                     .profileText {
                         border: 2px var(--darkmain) solid;
@@ -155,128 +171,8 @@ body {
                         margin-top: 10px;
                         border-radius: 10px;
                     }
-
-
                 }
-
-                // form {
-                //     width: 100%;
-                //     display: flex;
-                //     justify-content: space-around;
-
-                //     button {
-                //         align-self: end;
-                //         // height: 100%;
-                //         // margin-left: 5px;
-                //     }
-
-                //     #chats {
-                //         grid-area: messages;
-                //         flex-direction: column;
-                //     }
-
-                //     .friendsView {
-                //         border-radius: 5px;
-                //         box-shadow: 0 0 7px 1px var(--darksecondary);
-                //         background-color: var(--brightmain);
-                //         padding: 20px 10px;
-                //         margin-bottom: 20px;
-                //     }
-                // }
-
-                // >.ProfileCard {
-                //     display: grid;
-                //     grid-template-columns: repeat(4, 1fr) repeat(2, 150px);
-                //     grid-template-areas:
-                //         "img userName gender age btn1 btn2"
-                //         "img text text text text text"
-                //         "img text text text text text"
-                //         "form form form form form form";
-
-                //     .imgSearch {
-                //         grid-area: img;
-                //     }
-
-                //     .searchDivUserName {
-                //         grid-area: userName;
-                //         font-size: 1.5rem;
-                //         font-weight: 600;
-                //         display: flex;
-                //         justify-content: flex-start;
-                //         padding-left: 10px;
-                //         overflow: hidden;
-                //     }
-
-                //     .gender {
-                //         grid-area: gender;
-                //         font-weight: 600;
-                //         display: flex;
-                //         justify-content: center;
-                //     }
-
-                //     .age {
-                //         grid-area: age;
-                //         font-weight: 600;
-                //         display: flex;
-                //         justify-content: center;
-                //     }
-
-                //     .btn1 {
-                //         grid-area: btn1;
-                //     }
-
-                //     .btn2 {
-                //         grid-area: btn2;
-                //         margin-left: 15px;
-                //     }
-
-                //     .profileText {
-                //         grid-area: text;
-                //     }
-
-                //     form {
-                //         grid-area: form;
-                //     }
-                // }
-
-
-
-                // .forumClass {
-                //     display: grid;
-                //     grid-template-columns: 1fr 1fr;
-                //     grid-template-areas:
-                //         "photo name"
-                //         "photo date"
-                //         "subject subject"
-                //         "content content"
-                //         "form form";
-
-                //     img {
-                //         grid-area: photo;
-                //     }
-
-                //     .subj {
-                //         padding: 10px;
-                //         grid-area: subject;
-                //     }
-
-                //     .cont {
-                //         padding: 10px;
-                //         grid-area: content;
-                //     }
-
-                //     span {
-                //         font-size: smaller;
-                //         color: --brightmainOpacity;
-                //         opacity: .5;
-                //     }
-                // }
             }
-            // #chatsOV {
-            //     display: flex;
-            //     justify-content: space-between;
-            //     flex-wrap: wrap;
-            // }
         }
     }
 }
@@ -297,21 +193,30 @@ button {
     transition: all 0.2s ease 0s;
     cursor: pointer;
     outline: none;
+
     &:hover {
         background-color: var(--darkmain);
         box-shadow: 0px 4px 20px var(--darksecondary);
         color: #fff;
         transform: translateY(-3px);
     }
+
     &:active {
-    transform: translateY(-1px);
+        transform: translateY(-1px);
     }
 }
+
 .activeFriend {
     color: var(--darkmain);
+
     &:hover {
         color: white;
     }
+}
+
+#deleteUser {
+    width: fit-content;
+    background-color: red;
 }
 
 input {
@@ -323,12 +228,13 @@ input {
     border-radius: 5px;
     // border-right: 1px solid;
     display: flex;
-    text-align: center;
     text-align: left;
 }
-::placeholder{
+
+::placeholder {
     padding-left: 10px;
 }
+
 select {
     height: 2.5rem;
     font-size: 1.5rem;
@@ -352,6 +258,10 @@ textarea {
 }
 
 img {
+    border-radius: 5px;
+}
+
+h1{
     border-radius: 5px;
 }
 
@@ -383,32 +293,6 @@ img {
     font-weight: 90;
     text-align: center;
     padding: 0 20px 10px 20px;
-}
-
-.css-1s2u09g-control {
-    height: 2.5rem;
-    border: 0;
-    .css-1s2u09g-control{
-        border:0;
-    }
-    .css-1hwfws3{
-        margin:0;
-        padding:0;
-    }
-    .css-g1d714-ValueContainer{
-        margin:0;
-        padding:0;
-    }
-    .css-b62m3t-container{
-        height: 2.5rem;
-    }
-    .css-1pahdxg-control{
-        height: 2.5rem;
-    }
-    .css-1rhbuit-multiValue{
-        margin:0;
-        padding:0;
-    }
 }
 
 .show {
@@ -465,6 +349,7 @@ img {
     .bigScreen {
         display: none;
     }
+
     .messageHeader {
         display: block;
     }
@@ -487,129 +372,8 @@ img {
 
     .smallW {
         width: 50px;
-        ;
+
     }
-    // body {
-    //     div {
-    //         main {
-    //             article {
-    //                 form {
-    //                     select {
-    //                         width: 20%;
-    //                         display: flex;
-    //                         // align-self: flex-end;
-    //                     }
-
-    //                     fieldset {
-    //                         border: none;
-    //                     }
-    //                 }
-
-    //                 section {
-    //                     .ProfileCard {
-    //                         grid-template-columns: repeat(2, 1fr) repeat(2, 75px);
-    //                         grid-template-areas:
-    //                             "userName userName userName userName"
-    //                             "img img img img"
-    //                             "gender age btn1 btn2 "
-    //                             "text text text text"
-    //                             "text text text text"
-    //                             "form form form form";
-
-    //                         .imgSearch {
-    //                             margin-bottom: 5px;
-    //                         }
-
-    //                         .gender,
-    //                         .age {
-    //                             display: flex;
-    //                             justify-content: center;
-    //                             align-items: center;
-    //                         }
-                            
-    //                         // .profileText {
-    //                         //     border: 1px var(--darkmain) solid;
-    //                         //     background-color: var(--brightsecondary);
-    //                         //     font-style: italic;
-    //                         //     font-size: 1.4rem;
-    //                         //     // width: fit-content;
-    //                         //     // padding:10px;
-    //                         //     // margin-top: 10px;
-    //                         //     border-radius: 10px;
-    //                         // }
-
-    //                         button {
-    //                             padding: 5px 0 0 0;
-    //                             margin: 5px;
-    //                         }
-
-    //                     }
-
-    //                     form {
-    //                         input {
-    //                             width: 100%;
-    //                         }
-
-    //                         textarea {
-    //                             width: 100%;
-    //                         }
-    //                     }
-
-                        // .messages {
-                        //     grid-template-columns: repeat(3, 1fr) 75px;
-                        //     grid-template-areas:
-                        //         "img author . . "
-                        //         "img subject . btn3"
-                        //         "text text text  btn4"
-                        //         "form form form form";
-                        // }
-
-
-                    // .chatOV {
-                    //     flex-direction: column;
-
-                    //     a {
-                    //         flex-direction: column;
-                    //     }
-                    // }
-
-
-    // .friendsView {
-    //     display: grid;
-    //     grid-template-columns: 1fr 75px;
-    //     grid-template-areas:
-    //         "img button"
-    //         "div div";
-
-    //     .profPicDiv {
-    //         width: 100px;
-    //         height: 100px;
-    //         border-radius: 5px;
-    //         grid-area: img;
-    //     }
-
-    //     div {
-    //         grid-area: div;
-    //     }
-
-    //     .divInFriendsView {
-    //         display: flex;
-    //         justify-content: center;
-    //         align-items: center;
-    //         grid-area: button;
-
-    //         button {
-    //             display: flex;
-    //             justify-content: center;
-    //             align-items: center;
-    //             align-self: center;
-    //         }
-    //     }
-    // }
-
-    
-
-
 }
 
 //On Big Screens
@@ -622,27 +386,36 @@ img {
         width: 200px;
     }
 
-    // .friendsView {
-    //     display: grid;
-    //     grid-template-columns: 1fr 1fr 75px;
-    //     grid-template-areas:
-    //         " img div button";
+    .css-1s2u09g-control {
+        height: 2.5rem;
+        border: 0;
 
-    //     .profPicDiv {
-    //         grid-area: img;
-    //         border-radius: 5px;
-    //         height: 200px;
-    //         width: 200px;
-    //         // background-size: 200px 200px;
-    //         // background-position: center;
-    //         // background-repeat: no-repeat;
-    //     }
+        .css-1s2u09g-control {
+            border: 0;
+        }
 
-    //     div {
-    //         grid-area: div;
-    //     }
+        .css-1hwfws3 {
+            margin: 0;
+            padding: 0;
+        }
 
-    //     button {
-    //         grid-area: button;
-    //     }
+        .css-g1d714-ValueContainer {
+            margin: 0;
+            padding: 0;
+        }
+
+        .css-b62m3t-container {
+            height: 2.5rem;
+        }
+
+        .css-1pahdxg-control {
+            height: 2.5rem;
+        }
+
+        .css-1rhbuit-multiValue {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
 }

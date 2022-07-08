@@ -35,6 +35,10 @@ export default function Forum(props) {
                 console.log("POSTS: ", res.data);
             })
             .catch((error) => {
+                if(error.response.data.error.message=="jwt expired"){
+                    localStorage.removeItem("token")
+                    props.setToken(null)
+                }
                 if(error.response)
                     {if(error.response.data)
                         {notifyFeedback(error.response?.data?.error)}}
@@ -80,8 +84,8 @@ export default function Forum(props) {
             <hr />
             {/* <Post  /> */}
             {posts && posts.length ? (posts.map(item =>
-                <section>
-                    <div key={item._id} className="forumClass" onClick={() => setVis(vis ? 0 : item._id)}>
+                <section key={item._id}>
+                    <div className="forumClass" onClick={() => setVis(vis ? 0 : item._id)}>
                         <img src={item.author.profilePicture ? `${process.env.REACT_APP_BE_SERVER}/picture/${item.author.profilePicture}` : exmpl} />
                         <div className="divStartNextPicture">
                             <div><span>{trans[lang].createdBy}</span>{item.author.userName}</div>
@@ -98,8 +102,8 @@ export default function Forum(props) {
                         <button type='submit' className="btn2"><BiSend /></button>
                     </form>
                     <div className={vis === item._id ? "show" : "hide"} id="startChat" >
-                        {item.comments && item.comments.length && (item.comments.map(answer => (
-                            <div className={answer.author == props.user ? "right flex" : "left flex"}>
+                        {item.comments && item.comments.length && (item.comments.map((answer,index) => (
+                            <div key={index}className={answer.author == props.user ? "right flex" : "left flex"}>
                                 <div className="profileText">{answer.comment} </div><br />
                             </div>)))
                         }

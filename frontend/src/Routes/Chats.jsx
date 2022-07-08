@@ -24,6 +24,12 @@ export default function Messages(props){
             console.log(res.data)
             setChats(res.data)
         })
+        .catch(error => {
+            if(error.response.data.error.message=="jwt expired"){
+                localStorage.removeItem("token")
+                props.setToken(null)
+            }
+            console.log(error)})
     }
 
     useEffect(()=>{

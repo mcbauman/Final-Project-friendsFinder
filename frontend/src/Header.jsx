@@ -15,8 +15,11 @@ export default function Header(props){
         props.setUserProfPic(null)
         setTheme("BW")
         setLang("de")
-        localStorage.setItem("theme", "")
-        localStorage.setItem("lang", "")
+        localStorage.removeItem("theme")
+        localStorage.removeItem("lang")
+        localStorage.removeItem("userProfPic")
+        localStorage.removeItem("latitude")
+        localStorage.removeItem("longitude")
     }
    return(
        <header>

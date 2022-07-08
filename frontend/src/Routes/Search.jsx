@@ -25,7 +25,7 @@ export default function Search(props) {
   const [vis, setVis] = useState(false);
   const [content, setContent] = useState("");
   const [friends, setFriends] = useState([]);
-  const { lang } = useContext(Context);
+  const { lang,latitude, longitude } = useContext(Context);
   const notifyFeedback = (text) => toast(text);
 
   function requestServer() {
@@ -36,13 +36,20 @@ export default function Search(props) {
       .post(`${process.env.REACT_APP_BE_SERVER}/user/find`, body, { headers })
       .then((res) => {
         const opts = {yName: "latitude", xName: "longitude"};
-        const origin = { longitude: 10.0368384, latitude: 53.5658496 };
-        console.log(sortByDistance(origin, res.data, opts));
+        const origin = { longitude: latitude, latitude: longitude };
+        // console.log(sortByDistance(origin, res.data, opts));
         const sortedByDistance = sortByDistance(origin, res.data, opts);
         setListOfUser(sortedByDistance);
         console.log("SEARCH RES.DATA l24", res.data);
       })
-      .catch((error) => alert(error.response?.data?.error || "Unknown error"));
+      .catch((error) => {
+        console.log(error);
+        if(error.response.data.error.message=="jwt expired"){
+          localStorage.removeItem("token")
+          props.setToken(null)
+          return
+      }
+        alert(error.response?.data?.error || "Unknown error")});
     checkFriends(props.token, setFriends);
   }
 
@@ -69,6 +76,7 @@ export default function Search(props) {
         .catch(error => notifyFeedback(error.response.data.error[0].content || "Unknown error"))
     }
   }
+
     return(
         <article id="forum">
             <form onSubmit={submitFunction}>
@@ -84,7 +92,7 @@ export default function Search(props) {
                 </select>
                 <Select className='selectInSearch' onChange={setInterests} closeMenuOnSelect={false} 
                 isMulti options={options}/>
-                <button type="submit">
+                <button className="searchBTN" type="submit">
                     {/* <MdSearch/> */}
                 </button>
             </form>
@@ -97,6 +105,7 @@ export default function Search(props) {
                         <div className="searchDivUserName">{item.userName}</div>
                         <div className='gender'>{item.gender}</div>
                         <div className='age'>{item.age}</div>
+                        <div>{item.distance}</div>
                         <button className={isFriend(item._id,friends)+" btn1"} 
                             onClick={()=>addFriend(item._id,props.token,setFriends)}>
                             {/* <FaUserFriends/> */}
@@ -125,3 +134,4 @@ export default function Search(props) {
         </article>
     )
 }
+
