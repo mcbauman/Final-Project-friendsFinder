@@ -163,7 +163,7 @@ export default function Profile(props){
         console.log(passwords.pw1);
         console.log(passwords.pw2);
         if(passwords.pw1===passwords.pw2){
-        body={password:passwords.pw1}
+        const body={password:passwords.pw1}
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
             .then(result=> {
@@ -204,18 +204,18 @@ usr&&usr.friends;
 {/* CHANGE LOGINDATA */}
                 <h1 onClick={()=>setP7(p7==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].changeLogInData}</h1>
                 <section>
-                    <form className={p7} onSubmit={(e)=>changePasswordsF}>
+                    <form className={p7} onSubmit={changePasswordsF}>
                         {/* <input name="opw" type="password" defaultValue={passwords.opw} onChange={(e)=>{
                                     const x=e.target.name
                                     setPasswords({...passwords,x:e.target.value})
                         }} /> */}
                         <input name="pw1" type="password" placeholder="*****" defaultValue={passwords.pw1} onChange={(e)=>{
                                     const x=e.target.name
-                                    setPasswords({...passwords,x:e.target.value})
+                                    setPasswords({...passwords,[x]:e.target.value})
                         }} />
                         <input name="pw2" type="password" placeholder="*****" defaultValue={passwords.pw2} onChange={(e)=>{
                                     const x=e.target.name
-                                    setPasswords({...passwords,x:e.target.value})
+                                    setPasswords({...passwords,[x]:e.target.value})
                         }} />
                         <button type="submit"><MdOutlineSaveAlt/></button>
                     </form>
