@@ -30,7 +30,7 @@ const trans={
         desginAndLang:"THEME AND LANGUAGE",
         profPic:"PROFILE-PICTURE",
         userData:"USER-DATA",
-        adress:"ADRESS",
+        adress:"ADDRESS",
         YoureFriends:"YOUR FRIENDS",
         language: "Language",
         subject:"Subject of your post",

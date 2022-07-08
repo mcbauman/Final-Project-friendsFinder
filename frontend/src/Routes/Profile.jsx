@@ -135,19 +135,15 @@ usr&&console.log(usr.friends);
                     </select>
                     <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                 </form>
-                </section>
+                </section> 
                 <hr/>
 {/* PROFILPICTURE */}
                 <h1 onClick={()=>setP2(p2==="hide"?"show":"hide")} ><AiOutlineDown/> {trans[lang].profPic}</h1>
                 <section>
                 <form onSubmit={saveFile} className={p2} >
                     {usr&&usr.profilePicture?(<img src={`${process.env.REACT_APP_BE_SERVER}/picture/${usr.profilePicture}`} alt="Profil-Picture"/>):<img src={exmpl}/>}
-                    <input id="fileSelector" type="file" onChange={handleSelectedFile} />
-                    <a href="javascript:void(0)" className="hide">
-                    <span className="hide">UPLOAD</span>
-                    <div className="wave hide"></div>
-                    </a>
-                    <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
+                    <input id="fileSelector" type="file" className="hide" onChange={handleSelectedFile} />
+                    <button className="buttonSubmit" type="submit" ><MdOutlineSaveAlt/>  </button>
                 </form>
             </section>
             <hr/>
@@ -184,7 +180,7 @@ usr&&console.log(usr.friends);
                         placeholder={usr.zipCode}/>
                         <input type="text" value={city} onChange={e=>setCity(e.target.value)} 
                         placeholder={usr.city} className="fullW"/>
-                        <select onchange={e=>setCountry(e.target.value)} defautl={usr.country}>
+                        <select onchange={e=>setCountry(e.target.value)} default={usr.country}>
                             <option>DE</option>
                             <option>AUT</option>
                             <option>CH</option>

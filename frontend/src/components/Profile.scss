@@ -13,16 +13,232 @@ body{
                     padding:0;
                     margin:0;
                     form{
-                        justify-content: space-around;
-                        align-items: center;
-                    }
-                    
+                        justify-content: space-evenly;
+                        align-items:flex-start;
+                        display: flex; 
+                        flex-wrap:wrap;
+                        padding: 0;
+                        margin: 0;
 
-                    }
-                    
-                    
-                   
-                }
-            }
-        }
-    }
+                        
+
+                        #profile-image{
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                            margin: 0 auto;
+                            margin-bottom: 1em;
+                            display: flex-start;
+                            margin-bottom: 1em;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 50%;
+
+                                $b:#ff00b8;
+                                $bl: #1f00ff;
+
+                                body{
+                                display:flex;
+                                width:100%;
+                                height:100vh;
+                                justify-content:center;
+                                align-items:center;
+                                font-family:"Source Code Pro";
+                                svg{
+                                    position:absolute;
+                                    width:0;
+                                    height:0;
+                                }
+                                .btn{
+                                text-transform:uppercase;
+                                letter-spacing:5px;
+                                padding:20px 40px;
+                                transform-origin:100% 50%;
+                                color:#fff;
+                                position:relative;
+                                span{
+                                transition:0.2s ease-in-out;
+                                }
+                                &:before{
+                                content:'';
+                                position:absolute;
+                                width:100%;
+                                height:100%;
+                                background:$b;
+                                left:0;
+                                top:0;
+                                border-radius:75px;
+                                z-index:-1;
+                                transition-delay:1s;
+                                transition:0.4s ease-in-out;
+                                }
+                                div{
+                                width:100%;
+                                height:400%;
+                                position:absolute;
+                                left:0;
+                                bottom:0;
+                                z-index:-2;
+                                filter:url("#goo");
+                                &:after{
+                                    content:'';
+                                    position:absolute;
+                                    width:100%;
+                                    height:25%;
+                                    left:0;
+                                    bottom:0;
+                                    background:$b;
+                                }
+                                &:before{
+                                    content:'';
+                                    position:absolute;
+                                    width:50px;
+                                    height:50px;
+                                    left:0px;
+                                    bottom:0px;
+                                    border-radius:100%;
+                                    background:$b;
+                                }
+                                }
+                                &.loading{
+                                animation:flick 7s ease-in-out 1 forwards;
+                                &:before{
+                                    border-radius:0px;
+                                    box-shadow:inset 0 0 0 3px $b;
+                                    transition-delay:1.3s;
+                                    animation:loading 5s ease-in-out 1 forwards;
+                                    animation-delay:1.5s;
+                                    box-sizing:border-box;
+                                    @keyframes loading{
+                                    0%{
+                                        background:repeating-linear-gradient(45deg, $b, $b 5px, #fff 5px, #fff 10px);
+                                        background-position:-500px 50%;
+                                        background-size:925%;
+                                        clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+                                        padding:20px 40px;
+                                    }
+                                    97.5%{
+                                        background:repeating-linear-gradient(45deg, $b, $b 5px, #fff 5px, #fff 10px);
+                                        background-position:-900px 50%;
+                                        background-size:925%;
+                                        box-shadow:inset 0 0 0 3px $b;
+                                        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                                        content:'';
+                                        color:$bl;
+                                        padding:20px 40px;
+                                        z-index:-1;
+                                    }
+                                    100%{
+                                        background:#fff;
+                                        background-position:-900px 50%;
+                                        background-size:925%;
+                                        box-shadow:inset 0 0 0 3px $bl;
+                                        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                                        content:'COMPLETE!';
+                                        color:$bl;
+                                        padding:20px 40px;
+                                        font-weight:900;
+                                        z-index:9;
+                                    }
+                                    }
+                                    
+                                }
+                                div{
+                                    &:before{
+                                    animation:plop 1.75s ease-out forwards;
+                                    @keyframes plop{
+                                        0%{
+                                        transform:translateX(0px) translateY(0px);
+                                        }
+                                        40%{
+                                        transform:translateX(0px) translateY(0px);
+                                        }
+                                        70%{
+                                        transform:translateX(100px) translateY(-150px);
+                                        background:$b;
+                                        }
+                                        90%{
+                                        transform:translateX(200px) translateY(0px);
+                                        opacity:1;
+                                        }
+                                        100%{
+                                        transform:translateX(200px) translateY(0px);
+                                        opacity:0;
+                                        }
+                                    }
+                                    }
+                                }
+                                span{
+                                    animation:slide 1s ease-in-out 1 forwards;
+                                    transition-delay:6.75s;
+                                    color:$bl;
+                                    
+                                }
+                                @keyframes flick{
+                                    0%{
+                                    transform:rotate(0deg)
+                                    }
+                                    10.5%{
+                                    transform:rotate(-15deg)
+                                    }
+                                    12%{
+                                    transform:rotate(15deg);
+                                    }
+                                    13%{
+                                    transform:rotate(0deg);
+                                    }
+                                    21%{
+                                    transform:rotate(0deg);
+                                    padding-left:60px;
+                                    padding-right:60px;
+                                    }
+                                    97.5%{
+                                    transform:rotate(0deg);
+                                    padding-left:40px;
+                                    padding-right:80px;
+                                    }
+                                    100%{
+                                    transform:rotate(0deg);
+                                    padding-left:40px;
+                                    padding-right:40px;
+                                    }
+                                }
+                                }
+                                span{
+                                display:inline-block;
+                                @for $i from 1 through 100{
+                                    &:nth-of-type(#{$i}){
+                                    animation-delay:#{$i/70}s;
+                                    }
+                                }
+                                @keyframes slide{
+                                    0%{
+                                    transform:translateX(0);
+                                    }
+                                    75%{
+                                    transform:translateX(-20px) rotate(-5deg);
+                                    }
+                                    90%{
+                                    transform:translateX(2px) rotate(1deg);
+                                    }
+                                    100%{
+                                    transform:translateX(0);
+                                    }
+                                }
+                                }
+                            }
+                            }
+                                                        }
+                                                    }
+                                                }
+                                                
+
+                                                }
+                                                
+                                                
+                                            
+                                            }
+                                        }
+                                    }
+                                }
