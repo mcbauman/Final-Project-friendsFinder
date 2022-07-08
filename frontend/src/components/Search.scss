@@ -25,35 +25,33 @@ body{
                         background-position: center;
                         background-size: contain;
                         background-repeat: no-repeat;
-                        height: 30px;
+                        width: 100px;
+                        height: 38px;
                         box-shadow: none;
+                        background-size:2rem;
                     }
                     .searchBTN:hover {
                         background-color: white;
                         border: none;
                         box-shadow: none;
                         transform: none;
-                        transform: scale(1.4);
+                        transform: scale(1.1);
                     }
                 }
                 #messagesSearch{
                     .ProfileCard{
                         display: grid;
-                        // grid-template-columns: 200px repeat(5, 1fr);
-                        // grid-template-areas: 
-                        // "img name gender age btn1 btn2" 
-                        // "img profT profT profT profT profT" 
-                        // "form form form form form form";
                         .imgSearch{
                             grid-area: img;
                         }
                         .searchDivUserName{
                             grid-area: name;
-                            margin-left: 10px;
+                            margin-left: 20px;
+                            align-self: center;
+                            font-weight: 900;
                         }
                         .gender{
                             grid-area: gender;
-
                         }
                         .age{
                             grid-area: age;
@@ -67,7 +65,11 @@ body{
                         .profileText{
                             border: none;
                             grid-area: profT;
-                            // margin-left: 10px;
+                            padding-left: 10px;
+                            border-top: 2px solid var(--darkmain);
+                            margin: 3px 0 0 10px;
+                            display: inline-block;
+
                         }
                         form{
                             grid-area: form;
