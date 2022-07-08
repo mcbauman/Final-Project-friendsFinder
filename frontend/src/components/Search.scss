@@ -3,23 +3,6 @@ body{
         main{
             #forum{
                 >form{
-                    // display: flex;
-                    // flex-wrap: wrap;
-                    // justify-content: space-around;
-                    input{
-                        // width: 100px;
-                    }
-                    // .selectInSearch{
-                    //     width: 100px;
-                    //     padding: 0;
-                    //     .css-319lph-ValueContainer{
-                    //         padding: 0%;
-                    //         .css-6j8wv5-Input{
-                    //             padding: 0%;
-                    //             margin: 0;
-                    //         }
-                    //     }
-                    // }
                     .searchBTN {
                         background-image: url(../components/icons8-search.gif);
                         background-position: center;
@@ -68,7 +51,7 @@ body{
                             padding-left: 10px;
                             border-top: 2px solid var(--darkmain);
                             margin: 3px 0 0 10px;
-                            display: inline-block;
+                            // display: inline-block;
 
                         }
                         form{
@@ -95,15 +78,15 @@ body{
     }
 }
 @media only screen and (max-width:740px){
-        .ProfileCardSearch{
-            display: grid;
-            grid-template-columns:  repeat(3, 1fr);
-            grid-template-areas: 
-            "img img img"
-            "img img img"
-            "name gender age"
-            " . btn1 btn2"
-            "profT profT profT"
-            "form form form";
-        }
+    .ProfileCard{
+        display: grid;
+        grid-template-columns: 150px repeat(2, 1fr);
+        grid-template-areas: 
+        "img img img"
+        "img img img"
+        "name gender age"
+        " . btn1 btn2"
+        "profT profT profT"
+        "form form form";
     }
+}
