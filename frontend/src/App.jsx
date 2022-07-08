@@ -9,7 +9,7 @@ const userFromLS=localStorage.getItem("user")
 const userDefault=userFromLS?JSON.parse(userFromLS):null
 
 const userProfPicLS = localStorage.getItem("userProfPic")
-const userProfPicDefault=userFromLS?userProfPicLS:null
+const userProfPicDefault=userFromLS?userProfPicLS:""
 
 const tokenFromLS=localStorage.getItem("token")
 const tokenDefault=tokenFromLS?tokenFromLS:null
@@ -32,31 +32,34 @@ export default function App(){
     },[token])
 
     useEffect(()=>{
-      localStorage.setItem("userProfPic",(userProfPic))
+      if(userProfPic){
+         localStorage.setItem("userProfPic",(userProfPic))
+      }else{localStorage.removeItem("userProfPic")}
     },[userProfPic])
 
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-    function success(pos) {
-      const crd = pos.coords;
+   //  const options = {
+   //    enableHighAccuracy: true,
+   //    timeout: 5000,
+   //    maximumAge: 0
+   //  };
+   //  function success(pos) {
+   //    const crd = pos.coords;
       
-      console.log('Your current position is:');
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
-      setLatitude(crd.latitude);
-      setLangitude(crd.longitude);
+   //    console.log('Your current position is:');
+   //    console.log(`Latitude : ${crd.latitude}`);
+   //    console.log(`Longitude: ${crd.longitude}`);
+   //    console.log(`More or less ${crd.accuracy} meters.`);
+   //    setLatitude(crd.latitude);
+   //    setLangitude(crd.longitude);
 
-      }
-      // console.log(lat,leng)
-      function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-      }
+   //    }
+   //    // console.log(lat,leng)
+   //    function error(err) {
+   //    console.warn(`ERROR(${err.code}): ${err.message}`);
+   //    }
       
-      navigator.geolocation.getCurrentPosition(success, error, options); 
+   //    navigator.geolocation.getCurrentPosition(success, error, options); 
+
    return(
       <div className={theme}>
          {user&&token?

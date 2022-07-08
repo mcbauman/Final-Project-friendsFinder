@@ -105,7 +105,7 @@ export default function Search(props) {
                         <div className="searchDivUserName">{item.userName}</div>
                         <div className='gender'>{item.gender}</div>
                         <div className='age'>{item.age}</div>
-                        <div>{item.distance*111}</div>
+                        <div>{(item.distance*75).toFixed(2)} km</div>
                         <button className={isFriend(item._id,friends)+" btn1"} 
                             onClick={()=>addFriend(item._id,props.token,setFriends)}>
                             {/* <FaUserFriends/> */}

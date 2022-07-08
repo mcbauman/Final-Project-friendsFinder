@@ -111,7 +111,7 @@ app.post("/user/find", checkAuth, async (req, res, next) => {
 });
 
 // Find Profile to update
-app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
+app.get("/user/updateProfile",checkAuth,locationFinder,async(req,res,next)=>{
     try {
         const user=await User.findById(req.user._id).populate("friends","userName profilePicture")
         console.log(user)
@@ -124,6 +124,9 @@ app.get("/user/updateProfile",checkAuth,async(req,res,next)=>{
 // Update Profile
 app.put("/user/updateProfile",checkAuth,requestValidator(userValidator), async (req, res, next) => {
     try {
+      if(req.body.password){
+        req.body.password = await hash(req.body.password);
+      }
       const user = await User.findByIdAndUpdate(req.user._id, req.body, {
         new: true,
       });
