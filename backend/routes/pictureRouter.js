@@ -9,7 +9,9 @@ import checkAuth from '../middleware/checkAuth.js'
 const pictureRouter = express.Router()
 
 // create multer "middleware factory" (here we can configure multer)
-const multerOptions = { dest: 'uploads/' }
+const __dirname = path.resolve(path.dirname(''))
+const dirPath = path.join(__dirname, '/uploads');
+const multerOptions = { dest: dirPath }
 const upload = multer(multerOptions)
 
 const handleUpload = upload.fields([{ name: "selectedFile", maxCount: 1 }])
