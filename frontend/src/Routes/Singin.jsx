@@ -26,6 +26,7 @@ export default function Singin(props){
     const options=Activities
     const notifySuccess = () => toast("Your profile is created");
     const notifyError = (text) => toast(text);
+    
 
     function ageFunction(e){
         setDateOfBirth(e.target.value)

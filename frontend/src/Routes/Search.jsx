@@ -15,6 +15,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { sortByDistance } from "sort-by-distance";
 import "../components/Search.scss";
 
+
 export default function Search(props) {
   const [listOfUsers, setListOfUser] = useState([]);
   const [interests, setInterests] = useState([]);
@@ -105,7 +106,7 @@ export default function Search(props) {
                         <div className="searchDivUserName">{item.userName}</div>
                         <div className='gender'>{item.gender}</div>
                         <div className='age'>{item.age}</div>
-                        <div>{item.distance*111}</div>
+                        <div>{(item.distance*75).toFixed(2)} km</div>
                         <button className={isFriend(item._id,friends)+" btn1"} 
                             onClick={()=>addFriend(item._id,props.token,setFriends)}>
                             {/* <FaUserFriends/> */}

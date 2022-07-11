@@ -9,7 +9,7 @@ const userFromLS=localStorage.getItem("user")
 const userDefault=userFromLS?JSON.parse(userFromLS):null
 
 const userProfPicLS = localStorage.getItem("userProfPic")
-const userProfPicDefault=userFromLS?userProfPicLS:null
+const userProfPicDefault=userFromLS?userProfPicLS:""
 
 const tokenFromLS=localStorage.getItem("token")
 const tokenDefault=tokenFromLS?tokenFromLS:null
@@ -19,7 +19,7 @@ export default function App(){
    const [user,setUser]=useState(userDefault)
    const [token,setToken]=useState(tokenDefault)
    const [userProfPic, setUserProfPic] = useState(userProfPicDefault)
-   const {theme,setLatitude,setLangitude}=useContext(Context)
+   const {theme,setLatitude,setLongitude}=useContext(Context)
 
    useEffect(()=>{
       if(user){localStorage.setItem("user",JSON.stringify(user))
@@ -32,7 +32,9 @@ export default function App(){
     },[token])
 
     useEffect(()=>{
-      localStorage.setItem("userProfPic",(userProfPic))
+      if(userProfPic){
+         localStorage.setItem("userProfPic",(userProfPic))
+      }else{localStorage.removeItem("userProfPic")}
     },[userProfPic])
 
    //  const options = {
@@ -51,7 +53,7 @@ export default function App(){
    //    setLongitude(crd.longitude);
 
    //    }
-   //    // console.log(lat,leng)
+   //    // console.log(lat,long)
    //    function error(err) {
    //    console.warn(`ERROR(${err.code}): ${err.message}`);
    //    }

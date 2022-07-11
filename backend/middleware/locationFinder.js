@@ -7,13 +7,12 @@ const locationFinder = (req, res, next) => {
   const params = {
     access_key: "229ab8769d8adc30d265ad75a63be0f0",
     query: address,
-    country: "DE",
+    country: req.body.country,
     region: req.body.city,
   };
   axios
     .get("http://api.positionstack.com/v1/forward", { params })
     .then((response) => {
-      
 
       const userCoordinate = {
         latitude: response.data.data[0].latitude,

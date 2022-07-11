@@ -28,9 +28,29 @@ const Activities=[
 },
 {
     value:"Wandern",label:"Wandern"
+},
+{
+    value:"Kunst",label:"Kunst"
+},
+{
+    value:"Skateboarding",label:"Skateboarding"
+},
+{
+    value:"Comics",label:"Comics"
+},
+{
+    value:"Musik",label:"Musik"
+},
+{
+    value:"Kochen",label:"Kochen"
+},
+{ 
+    value:"Tauchen",label:"Tauchen"
+},
+{
+    value:"computer sience",label:"computer sience"
 }
-]
-
+];
 
 
 export default Activities

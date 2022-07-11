@@ -11,6 +11,7 @@ import trans from "../components/trans";
 import { useContext } from "react";
 import "../components/Start.scss";
 
+
 export default function Forum(props) {
     const [subject, setSubject] = useState("")
     const [content, setContent] = useState("")
