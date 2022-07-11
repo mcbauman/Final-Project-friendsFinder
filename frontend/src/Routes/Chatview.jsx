@@ -63,10 +63,9 @@ export default function Chatview(props){
                     onClick={()=>addFriend(props.memberId,props.token,setFriends)}>
                     <FaHandshake/>
                 </button>
-                <button className="bntX">
                 <NavLink onClick={()=>props.sethide(false)} to="/Chats">
-                    <CgCloseR/></NavLink>
-                </button>       
+                    <button className="bntX"><CgCloseR/></button>  
+                </NavLink> 
             </span> 
             <form>
                 <input type="text" placeholder="your text" value={content} 

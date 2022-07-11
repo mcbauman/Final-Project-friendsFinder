@@ -96,10 +96,11 @@ body {
             justify-content: space-between;
 
             .active {
-                 border-bottom: solid 2px var(--brightthirdly);
+                border-bottom: solid 2px var(--brightthirdly);
                 // box-shadow: 0px 0px 2px var(--darksecondary) inset;
                 // transform: scale(1.2);
                 // text-decoration: underline;
+                // color:black
             }
 
             a {
