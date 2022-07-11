@@ -21,11 +21,11 @@ export default function Search(props) {
   const [minAge, setMinAge] = useState(0);
   const [maxAge, setMaxAge] = useState(150);
   const [srchdGender, setSrchdGender] = useState("any");
-  const options = Activities;
   const [vis, setVis] = useState(false);
   const [content, setContent] = useState("");
   const [friends, setFriends] = useState([]);
   const { lang,latitude, longitude } = useContext(Context);
+  const options = Activities[lang];
   const notifyFeedback = (text) => toast(text);
 
   function requestServer() {

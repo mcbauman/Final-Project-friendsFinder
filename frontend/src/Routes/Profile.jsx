@@ -261,7 +261,7 @@ usr&&usr.friends;
                         <textarea placeholder={usr.profileText} value={profileText} 
                         onChange={(e)=>setProfileText(e.target.value)}/>
                         <Select onChange={setInterests} closeMenuOnSelect={false} 
-                        isMulti options={Activities} defaultValue={usr.interests}/>
+                        isMulti options={Activities[lang]} defaultValue={usr.interests}/>
                         <button className="buttonSubmit" type="submit"><MdOutlineSaveAlt/></button>
                     </form>
                     </section>
