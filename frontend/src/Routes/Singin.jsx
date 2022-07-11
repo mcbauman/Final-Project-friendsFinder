@@ -14,7 +14,7 @@ export default function Singin(props){
     const [familyName, setFamilyName] = useState("")
     const [dateOfBirth,setDateOfBirth] = useState("")
     const [age,setAge]=useState(0)
-    const [gender, setGender] = useState("male")
+    const [gender, setGender] = useState("⚧")
     const [interests,setInterests]=useState([])
     const [profileText,setProfileText]=useState("")
     const [street, setStreet]=useState("")
@@ -22,6 +22,7 @@ export default function Singin(props){
     const [zipCode, setZipCode]=useState()
     const [city, setCity]=useState("")
     const [country, setCountry]=useState("DE")
+    const [errors,setErrors]=useState([])
     const options=Activities
     const notifySuccess = () => toast("Your profile is created");
     const notifyError = (text) => toast(text);
@@ -46,26 +47,32 @@ export default function Singin(props){
                 if(err){
                     if(err.response){
                         if(err.response.data){
-                            notifyError(err?.response?.data?.error||"Something went wrong") 
+                            if(Array.isArray(err.response.data.error)){
+                                setErrors([...err.response.data.error])
+                                notifyError(err.response.data.error.join("")||"Something went wrong") 
+                            }else{
+                                setErrors(err.response.data.error)
+                                notifyError(err.response.data.error)
+                            }
                         }
                     }
                     else{notifyError(null||"Something went wrong")}    
                 }
             })
     }
-    
+
     return(
         <article id="signUp">
             <form className="signin" onSubmit={submitFunction}>
 {/* PROFILEDATA */}
                 <section>
-                <input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Name"/>
-                <input type="text" value={familyName} onChange={e=>setFamilyName(e.target.value)} placeholder="Family Name"/>
-                <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="@"/>
-                <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password"/>
-                <input type="text" value={userName} onChange={e=>setUserName(e.target.value)} placeholder="User-name" />
-                <input type="date" value={dateOfBirth} onChange={ageFunction} placeholder="Date of birth"/>
-                <select onChange={e=>setCountry(e.target.value)}>
+                <input className={errors.includes("your real Name please!")?"error":""} type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Name"/>
+                <input className={errors.includes("your real Name please!")?"error":""} type="text" value={familyName} onChange={e=>setFamilyName(e.target.value)} placeholder="Family Name"/>
+                <input className={errors.includes("E11000")?"error":""} type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="@"/>
+                <input className={errors.includes("password is to weak!")?"error":""} type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password"/>
+                <input className={errors.includes("only Chars and Numbers as UserName please!")?"error":""} type="text" value={userName} onChange={e=>setUserName(e.target.value)} placeholder="User-name" />
+                <input className={errors.includes("password")?"error":""} type="date" value={dateOfBirth} onChange={ageFunction} placeholder="Date of birth"/>
+                <select className={errors.includes("choose your country!")?"error":""} onChange={e=>setCountry(e.target.value)}>
                     <option>DE</option>
                     <option>AUT</option>
                     <option>CH</option>
@@ -78,14 +85,14 @@ export default function Singin(props){
                 <hr/>
 {/* Adress */}
                 <section>
-                <input type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder="Street"/>
-                <input type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder="Number"/>
-                <input type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder="Zip-Code"/>
-                <input type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder="City"/>
+                <input className={errors.includes("your real Street please!")?"error":""} type="text" value={street} onChange={e=>setStreet(e.target.value)} placeholder="Street"/>
+                <input className={errors.includes("only the Number please!")?"error":""} type="number" value={number} onChange={e=>setNumber(e.target.value)} placeholder="Number"/>
+                <input className={errors.includes("only ZIP-Code please!")?"error":""} type="number" value={zipCode} onChange={e=>setZipCode(e.target.value)} placeholder="Zip-Code"/>
+                <input className={errors.includes("type in your city!")?"error":""} type="text" value={city} onChange={e=>setCity(e.target.value)} placeholder="City"/>
                 </section>
                 <hr/>
 {/* ABOUTTEXT */}
-                <section>
+                <section className={errors.includes("Plese tell us a bit about you in Profile-Text")?"error":""} >
                  <textarea rows="5" value={profileText} 
                  onChange={e=>setProfileText(e.target.value)} 
                  placeholder="tell us a bit about yourself"/>
@@ -93,7 +100,7 @@ export default function Singin(props){
                 <hr/>
 {/* ABOUTTEXT */}
                 <section>
-                <fieldset onChange={e=>setGender(e.target.id)}>
+                <fieldset className={errors.includes("weak!")?"error":""} onChange={e=>setGender(e.target.id)}>
                     <input type="radio" name="gender" id="♂️"/><label htmlFor="♂️">♂️</label>
                     <input type="radio" name="gender" id="♀️"/><label htmlFor="♀️">♀️</label>
                     <input type="radio" name="gender" id="⚧"/><label htmlFor="⚧">⚧</label>

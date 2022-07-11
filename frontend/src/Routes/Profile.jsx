@@ -80,7 +80,9 @@ export default function Profile(props){
         formData.append("selectedFile", file)
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.post(`${process.env.REACT_APP_BE_SERVER}/picture/createPicture`, formData, {headers} )
-            .then(result =>  props.setUserProfPic(result.data._id))
+            .then(result =>  {
+                notify("Picture uploaded")
+                props.setUserProfPic(result.data._id)})
             .catch(error => console.log(error))
     }
 

@@ -5,7 +5,7 @@ const locationFinder = (req, res, next) => {
   const address = `${req.body.zipCode} ${req.body.street} ${req.body.number}`;
   console.log(address);
   const params = {
-    access_key: "229ab8769d8adc30d265ad75a63be0f0",
+    access_key: "7ec27733b18d0ba602c12e4362e5cdf8",
     query: address,
     country: req.body.country,
     region: req.body.city,
@@ -25,6 +25,7 @@ const locationFinder = (req, res, next) => {
     })
     .catch((error) => {
       console.log(error);
+      next({ status: 400, message: error.message })
     });
 };
 

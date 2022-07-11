@@ -220,6 +220,10 @@ button {
     background-color: red;
 }
 
+.error{
+    box-shadow: 0 0 10px red inset;
+}
+
 input {
     height: 2.5rem;
     font-size: 1.4rem;
