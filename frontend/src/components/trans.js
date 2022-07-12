@@ -19,7 +19,13 @@ const trans={
         createdAt:"erstellt am:",
         leaveComment:"kommentieren",
         deleteUser:"LÖSCHE DEINEN NUTZER",
-        changeLogInData:"EINLOG-DATEN ÄNDERN"
+        changeLogInData:"EINLOG-DATEN ÄNDERN",
+        familyName:"Nachname",
+        street:"Straße",
+        number:"Hausnummer",
+        zioCode:"PostLeitzahl",
+        city:"Stadt",
+        tellUs:"Profiltext: schreib etwas über Dich und deine Hobbies"
     },
     en:{
         Search:"Search",
@@ -41,7 +47,13 @@ const trans={
         createdAt:"created at:",
         leaveComment:"comment the post",
         deleteUser:"DELETE YOUR PROFILE",
-        changeLogInData:"CHANGE LOGIN DATA"
+        changeLogInData:"CHANGE LOGIN DATA",
+        familyName:"Family Name",
+        street:"Street",
+        number:"Number",
+        zioCode:"Zip-Code",
+        city:"City",
+        tellUs:"Tell us a bit about you in Profile-Text"
     }
 }
 
