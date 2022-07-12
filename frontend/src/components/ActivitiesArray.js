@@ -84,25 +84,14 @@ const Activities = [
     label: "Musik",
   },
   {
-    value: "MarkZuckerberg",
-    label: "Mark Zuckerberg",
-  },
-  {
-    value: "DonaldTrump",
-    label: "Donald Trump",
-  },
-  {
-    value: "BernieSanders",
-    label: "Bernie Sanders",
-  },
-  {
-    value: "HillaryClinton",
-    label: "Hillary Clinton",
-  },
-  {
     value: "netflix",
     label: "netflix",
   },
+  {
+    value:"tauchen",
+    label:"tauchen"
+  },
+  
   {
     value: "youtube",
     label: "youtube",
@@ -150,6 +139,22 @@ const Activities = [
   {
     value: "pianist",
     label: "Pianist",
+  },
+  {
+    value: "MarkZuckerberg",
+    label: "Mark Zuckerberg",
+  },
+  {
+    value: "DonaldTrump",
+    label: "Donald Trump",
+  },
+  {
+    value: "BernieSanders",
+    label: "Bernie Sanders",
+  },
+  {
+    value: "HillaryClinton",
+    label: "Hillary Clinton",
   },
 ];
 
