@@ -1,4 +1,4 @@
-[
+const Activities = {de: [
   {
     value: "Abnehmen",
     label: "Abnehmen",
@@ -156,7 +156,7 @@
     value: "HillaryClinton",
     label: "Hillary Clinton",
   },
-];
+],
 
 en: [
   {
@@ -246,7 +246,7 @@ en: [
   },
   {
     value: "tauchen",
-    label: "tauchen",
+    label: "diving",
   },
 
   {
@@ -313,6 +313,6 @@ en: [
     value: "HillaryClinton",
     label: "Hillary Clinton",
   },
-];
-
+]
+}
 export default Activities;
