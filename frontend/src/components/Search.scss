@@ -19,7 +19,7 @@ body{
                         margin-bottom: 2px;
                     }
                     .selectInSearch{
-                        min-width: 100px;
+                        // min-width: 100px;
                         padding: 0;
                         display: flex;
                         .css-319lph-ValueContainer{
@@ -57,14 +57,19 @@ body{
                         }
                         .searchDivUserName{
                             grid-area: name;
-                            margin-left: 20px;
+                            // margin-left: 20px;
                             align-self: center;
                             font-weight: 900;
                         }
+                        .distance{
+                            grid-area: distance;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                        }
                         .gender{
                             grid-area: gender;
-                            // text-align: center;
-                            font-size: 3.5rem;
+                            font-size: 3.1rem;
                             display: flex;
                             justify-content: center;
                             align-items: center;
@@ -89,9 +94,9 @@ body{
                         .profileText{
                             border: none;
                             grid-area: profT;
-                            padding-left: 10px;
+                            // padding-left: 10px;
                             border-top: 2px solid var(--darkmain);
-                            margin: 3px 0 0 10px;
+                            margin-top: 3px;
                             display: inline-block;
 
                         }
@@ -112,11 +117,11 @@ body{
 @media only screen and (min-width:740px){
     .ProfileCard{
         // display: grid;
-        grid-template-columns: 200px 250px repeat(4, 1fr);
+        grid-template-columns:  repeat(9, 1fr);
         grid-template-areas: 
-        "img name gender age btn1 btn2" 
-        "img profT profT profT profT profT" 
-        "form form form form form form";
+        "img img name name distance gender age btn1 btn2" 
+        "img img profT profT profT profT profT profT profT" 
+        "form form form form form form form form form";
     }
 }
 @media only screen and (max-width:740px){
@@ -127,8 +132,23 @@ body{
             "img img img"
             "img img img"
             "name gender age"
-            " . btn1 btn2"
+            "distance btn1 btn2"
             "profT profT profT"
             "form form form";
+        }
+    }
+    
+    @media only screen and (max-width:350px){
+        .ProfileCard{
+            display: grid;
+            grid-template-columns: 150px repeat(2, 1fr);
+            grid-template-areas: 
+            "img img"
+            "img img"
+            "name distance"
+            "gender age"
+            "btn1 btn2"
+            "profT profT"
+            "form form";
         }
     }
