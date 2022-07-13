@@ -15,7 +15,7 @@ import "../components/Chat.scss";
 export default function Messages(props){
     const [chats, setChats] = useState([])
     const [friends,setFriends]=useState([])
-    const {hide,setHide}=useContext(Context)
+    const {hide,setHide, isNewMessageCame, setIsNewMessageCame}=useContext(Context)
 
     function loadChats(){
     const headers = { Authorization: `Bearer ${props.token}` }
