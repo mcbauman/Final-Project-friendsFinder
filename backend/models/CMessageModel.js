@@ -7,7 +7,7 @@ const cMessageSchema = new mongoose.Schema({
     user:     { type: Schema.Types.ObjectId, ref: "user"},
     content:  { type: String, trim: true, required: true},
     chatId:   { type: Schema.Types.ObjectId, ref: "chat"},
-    readBy:   { type:Schema.Types.ObjectId, ref:"user" }
+    readBy:   { type: Boolean, default: false }
 }, {
     timestamps: true,
     toJSON:{

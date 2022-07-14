@@ -15,14 +15,35 @@ import "../components/Chat.scss";
 export default function Messages(props){
     const [chats, setChats] = useState([])
     const [friends,setFriends]=useState([])
-    const {hide,setHide, isNewMessageCame, setIsNewMessageCame}=useContext(Context)
+    const {hide,setHide, newMessageNotification, setNewMessageNotification}=useContext(Context)
 
     function loadChats(){
     const headers = { Authorization: `Bearer ${props.token}` }
     axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
         .then (res=>{
             console.log(res.data)
+            console.log(res.data[1].members[1].id.userName);
             setChats(res.data)
+        })
+        .catch(error => {
+            if(error.response.data.error.message=="jwt expired"){
+                localStorage.removeItem("token")
+                props.setToken(null)
+            }
+            console.log(error)})
+    }
+
+    function findMessageCreator(){
+        let messageLength = 0
+        const headers = { Authorization: `Bearer ${props.token}` }
+        const body={chatId:chats} // HERE need to find right ID!!!!!!!!!!!!!!!!!!!!
+        axios.post(`${process.env.REACT_APP_BE_SERVER}/messages/notification`,body,{headers})
+        .then(res => {
+            if(res.data.length > messageLength){
+                setNewMessageNotification(true)
+                messageLength = res.data.length
+            }
+            console.log(res.data);
         })
         .catch(error => {
             if(error.response.data.error.message=="jwt expired"){
@@ -36,6 +57,7 @@ export default function Messages(props){
         loadChats() 
         setHide(false)
         checkFriends(props.token,setFriends)
+        findMessageCreator()
     },[])
 
     chats.forEach(item=>{
@@ -66,7 +88,7 @@ export default function Messages(props){
                     </Routes>   
                     {!hide&&                    
                     chats.map(item=>(
-                        <section key={item._id}>
+                        <section onClick={()=> setNewMessageNotification(false)} style={{backgroundColor:newMessageNotification?"red":""}} key={item._id}>
                             <NavLink key={item._id} to={item._id}>
                                 <img className="img2" 
                                 src={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:exmpl}/>

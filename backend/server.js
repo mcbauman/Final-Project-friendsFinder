@@ -241,6 +241,18 @@ app.post("/messages",checkAuth,async(req, res, next) => {
     }
 })
 
+// Chat Notification:
+app.post("/messages/notification",checkAuth,async(req, res, next) => {
+  try {
+      const query = CMessage.find({chatId: req.body.chatId})
+      const messages = await query.exec()
+      console.log(messages);
+      res.send(messages)
+  } catch (error) {
+      next({status:400, message:error.message})
+  }
+})
+
 // GET Forum:
 app.get("/posts", checkAuth, async (req, res, next) => {
   try {
