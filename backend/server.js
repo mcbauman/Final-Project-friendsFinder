@@ -242,12 +242,11 @@ app.post("/messages",checkAuth,async(req, res, next) => {
 })
 
 // Chat Notification:
-app.post("/messages/notification",checkAuth,async(req, res, next) => {
+app.put("/chats/notification",checkAuth,async(req, res, next) => {
   try {
-      const query = CMessage.find({chatId: req.body.chatId})
-      const messages = await query.exec()
-      console.log(messages);
-      res.send(messages)
+    const $pull = {redBy: req.user._id}
+    const chat = Chat.findByIdAndUpdate(req.body.chatId, {$pull})
+    res.send(chat)
   } catch (error) {
       next({status:400, message:error.message})
   }
