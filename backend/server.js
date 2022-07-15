@@ -122,7 +122,7 @@ app.get("/user/updateProfile",checkAuth,locationFinder,async(req,res,next)=>{
 })
 
 // Update Profile
-app.put("/user/updateProfile",checkAuth,requestValidator(userValidator), async (req, res, next) => {
+app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),locationFinder, async (req, res, next) => {
     try {
       if(req.body.password){
         req.body.password = await hash(req.body.password);
