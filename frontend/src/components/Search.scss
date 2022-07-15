@@ -57,12 +57,13 @@ body{
                         }
                         .searchDivUserName{
                             grid-area: name;
-                            // margin-left: 20px;
+                            padding-left: 5px;
                             align-self: center;
                             font-weight: 900;
                         }
                         .distance{
                             grid-area: distance;
+                            padding-left: 5px;
                             display: flex;
                             justify-content: flex-start;
                             align-items: center;
@@ -94,7 +95,7 @@ body{
                         .profileText{
                             border: none;
                             grid-area: profT;
-                            // padding-left: 10px;
+                            padding-left: 5px;
                             border-top: 2px solid var(--darkmain);
                             margin-top: 3px;
                             display: inline-block;
@@ -141,7 +142,7 @@ body{
     @media only screen and (max-width:350px){
         .ProfileCard{
             display: grid;
-            grid-template-columns: 150px repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             grid-template-areas: 
             "img img"
             "img img"

@@ -21,7 +21,9 @@ export default function ContextProvider(props){
     const [theme,setTheme]=useState(themeDefault)
     const [latitude,setLatitude]=useState(latitudeDefault)
     const [longitude, setLongitude]=useState(longitudeDefault)
-    const contextValue={lang,setLang,theme,setTheme,hide,setHide,latitude,setLatitude,longitude, setLongitude}
+    const [isNewMessageCame, setIsNewMessageCame] = useState(false)
+    const [newMessageNotification, setNewMessageNotification] = useState(false)
+    const contextValue={lang,setLang,theme,setTheme,hide,setHide,latitude,setLatitude,longitude, setLongitude, isNewMessageCame, setIsNewMessageCame, newMessageNotification, setNewMessageNotification}
     return(
         <Context.Provider value={contextValue}>
             {props.children}
