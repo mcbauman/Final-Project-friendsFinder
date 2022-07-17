@@ -182,7 +182,7 @@ export default function Profile(props){
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
             .then(result=> {
                 console.log(result.data);
-                notify("Youre Password is Changed")
+                notify("Your Password has been Changed")
             })
             .catch(error => {
                 if(error.response.data.error.message=="jwt expired"){
