@@ -8,11 +8,11 @@ export default function Welcome(props) {
   }
   return (
     <div className={props.disp}>
-      <img src="COF.png" alt="the circle of friends" />
+      <img src={COF} alt="the circle of friends" />
       <h1>the Circle of friends </h1>
       <p>why we came and foremost how we came together</p>
       <a className="henrik" onClick={click}>
-        come and see your friends here
+        come and see your friends inside
       </a>
     </div>
   );

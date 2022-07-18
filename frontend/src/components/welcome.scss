@@ -1,56 +1,36 @@
-<<<<<<< HEAD
 body {
-  .welcome {
-    // position: relative;
-    // display: flex;
-    justify-content: center;
-    align-items: center;
+  .welcome{
     flex-direction: column;
-=======
-// body{
-//     div{
-//         h1{
-//             font-size: 2.5rem;
-//             font-weight: 300;
-//             color: red;
-//             text-align: left;
-//             margin-top: 0;
-//             margin-bottom: 0;
-//         }
-//         img
-//         { display: flex;
-//             justify-content: center;
-//             align-items: center;
-//             height: 50%;
-//             width: 50%;
-//             z-index: -1;
-//         }
-//     }
-// }
-#HenriksLoadingAnimation {
-    animation: henriksAnimation 18s infinite;
-    margin: 0 auto;
-    display: block;
-}
->>>>>>> 6f396294038c3c510caec4ca9420e4414d941a21
+    align-items: center;
+    justify-content:space-between;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: red;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    //
+    #HenriksLoadingAnimation {
+      animation: HenriksAnimation 18s infinite;
+      margin: 0 auto;
+      // display: block;
+    }
 
     img {
-    //   position: absolute;
       top: 200px;
       justify-content: center;
       align-items: center;
-      height: 800px;
-      width: 800px;
+      height: 40vh;
+      width: 40vh;
       animation: HenriksAnimation 18s infinite;
     }
     @keyframes HenriksAnimation {
       0% {
         transform: rotate(0deg);
       }
-
-      // 50% {
-      //     width: 150px;
-      // }
 
       100% {
         transform: rotate(360deg);
@@ -60,30 +40,31 @@ body {
       font-size: 5.5rem;
       font-weight: 300;
       color: orangered;
-      text-align: left;
+      text-align: center;
       margin-top: 0;
       margin-bottom: 0;
     }
-    break-before: right;
+
     p {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: grey;
+      text-align: center;
+      margin-top: 20;
+      margin-bottom: 0;
+    }
+    .henrik {
       font-size: 1.5rem;
       font-weight: 300;
       color: grey;
       text-align: right;
       margin-top: 20;
       margin-bottom: 0;
-    }
-    .henrik {
-      font-size: 1.5rem;
-      // font-weight: 300;
-      color: grey;
-      text-align: left;
-      margin-top: 20;
-      margin-bottom: 0;
       color: rgba(255, 121, 63, 1);
       // box-shadow: 0 0 0 0 rgba(255, 121, 63, 1);
-      animation: pulse-orange 3s infinite;
+      animation: pulse-orange 6s infinite;
     }
+   
 
     @keyframes pulse-orange {
       0% {
@@ -101,11 +82,11 @@ body {
         // box-shadow: 0 0 0 0 rgba(255, 121, 63, 0);
       }
     }
-  }
-}
 
-#HenriksLoadingAnimation {
-  animation: HenriksAnimation 24s infinite;
-  margin: 0 auto;
-  display: block;
+    #HenriksLoadingAnimation {
+      animation: HenriksAnimation 24s infinite;
+      margin: 0 auto;
+      // display: block;
+    }
+  }
 }
