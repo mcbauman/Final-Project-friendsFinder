@@ -32,6 +32,14 @@ export default function Chatview(props){
             }
             console.log(error)})
     }
+
+    function openChatFunction(){
+        console.log("OPENCHATFUNCTION EXECUTED");
+        const body={redBy:props.itemKey}
+        const headers = { Authorization: `Bearer ${props.token}` }
+        axios.put(`${process.env.REACT_APP_BE_SERVER}/chats`,body, {headers})
+    }
+
     function sendMessage(e){
         e.preventDefault()
         if(content.length>1){
@@ -51,6 +59,7 @@ export default function Chatview(props){
     props.sethide(true)
     useEffect(()=>{
         requestMessages()
+        openChatFunction()
     },[])
 
     return(

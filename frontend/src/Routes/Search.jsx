@@ -24,7 +24,7 @@ export default function Search(props) {
   const [vis, setVis] = useState(false);
   const [content, setContent] = useState("");
   const [friends, setFriends] = useState([]);
-  const { lang,latitude, longitude, isNewMessageCame, setIsNewMessageCame, newMessageNotification, setNewMessageNotification } = useContext(Context);
+  const { lang,latitude, longitude} = useContext(Context);
   const options = Activities[lang];
   const notifyFeedback = (text) => toast(text);
 
@@ -118,11 +118,6 @@ export default function Search(props) {
                             onSubmit={(e)=>{e.preventDefault();writeMessage(item._id)}}>
                             <input type="text" placeholder="your text" value={content} 
                             onChange={(e)=>{setContent(e.target.value)}} 
-                            onKeyDown={e => {
-                              if(e.code=="Enter"){
-                                setIsNewMessageCame(true)
-                                // setNewMessageNotification(true)
-                            } } }
                             className="maxW"/>
                         </form>
                     </section>
