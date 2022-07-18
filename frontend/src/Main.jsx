@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { Context } from "./components/context.js"
 
 export default function Main(props){
+    const {setIsNewMessageCame} = useContext(Context)
     function loadChats(){
         const headers = { Authorization: `Bearer ${props.token}` }
         axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
