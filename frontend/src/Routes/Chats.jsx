@@ -98,7 +98,8 @@ export default function Messages(props){
                             <NavLink key={item._id} to={item._id}>
                                 <img className="img2" 
                                 src={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:exmpl}/>
-                                <div className={"author" + (item.redBy.includes(props.user)? "" : " newMessage")}>{item.other.userName}</div>
+// unread style given by class name = newMessage (isNewMessageCame: is used, newMessageNotification: is not used)
+                                <div className={"author" + (item.redBy.includes(props.user)? "" : " newMessage")}>{item.other.userName}</div> 
                             </NavLink>
                             <button className={isFriend(
                                 item.other._id,friends
