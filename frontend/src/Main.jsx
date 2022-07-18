@@ -28,6 +28,7 @@ export default function Main(props){
                 console.log(error)})
     }
     
+    //setInterval(loadChats,5000)
     useEffect(()=>{
         loadChats() 
     },[])

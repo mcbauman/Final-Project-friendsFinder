@@ -28,7 +28,7 @@ POST {{url}}/user/login
 Content-Type: application/json
 
 {
-    "email":"maze1@online.de",
+    "email":"maze@online.de",
     "password":"aA@123456"
 }
 
@@ -126,4 +126,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Mjk2MWM2Z
 
 {
     "chatId":"62b2b85049af70b953ec3be4"
+}
+
+### MARK MESSAGE AS READ
+PUT {{url}}/chats
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MmM3ZjA2ZDk0ZmVkYzgyYjQ0YzE2MTMiLCJpYXQiOjE2NTgxNzQzODEsImV4cCI6MTY1ODI2MDc4MX0.4nfrCS0eqLg9z5ys3EZw4XA_REnDos4qXfw3JntwT08
+
+{
+   "chatId":"62d595f8e0b6ba80c8d7a254" 
 }

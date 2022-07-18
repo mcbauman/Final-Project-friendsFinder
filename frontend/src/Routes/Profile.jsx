@@ -110,8 +110,7 @@ export default function Profile(props){
             .catch(error => {
                 console.log(error)
                 notify(error)
-            })
-            
+            }) 
     }
 
     function setDefaults(e){

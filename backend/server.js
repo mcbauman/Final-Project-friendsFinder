@@ -179,7 +179,6 @@ app.put("/user/addFriend", checkAuth, async (req, res, next) => {
   }
 });
 
-
 //Delete Friend
 app.put("/deleteFriend/", checkAuth, async (req, res, next) => {
     try {
@@ -230,10 +229,10 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
 ///ISSUE CAUSE HERE
 // Mark chat as read:
 app.put("/chats",checkAuth,async(req, res, next) => {
-  console.log(req.body.redBy);
+  console.log(req.body.chatId);
   console.log(req.user._id);
   try {
-    const chat = Chat.findByIdAndUpdate(req.body.chatId, {$addToSet:req.body})
+    const chat = await Chat.findByIdAndUpdate(req.body.chatId, {$addToSet:{redBy:req.user._id}})
     res.send(chat)
   } catch (error) {
       next({status:400, message:error.message})

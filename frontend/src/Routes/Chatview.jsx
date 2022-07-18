@@ -9,13 +9,13 @@ import {isFriend,checkFriends,addFriend} from "../components/functions";
 import logo from "../components/COF.png";
 import exmpl from "../components/exmpl.jpeg"
 import {toast, ToastContainer} from "react-toastify";
-const notifyFeedback = (text) => toast(text);
 
 export default function Chatview(props){
     const [messages,setMessages]=useState()
     const [content,setContent]=useState("")
     const [friends,setFriends]=useState([])
-
+    const notifyFeedback = (text) => toast(text);
+    
     function requestMessages(){
     const headers = { Authorization: `Bearer ${props.token}` }
     const body={chatId:props.itemKey}
@@ -35,7 +35,7 @@ export default function Chatview(props){
 
     function openChatFunction(){
         console.log("OPENCHATFUNCTION EXECUTED");
-        const body={redBy:props.itemKey}
+        const body={chatId:props.itemKey}
         const headers = { Authorization: `Bearer ${props.token}` }
         axios.put(`${process.env.REACT_APP_BE_SERVER}/chats`,body, {headers})
     }
