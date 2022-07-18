@@ -102,16 +102,7 @@ body {
                 // text-decoration: underline;
                 // color:black
             }
-            #newMessage{
-                animation: massageNewAnimation 1s infinite;
-            }
-            
-            @keyframes massageNewAnimation{
-                0% { color: white}
-                50% {  color: var(--darkmain) }
-                100% { color: white}
-            }
-            
+                        
             a {
                 padding: .3em 1em .1em 1em;
                 border-radius: 5px;
@@ -388,6 +379,16 @@ h1{
         width: 50px;
 
     }
+}
+
+#newMessage{
+    animation: massageNewAnimation 1s infinite;
+}
+
+@keyframes massageNewAnimation{
+    0% { color: white}
+    50% {  color: var(--darkmain) }
+    100% { color: white}
 }
 
 //On Big Screens

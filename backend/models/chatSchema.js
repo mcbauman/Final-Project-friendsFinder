@@ -4,8 +4,14 @@ const memberSchema=new mongoose.Schema({
     id:{type:mongoose.Schema.Types.ObjectId, ref:"user"}
 }, { _id: false })
 
+const redBySchema=new mongoose.Schema({
+    id:{type:mongoose.Schema.Types.ObjectId, ref:"user"}
+}, { _id: false })
+
+
 const chatSchema=new mongoose.Schema({
-    members:    [memberSchema]
+    members:    [memberSchema],
+    redBy:      [redBySchema]
  })
 
 const Chat=mongoose.model("chat", chatSchema)

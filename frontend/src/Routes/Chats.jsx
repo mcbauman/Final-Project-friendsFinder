@@ -21,6 +21,12 @@ export default function Messages(props){
     const headers = { Authorization: `Bearer ${props.token}` }
     axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
         .then (res=>{
+            // res.data.forEach(item=>{
+            //     if(!item.redBy.includes(props.user)){
+            //         setNewMessageNotification(...newMessageNotification, item._id)
+            //     }
+            // })
+           
             console.log(res.data)
             console.log(res.data[1].members[1].id.userName);
             setChats(res.data)
@@ -33,31 +39,31 @@ export default function Messages(props){
             console.log(error)})
     }
 
-    function findMessageCreator(){
-        let messageLength = 0
-        const headers = { Authorization: `Bearer ${props.token}` }
-        const body={chatId:chats} // HERE need to find right ID!!!!!!!!!!!!!!!!!!!!
-        axios.post(`${process.env.REACT_APP_BE_SERVER}/messages/notification`,body,{headers})
-        .then(res => {
-            if(res.data.length > messageLength){
-                setNewMessageNotification(true)
-                messageLength = res.data.length
-            }
-            console.log(res.data);
-        })
-        .catch(error => {
-            if(error.response.data.error.message=="jwt expired"){
-                localStorage.removeItem("token")
-                props.setToken(null)
-            }
-            console.log(error)})
-    }
+    // function findMessageCreator(){
+    //     let messageLength = 0
+    //     const headers = { Authorization: `Bearer ${props.token}` }
+    //     const body={chatId:chats} // HERE need to find right ID!!!!!!!!!!!!!!!!!!!!
+    //     axios.post(`${process.env.REACT_APP_BE_SERVER}/chats/notification`,body,{headers})
+    //     .then(res => {
+    //         if(res.data.length > messageLength){
+    //             setNewMessageNotification(true)
+    //             messageLength = res.data.length
+    //         }
+    //         console.log(res.data);
+    //     })
+    //     .catch(error => {
+    //         if(error.response.data.error.message=="jwt expired"){
+    //             localStorage.removeItem("token")
+    //             props.setToken(null)
+    //         }
+    //         console.log(error)})
+    // }
 
     useEffect(()=>{
         loadChats() 
         setHide(false)
         checkFriends(props.token,setFriends)
-        findMessageCreator()
+        // findMessageCreator()
     },[])
 
     chats.forEach(item=>{
@@ -88,11 +94,11 @@ export default function Messages(props){
                     </Routes>   
                     {!hide&&                    
                     chats.map(item=>(
-                        <section onClick={()=> setNewMessageNotification(false)} style={{backgroundColor:newMessageNotification?"red":""}} key={item._id}>
+                        <section onClick={()=> setNewMessageNotification(false)} key={item._id}>
                             <NavLink key={item._id} to={item._id}>
                                 <img className="img2" 
                                 src={item.other.profilePicture?`${process.env.REACT_APP_BE_SERVER}/picture/${item.other.profilePicture}`:exmpl}/>
-                                <div className="author">{item.other.userName}</div>
+                                <div className={"author" + (item.redBy.includes(props.user)? "" : " newMessage")}>{item.other.userName}</div>
                             </NavLink>
                             <button className={isFriend(
                                 item.other._id,friends
