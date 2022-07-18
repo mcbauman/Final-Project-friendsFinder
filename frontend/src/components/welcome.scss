@@ -1,39 +1,83 @@
-body{
-    div{
-        h1{
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: red;
-            text-align: left;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-        img
-        { display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50%;
-            width: 50%;
-            z-index: -1;
-        }
+body {
+  .welcome {
+    // position: relative;
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+    //   position: absolute;
+      top: 200px;
+      justify-content: center;
+      align-items: center;
+      height: 800px;
+      width: 800px;
+      animation: HenriksAnimation 18s infinite;
     }
+    @keyframes HenriksAnimation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      // 50% {
+      //     width: 150px;
+      // }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    h1 {
+      font-size: 5.5rem;
+      font-weight: 300;
+      color: orangered;
+      text-align: left;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    break-before: right;
+    p {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: grey;
+      text-align: right;
+      margin-top: 20;
+      margin-bottom: 0;
+    }
+    .henrik {
+      font-size: 1.5rem;
+      // font-weight: 300;
+      color: grey;
+      text-align: left;
+      margin-top: 20;
+      margin-bottom: 0;
+      color: rgba(255, 121, 63, 1);
+      // box-shadow: 0 0 0 0 rgba(255, 121, 63, 1);
+      animation: pulse-orange 3s infinite;
+    }
+
+    @keyframes pulse-orange {
+      0% {
+        transform: scale(0.95);
+        // box-shadow: 0 0 0 0 rgba(255, 121, 63, 0.7);
+      }
+
+      70% {
+        transform: scale(1);
+        // box-shadow: 0 0 0 10px rgba(255, 121, 63, 0);
+      }
+
+      100% {
+        transform: scale(0.95);
+        // box-shadow: 0 0 0 0 rgba(255, 121, 63, 0);
+      }
+    }
+  }
 }
-#henriksLoadingAnimation {
-    animation: henriksAnimation 6s infinite;
-    margin: 0 auto;
-    display: block;
-}
 
-@keyframes henriksAnimation {
-    0% {
-        transform: rotate(0deg)
-    }
-
-    50% {
-        width: 150px;
-    }
-
-    100% {
-        transform: rotate(360deg)
-    }
+#HenriksLoadingAnimation {
+  animation: HenriksAnimation 24s infinite;
+  margin: 0 auto;
+  display: block;
 }
