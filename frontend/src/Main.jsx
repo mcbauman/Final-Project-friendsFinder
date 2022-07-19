@@ -11,7 +11,6 @@ import { Context } from "./components/context.js"
 export default function Main(props){
     const {setIsNewMessageCame} = useContext(Context)
     function loadChats(){
-        console.log("ASKING FOR NEW MESSAGES");
         const headers = { Authorization: `Bearer ${props.token}` }
         axios.get(`${process.env.REACT_APP_BE_SERVER}/chats`, {headers})
             .then (res=>{
@@ -24,11 +23,12 @@ export default function Main(props){
                 setIsNewMessageCame(helper)
             })
             .catch(error => {
-                console.log(error)})
+                if(error){console.log(error)}
                 if(error.response.data.error.message=="jwt expired"){
                     localStorage.removeItem("token")
                     props.setToken(null)
                 }
+            })
     }
     
     useEffect(()=>{
