@@ -1,4 +1,3 @@
-
 import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
@@ -138,7 +137,6 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),location
   }
 );
 
-
 // Delete Profile
 app.delete("/user/delete", checkAuth, async (req,res,next)=>{
   console.log("Deleting")
@@ -181,7 +179,6 @@ app.put("/user/addFriend", checkAuth, async (req, res, next) => {
   }
 });
 
-
 //Delete Friend
 app.put("/deleteFriend/", checkAuth, async (req, res, next) => {
     try {
@@ -199,7 +196,6 @@ app.get("/chats", checkAuth, async (req,res,next)=>{
         const query = Chat.find({members:{$elemMatch:{id:req.user._id}}})
         query.populate("members.id","userName profilePicture")
         const chats=await query.exec()
-        const readableChats=chats.map(chat=>chat.toObject())
         chats.reverse()
         res.send(chats)
     } catch (err){
@@ -222,6 +218,8 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
         }else{
             chatId=existingChats[0]._id
             const message=await CMessage.create({...req.body,chatId:chatId})
+            existingChats[0].redBy=[]
+            await existingChats[0].save()
             res.send(message)
         }
     } catch (err){
@@ -229,6 +227,18 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
 
     }
 });
+
+// Mark chat as read:
+app.put("/chats",checkAuth,async(req, res, next) => {
+  console.log(req.body.chatId);
+  console.log(req.user._id);
+  try {
+    const chat = await Chat.findByIdAndUpdate(req.body.chatId, {$addToSet:{redBy:req.user._id}})
+    res.send(chat)
+  } catch (error) {
+      next({status:400, message:error.message})
+  }
+})
 
 // Chat List Messages: 
 app.post("/messages",checkAuth,async(req, res, next) => {
@@ -241,17 +251,6 @@ app.post("/messages",checkAuth,async(req, res, next) => {
     }
 })
 
-// Chat Notification:
-app.put("/chats/notification",checkAuth,async(req, res, next) => {
-  try {
-    const $pull = {redBy: req.user._id}
-    const chat = Chat.findByIdAndUpdate(req.body.chatId, {$pull})
-    res.send(chat)
-  } catch (error) {
-      next({status:400, message:error.message})
-  }
-})
-
 // GET Forum:
 app.get("/posts", checkAuth, async (req, res, next) => {
   try {
@@ -259,7 +258,6 @@ app.get("/posts", checkAuth, async (req, res, next) => {
     query.populate("author", "userName profilePicture");
     const something = await query.exec();
     something.reverse();
-    //    console.log(something);
     res.send(something);
   } catch (error) {
     next({ status: 400, message: error.message });
