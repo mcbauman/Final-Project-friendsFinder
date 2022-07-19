@@ -5,6 +5,25 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    img {
+    //   position: absolute;
+      top: 200px;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+      width: 50vh;
+      animation: HenriksAnimation 18s infinite;
+    }
+    @keyframes HenriksAnimation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
     h1 {
       font-size: 5.5rem;
       font-weight: 300;
@@ -62,11 +81,6 @@ body {
         // box-shadow: 0 0 0 0 rgba(255, 121, 63, 0.7);
       }
 
-      70% {
-        transform: scale(1);
-        // box-shadow: 0 0 0 10px rgba(255, 121, 63, 0);
-      }
-
       100% {
         transform: scale(0.95);
         // box-shadow: 0 0 0 0 rgba(255, 121, 63, 0);
@@ -77,5 +91,5 @@ body {
 #HenriksLoadingAnimation {
   animation: HenriksAnimation 24s infinite;
   margin: 0 auto;
-  display: block;
+  // display: block;
 }
