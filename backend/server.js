@@ -218,6 +218,9 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
         }else{
             chatId=existingChats[0]._id
             const message=await CMessage.create({...req.body,chatId:chatId})
+//REMOVE REDBY FROM CHATS
+            existingChats[0].redBy=[]
+            await existingChats[0].save()
             res.send(message)
         }
     } catch (err){
@@ -226,7 +229,6 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
     }
 });
 
-///ISSUE CAUSE HERE
 // Mark chat as read:
 app.put("/chats",checkAuth,async(req, res, next) => {
   console.log(req.body.chatId);
