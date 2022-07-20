@@ -22,7 +22,6 @@ export default function Chatview(props){
     axios.post(`${process.env.REACT_APP_BE_SERVER}/messages`,body,{headers})
         .then(res => {
             setMessages(res.data)
-            console.log(res.data);
             checkFriends(props.token,setFriends)
         })
         .catch(error => {
@@ -34,7 +33,6 @@ export default function Chatview(props){
     }
 
     function openChatFunction(){
-        console.log("OPENCHATFUNCTION EXECUTED");
         const body={chatId:props.itemKey}
         const headers = { Authorization: `Bearer ${props.token}` }
         axios.put(`${process.env.REACT_APP_BE_SERVER}/chats`,body, {headers})
@@ -45,7 +43,6 @@ export default function Chatview(props){
         if(content.length>1){
             const headers = { Authorization: `Bearer ${props.token}` }
             const data={content,user:props.user,recipient:props.memberId}
-            console.log(data);
             axios.post(`${process.env.REACT_APP_BE_SERVER}/chats`,data, {headers})
                 .then(res => {
                     setContent("")

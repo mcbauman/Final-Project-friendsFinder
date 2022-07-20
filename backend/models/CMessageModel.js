@@ -18,7 +18,6 @@ const cMessageSchema = new mongoose.Schema({
 
 cMessageSchema.pre("remove", async function(){
     const id = this._id.toString()
-    console.log("Message is being removed " + id)
 
     const author = await User.findById(this.author)
     if ( author ) {

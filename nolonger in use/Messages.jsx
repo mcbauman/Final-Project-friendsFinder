@@ -19,7 +19,6 @@ export default function Messages(props){
         axios.get(`${process.env.REACT_APP_BE_SERVER}/message/find`, {headers})
             .then(res => {
                 setAllMsg(res.data)
-                console.log(allMsg)
             })
             .catch(error => alert(error.response?.data?.error || "Unknown error"))
     }

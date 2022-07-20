@@ -9,7 +9,6 @@ useEffect(()=>{
     fetch(`${process.env.REACT_APP_MARVELAPI}${process.env.REACT_APP_ADRESS}?apikey=${process.env.REACT_APP_MARVEL_PUBLIC_KEY}&limit=${howManyToFetch}&offset=${howManyToSkip}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         setFetchRes(data.data.results)
     });
 },[howManyToSkip])

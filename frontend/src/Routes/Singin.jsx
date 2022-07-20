@@ -41,7 +41,6 @@ export default function Singin(props){
         const data={age,email,password,userName,name,familyName,dateOfBirth,gender,interests:sendInterests,profileText, street, number, zipCode, city, country}
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/create`,data)
             .then(resp=>{
-                console.log(resp);
                 props.setUser(resp.data._id)
                 props.setToken(resp.data.token)
                 notifySuccess()

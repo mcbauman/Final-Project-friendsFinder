@@ -32,7 +32,6 @@ export default function Forum(props) {
             .get(`${process.env.REACT_APP_BE_SERVER}/posts`, { headers })
             .then((res) => {
                 setPosts(res.data);
-                console.log("POSTS: ", res.data);
             })
             .catch((error) => {
                 if(error.response.data.error.message=="jwt expired"){
@@ -63,7 +62,6 @@ export default function Forum(props) {
         e.preventDefault()
         post.comments.push({ author: userId, comment })
         const headers = { Authorization: `Bearer ${props.token}` }
-        console.log(post);
         if (comment) {
             axios.put(`${process.env.REACT_APP_BE_SERVER}/posts/addComment/${post._id}`, { author: userId, comment }, { headers })
                 .then(res => {

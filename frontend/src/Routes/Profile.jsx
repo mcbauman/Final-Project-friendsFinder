@@ -49,7 +49,6 @@ export default function Profile(props){
         .then(result=> {
             result.data.interests=result.data.interests.map(item=>({"value":item,"label":item}))
             setUsr(result.data)
-            console.log(result.data);
         })
         .catch(error => {
             if(error.response.data.error.message=="jwt expired"){
@@ -148,8 +147,7 @@ export default function Profile(props){
             .then(result=> {
                 notify(trans[lang].deleteUser)
             })
-        console.log("delete user Function");
-        console.log(props);
+
         props.setUser(null)
         props.setToken(null)
         props.setUserProfPic(null)
@@ -161,8 +159,6 @@ export default function Profile(props){
 
     function changePasswordsF(e){
         e.preventDefault()
-        console.log(passwords.pw1);
-        console.log(passwords.pw2);
         if(passwords.pw1===passwords.pw2){
         const body={
             name:name?name:usr.name,
@@ -180,7 +176,6 @@ export default function Profile(props){
         const headers = { Authorization: `Bearer ${props.token}`}
         axios.put(`${process.env.REACT_APP_BE_SERVER}/user/updateProfile`,body,{headers})
             .then(result=> {
-                console.log(result.data);
                 notify("Your Password has been Changed")
             })
             .catch(error => {

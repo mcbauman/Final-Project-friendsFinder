@@ -27,7 +27,6 @@ class FormComponent extends React.Component {
     }
     onSubmit(){
         if(this.emailValidation()){
-            console.log(this.state);
             this.setState(emailState);
         }
     }

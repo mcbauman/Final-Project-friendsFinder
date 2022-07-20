@@ -1,9 +1,7 @@
 import express from "express";
 import axios from "axios";
 const locationFinder = (req, res, next) => {
-  console.log(req.body);
   const address = `${req.body.zipCode} ${req.body.street} ${req.body.number}`;
-  console.log(address);
   const params = {
     access_key: "7ec27733b18d0ba602c12e4362e5cdf8",
     query: address,
@@ -19,7 +17,6 @@ const locationFinder = (req, res, next) => {
         longitude: response.data.data[0].longitude,
     
       };
-      console.log(userCoordinate)
       req.userCoordinate=userCoordinate
       next()
     })

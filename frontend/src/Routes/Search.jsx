@@ -37,10 +37,8 @@ export default function Search(props) {
       .then((res) => {
         const opts = {yName: "latitude", xName: "longitude"};
         const origin = { longitude: longitude, latitude: latitude };
-        // console.log(sortByDistance(origin, res.data, opts));
         const sortedByDistance = sortByDistance(origin, res.data, opts);
         setListOfUser(sortedByDistance);
-        console.log("SEARCH RES.DATA l24", res.data);
       })
       .catch((error) => {
         console.log(error);

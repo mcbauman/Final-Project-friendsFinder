@@ -55,7 +55,6 @@ app.use("/picture", pictureRouter);
 //LOGIN USER
 app.post("/user/login",async (req,res,next)=>{
   try {
-      console.log(req.body);
       const user=await User.findOne({email:req.body.email})
       if(!user){return next({status:405,message:"user doesnt exist"})}
       const loginSuccess = await compare(req.body.password, user.password)
@@ -78,7 +77,6 @@ app.post("/user/create",userValidator,locationFinder,async (req, res, next) => {
       });
     }
     try {
-      console.log(req.userCoordinate);
       req.body.password = await hash(req.body.password);
       const user = await User.create({ ...req.body, ...req.userCoordinate });
       const user2 = await User.findOne({ email: req.body.email });
@@ -113,7 +111,6 @@ app.post("/user/find", checkAuth, async (req, res, next) => {
 app.get("/user/updateProfile",checkAuth,locationFinder,async(req,res,next)=>{
     try {
         const user=await User.findById(req.user._id).populate("friends","userName profilePicture")
-        console.log(user)
         res.send(user)
     } catch (err) {
         next({status:400, message:err.message})  
@@ -129,7 +126,6 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),location
       const user = await User.findByIdAndUpdate(req.user._id, req.body, {
         new: true,
       });
-      console.log(user);
       res.send(user);
     } catch (error) {
       next({ status: 400, message: error.message });
@@ -139,7 +135,6 @@ app.put("/user/updateProfile",checkAuth,requestValidator(userValidator),location
 
 // Delete Profile
 app.delete("/user/delete", checkAuth, async (req,res,next)=>{
-  console.log("Deleting")
   try {
     await User.deleteOne({ _id: req.user._id });
     // //Delete Messages
@@ -230,8 +225,6 @@ app.post("/chats", checkAuth, requestValidator(messageRules), async(req, res, ne
 
 // Mark chat as read:
 app.put("/chats",checkAuth,async(req, res, next) => {
-  console.log(req.body.chatId);
-  console.log(req.user._id);
   try {
     const chat = await Chat.findByIdAndUpdate(req.body.chatId, {$addToSet:{redBy:req.user._id}})
     res.send(chat)
@@ -277,12 +270,10 @@ app.post("/posts", checkAuth,requestValidator(forumValidator), async(req, res, n
 // Comment on Forum:
 app.put("/posts/addComment/:id", checkAuth, requestValidator(commentValidator), async(req, res, next) => {
     try{
-        console.log("Dta from frontend: ",req.body);
         const forum = await Forum.findById(req.params.id) 
         forum.comments.push(req.body)
         await forum.save()
         res.send(forum)
-        console.log("Forum after save: ",forum);
     }catch (error) {
         next({status:400, message:error.message})
     }

@@ -47,8 +47,6 @@ export default function Messages(props){
         }
     })
 
-    console.log(chats);
-
     return(
         <article id="chats">
             {chats&&chats.length?(

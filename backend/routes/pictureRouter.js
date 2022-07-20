@@ -17,21 +17,14 @@ const upload = multer(multerOptions)
 const handleUpload = upload.fields([{ name: "selectedFile", maxCount: 1 }])
 // Create Profile Picture:
 pictureRouter.post("/createPicture", checkAuth, handleUpload, async(req, res, next) => {
-    console.log(req.body);
-    console.log(req.files);
     try {
         const file = await File.create(req.files.selectedFile[0])
-        console.log("Prof. Pic: ",req.user.profilePicture);
-
         req.user.profilePicture = file._id
-        console.log(file._id);
         const bla = await req.user.save()
-        console.log("Bla: ", bla);
         res.send(file)
     } catch (error) {
         next({status:400, message:error.message})
     }
-    console.log("picture file: ", req.files);
 })
 
 pictureRouter.get("/file", async (req, res) => {

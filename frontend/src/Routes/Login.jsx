@@ -19,7 +19,6 @@ export default function Login(props){
         e.preventDefault()
         axios.post(`${process.env.REACT_APP_BE_SERVER}/user/login`,{email,password})
         .then(resp=>{
-            console.log(resp.data);
             props.setUser(resp.data._id)
             props.setToken(resp.data.token)
             props.setUserProfPic(resp.data.profilePicture)
